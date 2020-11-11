@@ -1,0 +1,2064 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0046)http://habrahabr.ru/blogs/php/137459/#habracut -->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ru"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		
+		<title>Деобфускация PHP кода / PHP / Хабрахабр</title>
+		
+		
+		
+			<link href="http://habrahabr.ru/styles/1328200559/all.css" rel="stylesheet" media="all">
+		
+    
+		
+  <link href="http://habrahabr.ru/styles/1328200559/_parts/posts.css" rel="stylesheet" media="all">
+  <link href="http://habrahabr.ru/styles/1328200559/_parts/comments.css" rel="stylesheet" media="all">
+  <link href="http://habrahabr.ru/styles/1328200559/posts/all.css" rel="stylesheet" media="all">
+  <link href="http://habrahabr.ru/styles/1328200559/forms.css" rel="stylesheet" media="all">
+  <link href="http://habrahabr.ru/styles/1328200559/highlight.css" rel="stylesheet" media="all">
+
+
+		
+		
+			<script type="text/javascript" src="./Деобфускация PHP кода   PHP   Хабрахабр_files/all.js"></script>
+		
+		
+			
+		
+  <script type="text/javascript" src="./Деобфускация PHP кода   PHP   Хабрахабр_files/jquery.form.js"></script>
+  <script type="text/javascript" src="./Деобфускация PHP кода   PHP   Хабрахабр_files/jquery.cookie.js"></script>
+  <script type="text/javascript" src="./Деобфускация PHP кода   PHP   Хабрахабр_files/swfobject.js"></script>
+  <script type="text/javascript" src="./Деобфускация PHP кода   PHP   Хабрахабр_files/wysiwyg.js"></script>
+  <script type="text/javascript" src="./Деобфускация PHP кода   PHP   Хабрахабр_files/highlight.js"></script>
+  <script type="text/javascript" src="./Деобфускация PHP кода   PHP   Хабрахабр_files/posts.js"></script>
+  <script type="text/javascript" src="./Деобфускация PHP кода   PHP   Хабрахабр_files/comments.js"></script>
+  <script type="text/javascript" src="./Деобфускация PHP кода   PHP   Хабрахабр_files/all(1).js"></script>
+
+		
+		<script type="text/javascript" src="./Деобфускация PHP кода   PHP   Хабрахабр_files/adriver.core.2.js"></script>
+		
+		
+		
+		<link title="Хабрахабр / Комментарии к публикации &laquo;Деобфускация PHP кода&raquo; в блоге &laquo;PHP&raquo;" type="application/rss+xml" rel="alternate" href="http://habrahabr.ru/rss/post/137459/">
+		
+	<script async="true" src="./Деобфускация PHP кода   PHP   Хабрахабр_files/ga.js"></script></head>
+
+	<body>
+	  
+
+
+	<div id="topline" title=""><div style="position: relative; height: 90px; "><table width="100%" height="90" cellspacing="0" cellpadding="0" border="0" style="line-height: 100%; margin: 0; padding: 0;"><tbody><tr><td style="width: 50%; line-height: 100%; margin: 0; padding: 0;"><a target="_blank" href="http://ad.adriver.ru/cgi-bin/click.cgi?sid=176776&ad=299620&bid=1487001&bt=52&bn=1&pz=0&ref=http:%2f%2fhabrahabr.ru%2fblogs%2fphp%2f137459%2f&custom=&rleurl="><img width="100%" vspace="0" hspace="0" height="90" border="0" src="./Деобфускация PHP кода   PHP   Хабрахабр_files/cc1_90.jpg"></a></td><td width="1000" style="background-image:url(&#39;http://eltel2.adriver.ru/images/0001487/0001487001/0/cc1_90.jpg&#39;); line-height: 100%; margin: 0; padding: 0;"><a href="http://ad.adriver.ru/cgi-bin/click.cgi?sid=176776&ad=299620&bid=1487001&bt=52&bn=1&pz=0&ref=http:%2f%2fhabrahabr.ru%2fblogs%2fphp%2f137459%2f&custom=&rleurl=" target="_blank"><img src="./Деобфускация PHP кода   PHP   Хабрахабр_files/cc.jpg" border="0" width="1000" height="90"></a></td><td style="width: 50%; line-height: 100%; margin: 0; padding: 0;"><a target="_blank" href="http://ad.adriver.ru/cgi-bin/click.cgi?sid=176776&ad=299620&bid=1487001&bt=52&bn=1&pz=0&ref=http:%2f%2fhabrahabr.ru%2fblogs%2fphp%2f137459%2f&custom=&rleurl="><img width="100%" vspace="0" hspace="0" height="90" border="0" src="./Деобфускация PHP кода   PHP   Хабрахабр_files/cc1_90.jpg"></a></td></tr></tbody></table></div></div>
+	<script type="text/javascript">
+	new adriver("topline", {sid:176776, bt:52, bn:1});
+	</script>
+
+
+
+
+
+		<div id="layout">	    
+		  <div id="header">
+  <div class="userpanel silver">
+    
+    
+      <a href="http://habrahabr.ru/login/" class="login">войти</a> <a href="http://habrahabr.ru/register/">зарегистрироваться</a>
+    
+  </div>
+  <a class="logo" href="http://habrahabr.ru/" title="На главную страницу"></a>
+  <div class="search">
+    <form id="search_form" name="search" method="get" action="http://habrahabr.ru/search/">
+      <input type="text" name="q" value="поиск по сайту" onfocus="this.value = (this.value == &#39;поиск по сайту&#39;) ? &#39;&#39; : this.value" onblur="this.value = (this.value == &#39;&#39;) ? &#39;поиск по сайту&#39; : this.value" autocomplete="off">
+      <input type="submit" value="">
+    </form>
+  </div>
+  
+
+	<div class="main_menu">
+		<a href="http://habrahabr.ru/" class="active">посты</a><a href="http://habrahabr.ru/qa/">q&amp;a</a><a href="http://habrahabr.ru/bloglist/">блоги</a><a href="http://habrahabr.ru/events/coming/">события</a><a href="http://habrahabr.ru/companies/">компании</a>
+		<div class="banner_special">
+
+	 
+
+	 
+
+	
+	
+		<!--  AdRiver code START. Type:135x35 Site: habrahabr PZ: 0 BN: 0 -->
+		<script language="javascript" type="text/javascript"><!--
+		var RndNum4NoCash = Math.round(Math.random() * 1000000000);
+		var ar_Tail='unknown'; if (document.referrer) ar_Tail = escape(document.referrer);
+		document.write(
+		'<iframe src="http://ad.adriver.ru/cgi-bin/erle.cgi?'
+		+ 'sid=176776&target=top&w=135&h=35&bt=25&pz=0&rnd=' + RndNum4NoCash + '&tail256=' + ar_Tail
+		+ '" frameborder=0 vspace=0 hspace=0 width=135 height=35 marginwidth=0'
+		+ ' marginheight=0 scrolling=no></iframe>');
+		//--></script><iframe src="./Деобфускация PHP кода   PHP   Хабрахабр_files/erle(3).html" frameborder="0" vspace="0" hspace="0" width="135" height="35" marginwidth="0" marginheight="0" scrolling="no"></iframe>
+		<noscript></noscript>
+
+		<!--  AdRiver code END  -->
+	
+	
+
+</div>
+	</div>
+
+
+</div>
+
+
+	
+		  
+	  
+		  
+
+	<div class="blog_header">
+  <h2>
+    <a href="http://habrahabr.ru/blogs/php/" class="blog_title">PHP</a>
+    <span class="profiled_blog" title="Профильный блог"></span>
+
+    
+  				
+	</h2>
+	<div class="blog-index">
+	 <div class="label">индекс</div>
+	 <div class="value">206,16</div>
+	</div>
+</div>
+  <div class="content_left">
+
+	
+
+
+	
+
+
+
+	
+		<div class="add_post"><a href="http://habrahabr.ru/add/topic/" title="Добавить пост"></a></div>
+	
+	
+
+
+<table class="menu">
+  <tbody><tr>
+    
+      <td class="item ">
+        <a href="http://habrahabr.ru/blogs/php/">Захабренные </a>      
+      </td>
+    
+      <td class="item ">
+        <a href="http://habrahabr.ru/blogs/php/new/">Новые (<span class="count">1)</span></a>      
+      </td>
+    
+      <td class="item ">
+        <a href="http://habrahabr.ru/blogs/php/unhabred/">Отхабренные </a>      
+      </td>
+    
+  </tr>  
+</tbody></table>
+<div class="submenu ">
+
+</div>
+<div class="clear"></div>
+
+
+  
+
+	<div class="company_post">
+
+	
+
+		
+  <div class="post" id="post_137459">
+    <h2 class="title">
+    
+    	
+      
+      
+      
+      
+      
+        <span class="post_title">Деобфускация PHP кода</span>
+      
+      
+      
+
+
+  		<a href="http://habrahabr.ru/sandbox/" style="font-size: 14px; background: #F0F0E7; padding: 0 5px;vertical-align:super;color:#767676;text-decoration:none;" title="Перейти в песочницу">из песочницы</a>
+  		
+  	</h2>
+    <div class="content">
+      <img alt="Деобфускация PHP" src="./Деобфускация PHP кода   PHP   Хабрахабр_files/bc6e25ad0b208c2ff8ded140c0590584.png" align="right"><br>
+Так уж случилось, что на днях мне попался один нужный PHP скрипт, но <a href="http://ru.wikipedia.org/wiki/%D0%9E%D0%B1%D1%84%D1%83%D1%81%D0%BA%D0%B0%D1%86%D0%B8%D1%8F" title="статья Обфускация на Wikipedia">обфусцированный</a>. <br>
+По какой-то причине он никак не работал. Я пишу на PHP достаточно давно, и мне очень нравится отлавливать нестандартные ситуации в скриптах, особенно когда при выполнении в логах нет ошибок, а скрипт просто не выполняет своих предназначенных обязанностей, руки так и чесались расшифровать. Последней каплей стало то, что автора этого скрипта не было в сети, чтобы помочь решить мою проблему. Скрипт кстати куплен моим товарищем, собственно он и попросил помочь.<br>
+<br>
+Цель данной статьи, показать принцип дешифровки, зашифрованных скриптов, чтобы например расшифровать залитый злоумышленником <a href="http://habrahabr.ru/blogs/infosecurity/136166/">вирус на PHP</a>.<br>
+<br>
+<a name="habracut"></a><br>
+<br>
+<h4>Анализирование кода</h4><br>
+<br>
+Вот один из этих <a href="http://pastebin.com/HHhZbYs2">скриптов</a>, открывая такой скрипт в блокноте, мы увидим:<br>
+<img src="./Деобфускация PHP кода   PHP   Хабрахабр_files/138265e47bf92613aab8b80346c8726b.png"><br>
+<br>
+Разобьем для начала его на строки:<br>
+<img src="./Деобфускация PHP кода   PHP   Хабрахабр_files/e29048013141c31c40d13495c6497617.png"><br>
+и сохраним в файл <b>encoded_script.php</b><br>
+<br>
+Видно что тут код разбит на 4е части. В каждой выполняется eval.<br>
+Для удобства дешифровки eval воспользуемся расширением для PHP — Evalhook. Его написал <b>Stefan Esser</b> за что ему большущее спасибо. С помощью него можно расшифровывать в несколько проходов например монстров закодированных через <a href="http://www.php-crypt.com/">www.php-crypt.com</a> функциями eval, gzuncompress, base64_decode и тд.<br>
+<br>
+<h4>Установка evalhook</h4><br>
+<br>
+<b>Требуется:</b><br>
+<ol>
+<li>PHP &gt;= v5.2</li>
+<li>php-devel</li>
+<li>PHP Zend Optimizer</li>
+</ol><br>
+<br>
+Скачиваем архив с исходниками<br>
+<pre><code class="bash">fetch http://php-security.org/downloads/evalhook-0.1.tar.gz
+</code></pre><br>
+<br>
+Распаковываем и собираем расширение для PHP<br>
+<pre><code class="bash">tar xvfz evalhook-<span class="number">0.1</span>.tar.gz
+cd evalhook
+phpize 
+./configure
+make
+sudo make install
+</code></pre><br>
+<br>
+расширение готово, теперь его можно динамически подгружать в консоль и смотреть зашифрованный скрипт.<br>
+<pre><code class="bash">php -d extension=evalhook.so encoded_script.php
+</code></pre><br>
+<br>
+где encoded_script.php — закодированный файл.<br>
+Для получения исходного кода просто жмем «Y» несколько раз в процессе деобфускации. Каждый новый Y будет расшифровывать следующий eval. Ну что ж вооружимся консолью и в бой!<br>
+<br>
+<h4>Деобфускация и декодирование </h4><br>
+1-й проход<br>
+<pre><code class="bash">%php -d extension=evalhook.so encoded_script.php
+Script tries to evaluate the following string.
+----
+<span class="variable">$GLOBALS</span>['_562306928_']=Array(base64_decode('' .'Ym' .'FzZTY' .'<span class="number">0</span>X2RlY2' .'<span class="number">9</span>kZQ=='),base64_decode('Y' .'mFzZTY0X2R' .'lY29' .'kZ' .'Q=='),base64_decode('' .'YmFzZT' .'Y0X2RlY29kZ' .'Q=='),base64_decode('YmF' .'zZTY0X2Rl' .'Y29' .'kZQ=='),base64_decode('YmF' .'zZTY' .'<span class="number">0</span>X2RlY2' .'<span class="number">9</span>kZQ=' .'='),base64_decode('' .'Y' .'m' .'FzZTY0X2RlY29k' .'ZQ=='),base64_decode('YmFzZ' .'TY0X2R' .'l' .'Y' .'<span class="number">29</span>k' .'ZQ' .'=='),base64_decode('Y' .'m' .'FzZTY0X2' .'Rl' .'Y' .'<span class="number">29</span>k' .'ZQ=='),base64_decode('YmFzZT' .'Y0X2RlY2' .'<span class="number">9</span>kZQ' .'=='),base64_decode('YmFzZ' .'T' .'Y0X' .'<span class="number">2</span>' .'RlY29kZ' .'Q=='),base64_decode('' .'Y' .'m' .'FzZT' .'Y0X2RlY2' .'<span class="number">9</span>k' .'ZQ=='),base64_decode('Ym' .'FzZTY0X' .'<span class="number">2</span>Rl' .'Y29' .'kZQ=='),base64_decode('YmF' .'zZT' .'Y0' .'X2RlY29' .'kZ' .'Q=='),base64_decode('YmFzZ' .'TY0X2RlY29kZQ=='),base64_decode('Ym' .'FzZTY0X' .'<span class="number">2</span>RlY29k' .'ZQ=='),base64_decode('YmFzZTY0' .'X2RlY' .'<span class="number">29</span>kZQ=='),base64_decode('Ym' .'FzZTY0X2Rl' .'Y2' .'<span class="number">9</span>kZ' .'Q=='),base64_decode('Ym' .'FzZTY0X2' .'R' .'lY29kZQ=='),base64_decode('Y' .'mFz' .'ZTY' .'<span class="number">0</span>' .'X2R' .'lY29k' .'Z' .'Q=='),base64_decode('Y' .'mFzZT' .'Y0X2R' .'lY2' .'<span class="number">9</span>kZQ=' .'='),base64_decode('' .'YmFzZTY' .'<span class="number">0</span>X' .'<span class="number">2</span>' .'RlY29k' .'ZQ=='),base64_decode('' .'Y' .'mFzZTY0' .'X2R' .'lY' .'<span class="number">29</span>kZQ=='),base64_decode('YmFzZTY0' .'X2Rl' .'Y29k' .'ZQ=='),base64_decode('YmFzZ' .'TY0' .'X2Rl' .'Y' .'<span class="number">29</span>k' .'Z' .'Q=='),base64_decode('YmFzZT' .'Y' .'<span class="number">0</span>X2Rl' .'Y' .'<span class="number">29</span>kZQ=='),base64_decode('YmFzZTY0X2Rl' .'Y29k' .'Z' .'Q=='),base64_decode('' .'Y' .'m' .'FzZ' .'TY0X' .'<span class="number">2</span>RlY29kZQ=' .'='),base64_decode('YmF' .'z' .'ZTY' .'<span class="number">0</span>X2R' .'lY29kZQ' .'=='),base64_decode('YmF' .'zZTY0X2RlY29kZQ=='),base64_decode('YmFz' .'ZTY0X2RlY29kZQ=='),base64_decode('' .'Ym' .'FzZ' .'TY0' .'X2RlY2' .'<span class="number">9</span>' .'kZ' .'Q=='),base64_decode('YmFzZT' .'Y0X2' .'R' .'lY29kZQ=='),base64_decode('YmFzZTY0' .'X2' .'RlY29kZ' .'Q=='),base64_decode('Ym' .'F' .'zZ' .'TY0X2' .'R' .'lY29kZQ=='),base64_decode('Ym' .'FzZTY' .'<span class="number">0</span>X2RlY29kZ' .'Q=='),base64_decode('YmF' .'z' .'ZT' .'Y0X' .'<span class="number">2</span>RlY29kZQ=='),base64_decode('YmFzZ' .'TY0X2RlY29kZQ=' .'='),base64_decode('YmFz' .'ZTY0X2Rl' .'Y29' .'kZQ=='),base64_decode('Y' .'mFzZTY' .'<span class="number">0</span>' .'X2Rl' .'Y2' .'<span class="number">9</span>kZ' .'Q=='),base64_decode('YmFzZ' .'T' .'Y0X2RlY2' .'<span class="number">9</span>kZQ=='),base64_decode('YmFz' .'Z' .'T' .'Y0X2RlY29kZ' .'Q=='),base64_decode('YmFzZT' .'Y0X2RlY29' .'kZQ=' .'='),base64_decode('' .'YmFzZTY0X2RlY29kZ' .'Q=='),base64_decode('YmFz' .'ZTY0X2' .'RlY29kZQ=='),base64_decode('Ym' .'FzZ' .'TY0X' .'<span class="number">2</span>R' .'l' .'Y2' .'<span class="number">9</span>' .'kZQ=='),base64_decode('Ym' .'FzZT' .'Y0X2Rl' .'Y29kZQ=='),base64_decode('YmFzZTY0X' .'<span class="number">2</span>RlY29' .'kZQ=='),base64_decode('YmFzZTY0X2' .'RlY29kZQ' .'=='),base64_decode('' .'Ym' .'F' .'zZT' .'Y0X2RlY29k' .'Z' .'Q' .'=='),base64_decode('YmFzZTY0' .'X' .'<span class="number">2</span>R' .'lY2' .'<span class="number">9</span>kZ' .'Q=='),base64_decode('' .'YmF' .'zZTY0X' .'<span class="number">2</span>RlY29' .'kZQ=='),base64_decode('Y' .'m' .'Fz' .'ZTY0X2R' .'l' .'Y29kZQ=' .'='),base64_decode('Y' .'m' .'FzZ' .'TY0X2R' .'lY' .'<span class="number">2</span>' .'<span class="number">9</span>' .'kZQ=='),base64_decode('YmFz' .'ZTY0' .'X' .'<span class="number">2</span>RlY29kZ' .'Q=='),base64_decode('YmFzZTY0X2' .'RlY' .'<span class="number">29</span>kZQ=='),base64_decode('' .'YmFzZ' .'TY0X2RlY29' .'kZ' .'Q=='),base64_decode('Y' .'mFzZTY0X2R' .'l' .'Y29' .'kZQ=='),base64_decode('Y' .'mFzZ' .'T' .'Y0X2RlY29k' .'ZQ=' .'='),base64_decode('Y' .'mFzZTY0X2' .'RlY2' .'<span class="number">9</span>k' .'ZQ=' .'='),base64_decode('Ym' .'FzZTY0X2RlY' .'<span class="number">29</span>' .'kZQ=' .'='),base64_decode('YmFzZTY0X2R' .'lY29kZQ' .'=='),base64_decode('YmF' .'zZTY0X2RlY29k' .'ZQ=='),base64_decode('' .'YmFzZ' .'T' .'Y0X2' .'R' .'lY29kZQ' .'=='),base64_decode('YmFzZTY0' .'X2R' .'lY29kZQ=='),base64_decode('YmFz' .'ZTY' .'<span class="number">0</span>X2' .'RlY29kZQ' .'=='),base64_decode('' .'YmF' .'zZTY0X2RlY29kZQ=='),base64_decode('Y' .'mF' .'zZTY0X2Rl' .'Y29kZQ' .'=='),base64_decode('Y' .'mF' .'z' .'ZTY0X2' .'RlY29kZQ=' .'='),base64_decode('Y' .'m' .'FzZTY0' .'X2RlY29kZQ=='),base64_decode('Y' .'mFzZTY' .'<span class="number">0</span>X' .'<span class="number">2</span>R' .'lY' .'<span class="number">29</span>kZQ=='),base64_decode('Y' .'mFzZ' .'TY0X' .'<span class="number">2</span>Rl' .'Y' .'<span class="number">29</span>kZ' .'Q=='),base64_decode('YmF' .'zZTY0X2' .'RlY' .'<span class="number">29</span>' .'kZQ' .'=='),base64_decode('' .'YmFzZTY0X2' .'RlY29kZQ=='),base64_decode('YmFzZTY0X2RlY29kZQ=='),base64_decode('YmFzZTY0' .'X2RlY' .'<span class="number">29</span>k' .'Z' .'Q=='),base64_decode('Ym' .'FzZ' .'TY0X2RlY' .'<span class="number">29</span>' .'kZ' .'Q=='),base64_decode('Y' .'mFzZTY0X2RlY29kZQ=='),base64_decode('YmF' .'z' .'ZTY0' .'X2RlY29' .'kZQ=='),base64_decode('YmF' .'zZTY0X' .'<span class="number">2</span>R' .'lY29kZ' .'Q=='),base64_decode('YmFz' .'ZT' .'Y0X2' .'RlY29kZQ=' .'='),base64_decode('Y' .'mF' .'zZ' .'TY' .'<span class="number">0</span>' .'X2R' .'lY' .'<span class="number">29</span>kZQ=='),base64_decode('' .'YmFzZ' .'TY0X2' .'RlY' .'<span class="number">29</span>' .'kZQ=='),base64_decode('Ym' .'F' .'zZTY' .'<span class="number">0</span>X' .'<span class="number">2</span>' .'RlY' .'<span class="number">29</span>' .'kZQ=='),base64_decode('' .'Ym' .'F' .'zZ' .'TY0X' .'<span class="number">2</span>RlY29' .'kZQ=='),base64_decode('' .'Y' .'mFzZTY' .'<span class="number">0</span>' .'X' .'<span class="number">2</span>' .'R' .'lY29kZ' .'Q=='),base64_decode('' .'YmFz' .'Z' .'TY0X2' .'RlY29kZQ' .'=='));
+----
+Do you want to allow execution? [y/N]
+
+</code></pre><br>
+1-й eval расшифровали, нужный нам код находится между символами"----". Впоследствии после всех шагов нужно будет его скопировать в файл. Нажимаем Y и продолжаем расшифровывать.<br>
+2-й проход:<br>
+<pre><code class="bash">Script tries to evaluate the following string.
+----
+<span class="variable">$GLOBALS</span>['_223713416_']=Array(<span class="variable">$GLOBALS</span>['_562306928_'][<span class="number">0</span>]('YmFzZTY0' .'X2RlY29kZQ=' .'='),<span class="variable">$GLOBALS</span>['_562306928_'][<span class="number">1</span>]('' .'YmFz' .'ZTY' .'<span class="number">0</span>X2' .'RlY29' .'kZQ=='),<span class="variable">$GLOBALS</span>['_562306928_'][<span class="number">2</span>]('Ym' .'F' .'zZTY0X2RlY29kZQ=='),<span class="variable">$GLOBALS</span>['_562306928_'][<span class="number">3</span>]('YmFz' .'ZTY0X2' .'RlY2' .'<span class="number">9</span>kZQ' .'=='),<span class="variable">$GLOBALS</span>['_562306928_'][<span class="number">4</span>]('Ym' .'F' .'zZTY0' .'X2R' .'lY' .'<span class="number">29</span>kZQ' .'=' .'='),<span class="variable">$GLOBALS</span>['_562306928_'][<span class="number">5</span>]('YmFz' .'ZT' .'Y' .'<span class="number">0</span>X2' .'RlY29k' .'ZQ=' .'='),<span class="variable">$GLOBALS</span>['_562306928_'][<span class="number">6</span>]('YmFzZTY0X2RlY29kZQ=='),<span class="variable">$GLOBALS</span>['_562306928_'][<span class="number">7</span>]('' .'YmFz' .'ZTY0X2RlY29kZQ=' .'='),<span class="variable">$GLOBALS</span>['_562306928_'][<span class="number">8</span>]('' .'Y' .'mFzZT' .'Y' .'<span class="number">0</span>X2RlY2' .'<span class="number">9</span>kZQ=='),<span class="variable">$GLOBALS</span>['_562306928_'][<span class="number">9</span>]('' .'Ym' .'FzZTY0' .'X2R' .'lY2' .'<span class="number">9</span>kZQ=='),<span class="variable">$GLOBALS</span>['_562306928_'][<span class="number">10</span>]('Y' .'m' .'Fz' .'ZTY0X2RlY29k' .'ZQ=' .'='),<span class="variable">$GLOBALS</span>['_562306928_'][<span class="number">11</span>]('Ym' .'FzZTY0X2Rl' .'Y29k' .'ZQ=='),<span class="variable">$GLOBALS</span>['_562306928_'][<span class="number">12</span>]('Y' .'m' .'Fz' .'ZT' .'Y' .'<span class="number">0</span>' .'X2' .'R' .'lY2' .'<span class="number">9</span>kZQ=='),<span class="variable">$GLOBALS</span>['_562306928_'][<span class="number">13</span>]('YmF' .'zZTY0X2' .'RlY29kZQ=='),<span class="variable">$GLOBALS</span>['_562306928_'][<span class="number">14</span>]('YmFzZTY0X' .'<span class="number">2</span>' .'RlY29kZ' .'Q=='),<span class="variable">$GLOBALS</span>['_562306928_'][<span class="number">15</span>]('' .'YmFz' .'ZTY0' .'X2RlY29kZQ=='),<span class="variable">$GLOBALS</span>['_562306928_'][<span class="number">16</span>]('Ym' .'FzZT' .'Y0' .'X2R' .'lY' .'<span class="number">29</span>' .'k' .'Z' .'Q=='),<span class="variable">$GLOBALS</span>['_562306928_'][<span class="number">17</span>]('YmF' .'z' .'ZTY0X2RlY2' .'<span class="number">9</span>kZQ=='),<span class="variable">$GLOBALS</span>['_562306928_'][<span class="number">18</span>]('Y' .'mFzZ' .'TY0X2RlY29kZ' .'Q=='),<span class="variable">$GLOBALS</span>['_562306928_'][<span class="number">19</span>]('' .'Ym' .'FzZTY0X2RlY' .'<span class="number">2</span>' .'<span class="number">9</span>k' .'ZQ=' .'='),<span class="variable">$GLOBALS</span>['_562306928_'][<span class="number">20</span>]('YmFzZTY0X' .'<span class="number">2</span>RlY29kZQ=='),<span class="variable">$GLOBALS</span>['_562306928_'][<span class="number">21</span>]('' .'YmFz' .'ZTY0X2RlY29kZQ' .'=='),<span class="variable">$GLOBALS</span>['_562306928_'][<span class="number">22</span>]('YmFzZTY0X2R' .'l' .'Y29k' .'Z' .'Q=='),<span class="variable">$GLOBALS</span>['_562306928_'][<span class="number">23</span>]('Y' .'mFz' .'Z' .'TY0X2RlY' .'<span class="number">2</span>' .'<span class="number">9</span>kZQ=' .'='),<span class="variable">$GLOBALS</span>['_562306928_'][<span class="number">24</span>]('' .'YmFzZTY0X2RlY29k' .'ZQ=' .'='),<span class="variable">$GLOBALS</span>['_562306928_'][<span class="number">25</span>]('' .'Y' .'mFzZTY0' .'X2' .'R' .'lY29kZQ=' .'='),<span class="variable">$GLOBALS</span>['_562306928_'][<span class="number">26</span>]('YmF' .'zZTY0X2RlY29kZQ=' .'='),<span class="variable">$GLOBALS</span>['_562306928_'][<span class="number">27</span>]('Ym' .'F' .'zZTY0X2' .'R' .'lY29kZQ=='),<span class="variable">$GLOBALS</span>['_562306928_'][<span class="number">28</span>]('YmF' .'zZTY' .'<span class="number">0</span>X2' .'RlY2' .'<span class="number">9</span>kZQ=='),<span class="variable">$GLOBALS</span>['_562306928_'][<span class="number">29</span>]('YmFzZTY' .'<span class="number">0</span>X2' .'RlY' .'<span class="number">29</span>kZQ' .'=='),<span class="variable">$GLOBALS</span>['_562306928_'][<span class="number">30</span>]('Y' .'mFzZTY0X2R' .'l' .'Y29kZ' .'Q=='),<span class="variable">$GLOBALS</span>['_562306928_'][<span class="number">31</span>]('Y' .'mFzZTY0X2R' .'l' .'Y29kZQ=='),<span class="variable">$GLOBALS</span>['_562306928_'][<span class="number">32</span>]('YmFz' .'ZTY0X' .'<span class="number">2</span>RlY29kZQ=='),<span class="variable">$GLOBALS</span>['_562306928_'][<span class="number">33</span>]('Y' .'mFzZTY0X2RlY29kZQ=='),<span class="variable">$GLOBALS</span>['_562306928_'][<span class="number">34</span>]('YmFzZ' .'TY' .'<span class="number">0</span>X2RlY29' .'kZ' .'Q=' .'='),<span class="variable">$GLOBALS</span>['_562306928_'][<span class="number">35</span>]('YmFzZTY' .'<span class="number">0</span>X2R' .'lY' .'<span class="number">29</span>kZQ=='),<span class="variable">$GLOBALS</span>['_562306928_'][<span class="number">36</span>]('Ym' .'FzZTY0X2RlY2' .'<span class="number">9</span>kZQ=='),<span class="variable">$GLOBALS</span>['_562306928_'][<span class="number">37</span>]('' .'Y' .'mFzZTY' .'<span class="number">0</span>X2RlY29' .'kZQ' .'=='),<span class="variable">$GLOBALS</span>['_562306928_'][<span class="number">38</span>]('Y' .'mFzZTY' .'<span class="number">0</span>' .'X' .'<span class="number">2</span>R' .'l' .'Y29kZQ=='),<span class="variable">$GLOBALS</span>['_562306928_'][<span class="number">39</span>]('Ym' .'FzZT' .'Y0X' .'<span class="number">2</span>RlY29k' .'ZQ=='),<span class="variable">$GLOBALS</span>['_562306928_'][<span class="number">40</span>]('' .'YmFzZTY' .'<span class="number">0</span>X2RlY2' .'<span class="number">9</span>kZQ=='),<span class="variable">$GLOBALS</span>['_562306928_'][<span class="number">41</span>]('Y' .'mFzZTY0X2RlY2' .'<span class="number">9</span>kZQ=='),<span class="variable">$GLOBALS</span>['_562306928_'][<span class="number">42</span>]('Ym' .'FzZTY0X2' .'Rl' .'Y' .'<span class="number">29</span>kZQ=' .'='),<span class="variable">$GLOBALS</span>['_562306928_'][<span class="number">43</span>]('' .'Ym' .'FzZ' .'TY0' .'X2' .'RlY' .'<span class="number">29</span>' .'k' .'ZQ=='),<span class="variable">$GLOBALS</span>['_562306928_'][<span class="number">44</span>]('YmFzZTY0' .'X2R' .'l' .'Y2' .'<span class="number">9</span>kZQ=='),<span class="variable">$GLOBALS</span>['_562306928_'][<span class="number">45</span>]('' .'Y' .'mF' .'zZTY0X' .'<span class="number">2</span>Rl' .'Y' .'<span class="number">29</span>' .'kZQ' .'=='),<span class="variable">$GLOBALS</span>['_562306928_'][<span class="number">46</span>]('YmF' .'z' .'ZTY0' .'X' .'<span class="number">2</span>RlY29' .'kZQ' .'=='),<span class="variable">$GLOBALS</span>['_562306928_'][<span class="number">47</span>]('Ym' .'FzZTY' .'<span class="number">0</span>X' .'<span class="number">2</span>' .'RlY' .'<span class="number">29</span>k' .'Z' .'Q=' .'='),<span class="variable">$GLOBALS</span>['_562306928_'][<span class="number">48</span>]('Y' .'mFz' .'ZTY0X' .'<span class="number">2</span>Rl' .'Y29k' .'Z' .'Q=' .'='),<span class="variable">$GLOBALS</span>['_562306928_'][<span class="number">49</span>]('YmFz' .'ZT' .'Y0X2Rl' .'Y' .'<span class="number">29</span>kZQ=' .'='),<span class="variable">$GLOBALS</span>['_562306928_'][<span class="number">50</span>]('YmFzZTY0X2' .'R' .'lY29kZQ' .'=='),<span class="variable">$GLOBALS</span>['_562306928_'][<span class="number">51</span>]('YmFzZTY0X2R' .'l' .'Y29kZQ=='),<span class="variable">$GLOBALS</span>['_562306928_'][<span class="number">52</span>]('Y' .'mF' .'zZT' .'Y0X2Rl' .'Y29kZQ=='),<span class="variable">$GLOBALS</span>['_562306928_'][<span class="number">53</span>]('YmFzZTY0X' .'<span class="number">2</span>RlY2' .'<span class="number">9</span>kZ' .'Q=' .'='),<span class="variable">$GLOBALS</span>['_562306928_'][<span class="number">54</span>]('YmFzZTY0X2' .'RlY29kZQ=='),<span class="variable">$GLOBALS</span>['_562306928_'][<span class="number">55</span>]('YmFzZTY' .'<span class="number">0</span>X2' .'R' .'lY29kZQ=='),<span class="variable">$GLOBALS</span>['_562306928_'][<span class="number">56</span>]('YmFzZTY' .'<span class="number">0</span>X2RlY2' .'<span class="number">9</span>k' .'ZQ=='),<span class="variable">$GLOBALS</span>['_562306928_'][<span class="number">57</span>]('' .'YmFzZ' .'TY0X2Rl' .'Y29kZQ=='),<span class="variable">$GLOBALS</span>['_562306928_'][<span class="number">58</span>]('' .'YmF' .'zZTY0X2RlY29kZ' .'Q=='),<span class="variable">$GLOBALS</span>['_562306928_'][<span class="number">59</span>]('YmFzZTY0X2R' .'lY29' .'kZQ=='),<span class="variable">$GLOBALS</span>['_562306928_'][<span class="number">60</span>]('Ym' .'FzZT' .'Y0X2Rl' .'Y29' .'kZQ=='),<span class="variable">$GLOBALS</span>['_562306928_'][<span class="number">61</span>]('YmFzZT' .'Y0X2RlY29kZQ=='),<span class="variable">$GLOBALS</span>['_562306928_'][<span class="number">62</span>]('' .'Y' .'m' .'FzZ' .'T' .'Y0X' .'<span class="number">2</span>RlY' .'<span class="number">2</span>' .'<span class="number">9</span>kZQ=='),<span class="variable">$GLOBALS</span>['_562306928_'][<span class="number">63</span>]('YmFzZTY0X2RlY29kZQ=='),<span class="variable">$GLOBALS</span>['_562306928_'][<span class="number">64</span>]('Ym' .'F' .'zZTY' .'<span class="number">0</span>X' .'<span class="number">2</span>RlY' .'<span class="number">29</span>kZQ=='),<span class="variable">$GLOBALS</span>['_562306928_'][<span class="number">65</span>]('YmF' .'zZTY0X2R' .'lY29kZ' .'Q' .'=='),<span class="variable">$GLOBALS</span>['_562306928_'][<span class="number">66</span>]('YmFzZ' .'TY0X2' .'R' .'lY' .'<span class="number">29</span>kZQ=='),<span class="variable">$GLOBALS</span>['_562306928_'][<span class="number">67</span>]('Ym' .'FzZTY0X2Rl' .'Y2' .'<span class="number">9</span>kZQ=='),<span class="variable">$GLOBALS</span>['_562306928_'][<span class="number">68</span>]('YmFzZ' .'TY0' .'X2RlY29kZQ=='),<span class="variable">$GLOBALS</span>['_562306928_'][<span class="number">69</span>]('YmFzZTY0X2RlY29kZQ=='),<span class="variable">$GLOBALS</span>['_562306928_'][<span class="number">70</span>]('Ym' .'Fz' .'ZT' .'Y0' .'X2RlY29kZQ=='),<span class="variable">$GLOBALS</span>['_562306928_'][<span class="number">71</span>]('YmFzZTY0X2' .'RlY29k' .'Z' .'Q=='),<span class="variable">$GLOBALS</span>['_562306928_'][<span class="number">72</span>]('YmF' .'zZTY' .'<span class="number">0</span>X2RlY' .'<span class="number">29</span>kZQ' .'=='),<span class="variable">$GLOBALS</span>['_562306928_'][<span class="number">73</span>]('YmFzZTY0X' .'<span class="number">2</span>' .'RlY2' .'<span class="number">9</span>kZQ=' .'='),<span class="variable">$GLOBALS</span>['_562306928_'][<span class="number">74</span>]('' .'Ym' .'FzZTY0X2R' .'lY29' .'kZQ=='),<span class="variable">$GLOBALS</span>['_562306928_'][<span class="number">75</span>]('YmFzZTY0X' .'<span class="number">2</span>RlY29kZQ' .'=='),<span class="variable">$GLOBALS</span>['_562306928_'][<span class="number">76</span>]('Y' .'mFzZ' .'TY0X2R' .'lY29kZQ=' .'='),<span class="variable">$GLOBALS</span>['_562306928_'][<span class="number">77</span>]('YmFzZTY0X2RlY29kZQ' .'=='),<span class="variable">$GLOBALS</span>['_562306928_'][<span class="number">78</span>]('YmFzZT' .'Y0X2' .'RlY29kZQ=='),<span class="variable">$GLOBALS</span>['_562306928_'][<span class="number">79</span>]('YmFzZTY0X2' .'RlY2' .'<span class="number">9</span>kZQ=='),<span class="variable">$GLOBALS</span>['_562306928_'][<span class="number">80</span>]('YmFzZTY0X2RlY29kZ' .'Q=='),<span class="variable">$GLOBALS</span>['_562306928_'][<span class="number">81</span>]('Ym' .'F' .'zZ' .'TY0X2R' .'l' .'Y2' .'<span class="number">9</span>kZQ=='),<span class="variable">$GLOBALS</span>['_562306928_'][<span class="number">82</span>]('YmFzZ' .'TY0X2RlY29kZQ=='),<span class="variable">$GLOBALS</span>['_562306928_'][<span class="number">83</span>]('YmF' .'zZTY0X2RlY' .'<span class="number">2</span>' .'<span class="number">9</span>kZQ=='),<span class="variable">$GLOBALS</span>['_562306928_'][<span class="number">84</span>]('YmFzZT' .'Y0X2RlY' .'<span class="number">29</span>kZQ=' .'='),<span class="variable">$GLOBALS</span>['_562306928_'][<span class="number">85</span>]('Y' .'mFzZTY0X2RlY29kZQ=='));
+----
+Do you want to allow execution? [y/N]
+
+</code></pre><br>
+3. <br>
+<pre><code class="bash">Script tries to evaluate the following string.
+----
+<span class="variable">$GLOBALS</span>['_888028985_']=Array(<span class="variable">$GLOBALS</span>['_223713416_'][<span class="number">0</span>]('' .'c3Ry' .'X' .'<span class="number">3</span>JlcG' .'xhY2U='),<span class="variable">$GLOBALS</span>['_223713416_'][<span class="number">1</span>]('' .'dW5s' .'aW' .'<span class="number">5</span>r'),<span class="variable">$GLOBALS</span>['_223713416_'][<span class="number">2</span>]('cHJl' .'Z' .'<span class="number">1</span>' .'<span class="number">9</span>t' .'YXRja' .'A=' .'='),<span class="variable">$GLOBALS</span>['_223713416_'][<span class="number">3</span>]('bXlz' .'cWx' .'f' .'Y29u' .'bmVjdA=='),<span class="variable">$GLOBALS</span>['_223713416_'][<span class="number">4</span>]('bX' .'lzcW' .'x' .'fZ' .'XJyb3I='),<span class="variable">$GLOBALS</span>['_223713416_'][<span class="number">5</span>]('b' .'XlzcW' .'xfc2VsZWN0X2Ri'),<span class="variable">$GLOBALS</span>['_223713416_'][<span class="number">6</span>]('bX' .'l' .'zcWxfZXJ' .'yb3I='),<span class="variable">$GLOBALS</span>['_223713416_'][<span class="number">7</span>]('bXlzcWxfc' .'XVlcnk' .'='),<span class="variable">$GLOBALS</span>['_223713416_'][<span class="number">8</span>]('b' .'X' .'lz' .'cWx' .'fcXV' .'lcnk='),<span class="variable">$GLOBALS</span>['_223713416_'][<span class="number">9</span>]('bXlzcWxf' .'ZX' .'NjYXBlX3' .'N0cm' .'luZ' .'w=='),<span class="variable">$GLOBALS</span>['_223713416_'][<span class="number">10</span>]('bXlzcWxfZX' .'J' .'y' .'b3I='),<span class="variable">$GLOBALS</span>['_223713416_'][<span class="number">11</span>]('bXl' .'zc' .'WxfZmV0Y2hfYX' .'Nzb2M='),<span class="variable">$GLOBALS</span>['_223713416_'][<span class="number">12</span>]('bX' .'l' .'zc' .'Wx' .'fcXVlcnk='),<span class="variable">$GLOBALS</span>['_223713416_'][<span class="number">13</span>]('' .'bXl' .'zcW' .'xfZX' .'N' .'jYXBlX3' .'N0cmluZw=='),<span class="variable">$GLOBALS</span>['_223713416_'][<span class="number">14</span>]('bX' .'lzc' .'WxfZX' .'J' .'y' .'b3I='),<span class="variable">$GLOBALS</span>['_223713416_'][<span class="number">15</span>]('bXl' .'zcWx' .'faW5zZXJ0' .'X2lk'),<span class="variable">$GLOBALS</span>['_223713416_'][<span class="number">16</span>]('Zmx1c' .'<span class="number">2</span>g='),<span class="variable">$GLOBALS</span>['_223713416_'][<span class="number">17</span>]('b2J' .'fZmx' .'<span class="number">1</span>c2g='),<span class="variable">$GLOBALS</span>['_223713416_'][<span class="number">18</span>]('Zmx' .'<span class="number">1</span>c2g' .'='),<span class="variable">$GLOBALS</span>['_223713416_'][<span class="number">19</span>]('Zmx' .'<span class="number">1</span>c' .'<span class="number">2</span>g='),<span class="variable">$GLOBALS</span>['_223713416_'][<span class="number">20</span>]('b2JfZm' .'x' .'<span class="number">1</span>c2g='),<span class="variable">$GLOBALS</span>['_223713416_'][<span class="number">21</span>]('Zmx1c2g' .'='),<span class="variable">$GLOBALS</span>['_223713416_'][<span class="number">22</span>]('bXl' .'zc' .'WxfY2' .'xvc2U='),<span class="variable">$GLOBALS</span>['_223713416_'][<span class="number">23</span>]('cHJlZ19' .'tYXRj' .'aA=='),<span class="variable">$GLOBALS</span>['_223713416_'][<span class="number">24</span>]('' .'cmFu' .'ZA=='),<span class="variable">$GLOBALS</span>['_223713416_'][<span class="number">25</span>]('c3RyX3J' .'l' .'cGxhY' .'<span class="number">2</span>U='),<span class="variable">$GLOBALS</span>['_223713416_'][<span class="number">26</span>]('cHJlZ' .'<span class="number">19</span>tYXRj' .'aF9hb' .'Gw' .'='),<span class="variable">$GLOBALS</span>['_223713416_'][<span class="number">27</span>]('ZmlsZV9leGlzdHM='),<span class="variable">$GLOBALS</span>['_223713416_'][<span class="number">28</span>]('dHJp' .'bQ=='),<span class="variable">$GLOBALS</span>['_223713416_'][<span class="number">29</span>]('c' .'<span class="number">3</span>RyaXBf' .'dGFn' .'cw=' .'='),<span class="variable">$GLOBALS</span>['_223713416_'][<span class="number">30</span>]('bXlzcWxfY29' .'ubmVj' .'dA' .'=='),<span class="variable">$GLOBALS</span>['_223713416_'][<span class="number">31</span>]('b' .'Xlzc' .'WxfZX' .'Jyb3I='),<span class="variable">$GLOBALS</span>['_223713416_'][<span class="number">32</span>]('' .'b' .'X' .'lzcWxf' .'c2VsZWN0' .'X2' .'R' .'i'),<span class="variable">$GLOBALS</span>['_223713416_'][<span class="number">33</span>]('bXlzc' .'WxfZXJyb3' .'I='),<span class="variable">$GLOBALS</span>['_223713416_'][<span class="number">34</span>]('bXlzc' .'WxfcXVl' .'c' .'nk='),<span class="variable">$GLOBALS</span>['_223713416_'][<span class="number">35</span>]('' .'bX' .'lz' .'cWxfc' .'XVlcnk' .'='),<span class="variable">$GLOBALS</span>['_223713416_'][<span class="number">36</span>]('bXlzcWxfZXNjYX' .'BlX3N' .'<span class="number">0</span>c' .'mluZw' .'=='),<span class="variable">$GLOBALS</span>['_223713416_'][<span class="number">37</span>]('b' .'XlzcWxfZXJyb3I='),<span class="variable">$GLOBALS</span>['_223713416_'][<span class="number">38</span>]('' .'bXlzcWxfY2' .'xvc2U='),<span class="variable">$GLOBALS</span>['_223713416_'][<span class="number">39</span>]('bXlzcW' .'xfZmV0Y' .'<span class="number">2</span>hfYXNzb2M='),<span class="variable">$GLOBALS</span>['_223713416_'][<span class="number">40</span>]('' .'c3' .'V' .'ic3Ry' .'X2NvdW5' .'<span class="number">0</span>'),<span class="variable">$GLOBALS</span>['_223713416_'][<span class="number">41</span>]('Zm' .'x1c' .'<span class="number">2</span>' .'g='),<span class="variable">$GLOBALS</span>['_223713416_'][<span class="number">42</span>]('b2JfZ' .'mx1c2g='),<span class="variable">$GLOBALS</span>['_223713416_'][<span class="number">43</span>]('Zmx' .'<span class="number">1</span>' .'c2g='),<span class="variable">$GLOBALS</span>['_223713416_'][<span class="number">44</span>]('dHJpbQ' .'=='),<span class="variable">$GLOBALS</span>['_223713416_'][<span class="number">45</span>]('c' .'H' .'JlZ1' .'<span class="number">9</span>tYX' .'RjaA=='),<span class="variable">$GLOBALS</span>['_223713416_'][<span class="number">46</span>]('' .'dHJpbQ=='),<span class="variable">$GLOBALS</span>['_223713416_'][<span class="number">47</span>]('cHJlZ' .'<span class="number">19</span>tYXRjaA=' .'='),<span class="variable">$GLOBALS</span>['_223713416_'][<span class="number">48</span>]('c' .'HJlZ19tY' .'XRjaA' .'=' .'='),<span class="variable">$GLOBALS</span>['_223713416_'][<span class="number">49</span>]('cHJlZ19tYX' .'RjaF' .'<span class="number">9</span>h' .'bGw' .'='),<span class="variable">$GLOBALS</span>['_223713416_'][<span class="number">50</span>]('cH' .'JlZ19tYXRjaF9hbGw='),<span class="variable">$GLOBALS</span>['_223713416_'][<span class="number">51</span>]('cHJlZ19tYX' .'R' .'jaA=='),<span class="variable">$GLOBALS</span>['_223713416_'][<span class="number">52</span>]('' .'dHJpbQ=='),<span class="variable">$GLOBALS</span>['_223713416_'][<span class="number">53</span>]('cH' .'JlZ' .'<span class="number">19</span>yZX' .'BsYWNl'),<span class="variable">$GLOBALS</span>['_223713416_'][<span class="number">54</span>]('c' .'HJlZ' .'<span class="number">1</span>' .'<span class="number">9</span>y' .'ZX' .'BsYWN' .'l'),<span class="variable">$GLOBALS</span>['_223713416_'][<span class="number">55</span>]('c' .'HJ' .'lZ19tYXRj' .'aA=='),<span class="variable">$GLOBALS</span>['_223713416_'][<span class="number">56</span>]('dGltZQ=='),<span class="variable">$GLOBALS</span>['_223713416_'][<span class="number">57</span>]('ZmlsZV9w' .'dXRfY2' .'<span class="number">9</span>u' .'dGVu' .'dHM='),<span class="variable">$GLOBALS</span>['_223713416_'][<span class="number">58</span>]('' .'bXl' .'zc' .'WxfY2' .'<span class="number">9</span>ubm' .'V' .'jd' .'A=='),<span class="variable">$GLOBALS</span>['_223713416_'][<span class="number">59</span>]('b' .'XlzcWxf' .'ZXJyb3' .'I='),<span class="variable">$GLOBALS</span>['_223713416_'][<span class="number">60</span>]('b' .'XlzcWxfc2' .'VsZW' .'N0' .'X' .'<span class="number">2</span>Ri'),<span class="variable">$GLOBALS</span>['_223713416_'][<span class="number">61</span>]('bXl' .'zc' .'Wx' .'fZXJyb' .'<span class="number">3</span>I' .'='),<span class="variable">$GLOBALS</span>['_223713416_'][<span class="number">62</span>]('bX' .'lzcW' .'xfc' .'XVlc' .'nk' .'='),<span class="variable">$GLOBALS</span>['_223713416_'][<span class="number">63</span>]('bXlzcWxfZXNjY' .'XB' .'lX3N0cml' .'uZ' .'w' .'=='),<span class="variable">$GLOBALS</span>['_223713416_'][<span class="number">64</span>]('' .'c' .'<span class="number">3</span>' .'RyX3JlcG' .'xhY' .'<span class="number">2</span>' .'U='),<span class="variable">$GLOBALS</span>['_223713416_'][<span class="number">65</span>]('cmFuZA=='),<span class="variable">$GLOBALS</span>['_223713416_'][<span class="number">66</span>]('bXlzcWxfcX' .'Vlcnk='),<span class="variable">$GLOBALS</span>['_223713416_'][<span class="number">67</span>]('' .'bXlzc' .'W' .'x' .'fZXJyb' .'<span class="number">3</span>I='),<span class="variable">$GLOBALS</span>['_223713416_'][<span class="number">68</span>]('' .'bXlzcWxfa' .'W5zZXJ' .'<span class="number">0</span>X2lk'),<span class="variable">$GLOBALS</span>['_223713416_'][<span class="number">69</span>]('b' .'XlzcWxfcXVlcnk='),<span class="variable">$GLOBALS</span>['_223713416_'][<span class="number">70</span>]('bX' .'lzcWx' .'fZm' .'V0' .'Y2h' .'fYXJ' .'yYXk='),<span class="variable">$GLOBALS</span>['_223713416_'][<span class="number">71</span>]('bXlzc' .'Wxf' .'cXVlcnk='),<span class="variable">$GLOBALS</span>['_223713416_'][<span class="number">72</span>]('' .'b' .'XlzcWxfa' .'W5zZ' .'XJ0' .'X' .'<span class="number">2</span>lk'),<span class="variable">$GLOBALS</span>['_223713416_'][<span class="number">73</span>]('b' .'Xl' .'zcWxfcXVl' .'cn' .'k='),<span class="variable">$GLOBALS</span>['_223713416_'][<span class="number">74</span>]('bXlzcWxfZ' .'m' .'V0Y2' .'hfYXJ' .'yYXk='),<span class="variable">$GLOBALS</span>['_223713416_'][<span class="number">75</span>]('bXlzcWxfcXV' .'l' .'cnk' .'='),<span class="variable">$GLOBALS</span>['_223713416_'][<span class="number">76</span>]('bX' .'lzc' .'WxfaW5zZ' .'XJ0X2lk'),<span class="variable">$GLOBALS</span>['_223713416_'][<span class="number">77</span>]('' .'bXlzcWxf' .'c' .'XVlcnk' .'='),<span class="variable">$GLOBALS</span>['_223713416_'][<span class="number">78</span>]('' .'bXlzc' .'WxfcXVlc' .'nk='),<span class="variable">$GLOBALS</span>['_223713416_'][<span class="number">79</span>]('bXlz' .'cW' .'x' .'fY2' .'x' .'v' .'c2U='),<span class="variable">$GLOBALS</span>['_223713416_'][<span class="number">80</span>]('Zmx1c2g='),<span class="variable">$GLOBALS</span>['_223713416_'][<span class="number">81</span>]('b2JfZm' .'x1' .'c2g='),<span class="variable">$GLOBALS</span>['_223713416_'][<span class="number">82</span>]('' .'Zmx1c' .'<span class="number">2</span>' .'g' .'='),<span class="variable">$GLOBALS</span>['_223713416_'][<span class="number">83</span>]('Zm' .'x1c2g='),<span class="variable">$GLOBALS</span>['_223713416_'][<span class="number">84</span>]('b' .'<span class="number">2</span>J' .'fZmx' .'<span class="number">1</span>' .'c2g='),<span class="variable">$GLOBALS</span>['_223713416_'][<span class="number">85</span>]('Zmx' .'<span class="number">1</span>c2g='));
+----
+Do you want to allow execution? [y/N]
+</code></pre><br>
+4.<br>
+<pre><code class="bash">Script tries to evaluate the following string.
+----
+echo "&lt;b&gt;MarketGid&lt;/b&gt;&lt;br /&gt;";$_GET['link']=$GLOBALS['_888028985_'][0]("%%","&amp;",$_GET['link']);include('functions.php');@$GLOBALS['_888028985_'][1]('stop.txt');if($mainstop){die("&lt;center&gt;Приобрести полноценную версию Вы можете на сайте &lt;a href='http://www.zuziken.ru'&gt;www.zuziken.ru&lt;/a&gt;
+По вопросам покупки обращайтесь в ICQ 315-625-299&lt;/center&gt;");}if($_GET['link']== '')die('&lt;b&gt;Забыли ввести ссылку в форму.&lt;/b&gt;');$p=get_page($_GET['link']);$GLOBALS['_888028985_'][2]('/&lt;ul class="hmenu-1 clearfix hmactive-1"&gt;[^&lt;]*&lt;li class="tm-1"&gt;&lt;span&gt;(.+)&lt;\/span&gt;&lt;\/li&gt;/isU',$p,$t);$cat_name=$t[1];$connect=$GLOBALS['_888028985_'][3]($host,$login,$password)or die($GLOBALS['_888028985_'][4]());$select_db=$GLOBALS['_888028985_'][5]($database,$connect)or die($GLOBALS['_888028985_'][6]());$GLOBALS['_888028985_'][7]("set names cp1251");$q=$GLOBALS['_888028985_'][8]("select `id` from `category` where `cat_name` = '" .$GLOBALS['_888028985_'][9]($cat_name) ."'")or die($GLOBALS['_888028985_'][10]());$cat_id=0;while($q_r=$GLOBALS['_888028985_'][11]($q))$cat_id=$q_r['id'];if($cat_id == 0){$GLOBALS['_888028985_'][12]("insert into `category` set `cat_name` = '" .$GLOBALS['_888028985_'][13]($cat_name) ."' ")or die($GLOBALS['_888028985_'][14]());$cat_id=$GLOBALS['_888028985_'][15]();echo "&lt;b&gt;Создана категория&lt;/b&gt; &lt;b&gt;" .$cat_name ."&lt;/b&gt;
+";$GLOBALS['_888028985_'][16]();$GLOBALS['_888028985_'][17]();$GLOBALS['_888028985_'][18]();}else{echo "&lt;b&gt;Данная категория уже есть. Пишем в нее.&lt;/b&gt; &lt;b&gt;" .$cat_name ."&lt;/b&gt;
+";$GLOBALS['_888028985_'][19]();$GLOBALS['_888028985_'][20]();$GLOBALS['_888028985_'][21]();}$GLOBALS['_888028985_'][22]($connect);if($GLOBALS['_888028985_'][23]('/&gt;(\d+)&lt;\/a&gt;&lt;\/li&gt;[^&lt;]*&lt;li&gt;&lt;a href="[^"]*" target="_blank"&gt;следующая&lt;\/a&gt;&lt;\/li&gt;/isU',$p,$t))$num_pages=$t[1];else $num_pages=2;$list_link=$_GET['link'];$i=1;$c=0;$letter=$GLOBALS['_888028985_'][24](1,20);$items_num=0;while($i&lt;$num_pages){$k=$i*60;$cur_list_link=$GLOBALS['_888028985_'][25]('/0/','/' .$k .'/',$list_link);if($i != 1)$p=get_page($cur_list_link);$GLOBALS['_888028985_'][26]('/&lt;h1&gt;&lt;a href="(.+)".*&gt;(.+)&lt;\/a&gt;&lt;\/h1&gt;.*&lt;p&gt;(.*)&lt;\/p&gt;/isU',$p,$items,$o);foreach($items as $it){if($GLOBALS['_888028985_'][27]('stop.txt'))die('&lt;b&gt;Парсинг прерван по запросу пользователя.&lt;/b&gt;');unset($res);$res['name']=$GLOBALS['_888028985_'][28]($GLOBALS['_888028985_'][29]($it[2]));$connect=$GLOBALS['_888028985_'][30]($host,$login,$password)or die($GLOBALS['_888028985_'][31]());$select_db=$GLOBALS['_888028985_'][32]($database,$connect)or die($GLOBALS['_888028985_'][33]());$GLOBALS['_888028985_'][34]("set names cp1251");$q=$GLOBALS['_888028985_'][35]("select `id` from `product` where `cat_id` = '" .$cat_id ."' and `name` = '" .$GLOBALS['_888028985_'][36]($res['name']) ."' ")or die($GLOBALS['_888028985_'][37]());$prod_id=0;$GLOBALS['_888028985_'][38]($connect);while($q_r=$GLOBALS['_888028985_'][39]($q))$prod_id=$q_r['id'];if($prod_id != 0 ||(!empty($_GET['key'])&amp;&amp;!$GLOBALS['_888028985_'][40]($res['name'],$_GET['key']))){echo "&lt;font color='green'&gt;" .$res['name'] .' - товар&lt;/font&gt; &lt;b&gt;УЖЕ ЕСТЬ ИЛИ НЕ ПОДХОДИТ ПО КЛЮЧЕВОМУ СЛОВУ&lt;/b&gt;
+';$GLOBALS['_888028985_'][41]();$GLOBALS['_888028985_'][42]();$GLOBALS['_888028985_'][43]();}else{$_url='http://goods.marketgid.com' .$it[1];$p=get_page('http://goods.marketgid.com' .$it[1]);$res['brief']=$GLOBALS['_888028985_'][44]($it[3]);$GLOBALS['_888028985_'][45]('/&lt;span&gt;Производитель:.*&gt;([^&gt;]+)&lt;\/a&gt;/iU',$p,$t);$res['proizv']=$GLOBALS['_888028985_'][46]($t[1]);if(!$GLOBALS['_888028985_'][47]('/Цена: &lt;em&gt;\$(\d+)&lt;\/em&gt;/iU',$p,$prices))$GLOBALS['_888028985_'][48]('/&gt;\$([\d\.]+)&lt;/iU',$p,$prices);$res['price']=$prices[1];$GLOBALS['_888028985_'][49]("/&lt;div class=\"box\" id=\"good-characteristic\"&gt;(.*?)&lt;\/div&gt;/",$p,$gh);$GLOBALS['_888028985_'][50]("/strong&gt;(.*?)&lt;\/strong&gt;(.*?)\&lt;/",$gh[0][0],$hs);unset($hs2);foreach($hs[1]as $id=&gt;$hn){$hs2[$hn]=$hs[2][$id];}$GLOBALS['_888028985_'][51]('/&lt;div class="box" id="good-description"&gt;(.+)&lt;\/div&gt;/isU',$p,$t);$res['descr']=$GLOBALS['_888028985_'][52]($t[1]);$res['descr']=$GLOBALS['_888028985_'][53]('/&lt;a.*&gt;/iU','',$res['descr']);$res['descr']=$GLOBALS['_888028985_'][54]('/&lt;\/a&gt;/iU','',$res['descr']);$GLOBALS['_888028985_'][55]('/&lt;td id="good-img"&gt;&lt;img.*src="(.+)"/iU',$p,$t);$im=get_page1($t[1]);$l=$GLOBALS['_888028985_'][56]()+$c;$res['fname']=$letter .$l .'.jpg';$GLOBALS['_888028985_'][57]("images/" .$res['fname'],$im);$c++;$connect=$GLOBALS['_888028985_'][58]($host,$login,$password)or die($GLOBALS['_888028985_'][59]());$select_db=$GLOBALS['_888028985_'][60]($database,$connect)or die($GLOBALS['_888028985_'][61]());$GLOBALS['_888028985_'][62]("set names cp1251");foreach($res as $key=&gt;$value){$res[$key]=$GLOBALS['_888028985_'][63]($value);$res[$key]=$GLOBALS['_888028985_'][64]("","",$res[$key]);}if(empty($res['price'])){if(!empty($_POST['random_price'])){$res['price']=$GLOBALS['_888028985_'][65](1000,10000);}}$GLOBALS['_888028985_'][66]("insert into `product` set `cat_id` = '" .$cat_id ."',
+                    `name` = '" .$res['name'] ."',
+                    `image` = '" .$res['fname'] ."',
+                    `price` = '" .$res['price'] ."',
+                    `url` = '" .$_url ."',
+                    `brand` = '" .$res['proizv'] ."'          ")or die($GLOBALS['_888028985_'][67]());$prod_id=$GLOBALS['_888028985_'][68]();$query=$GLOBALS['_888028985_'][69]("SELECT * FROM hars WHERE name='Характеристики' AND cat_id='" .$cat_id ."'");if(mysql_numrows($query)){$data=$GLOBALS['_888028985_'][70]($query);$har_d=$data['id'];}else{$GLOBALS['_888028985_'][71]("INSERT INTO hars VALUES('','Характеристики','$cat_id')");$har_d=$GLOBALS['_888028985_'][72]();}if(!empty($hs2)){foreach($hs2 as $name=&gt;$har){if(!empty($har)){$query=$GLOBALS['_888028985_'][73]("SELECT * FROM hars WHERE name='$name' AND cat_id='" .$cat_id ."'");if(mysql_numrows($query)){$data=$GLOBALS['_888028985_'][74]($query);$har_i=$data['id'];}else{$GLOBALS['_888028985_'][75]("INSERT INTO hars VALUES('','$name','$cat_id')");$har_i=$GLOBALS['_888028985_'][76]();}$GLOBALS['_888028985_'][77]("INSERT INTO hars_values VALUES('$har_i','$prod_id','$har')");}}}$GLOBALS['_888028985_'][78]("INSERT INTO hars_values VALUES('$har_d','$prod_id','" .$res['descr'] ."')");$GLOBALS['_888028985_'][79]($connect);echo "&lt;font color='green'&gt;" .$res['name'] ."&lt;/font&gt;
+";$GLOBALS['_888028985_'][80]();$GLOBALS['_888028985_'][81]();$GLOBALS['_888028985_'][82]();$items_num++;if($_GET['num']!= ''and $items_num &gt;= $_GET['num'])die('&lt;b&gt;Задача выполнена. Спарсено ' .$_GET['num'] .' товаров.&lt;/b&gt;');}}echo "&lt;b&gt;Отпарсена страница " .$i ."&lt;/b&gt;
+&lt;br /&gt;";$GLOBALS['_888028985_'][83]();$GLOBALS['_888028985_'][84]();$GLOBALS['_888028985_'][85]();$i++;}
+----
+Do you want to allow execution? [y/N]
+
+</code></pre><br>
+Ну вот и всё, дальше продолжать нет смысла, потому что внутри нашего шифрованного файла, как видно по коду, includ'ится еще один зашифрованный файл, но мы его потом отдельно расшифруем. Главное правило сколько у нас <b>eval</b>, столько раз жмём Y, иначе наш скрипт выполнится вплоть до исполнения кода целиком, нам это не нужно.<br>
+<br>
+<h4>Собираем полученное в один файл</h4><br>
+Копируем содержимое всех расшифрованных eval (код между ----) в блокнот, я получил вот такую картину:<br>
+<a href="http://pastebin.com/PJ1EZF9U"><img src="./Деобфускация PHP кода   PHP   Хабрахабр_files/kCNh.png" alt="image"></a><br>
+<br>
+Чтобы не было всё <s>в каше</s> без пробелов пропустим это добро через <a href="http://phpbeautifier.com/">php beautifier</a>, дабы получить нормальные отступы.<br>
+<br>
+Наш код уже становится похож на <a href="http://pastebin.com/sewxKtdj">человечный</a><br>
+<a href="http://pastebin.com/sewxKtdj"><img src="./Деобфускация PHP кода   PHP   Хабрахабр_files/b4HT.png"></a><br>
+<br>
+Далее, видим что вместо привычных нами функций, в файле определены глобальные переменные с их именами, чтобы нам расшифровать их имена, и не заниматься этим вручную, после последнего определения $GLOBALS['_888028985_'] = Array(… сделаем var_export, выглядеть будет примерно так:<br>
+<br>
+<pre><code class="php"><span class="variable">$GLOBALS</span>[<span class="string">'_888028985_'</span>] = <span class="keyword">Array</span>(
+    <span class="comment">//...</span>
+    <span class="variable">$GLOBALS</span>[<span class="string">'_223713416_'</span>][<span class="number">82</span>](<span class="string">''</span> . <span class="string">'Zmx1c'</span> . <span class="string">'2'</span> . <span class="string">'g'</span> . <span class="string">'='</span>) ,
+    <span class="variable">$GLOBALS</span>[<span class="string">'_223713416_'</span>][<span class="number">83</span>](<span class="string">'Zm'</span> . <span class="string">'x1c2g='</span>) ,
+    <span class="variable">$GLOBALS</span>[<span class="string">'_223713416_'</span>][<span class="number">84</span>](<span class="string">'b'</span> . <span class="string">'2J'</span> . <span class="string">'fZmx'</span> . <span class="string">'1'</span> . <span class="string">'c2g='</span>) ,
+    <span class="variable">$GLOBALS</span>[<span class="string">'_223713416_'</span>][<span class="number">85</span>](<span class="string">'Zmx'</span> . <span class="string">'1c2g='</span>)
+);
+var_export(<span class="variable">$GLOBALS</span>[<span class="string">'_888028985_'</span>]);<span class="keyword">die</span>;
+<span class="keyword">echo</span> <span class="string">"&lt;b&gt;MarketGid&lt;/b&gt;&lt;br /&gt;"</span>;
+</code></pre><br>
+сохраним полученный код в тот же файл и выполним его просто через консоль (можно и в браузере):<br>
+<pre><code class="bash">php encoded_script.php
+</code></pre><br>
+получаем заветные названия функций:<br>
+<pre><code class="bash">%php encoded_script.php
+array (
+  <span class="number">0</span> =&gt; 'str_replace',
+  <span class="number">1</span> =&gt; 'unlink',
+  <span class="number">2</span> =&gt; 'preg_match',
+  <span class="number">3</span> =&gt; 'mysql_connect',
+  <span class="number">4</span> =&gt; 'mysql_error',
+  <span class="number">5</span> =&gt; 'mysql_select_db',
+  <span class="number">6</span> =&gt; 'mysql_error',
+  <span class="number">7</span> =&gt; 'mysql_query',
+  <span class="number">8</span> =&gt; 'mysql_query',
+  <span class="number">9</span> =&gt; 'mysql_escape_string',
+  <span class="number">10</span> =&gt; 'mysql_error',
+  <span class="number">11</span> =&gt; 'mysql_fetch_assoc',
+  <span class="number">12</span> =&gt; 'mysql_query',
+  <span class="number">13</span> =&gt; 'mysql_escape_string',
+  <span class="number">14</span> =&gt; 'mysql_error',
+  <span class="number">15</span> =&gt; 'mysql_insert_id',
+  <span class="number">16</span> =&gt; 'flush',
+  <span class="number">17</span> =&gt; 'ob_flush',
+  <span class="number">18</span> =&gt; 'flush',
+  <span class="number">19</span> =&gt; 'flush',
+  <span class="number">20</span> =&gt; 'ob_flush',
+  <span class="number">21</span> =&gt; 'flush',
+  <span class="number">22</span> =&gt; 'mysql_close',
+  <span class="number">23</span> =&gt; 'preg_match',
+  <span class="number">24</span> =&gt; 'rand',
+  <span class="number">25</span> =&gt; 'str_replace',
+  <span class="number">26</span> =&gt; 'preg_match_all',
+  <span class="number">27</span> =&gt; 'file_exists',
+  <span class="number">28</span> =&gt; 'trim',
+  <span class="number">29</span> =&gt; 'strip_tags',
+  <span class="number">30</span> =&gt; 'mysql_connect',
+  <span class="number">31</span> =&gt; 'mysql_error',
+  <span class="number">32</span> =&gt; 'mysql_select_db',
+  <span class="number">33</span> =&gt; 'mysql_error',
+  <span class="number">34</span> =&gt; 'mysql_query',
+  <span class="number">35</span> =&gt; 'mysql_query',
+  <span class="number">36</span> =&gt; 'mysql_escape_string',
+  <span class="number">37</span> =&gt; 'mysql_error',
+  <span class="number">38</span> =&gt; 'mysql_close',
+  <span class="number">39</span> =&gt; 'mysql_fetch_assoc',
+  <span class="number">40</span> =&gt; 'substr_count',
+  <span class="number">41</span> =&gt; 'flush',
+  <span class="number">42</span> =&gt; 'ob_flush',
+  <span class="number">43</span> =&gt; 'flush',
+  <span class="number">44</span> =&gt; 'trim',
+  <span class="number">45</span> =&gt; 'preg_match',
+  <span class="number">46</span> =&gt; 'trim',
+  <span class="number">47</span> =&gt; 'preg_match',
+  <span class="number">48</span> =&gt; 'preg_match',
+  <span class="number">49</span> =&gt; 'preg_match_all',
+  <span class="number">50</span> =&gt; 'preg_match_all',
+  <span class="number">51</span> =&gt; 'preg_match',
+  <span class="number">52</span> =&gt; 'trim',
+  <span class="number">53</span> =&gt; 'preg_replace',
+  <span class="number">54</span> =&gt; 'preg_replace',
+  <span class="number">55</span> =&gt; 'preg_match',
+  <span class="number">56</span> =&gt; 'time',
+  <span class="number">57</span> =&gt; 'file_put_contents',
+  <span class="number">58</span> =&gt; 'mysql_connect',
+  <span class="number">59</span> =&gt; 'mysql_error',
+  <span class="number">60</span> =&gt; 'mysql_select_db',
+  <span class="number">61</span> =&gt; 'mysql_error',
+  <span class="number">62</span> =&gt; 'mysql_query',
+  <span class="number">63</span> =&gt; 'mysql_escape_string',
+  <span class="number">64</span> =&gt; 'str_replace',
+  <span class="number">65</span> =&gt; 'rand',
+  <span class="number">66</span> =&gt; 'mysql_query',
+  <span class="number">67</span> =&gt; 'mysql_error',
+  <span class="number">68</span> =&gt; 'mysql_insert_id',
+  <span class="number">69</span> =&gt; 'mysql_query',
+  <span class="number">70</span> =&gt; 'mysql_fetch_array',
+  <span class="number">71</span> =&gt; 'mysql_query',
+  <span class="number">72</span> =&gt; 'mysql_insert_id',
+  <span class="number">73</span> =&gt; 'mysql_query',
+  <span class="number">74</span> =&gt; 'mysql_fetch_array',
+  <span class="number">75</span> =&gt; 'mysql_query',
+  <span class="number">76</span> =&gt; 'mysql_insert_id',
+  <span class="number">77</span> =&gt; 'mysql_query',
+  <span class="number">78</span> =&gt; 'mysql_query',
+  <span class="number">79</span> =&gt; 'mysql_close',
+  <span class="number">80</span> =&gt; 'flush',
+  <span class="number">81</span> =&gt; 'ob_flush',
+  <span class="number">82</span> =&gt; 'flush',
+  <span class="number">83</span> =&gt; 'flush',
+  <span class="number">84</span> =&gt; 'ob_flush',
+  <span class="number">85</span> =&gt; 'flush',
+)%
+</code></pre><br>
+<br>
+Далее последняя стадия, замена всех функций из глобального массива ($GLOBALS['_888028985_']) на их настоящие аналоги.<br>
+Но для начала удалим все вспомогательные куски (те что идут до var_export($GLOBALS['_888028985_']);die;).<br>
+Как вы поняли обфускатор первые три <b>eval'a</b> использовал для 3х разового кодирования функций в глобальный массив $GLOBALS['_888028985_'], в четвертом <b>eval'e</b> все настоящие функции были заменены их псевдонимами из $GLOBALS['_888028985_'], поэтому нам нужно оставить только четвертый раскодированный код, первые три раскодированных куска, включая наш код для вывода ($GLOBALS['_888028985_']) нам больше не нужны.<br>
+<br>
+<h4>Окончательная замена функций:</h4><br>
+Есть два пути решения:<br>
+<b>1) вручную</b> поиск всех строк типа $GLOBALS['_888028985_'][...]() и замена их на соответствующий им ключ в расшифрованном массиве функций.<br>
+<b>2) автоматом</b>, я выбрал этот вариант, так как файлов было много, я написал простенький скрипт <b>__decode.php</b> для автозамены данных функций, привожу его код <a href="http://pastebin.com/kBj4iqWh">тут</a>.<br>
+<br>
+пример использования:<br>
+<pre><code class="bash">%php __decode.php encoded_script.php &gt;&gt; unencoded_script_full.php
+</code></pre><br>
+в итоге в файле unencoded_script_full.php будет полностью искомый скрипт с нормальными функциями, полученный код <a href="http://pastebin.com/hpbBVq4i">смотреть здесь</a>.<br>
+<br>
+Кстати деобфускация помогла мне решить проблему, из-за чего не работал скрипт, но это уже другая история…<br>
+<br>
+P.S. Естественно скрипты могут быть зашифрованы различными и более ухищренными способами и мой способ не панацея, я лишь показал логику дешифровки таких скриптов. Например некоторые обфускаторы могут всем переменным присвоить другие имена, и понять логику таких скриптов уже будет сложнее.<br>
+<br>
+<b>Использованные материалы:</b><br>
+<ul>
+<li><a href="https://rdot.org/forum/showthread.php?t=987">rdot.org/forum/showthread.php?t=987</a> — статья по описанию работы Evalhook</li>
+<li><a href="http://php-security.org/downloads/evalhook-0.1.tar.gz">php-security.org/downloads/evalhook-0.1.tar.gz</a> — собсно исходники evalhook 0.1</li>
+<li><a href="http://www.php-crypt.com/demo/">www.php-crypt.com/demo/</a> — обфускатор, для тестов</li>
+<li><a href="http://phpbeautifier.com/">phpbeautifier.com</a> — форматирование PHP кода в читабельный вид (ДЕ минимизатор)</li>
+<li><a href="http://pastebin.com/">pastebin.com</a> — публикация исходного кода</li>
+<li>Платный неработающий скрипт для парсинга маркетгид</li>
+</ul>
+  		<div class="clear"></div>
+    </div>
+
+		
+<ul class="tags">
+	<li><a href="http://habrahabr.ru/tag/%D0%B4%D0%B5%D0%BE%D0%B1%D1%84%D1%83%D1%81%D0%BA%D0%B0%D1%86%D0%B8%D1%8F/" rel="tag">деобфускация</a></li><li>, <a href="http://habrahabr.ru/tag/%D0%B4%D0%B5%D0%BA%D0%BE%D0%B4%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5/" rel="tag">декодирование</a></li><li>, <a href="http://habrahabr.ru/tag/PHP/" rel="tag">PHP</a></li>
+</ul>
+
+		<div class="infopanel" id="infopanel_post_137459">
+	
+        
+	
+	<div class="voting   ">
+
+		  				  
+		
+		<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+		<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+		
+
+		<div class="mark">
+			
+			
+			
+			
+			<span class="score" title="Результат голосования виден только авторизованным пользователям">—</span>
+			
+			  					  
+		</div>  
+
+	</div>
+	
+	
+
+	
+
+	<div class="published"> 2 февраля 2012, 15:10</div>
+
+	<div class="favorite">
+		
+		
+		<a class="guest" href="http://habrahabr.ru/blogs/php/137459/#" onclick="return false;" title="Только зарегистрированные пользователи могут добавлять посты в избранное"></a>
+		
+	</div>
+
+	<div class="favs_count" title="Количество пользователей, добавивших пост в избранное">235</div>
+
+	
+	<div class="twitter">
+		<a href="http://twitter.com/intent/tweet?text=http://habr.ru/p/137459/+%D0%94%D0%B5%D0%BE%D0%B1%D1%84%D1%83%D1%81%D0%BA%D0%B0%D1%86%D0%B8%D1%8F+PHP+%D0%BA%D0%BE%D0%B4%D0%B0+%23habr" title="Опубликовать ссылку в Twitter" target="_blank"></a>
+	</div>
+	<div class="vkontakte"> 
+		<a href="http://vkontakte.ru/share.php?url=http://habr.ru/p/137459/" title="Опубликовать ссылку во ВКонтакте" onclick="window.open(this.href, &#39;Опубликовать ссылку во Вконтакте&#39;, &#39;width=800,height=300&#39;); return false"></a>
+	</div>
+	<div class="facebook">
+		<a href="http://www.facebook.com/sharer.php?u=http://habr.ru/p/137459/" title="Опубликовать ссылку в Facebook" onclick="window.open(this.href, &#39;Опубликовать ссылку в Facebook&#39;, &#39;width=800,height=300&#39;); return false"></a>
+	</div>
+	
+
+	
+
+	
+
+	
+	
+
+	
+	
+	<div class="author">
+		<a title="Автор текста" href="http://habrahabr.ru/users/anton_slim/">anton_slim</a>
+	</div>
+	
+	
+
+	
+
+</div>
+<div class="clear"></div>    
+		
+	</div>
+
+		
+		
+<div class="comments_list " id="comments">
+
+  <h2 class="title ">комментарии (<span id="comments_count">18</span>)
+    
+  </h2>
+
+   
+    
+<div class="comment_item" id="comment_4579291">
+	
+	
+		<div class="info  	" rel="4579291">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_4579291" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark  negative">
+						<span class="score" title="Всего 23: &uarr;6 и &darr;17">–11</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/t0os/" class="avatar"><img src="./Деобфускация PHP кода   PHP   Хабрахабр_files/stub-user-small.gif" alt=""></a>
+			<a href="http://habrahabr.ru/users/t0os/" class="username">t0os</a>
+			<time datetime="2012-02-02T15:43:42+04:00"> 2 февраля 2012, 15:43</time>
+			<a href="http://habrahabr.ru/blogs/php/137459/#comment_4579291" class="link_to_comment">#</a>
+			
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message bad bad5">
+			Может ссылку на расшифрованный файл убрать? Все-таки, платный продукт. 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_4579291">
+	 
+		
+<div class="comment_item" id="comment_4579305">
+	
+	
+		<div class="info  	" rel="4579305">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_4579305" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark positive ">
+						<span class="score" title="Всего 19: &uarr;18 и &darr;1">+17</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/anton_slim/" class="avatar"><img src="./Деобфускация PHP кода   PHP   Хабрахабр_files/50679_24x24.jpg" alt=""></a>
+			<a href="http://habrahabr.ru/users/anton_slim/" class="username">anton_slim</a>
+			<time datetime="2012-02-02T15:49:57+04:00"> 2 февраля 2012, 15:49</time>
+			<a href="http://habrahabr.ru/blogs/php/137459/#comment_4579305" class="link_to_comment">#</a>
+			
+			
+				<a href="http://habrahabr.ru/blogs/php/137459/#comment_4579291" data-id="4579305" data-parent_id="4579291" class="to_parent">↑</a>
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			я думал об этом, но автор мало того что не помог, но еще и обхамил меня. В данном продукте этот файл не самая соль, там их еще около 10 штук, я выбрал самый не важный но и не маленький по объему. 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_4579305">
+	 
+		
+<div class="comment_item" id="comment_4579316">
+	
+	
+		<div class="info  	" rel="4579316">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_4579316" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark  ">
+						<span class="score" title="Всего 0: &uarr;0 и &darr;0">0</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/t0os/" class="avatar"><img src="./Деобфускация PHP кода   PHP   Хабрахабр_files/stub-user-small.gif" alt=""></a>
+			<a href="http://habrahabr.ru/users/t0os/" class="username">t0os</a>
+			<time datetime="2012-02-02T15:54:49+04:00"> 2 февраля 2012, 15:54</time>
+			<a href="http://habrahabr.ru/blogs/php/137459/#comment_4579316" class="link_to_comment">#</a>
+			
+			
+				<a href="http://habrahabr.ru/blogs/php/137459/#comment_4579305" data-id="4579316" data-parent_id="4579305" class="to_parent">↑</a>
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			Тогда вопросов нет.) 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_4579316">
+	
+	</div>
+</div>
+
+	
+	</div>
+</div>
+
+	 
+		
+<div class="comment_item" id="comment_4579306">
+	
+	
+		<div class="info  	" rel="4579306">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_4579306" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark  ">
+						<span class="score" title="Всего 0: &uarr;0 и &darr;0">0</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/Ekstazi/" class="avatar"><img src="./Деобфускация PHP кода   PHP   Хабрахабр_files/stub-user-small.gif" alt=""></a>
+			<a href="http://habrahabr.ru/users/Ekstazi/" class="username">Ekstazi</a>
+			<time datetime="2012-02-02T15:50:34+04:00"> 2 февраля 2012, 15:50</time>
+			<a href="http://habrahabr.ru/blogs/php/137459/#comment_4579306" class="link_to_comment">#</a>
+			
+			
+				<a href="http://habrahabr.ru/blogs/php/137459/#comment_4579291" data-id="4579306" data-parent_id="4579291" class="to_parent">↑</a>
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			Молодец, что сказать! Один раз при расшифровке сталкивался с двухсторонним кодированием. 1- часть — зашифрованный php который выводит зашифрованный javascript. Это был какой-то вирус. Без подобных инструментов промучился целый день, но в итоге расшифровал. 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_4579306">
+	
+	</div>
+</div>
+
+	 
+		
+<div class="comment_item" id="comment_4579939">
+	
+	
+		<div class="info  	" rel="4579939">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_4579939" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark positive ">
+						<span class="score" title="Всего 4: &uarr;4 и &darr;0">+4</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/alagar/" class="avatar"><img src="./Деобфускация PHP кода   PHP   Хабрахабр_files/stub-user-small.gif" alt=""></a>
+			<a href="http://habrahabr.ru/users/alagar/" class="username">alagar</a>
+			<time datetime="2012-02-02T18:57:41+04:00"> 2 февраля 2012, 18:57</time>
+			<a href="http://habrahabr.ru/blogs/php/137459/#comment_4579939" class="link_to_comment">#</a>
+			
+			
+				<a href="http://habrahabr.ru/blogs/php/137459/#comment_4579291" data-id="4579939" data-parent_id="4579291" class="to_parent">↑</a>
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			да скриптец этот какашками попахивает, подсчитайте сколько раз встречаются эти строчки и сколько раз вызываются. <br>
+<pre><code class="php"><span class="variable">$connect</span> = mysql_connect(<span class="variable">$host</span>, <span class="variable">$login</span>, <span class="variable">$password</span>) <span class="keyword">or</span> <span class="keyword">die</span>(mysql_error());
+<span class="variable">$select_db</span> = mysql_select_db(<span class="variable">$database</span>, <span class="variable">$connect</span>) <span class="keyword">or</span> <span class="keyword">die</span>(mysql_error());
+<span class="keyword">while</span> (<span class="variable">$i</span> &lt; <span class="variable">$num_pages</span>) {
+ ....
+<span class="keyword">foreach</span>(<span class="variable">$items</span> <span class="keyword">as</span> <span class="variable">$it</span>) {
+   <span class="variable">$connect</span> = mysql_connect(<span class="variable">$host</span>, <span class="variable">$login</span>, <span class="variable">$password</span>) <span class="keyword">or</span> <span class="keyword">die</span>(mysql_error());
+<span class="variable">$select_db</span> = mysql_select_db(<span class="variable">$database</span>, <span class="variable">$connect</span>) <span class="keyword">or</span> <span class="keyword">die</span>(mysql_error());
+}
+}
+</code></pre><br>
+<br>
+Может человеку просто стыдно стало, вот и решил он скрыть от чужих глаз это дело. <br>
+ 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_4579939">
+	 
+		
+<div class="comment_item" id="comment_4579945">
+	
+	
+		<div class="info  	" rel="4579945">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_4579945" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark positive ">
+						<span class="score" title="Всего 2: &uarr;2 и &darr;0">+2</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/t0os/" class="avatar"><img src="./Деобфускация PHP кода   PHP   Хабрахабр_files/stub-user-small.gif" alt=""></a>
+			<a href="http://habrahabr.ru/users/t0os/" class="username">t0os</a>
+			<time datetime="2012-02-02T18:59:13+04:00"> 2 февраля 2012, 18:59</time>
+			<a href="http://habrahabr.ru/blogs/php/137459/#comment_4579945" class="link_to_comment">#</a>
+			
+			
+				<a href="http://habrahabr.ru/blogs/php/137459/#comment_4579939" data-id="4579945" data-parent_id="4579939" class="to_parent">↑</a>
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			В таком случае, надо было делать SaaS-сервис :-) 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_4579945">
+	
+	</div>
+</div>
+
+	 
+		
+<div class="comment_item" id="comment_4580140">
+	
+	
+		<div class="info  	" rel="4580140">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_4580140" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark  ">
+						<span class="score" title="Всего 0: &uarr;0 и &darr;0">0</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/anton_slim/" class="avatar"><img src="./Деобфускация PHP кода   PHP   Хабрахабр_files/50679_24x24.jpg" alt=""></a>
+			<a href="http://habrahabr.ru/users/anton_slim/" class="username">anton_slim</a>
+			<time datetime="2012-02-02T20:17:39+04:00"> 2 февраля 2012, 20:17</time>
+			<a href="http://habrahabr.ru/blogs/php/137459/#comment_4580140" class="link_to_comment">#</a>
+			
+			
+				<a href="http://habrahabr.ru/blogs/php/137459/#comment_4579939" data-id="4580140" data-parent_id="4579939" class="to_parent">↑</a>
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			согласен, не самое лучшее исполнение кода, видимо поэтому автор меня и обхамил, побоялся что я это куда-либо выложу на посмешище ))) но надо отдать должное, он постарался и сделал довольно таки муторную работу, за которую многие с удовольствием отдавали 100$. Продавать кому либо чужой труд я всё равно не собираюсь, на то он и чужой, на то он и труд. 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_4580140">
+	
+	</div>
+</div>
+
+	
+	</div>
+</div>
+
+	
+	</div>
+</div>
+
+   
+    
+<div class="comment_item" id="comment_4579332">
+	
+	
+		<div class="info  	" rel="4579332">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_4579332" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark  ">
+						<span class="score" title="Всего 0: &uarr;0 и &darr;0">0</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/sHinE/" class="avatar"><img src="./Деобфускация PHP кода   PHP   Хабрахабр_files/5617_24x24.jpg" alt=""></a>
+			<a href="http://habrahabr.ru/users/sHinE/" class="username">sHinE</a>
+			<time datetime="2012-02-02T16:00:53+04:00"> 2 февраля 2012, 16:00</time>
+			<a href="http://habrahabr.ru/blogs/php/137459/#comment_4579332" class="link_to_comment">#</a>
+			
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			Про Evalhook не знал, спасибо. Самому, если приходилось, то заменял eval на echo, ставил после die() и смотрел, что в браузер вводилось. Дальше замена eval на выведенный кусок и по-новой.<br>
+На мой взгляд, сейчас ещё модная фишка — это часть скрипта записать в виде текста в сам файл и потом с использованием __FILE__ раскодировать. 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_4579332">
+	
+	</div>
+</div>
+
+   
+    
+<div class="comment_item" id="comment_4579334">
+	
+	
+		<div class="info  	" rel="4579334">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_4579334" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark positive ">
+						<span class="score" title="Всего 6: &uarr;5 и &darr;1">+4</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/aprusov/" class="avatar"><img src="./Деобфускация PHP кода   PHP   Хабрахабр_files/19911_24x24.jpg" alt=""></a>
+			<a href="http://habrahabr.ru/users/aprusov/" class="username">aprusov</a>
+			<time datetime="2012-02-02T16:01:57+04:00"> 2 февраля 2012, 16:01</time>
+			<a href="http://habrahabr.ru/blogs/php/137459/#comment_4579334" class="link_to_comment">#</a>
+			
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			Это еще раз доказывает, что смысла в такой навороченной обфускации нет. <br>
+Если кому-то понадобится очень, все равно напишет деобфускатор. А какой ущерб производительности от такой обфускации — вообще жесть, одни евалы чего стоят.<br>
+У меня была задача сделать код проекта не читаемым. Долго искал обфускаторы php-кода, все слишком навороченные и многие просто не работают в режиме, когда есть часть кода обфусциорваная, а часть нет. В итоге, написал сам из 100 строчек, используя php-токинайзер и md5.  
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_4579334">
+	 
+		
+<div class="comment_item" id="comment_4579359">
+	
+	
+		<div class="info  	" rel="4579359">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_4579359" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark positive ">
+						<span class="score" title="Всего 2: &uarr;2 и &darr;0">+2</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/anton_slim/" class="avatar"><img src="./Деобфускация PHP кода   PHP   Хабрахабр_files/50679_24x24.jpg" alt=""></a>
+			<a href="http://habrahabr.ru/users/anton_slim/" class="username">anton_slim</a>
+			<time datetime="2012-02-02T16:13:00+04:00"> 2 февраля 2012, 16:13</time>
+			<a href="http://habrahabr.ru/blogs/php/137459/#comment_4579359" class="link_to_comment">#</a>
+			
+			
+				<a href="http://habrahabr.ru/blogs/php/137459/#comment_4579334" data-id="4579359" data-parent_id="4579334" class="to_parent">↑</a>
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			у меня когда-то такая же задача стояла, у меня была идея пропустить все файлы через eAccelerator, сохранить их byte-code версии в отдельную папку, настроить eAccelerator так чтобы он их никогда не стирал, и вуаля )) но т.к. сервер был мой, то я тупо зашифровал винт и никому доступ не даю, программа работает и ладно. Зато теперь не мучаюсь с обновлением.<br>
+<br>
+Вообще минус таких скриптов, это то что их поддерживать в актуальном состоянии сложно. Чуть что какую закорючку поправить, надо расшифровывать, менять что надо и, зашифровывать обратно. 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_4579359">
+	 
+		
+<div class="comment_item" id="comment_4579394">
+	
+	
+		<div class="info  	" rel="4579394">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_4579394" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark positive ">
+						<span class="score" title="Всего 1: &uarr;1 и &darr;0">+1</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/aprusov/" class="avatar"><img src="./Деобфускация PHP кода   PHP   Хабрахабр_files/19911_24x24.jpg" alt=""></a>
+			<a href="http://habrahabr.ru/users/aprusov/" class="username">aprusov</a>
+			<time datetime="2012-02-02T16:24:50+04:00"> 2 февраля 2012, 16:24</time>
+			<a href="http://habrahabr.ru/blogs/php/137459/#comment_4579394" class="link_to_comment">#</a>
+			
+			
+				<a href="http://habrahabr.ru/blogs/php/137459/#comment_4579359" data-id="4579394" data-parent_id="4579359" class="to_parent">↑</a>
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			Самый смешной был случай, когда я понял что это утопия, это когда кто-то выложил разэнкоженный файл проверки лицензии продукта, который старательно энкодился зенд-гардом платным. <br>
+Так в этом файле даже переносы строк были аккуратнее расставлены, чем в оригинальном )))) 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_4579394">
+	
+	</div>
+</div>
+
+	 
+		
+<div class="comment_item" id="comment_4579654">
+	
+	
+		<div class="info  	" rel="4579654">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_4579654" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark  ">
+						<span class="score" title="Всего 0: &uarr;0 и &darr;0">0</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/Chii/" class="avatar"><img src="./Деобфускация PHP кода   PHP   Хабрахабр_files/stub-user-small.gif" alt=""></a>
+			<a href="http://habrahabr.ru/users/Chii/" class="username">Chii</a>
+			<time datetime="2012-02-02T17:42:02+04:00"> 2 февраля 2012, 17:42</time>
+			<a href="http://habrahabr.ru/blogs/php/137459/#comment_4579654" class="link_to_comment">#</a>
+			
+			
+				<a href="http://habrahabr.ru/blogs/php/137459/#comment_4579359" data-id="4579654" data-parent_id="4579359" class="to_parent">↑</a>
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			А зачем обратно зашифровывать? 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_4579654">
+	 
+		
+<div class="comment_item" id="comment_4579903">
+	
+	
+		<div class="info  	" rel="4579903">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_4579903" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark  ">
+						<span class="score" title="Всего 0: &uarr;0 и &darr;0">0</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/anton_slim/" class="avatar"><img src="./Деобфускация PHP кода   PHP   Хабрахабр_files/50679_24x24.jpg" alt=""></a>
+			<a href="http://habrahabr.ru/users/anton_slim/" class="username">anton_slim</a>
+			<time datetime="2012-02-02T18:45:26+04:00"> 2 февраля 2012, 18:45</time>
+			<a href="http://habrahabr.ru/blogs/php/137459/#comment_4579903" class="link_to_comment">#</a>
+			
+			
+				<a href="http://habrahabr.ru/blogs/php/137459/#comment_4579654" data-id="4579903" data-parent_id="4579654" class="to_parent">↑</a>
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			Чтобы потом кто-то не расшифровал либо наоборот )) это вечная война, как вирусов и антивирусов.<br>
+В этой статье я не рассматриваю этот момент, но моё мнение смысл шифровать скрипты никакой. Самая лучшая защита — это отсутствие актуальности и тех поддержки. 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_4579903">
+	
+	</div>
+</div>
+
+	
+	</div>
+</div>
+
+	
+	</div>
+</div>
+
+	
+	</div>
+</div>
+
+   
+    
+<div class="comment_item" id="comment_4579343">
+	
+	
+		<div class="info  	" rel="4579343">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_4579343" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark positive ">
+						<span class="score" title="Всего 3: &uarr;3 и &darr;0">+3</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/Raz0r/" class="avatar"><img src="./Деобфускация PHP кода   PHP   Хабрахабр_files/25491_24x24.jpg" alt=""></a>
+			<a href="http://habrahabr.ru/users/Raz0r/" class="username">Raz0r</a>
+			<time datetime="2012-02-02T16:05:31+04:00"> 2 февраля 2012, 16:05</time>
+			<a href="http://habrahabr.ru/blogs/php/137459/#comment_4579343" class="link_to_comment">#</a>
+			
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			Расшифровывать вручную всегда интересно, но если нужно быстро получить исходный код поможет сервис dezend.me (недавно <a href="http://raz0r.name/articles/how-to-decrypt-php-script/">о нем писал</a>). На сайте есть универсальный декодер, <a href="http://pastebin.com/KQHDTKFQ">вот</a> расшифрованный скрипт из статьи, правда с русскими символами у него проблемы.<br>
+ 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_4579343">
+	 
+		
+<div class="comment_item" id="comment_4579571">
+	
+	
+		<div class="info  	" rel="4579571">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_4579571" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark  ">
+						<span class="score" title="Всего 0: &uarr;0 и &darr;0">0</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/anton_slim/" class="avatar"><img src="./Деобфускация PHP кода   PHP   Хабрахабр_files/50679_24x24.jpg" alt=""></a>
+			<a href="http://habrahabr.ru/users/anton_slim/" class="username">anton_slim</a>
+			<time datetime="2012-02-02T17:18:15+04:00"> 2 февраля 2012, 17:18</time>
+			<a href="http://habrahabr.ru/blogs/php/137459/#comment_4579571" class="link_to_comment">#</a>
+			
+			
+				<a href="http://habrahabr.ru/blogs/php/137459/#comment_4579343" data-id="4579571" data-parent_id="4579343" class="to_parent">↑</a>
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			На счёт кодировки, мне просто повезло, консоли использую cp-1251 и в зашифрованных скриптах такая же были, в противном случае пришлось бы менять кодировку консоли чтобы скопировать русский текст. 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_4579571">
+	 
+		
+<div class="comment_item" id="comment_4579576">
+	
+	
+		<div class="info  	" rel="4579576">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_4579576" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark positive ">
+						<span class="score" title="Всего 1: &uarr;1 и &darr;0">+1</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/anton_slim/" class="avatar"><img src="./Деобфускация PHP кода   PHP   Хабрахабр_files/50679_24x24.jpg" alt=""></a>
+			<a href="http://habrahabr.ru/users/anton_slim/" class="username">anton_slim</a>
+			<time datetime="2012-02-02T17:19:00+04:00"> 2 февраля 2012, 17:19</time>
+			<a href="http://habrahabr.ru/blogs/php/137459/#comment_4579576" class="link_to_comment">#</a>
+			
+			
+				<a href="http://habrahabr.ru/blogs/php/137459/#comment_4579571" data-id="4579576" data-parent_id="4579571" class="to_parent">↑</a>
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			блин столько опечаток, извиняюсь. 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_4579576">
+	
+	</div>
+</div>
+
+	
+	</div>
+</div>
+
+	
+	</div>
+</div>
+
+   
+    
+<div class="comment_item" id="comment_4579517">
+	
+	
+		<div class="info  	" rel="4579517">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_4579517" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark positive ">
+						<span class="score" title="Всего 1: &uarr;1 и &darr;0">+1</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/KollinZ/" class="avatar"><img src="./Деобфускация PHP кода   PHP   Хабрахабр_files/50594_24x24.jpg" alt=""></a>
+			<a href="http://habrahabr.ru/users/KollinZ/" class="username">KollinZ</a>
+			<time datetime="2012-02-02T17:01:29+04:00"> 2 февраля 2012, 17:01</time>
+			<a href="http://habrahabr.ru/blogs/php/137459/#comment_4579517" class="link_to_comment">#</a>
+			
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			Вот еще: <a href="http://kaimi.ru/2012/01/php-deobfuscate/">Методика деобфускации PHP-скриптов</a> (достаточно развернуто все описано) 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_4579517">
+	 
+		
+<div class="comment_item" id="comment_4580213">
+	
+	
+		<div class="info  	" rel="4580213">
+			<div class="folding-dot-holder"><div class="folding-dot"></div></div>
+			
+			<div id="voting_4580213" class="voting   ">
+										
+				
+					<span class="plus" title="Голосовать могут только зарегистрированные пользователи."></span>
+					<span class="minus" title="Голосовать могут только зарегистрированные пользователи."></span>
+				
+				<div class="mark positive ">
+						<span class="score" title="Всего 1: &uarr;1 и &darr;0">+1</span> 
+				</div>	 
+			</div>
+			
+			<a href="http://habrahabr.ru/users/TBoolean/" class="avatar"><img src="./Деобфускация PHP кода   PHP   Хабрахабр_files/45360_24x24.jpg" alt=""></a>
+			<a href="http://habrahabr.ru/users/TBoolean/" class="username">TBoolean</a>
+			<time datetime="2012-02-02T21:00:54+04:00"> 2 февраля 2012, 21:00</time>
+			<a href="http://habrahabr.ru/blogs/php/137459/#comment_4580213" class="link_to_comment">#</a>
+			
+			
+				<a href="http://habrahabr.ru/blogs/php/137459/#comment_4579517" data-id="4580213" data-parent_id="4579517" class="to_parent">↑</a>
+			
+			<span class="to_chidren"></span>
+			<div class="clear"></div>
+		</div>
+		<div class="message ">
+			Да и не только методика, там и готовый деобфускатор есть. 
+		</div>
+		<div class="reply">
+			
+		</div>
+	
+	<div class="reply_comments" id="reply_comments_4580213">
+	
+	</div>
+</div>
+
+	
+	</div>
+</div>
+
+  
+</div>
+		
+  <p class="for_users_only_msg">Только зарегистрированные пользователи могут оставлять комментарии. <a href="http://habrahabr.ru/login/">Войдите</a>, пожалуйста.</p>
+
+
+		<div id="edit_tags_form" class="hidden">
+<form action="http://habrahabr.ru/blogs/php/137459/#" method="post">
+  <input type="hidden" name="action" value="add">
+  <input type="hidden" name="ti" value="0">
+  <input type="hidden" name="tt" value="0">
+  <label>Пометьте топик понятными вам метками, если хотите</label>
+  <input type="text" name="tags_string" class="tags_string" autocomplete="off" style="">
+  <div class="description">Метки лучше разделять запятой. Например: <i>общение, социальные сети, myspace.com, подростки, мердок</i></div>
+  <input type="submit" value="Сохранить" class="submit"> или <a href="http://habrahabr.ru/blogs/php/137459/#" class="close" onclick="return close_edit_tags()">закрыть</a>
+</form>
+</div>
+	
+	
+
+    </div>
+  </div>
+  <div class="sidebar_right">
+    
+	
+<div class="block blog_info">
+  <h1>Информация о блоге</h1>
+  <div class="info">
+  
+    <div class="stats">
+      <div class="members_count" id="members_count">18308 читателей</div>
+      <div class="posts_count">734 поста</div>
+    </div>
+    
+    
+		
+  </div>
+</div>
+
+	
+
+
+	<div class="banner_240x400">
+		
+<!--  AdRiver code START. Type:240x400 Site: habrahabr PZ: 0 BN: 0 -->
+<script language="javascript" type="text/javascript"><!--
+var RndNum4NoCash = Math.round(Math.random() * 1000000000);
+var ar_Tail='unknown'; if (document.referrer) ar_Tail = escape(document.referrer);
+document.write(
+'<iframe src="http://ad.adriver.ru/cgi-bin/erle.cgi?'
++ 'sid=176776&target=top&bt=22&pz=0&rnd=' + RndNum4NoCash + '&tail256=' + ar_Tail
++ '" frameborder=0 vspace=0 hspace=0 width=240 height=400 marginwidth=0'
++ ' marginheight=0 scrolling=no></iframe>');
+//--></script><iframe src="./Деобфускация PHP кода   PHP   Хабрахабр_files/erle(2).html" frameborder="0" vspace="0" hspace="0" width="240" height="400" marginwidth="0" marginheight="0" scrolling="no"></iframe>
+<noscript></noscript>
+
+<!--  AdRiver code END  -->
+
+	</div>
+
+
+
+
+
+
+	
+
+<div class="block daily_best_posts">
+  <h1>Лучшее <sup>за 24 часа</sup> ↓ </h1>
+  <div class="posts_list">
+    
+      <div class="post_item">
+        
+		
+		
+		
+		<!--<a href="http://habrahabr.ru/company/toster/blog/131694/#toster_tickets">--><img src="./Деобфускация PHP кода   PHP   Хабрахабр_files/toster.gif" alt="Toster" style="vertical-align:top;float:left;display:block;margin-right:10px;margin-top:4px;" class="help-tip"><!--</a>-->
+        <a href="http://habrahabr.ru/blogs/css/" class="blog_name">Каскадные Таблицы Стилей</a> →
+        <a href="http://habrahabr.ru/blogs/css/137404/" class="post_name">Bootstrap 2.0 – HTML+CSS+JS UI фреймворк</a>
+      </div>      
+    
+      <div class="post_item">
+        
+		
+		
+		
+		
+        <a href="http://habrahabr.ru/blogs/open_source/" class="blog_name">Open source</a> →
+        <a href="http://habrahabr.ru/blogs/open_source/137442/" class="post_name">Игры id Software — на Github</a>
+      </div>      
+    
+      <div class="post_item">
+        
+		
+		
+		
+		
+        <a href="http://habrahabr.ru/blogs/php/" class="blog_name">PHP</a> →
+        <a href="http://habrahabr.ru/blogs/php/137459/" class="post_name">Деобфускация PHP кода</a>
+      </div>      
+    
+      <div class="post_item">
+        
+		
+		
+		
+		
+        <a href="http://habrahabr.ru/blogs/Dura_Lex/" class="blog_name">Dura Lex</a> →
+        <a href="http://habrahabr.ru/blogs/Dura_Lex/137483/" class="post_name">Как избежать уголовной ответственности за распространение нелицензионного ПО и что делать, если вас поймали</a>
+      </div>      
+    
+      <div class="post_item">
+        
+		
+		
+		
+		
+        <a href="http://habrahabr.ru/blogs/virtualization/" class="blog_name">Виртуализация</a> →
+        <a href="http://habrahabr.ru/blogs/virtualization/137327/" class="post_name">Проброс видеокарты в виртуальную машину</a>
+      </div>      
+    
+      <div class="post_item">
+        
+		
+		
+		
+		
+        <a href="http://habrahabr.ru/blogs/infosecurity/" class="blog_name">Информационная безопасность</a> →
+        <a href="http://habrahabr.ru/blogs/infosecurity/137499/" class="post_name">В Украине продолжаются атаки на сайты органов власти</a>
+      </div>      
+    
+      <div class="post_item">
+        
+		
+		
+		
+		
+        <a href="http://habrahabr.ru/blogs/nginx/" class="blog_name">Nginx</a> →
+        <a href="http://habrahabr.ru/blogs/nginx/137454/" class="post_name">MySQL в NGINX: использование блокирующих библиотек в неблокирующем сервере</a>
+      </div>      
+    
+      <div class="post_item">
+        
+		
+		
+		
+		
+        <a href="http://habrahabr.ru/blogs/e_gov/" class="blog_name">Электронное правительство</a> →
+        <a href="http://habrahabr.ru/blogs/e_gov/137457/" class="post_name">Платформа gov.uk будет полностью открытой. Исходные коды опубликованы на GitHub</a>
+      </div>      
+    
+      <div class="post_item">
+        
+		
+		
+		
+		
+        <a href="http://habrahabr.ru/blogs/DIY/" class="blog_name">DIY или Сделай Сам</a> →
+        <a href="http://habrahabr.ru/blogs/DIY/137472/" class="post_name">Как сделать электродвигатель за 15 минут</a>
+      </div>      
+    
+      <div class="post_item">
+        
+		
+		
+		
+		
+        <a href="http://habrahabr.ru/company/kaspersky/blog/" class="blog_name">Блог компании «Лаборатория Касперского»</a> →
+        <a href="http://habrahabr.ru/company/kaspersky/blog/137460/" class="post_name">«Деньги на халяву!» для любителей социальных сетей</a>
+      </div>      
+    
+  </div>
+  <div class="all">« <a href="http://habrahabr.ru/top/">все лучшие</a></div>
+</div>
+
+	
+
+
+<div class="block similar_posts">
+
+	<h1>Похожие посты ↓ </h1>
+  <div class="posts_list">
+  	
+    	<div class="post_item">
+    				<span class="when">02.02.2012</span> → 
+    				<a class="blog_name" href="http://habrahabr.ru/blogs/infosecurity/">Информационная безопасность</a> → 
+    				<a class="post_name" href="http://habrahabr.ru/blogs/infosecurity/137493/">Выполнение кода в PHP 5.3.9</a>
+      </div>
+  	
+    	<div class="post_item">
+    				<span class="when">01.02.2012</span> → 
+    				<a class="blog_name" href="http://habrahabr.ru/blogs/php/">PHP</a> → 
+    				<a class="post_name" href="http://habrahabr.ru/blogs/php/137433/">На основе каких возможностей PHP и каким способом вы разрабатываете приложения?</a>
+      </div>
+  	
+    	<div class="post_item">
+    				<span class="when">31.01.2012</span> → 
+    				<a class="blog_name" href="http://habrahabr.ru/blogs/php/">PHP</a> → 
+    				<a class="post_name" href="http://habrahabr.ru/blogs/php/137337/">Правильный запуск PHP-скриптов в бекграунде</a>
+      </div>
+  	
+    	<div class="post_item">
+    				<span class="when">26.01.2012</span> → 
+    				<a class="blog_name" href="http://habrahabr.ru/blogs/php/">PHP</a> → 
+    				<a class="post_name" href="http://habrahabr.ru/blogs/php/136929/">Дай пять или еще один PHP/CSS фреймворк</a>
+      </div>
+  	
+    	<div class="post_item">
+    				<span class="when">25.01.2012</span> → 
+    				<a class="blog_name" href="http://habrahabr.ru/blogs/php/">PHP</a> → 
+    				<a class="post_name" href="http://habrahabr.ru/blogs/php/136999/">Не очень честная генерация DOC файлов на PHP</a>
+      </div>
+  	
+    	<div class="post_item">
+    				<span class="when">25.01.2012</span> → 
+    				<a class="blog_name" href="http://habrahabr.ru/blogs/php/">PHP</a> → 
+    				<a class="post_name" href="http://habrahabr.ru/blogs/php/136974/">Upload progress средствами PHP 5.4</a>
+      </div>
+  	
+    	<div class="post_item">
+    				<span class="when">24.01.2012</span> → 
+    				<a class="blog_name" href="http://habrahabr.ru/company/badoo/blog/">Блог компании Badoo</a> → 
+    				<a class="post_name" href="http://habrahabr.ru/company/badoo/blog/136846/">Написание системных утилит на PHP CLI</a>
+      </div>
+  	
+    	<div class="post_item">
+    				<span class="when">23.01.2012</span> → 
+    				<a class="blog_name" href="http://habrahabr.ru/blogs/php/">PHP</a> → 
+    				<a class="post_name" href="http://habrahabr.ru/blogs/php/136800/">Что нового в PHP 5.4</a>
+      </div>
+  	
+    	<div class="post_item">
+    				<span class="when">22.01.2012</span> → 
+    				<a class="blog_name" href="http://habrahabr.ru/blogs/php/">PHP</a> → 
+    				<a class="post_name" href="http://habrahabr.ru/blogs/php/136761/">Автозагрузка классов в PHP с использованием SPL</a>
+      </div>
+  	
+    	<div class="post_item">
+    				<span class="when">22.01.2012</span> → 
+    				<a class="blog_name" href="http://habrahabr.ru/blogs/sysadm/">Системное администрирование</a> → 
+    				<a class="post_name" href="http://habrahabr.ru/blogs/sysadm/136735/">Грамотная настройка сервера отправки почты для скриптов PHP, настройка функции mail()</a>
+      </div>
+  	
+  </div>			
+</div>
+
+
+
+
+	
+
+
+<div class="block live_broadcast_activity">
+  <h1>Прямой эфир ↓ </h1>
+  <div class="posts_list">
+
+    <div class="post_item">
+      <a href="http://habrahabr.ru/users/Yakiv_Gluck/" class="user_name">Yakiv_Gluck</a> →
+      <a href="http://habrahabr.ru/blogs/hosting/137507/#comment_4580502" class="post_name">Бесплатное увеличение Dropbox аккаунта на 4,5 ГБ</a>
+      <span class="count">3</span>
+    </div>
+
+    <div class="post_item">
+      <a href="http://habrahabr.ru/users/VolCh/" class="user_name">VolCh</a> →
+      <a href="http://habrahabr.ru/blogs/Dura_Lex/137483/#comment_4580501" class="post_name">Как избежать уголовной ответственности за распространение нелицензионного ПО и что делать, если вас поймали</a>
+      <span class="count">178</span>
+    </div>
+
+    <div class="post_item">
+      <a href="http://habrahabr.ru/users/XuMiX/" class="user_name">XuMiX</a> →
+      <a href="http://habrahabr.ru/company/Buffalo/blog/137491/#comment_4580498" class="post_name">Бюджетный роутер Buffalo WCR-HP-GN</a>
+      <span class="count">12</span>
+    </div>
+
+    <div class="post_item">
+      <a href="http://habrahabr.ru/users/Gilberg/" class="user_name">Gilberg</a> →
+      <a href="http://habrahabr.ru/blogs/webdev/137496/#comment_4580495" class="post_name">Скачиваем видео с YouTube</a>
+      <span class="count">51</span>
+    </div>
+
+    <div class="post_item">
+      <a href="http://habrahabr.ru/users/beeruser/" class="user_name">beeruser</a> →
+      <a href="http://habrahabr.ru/blogs/android_development/137292/#comment_4580494" class="post_name">Существующие приложения и будущие Android x86 устройства</a>
+      <span class="count">57</span>
+    </div>
+
+    <div class="post_item">
+      <a href="http://habrahabr.ru/users/Shaytank/" class="user_name">Shaytank</a> →
+      <a href="http://habrahabr.ru/blogs/infosecurity/137502/#comment_4580492" class="post_name">«Вирусная» атака на Android Market оказалась ошибкой Symantec</a>
+      <span class="count">10</span>
+    </div>
+
+    <div class="post_item">
+      <a href="http://habrahabr.ru/users/zadnica/" class="user_name">zadnica</a> →
+      <a href="http://habrahabr.ru/company/fsf/blog/137504/#comment_4580491" class="post_name">Остановить ACTA в Европе, 11 февраля</a>
+      <span class="count">6</span>
+    </div>
+
+    <div class="post_item">
+      <a href="http://habrahabr.ru/users/freeznah/" class="user_name">freeznah</a> →
+      <a href="http://habrahabr.ru/company/kaspersky/blog/137460/#comment_4580490" class="post_name">«Деньги на халяву!» для любителей социальных сетей</a>
+      <span class="count">18</span>
+    </div>
+
+    <div class="post_item">
+      <a href="http://habrahabr.ru/users/MazeFAQa/" class="user_name">MazeFAQa</a> →
+      <a href="http://habrahabr.ru/blogs/microsoft/137429/#comment_4580489" class="post_name">Поступил в продажу Kinect for Windows</a>
+      <span class="count">52</span>
+    </div>
+
+    <div class="post_item">
+      <a href="http://habrahabr.ru/users/ViSP/" class="user_name">ViSP</a> →
+      <a href="http://habrahabr.ru/blogs/atnikvariat/137465/#comment_4580488" class="post_name">Roverbook Discovery AT4 — «компактный» ноутбук из 90-х</a>
+      <span class="count">22</span>
+    </div>
+
+  </div>
+  <!--div class="all">&laquo; <a href="/live/">весь прямой эфир</a></div-->
+  
+</div>
+
+
+
+  
+	
+
+<div class="block megafon_htmlblock">
+	<div class="logo"><img src="./Деобфускация PHP кода   PHP   Хабрахабр_files/logo.jpg" alt=""></div>
+	<div class="description">Уникальный сервис «МультиФон» позволяет совершать и принимать звонки по привлекательным тарифам!</div>
+	<div class="download"><a id="megafon_download_link" href="http://ad.adriver.ru/cgi-bin/click.cgi?sid=1&ad=316613&bt=21&bid=1492182&bn=1492182&rnd=281245338" class="win"><img src="./Деобфускация PHP кода   PHP   Хабрахабр_files/button.jpg" alt=""></a></div>
+	<div class="description2">Cовершай и принимай <b>видеовызовы</b>, общайся в чате и пользуйся другими возможностями.</div>
+</div>
+
+
+<script type="text/javascript">
+$(document).ready(function(){
+		var download_link = $('#megafon_download_link')
+		if(navigator.userAgent.indexOf('Win') != -1){ 
+			console.log('win')
+			download_link.attr('href', 'http://ad.adriver.ru/cgi-bin/click.cgi?sid=1&ad=316613&bt=21&bid=1492182&bn=1492182&rnd=281245338').addClass('win');
+		}else if(navigator.userAgent.indexOf('Mac') != -1){ 
+			console.log('mac')
+			download_link.attr('href', 'http://ad.adriver.ru/cgi-bin/click.cgi?sid=1&ad=316613&bt=21&bid=1492183&bn=1492183&rnd=1641624102').addClass('mac');
+		}else if(navigator.userAgent.indexOf('UNIX') != -1){
+			console.log('unix')
+			download_link.attr('href', 'http://ad.adriver.ru/cgi-bin/click.cgi?sid=1&ad=316613&bt=21&bid=1492184&bn=1492184&rnd=1166844504').addClass('unix');
+		}else { 
+			console.log('win2')
+			download_link.attr('href', 'http://ad.adriver.ru/cgi-bin/click.cgi?sid=1&ad=316613&bt=21&bid=1492182&bn=1492182&rnd=281245338').addClass('win');
+		}
+
+})
+
+
+</script>
+
+<!--  AdRiver code START. Type:counter(zeropixel) Site: SP SZ: multifon PZ: 0 BN: 0 -->
+<script language="javascript" type="text/javascript"><!--
+var RndNum4NoCash = Math.round(Math.random() * 1000000000);
+var ar_Tail='unknown'; if (document.referrer) ar_Tail = escape(document.referrer);
+document.write('<img src="http://ad.adriver.ru/cgi-bin/rle.cgi?' + 'sid=179440&sz=multifon&bt=21&pz=0&rnd=' + RndNum4NoCash + '&tail256=' + ar_Tail + '" border=0 width=1 height=1>')
+//--></script><img src="./Деобфускация PHP кода   PHP   Хабрахабр_files/rle.cgi" border="0" width="1" height="1">
+<noscript></noscript>
+<!--  AdRiver code END  -->
+
+
+	
+
+	
+
+<div class="block qa_activity">
+  <h1>Q&amp;A ↓ </h1>
+  <div class="posts_list">
+
+    <div class="post_item">
+      <a href="http://habrahabr.ru/users/Silver_Clash/" class="user_name">Silver_Clash</a> →
+      <a href="http://habrahabr.ru/qa/16042/#answer_66579" class="post_name">А посоветуйте хороший USB wi-fi адаптер?</a>
+      <span class="count">1</span>
+    </div>
+
+    <div class="post_item">
+      <a href="http://habrahabr.ru/users/Bublik/" class="user_name">Bublik</a> →
+      <a href="http://habrahabr.ru/qa/16035/#answer_66578" class="post_name">Посоветуйте JSON библиотеку под Java</a>
+      <span class="count">3</span>
+    </div>
+
+    <div class="post_item">
+      <a href="http://habrahabr.ru/users/viperet/" class="user_name">viperet</a> →
+      <a href="http://habrahabr.ru/qa/16037/#comment_78101" class="post_name">Как сделать сенсорный терминал (интернет-киоск)</a>
+      <span class="count">3</span>
+    </div>
+
+    <div class="post_item">
+      <a href="http://habrahabr.ru/users/prox/" class="user_name">prox</a> →
+      <a href="http://habrahabr.ru/qa/16021/#answer_66577" class="post_name">Проверка зрения</a>
+      <span class="count">10</span>
+    </div>
+
+    <div class="post_item">
+      <a href="http://habrahabr.ru/users/xaker1/" class="user_name">xaker1</a> →
+      <a href="http://habrahabr.ru/qa/16040/#answer_66576" class="post_name">Регистрация домена</a>
+      <span class="count">1</span>
+    </div>
+
+    <div class="post_item">
+      <a href="http://habrahabr.ru/users/paco/" class="user_name">paco</a> →
+      <a href="http://habrahabr.ru/qa/16039/#comment_78100" class="post_name">Как создавать виртуальные домены 3 уровня в ASP.NET MVC 3?</a>
+      <span class="count">2</span>
+    </div>
+
+    <div class="post_item">
+      <a href="http://habrahabr.ru/users/kostius/" class="user_name">kostius</a> →
+      <a href="http://habrahabr.ru/qa/16003/#comment_78097" class="post_name">Как узнать провайдера</a>
+      <span class="count">8</span>
+    </div>
+
+    <div class="post_item">
+      <a href="http://habrahabr.ru/users/andreevich/" class="user_name">andreevich</a> →
+      <a href="http://habrahabr.ru/qa/16034/#comment_78096" class="post_name">Как заставить разработчиков сдать протестированный продукт?</a>
+      <span class="count">5</span>
+    </div>
+
+    <div class="post_item">
+      <a href="http://habrahabr.ru/users/compressor64/" class="user_name">compressor64</a> →
+      <a href="http://habrahabr.ru/qa/16026/#answer_66573" class="post_name">В какой стране должен стоять сервер с полулегальным контентом, чтобы его не беспокоили?</a>
+      <span class="count">9</span>
+    </div>
+
+    <div class="post_item">
+      <a href="http://habrahabr.ru/users/DMinsky/" class="user_name">DMinsky</a> →
+      <a href="http://habrahabr.ru/qa/16038/#answer_66572" class="post_name">Наушники apple и обычные капельки</a>
+      <span class="count">3</span>
+    </div>
+
+  </div>
+  <div class="all">« <a href="http://habrahabr.ru/qa/">все вопросы</a></div>
+  
+</div>
+
+	
+
+<div class="block new_vacanies">
+  <h1>О, работа! ↓ </h1>
+  <div class="vacancies">
+		
+		<div class="job_item">
+			<a href="http://hantim.ru/jobs/7788-python-razrabotchik">Python-разработчик</a>
+		</div>
+		
+		<div class="job_item">
+			<a href="http://hantim.ru/jobs/7786-presale-menedzher">Presale менеджер</a>
+		</div>
+		
+		<div class="job_item">
+			<a href="http://hantim.ru/jobs/7784-python-razrabotchik">Python разработчик</a>
+		</div>
+		
+		<div class="job_item">
+			<a href="http://hantim.ru/jobs/7782-ui-dizayner">UI-дизайнер</a>
+		</div>
+		
+		<div class="job_item">
+			<a href="http://hantim.ru/jobs/7781-razrabotchik-php-asp-net-mvc">Разработчик PHP ASP .NET MVC</a>
+		</div>
+		
+		<div class="job_item">
+			<a href="http://hantim.ru/jobs/7780-programmist-asp-net">Программист ASP.NET</a>
+		</div>
+		
+		<div class="job_item">
+			<a href="http://hantim.ru/jobs/7778-ios-razrabotchik-75-go-urovnya">iOS-разработчик 75-го уровня</a>
+		</div>
+		
+		<div class="job_item">
+			<a href="http://hantim.ru/jobs/7777-lead-game-developer">Lead game developer</a>
+		</div>
+		
+		<div class="job_item">
+			<a href="http://hantim.ru/jobs/6967-junior-php-programmist-malo-opyta-stazher">Junior PHP-программист (мало опыта, стажер)</a>
+		</div>
+		
+		<div class="job_item">
+			<a href="http://hantim.ru/jobs/7744-razrabotchik-flex">Разработчик Flex</a>
+		</div>
+		
+  </div>
+  <div class="all">« <a href="http://hantim.ru/">все вакансии</a></div>
+
+	</div>
+      
+	
+	
+	
+	<div class="block category_blogs">
+		<h1>Языки программирования ↓</h1>
+		
+		<div class="blogs_list">
+			
+        <div class="blog_item">				
+				  <div class="title">
+				  	<a href="http://habrahabr.ru/blogs/asm/">Assembler</a>
+				  </div>
+		
+			  </div>
+			
+        <div class="blog_item">				
+				  <div class="title">
+				  	<a href="http://habrahabr.ru/blogs/python/">Python</a>
+				  </div>
+		
+			  </div>
+			
+        <div class="blog_item">				
+				  <div class="title">
+				  	<a href="http://habrahabr.ru/blogs/javascript/">JavaScript</a>
+				  </div>
+		
+			  </div>
+			
+        <div class="blog_item">				
+				  <div class="title">
+				  	<a href="http://habrahabr.ru/blogs/cpp/">C++</a>
+				  </div>
+		
+			  </div>
+			
+        <div class="blog_item">				
+				  <div class="title">
+				  	<a href="http://habrahabr.ru/blogs/java/">JAVA</a>
+				  </div>
+		
+			  </div>
+			
+        <div class="blog_item">				
+				  <div class="title">
+				  	<a href="http://habrahabr.ru/blogs/ruby/">Ruby</a>
+				  </div>
+		
+			  </div>
+			
+        <div class="blog_item">				
+				  <div class="title">
+				  	<a href="http://habrahabr.ru/blogs/Haskell/">Haskell</a>
+				  </div>
+		
+			  </div>
+			
+        <div class="blog_item">				
+				  <div class="title">
+				  	<a href="http://habrahabr.ru/blogs/net/">.NET</a>
+				  </div>
+		
+			  </div>
+			
+        <div class="blog_item">				
+				  <div class="title">
+				  	<a href="http://habrahabr.ru/blogs/lisp/">Lisp</a>
+				  </div>
+		
+			  </div>
+			
+        <div class="blog_item">				
+				  <div class="title">
+				  	<a href="http://habrahabr.ru/blogs/perl/">Perl</a>
+				  </div>
+		
+			  </div>
+			
+		</div>
+		<div class="all">« <a href="http://habrahabr.ru/bloglist/program-langs/">все  блоги</a></div>
+  </div>
+	
+
+
+	
+
+
+<div class="block similar_events">
+  <h1>Ближайшие события</h1>
+  <div class="events">
+    
+    <div class="event">
+			
+			<div class="date">
+				<div class="dayname dayname_5"></div>
+				<div class="day">03</div>
+				<div class="month">февраля</div>				
+			</div>
+			
+			<div class="title">
+			 <a href="http://habrahabr.ru/events/403/">Лекция Санберга: интерактив в телевидении</a>			 
+			</div>
+		</div>
+		
+    <div class="event">
+			
+			<div class="date">
+				<div class="dayname dayname_6"></div>
+				<div class="day">04</div>
+				<div class="month">февраля</div>				
+			</div>
+			
+			<div class="title">
+			 <a href="http://habrahabr.ru/events/378/">Мастер-класс по разработке приложений для Android</a>			 
+			</div>
+		</div>
+		
+    <div class="event">
+			
+			<div class="date">
+				<div class="dayname dayname_1"></div>
+				<div class="day">06</div>
+				<div class="month">февраля</div>				
+			</div>
+			
+			<div class="title">
+			 <a href="http://habrahabr.ru/events/394/">QML тренинг в Петрозаводске</a>			 
+			</div>
+		</div>
+		
+    <div class="event">
+			
+			<div class="date">
+				<div class="dayname dayname_2"></div>
+				<div class="day">07</div>
+				<div class="month">февраля</div>				
+			</div>
+			
+			<div class="title">
+			 <a href="http://habrahabr.ru/events/406/">Начальный курс по разработке сайтов на TPL-шаблонизаторе</a>			 
+			</div>
+		</div>
+		
+    <div class="event">
+			
+			<div class="date">
+				<div class="dayname dayname_2"></div>
+				<div class="day">07</div>
+				<div class="month">февраля</div>				
+			</div>
+			
+			<div class="title">
+			 <a href="http://habrahabr.ru/events/412/">Лекция Джона Перри Барлоу, который против цензуры в Интернете</a>			 
+			</div>
+		</div>
+		
+  </div>
+  <div class="all">« <a href="http://habrahabr.ru/events/">все события</a></div>
+</div>
+
+
+    
+  </div>
+  <div class="clear"></div>
+
+		  <div id="footer">
+      
+			
+			<dl>
+				<dd><a href="http://habrahabr.ru/login/">Войти</a></dd>
+				<dd><a href="http://habrahabr.ru/register/">Регистрация</a></dd>
+			</dl>
+			
+			<dl>
+				<dt>Разделы</dt>
+			  
+				<dd><a href="http://habrahabr.ru/qa/">Q&amp;A</a></dd>
+				<dd><a href="http://habrahabr.ru/events/">События</a></dd>
+				<!--dd><a href="http://habrahabr.ru/links/">Ссылки</a></dd-->
+				<dd><a href="http://habrahabr.ru/job/">Работа</a></dd>
+				<dd><a href="http://habrahabr.ru/bloglist/">Блоги</a></dd>
+				<dd><a href="http://habrahabr.ru/companies/">Компании</a></dd>
+				<dd><a href="http://habrahabr.ru/people/">Люди</a></dd>
+				<dd><a href="http://habrahabr.ru/top/">Лучшие</a></dd>
+			</dl>
+			<dl>
+				<dt>Блоги</dt>
+				<dd><a href="http://habrahabr.ru/">Все</a></dd>
+				<dd><a href="http://habrahabr.ru/blogs/">Тематические</a></dd>
+				<dd><a href="http://habrahabr.ru/corporative/">Корпоративные</a></dd>
+				<!--dd><a href="http://habrahabr.ru/personal/">Личные</a></dd-->
+				<dd><a href="http://habrahabr.ru/sandbox/">Песочница</a></dd>
+			</dl>
+			<dl>
+				<dt>Инфо</dt>
+				<dd><a href="http://habrahabr.ru/info/about/">О сайте</a></dd>
+				<dd><a href="http://habrahabr.ru/info/help/rules/">Правила</a></dd>
+				<dd><a href="http://habrahabr.ru/info/help/">Помощь</a></dd>
+				<dd><a href="http://habrahabr.ru/info/agreement/">Соглашение</a></dd>
+				<dd><a href="http://habrahabr.ru/info/stats/">Статистика</a></dd>
+			</dl>
+			<dl>
+				<dt>Услуги</dt>
+				<dd><a href="http://habrahabr.ru/info/advertising/">Реклама</a></dd>
+				<dd><a href="http://habrahabr.ru/info/advertising/corporate/">Корпоративные пакеты</a></dd>
+				<dd><a href="http://habrahabr.ru/info/advertising/workshops/">Семинары</a></dd>
+			</dl>
+      <div class="copyright">
+    		<a class="footer_logo" href="http://thematicmedia.ru/">Тематические Медиа</a>
+    		<div class="about">
+    			© 2006–2012<br>
+    			«<a href="http://www.thematicmedia.ru/">Тематические Медиа</a>»
+    		  <br><br>	
+  				Служба поддержки:<br>
+  				<a href="mailto:support@habrahabr.ru" title="адрес службы поддержки пользователей">support@habrahabr.ru</a><br><br><br>
+  				<a href="http://m.habrahabr.ru/">Мобильная версия</a>
+  			
+			  </div>
+      </div>
+	
+</div>
+		</div>
+	 	
+		
+    
+		
+    <script type="text/javascript">
+      $(document).ready(function(){
+        // test gggg
+        // настройки всплывающих уведомлений
+        $.jGrowl.defaults.closerTemplate = '<div>Закрыть все уведомления</div>';         
+        
+        // настройки тултипов
+        $(".help-tip").tipTip({maxWidth: "auto", edgeOffset: 10});  
+        
+      });
+      // global vars
+      var g_base_url = 'habrahabr.ru';
+      var g_show_xpanel = false;
+      var g_base_fullurl = 'http://habrahabr.ru/';
+      var g_is_guest = false;
+       
+    </script>
+    
+    
+<script type="text/javascript">
+	/*<![CDATA[*/
+	var ga = document.createElement('script');
+		ga.setAttribute('async', 'true');
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	/* ]]>*/
+</script>
+
+<script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push(
+	    ['_setAccount', 'UA-726094-1'],
+	    ['_setDomainName', '.habrahabr.ru'],
+	    ["_addOrganic", "mail.ru", "q"],
+	    ["_addOrganic","rambler.ru", "words"],
+	    ["_addOrganic","nigma.ru", "s"],
+	    ["_addOrganic","blogs.yandex.ru", "text"],
+	    ["_addOrganic","webalta.ru", "q"],
+	    ["_addOrganic","aport.ru", "r"],
+	    ["_addOrganic","akavita.by", "z"],
+	    ["_addOrganic","meta.ua", "q"],
+	    ["_addOrganic","bigmir.net", "q"],
+	    ["_addOrganic","tut.by", "query"],
+	    ["_addOrganic","all.by", "query"],
+	    ["_addOrganic","i.ua", "q"],
+	    ["_addOrganic","online.ua", "q"],
+	    ["_addOrganic","a.ua", "s"],
+	    ["_addOrganic","ukr.net", "search_query"],
+	    ["_addOrganic","search.com.ua", "q"],
+	    ["_addOrganic","search.ua", "query"],
+	    ["_addOrganic","poisk.ru", "text"],
+	    ["_addOrganic","km.ru", "sq"],
+	    ["_addOrganic","liveinternet.ru", "ask"],
+	    ["_addOrganic","gogo.ru", "q"],
+	    ["_addOrganic","gde.ru", "keywords"],
+	    ["_addOrganic","quintura.ru", "request"],
+	    ['_trackPageview']
+	);
+	document.documentElement.firstChild.appendChild(ga);
+</script>	
+		
+		
+	
+
+<div id="AutocompleteContainter_d96e7" style="position: absolute; top: 51px; left: 958px; z-index: 9999; "><div class="autocomplete-w1"><div class="autocomplete" id="Autocomplete_d96e7" style="display: none; max-height: 400px; width: 300px; "></div></div></div><div id="AutocompleteContainter_171ca" style="position: absolute; top: 0px; left: 0px; z-index: 9999; "><div class="autocomplete-w1"><div class="autocomplete" id="Autocomplete_171ca" style="display: none; max-height: 400px; width: 300px; "></div></div></div><div id="tiptip_holder" style="max-width:auto;"><div id="tiptip_arrow"><div id="tiptip_arrow_inner"></div></div><div id="tiptip_content"></div></div></body></html>

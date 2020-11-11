@@ -1,0 +1,9 @@
+try{
+if(woopraTracker.version && woopraTracker.version==10){}else{
+setTimeout(function(){woopraTracker.ping();},12 * 1000);
+}
+}catch(e){}
+woopraTracker.createcookie('wooMeta','MjAwNzQ2JjEmMSYxMSYxMzI4MzgzODYyMjY2JjEzMjgzODM4NzM2ODEmJjEwMCYmMiYmJiY=',9000);
+var cdiv=document.getElementById('woopra_request_global');
+//already started or rejected, should hide 
+if(cdiv){cdiv.style.display='none';}

@@ -1,0 +1,541 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0040)http://kaimi.ru/2012/01/php-deobfuscate/ -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head profile="http://gmpg.org/xfn/11"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script type="text/javascript" src="./Методика деобфускации PHP-скриптов для чайников. Полезные советы._files/1810114"></script>
+
+
+<title>Методика деобфускации PHP-скриптов для чайников. Полезные советы.</title>
+
+<link rel="icon" href="http://kaimi.ru/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="./Методика деобфускации PHP-скриптов для чайников. Полезные советы._files/style.css" type="text/css" media="screen">
+<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="http://feeds.feedburner.com/kaimi/dev">
+<link rel="pingback" href="http://kaimi.ru/xmlrpc.php">
+
+<link rel="alternate" type="application/rss+xml" title="Misc &raquo; Лента комментариев к &laquo;Методика деобфускации PHP-скриптов для чайников. Полезные советы.&raquo;" href="http://kaimi.ru/2012/01/php-deobfuscate/feed/">
+<link rel="stylesheet" id="wp-polls-css" href="./Методика деобфускации PHP-скриптов для чайников. Полезные советы._files/polls-css.css" type="text/css" media="all">
+<link rel="stylesheet" id="wp-pagenavi-css" href="./Методика деобфускации PHP-скриптов для чайников. Полезные советы._files/pagenavi-css.css" type="text/css" media="all">
+<script type="text/javascript" src="./Методика деобфускации PHP-скриптов для чайников. Полезные советы._files/jquery.js"></script>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://kaimi.ru/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://kaimi.ru/wp-includes/wlwmanifest.xml"> 
+<link rel="prev" title="Встраиваем Flash в свое приложение" href="http://kaimi.ru/2012/01/flash-com-embed/">
+<meta name="generator" content="WordPress 3.3.1">
+<link rel="canonical" href="./Методика деобфускации PHP-скриптов для чайников. Полезные советы._files/Методика деобфускации PHP-скриптов для чайников. Полезные советы..html">
+<link rel="shortlink" href="http://kaimi.ru/?p=2724">
+
+<!-- platinum seo pack 1.3.7 -->
+<meta name="robots" content="index,follow,noodp,noydir">
+<meta name="description" content="Очень часто непосвященные люди задают вопросы вроде Как расшифровать обфусцированный">
+<link rel="canonical" href="./Методика деобфускации PHP-скриптов для чайников. Полезные советы._files/Методика деобфускации PHP-скриптов для чайников. Полезные советы..html">
+<!-- /platinum one seo pack -->
+<style type="text/css">
+.wp-polls .pollbar {
+	margin: 1px;
+	font-size: 2px;
+	line-height: 4px;
+	height: 4px;
+	background-image: url('http://kaimi.ru/wp-content/plugins/wp-polls/images/default/pollbg.gif');
+	border: 1px solid #c8c8c8;
+}
+</style>
+
+<link rel="stylesheet" href="./Методика деобфускации PHP-скриптов для чайников. Полезные советы._files/wp-syntax.css" type="text/css" media="screen">
+<!-- wp thread comment 1.4.9.4.002 -->
+<style type="text/css" media="screen">
+.editComment, .editableComment, .textComment{
+	display: inline;
+}
+.comment-childs{
+	border: 1px solid #999;
+	margin: 5px 2px 2px 4px;
+	padding: 4px 2px 2px 4px;
+	background-color: white;
+}
+.chalt{
+	background-color: #E2E2E2;
+}
+#newcomment{
+	border:1px dashed #777;width:90%;
+}
+#newcommentsubmit{
+	color:red;
+}
+.adminreplycomment{
+	border:1px dashed #777;
+	width:99%;
+	margin:4px;
+	padding:4px;
+}
+.mvccls{
+	color: #999;
+}
+			
+</style>
+<meta name="blogcatalog" content="9BC9175258">
+<meta name="yandex-verification" content="41749f3e894a31b3">
+<style type="text/css" id="ya_share_style">.b-share-popup-wrap{z-index:1073741823;position:absolute;width:500px}.b-share-popup{position:absolute;z-index:1073741823;border:1px solid #888;background:#FFF;color:#000}.b-share-popup-wrap .b-share-popup_down{top:0}.b-share-popup-wrap .b-share-popup_up{bottom:0}.b-share-popup-wrap_state_hidden{position:absolute!important;top:-9999px!important;right:auto!important;bottom:auto!important;left:-9999px!important;visibility:hidden!important}.b-share-popup,x:nth-child(1){border:0;padding:1px!important}@media all and (resolution = 0dpi){.b-share-popup,x:nth-child(1),x:-o-prefocus{padding:0!important;border:1px solid #888}}.b-share-popup__i{display:-moz-inline-box;display:inline-block;padding:5px 0!important;overflow:hidden;vertical-align:top;white-space:nowrap;visibility:visible;background:#FFF;-webkit-box-shadow:0 2px 9px rgba(0,0,0,0.6);-moz-box-shadow:0 2px 9px rgba(0,0,0,0.6);box-shadow:0 2px 9px rgba(0,0,0,0.6)}.b-share-popup__item{font:1em/1.25em Arial,sans-serif;display:block;padding:5px 15px!important;white-space:nowrap;background:#FFF}.b-share-popup__item,a.b-share-popup__item:link,a.b-share-popup__item:visited{text-decoration:none!important;border:0!important}a.b-share-popup__item{cursor:pointer}a.b-share-popup__item .b-share-popup__item__text{display:inline;text-decoration:underline;color:#1a3dc1}a.b-share-popup__item:hover{word-spacing:0}a.b-share-popup__item:hover .b-share-popup__item__text{color:#F00;cursor:pointer}.b-share-popup__icon{display:-moz-inline-box;display:inline-block;margin:-3px 0 0 0;padding:0 5px 0 0!important;vertical-align:middle}.b-share-popup__icon_input{width:21px;height:16px;margin-top:-6px;padding:0!important}.b-share-popup__icon__input{margin-right:0;margin-left:2px;vertical-align:top}.b-share-popup__spacer{display:block;padding-top:10px!important}.b-share-popup__header{font:86%/1em Verdana,sans-serif;display:block;padding:10px 15px 5px 15px!important;color:#999}.b-share-popup__header_first{padding-top:5px!important}.b-share-popup__input{font:86%/1em Verdana,sans-serif;display:block;padding:5px 15px!important;color:#999;text-align:left}.b-share-popup__input__input{font:1em/1em Verdana,sans-serif;display:block;width:10px;margin:5px 0 0;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;resize:none;text-align:left;direction:ltr}.b-share-popup_down .b-share-popup_with-link .b-share-popup__input_link{position:absolute;top:5px;right:0;left:0}.b-share-popup_up .b-share-popup_with-link .b-share-popup__input_link{position:absolute;right:0;bottom:5px;left:0}.b-share-popup_down .b-share-popup_with-link{padding-top:55px!important}.b-share-popup_up .b-share-popup_with-link{padding-bottom:55px!important}.b-share-popup_down .b-share-popup_expandable .b-share-popup__main{padding-bottom:25px!important}.b-share-popup_up .b-share-popup_expandable .b-share-popup__main{padding-top:25px!important}.b-share-popup_down .b-share-popup_yandexed{padding-bottom:10px!important}.b-share-popup_up .b-share-popup_yandexed{padding-top:10px!important}.b-share-popup__yandex{position:absolute;right:4px;bottom:2px;font:78.125%/1em Verdana,sans-serif;padding:3px!important;background:transparent}a.b-share-popup__yandex:link,a.b-share-popup__yandex:visited{color:#c6c5c5;text-decoration:none}a.b-share-popup__yandex:link:hover,a.b-share-popup__yandex:visited:hover{color:#F00;text-decoration:underline}.b-share-popup_up .b-share-popup__yandex{top:2px;bottom:auto}.b-share-popup_expandable .b-share-popup__yandex{right:auto;left:4px}.b-share-popup_to-right .b-share-popup_expandable .b-share-popup__yandex{right:4px;left:auto}.b-share-popup__expander .b-share-popup__item{position:absolute;bottom:5px;font:86%/1em Verdana,sans-serif;margin:10px 0 0;padding:5px 10px!important;cursor:pointer;color:#999;background:transparent}.b-share-popup_to-right,.b-share-popup_to-right .b-share-popup__expander{direction:rtl}.b-share-popup_to-right .b-share-popup__expander .b-share-popup__icon{padding:0 0 0 5px!important}.b-share-popup_up .b-share-popup__expander .b-share-popup__item{top:-5px;bottom:auto}.b-share-popup__expander .b-share-popup__item:hover .b-share-popup__item__text{text-decoration:underline}.b-share-popup__expander .b-ico_action_rarr,.b-share-popup_to-right .b-share-popup__expander .b-ico_action_larr,.b-share-popup_full .b-share-popup__expander .b-ico_action_larr,.b-share-popup_to-right .b-share-popup_full .b-share-popup__expander .b-ico_action_rarr,.b-share-popup__expander .b-share-popup__item__text_collapse,.b-share-popup_full .b-share-popup__item__text_expand{display:none}.b-share-popup_to-right .b-share-popup__expander .b-ico_action_rarr,.b-share-popup_full .b-share-popup__item__text_collapse,.b-share-popup_full .b-share-popup__expander .b-ico_action_rarr,.b-share-popup_to-right .b-share-popup_full .b-share-popup__expander .b-ico_action_larr{display:inline}.b-ico_action_rarr,.b-ico_action_larr{width:8px;height:7px;border:0}.b-share-popup__main,.b-share-popup__extra{direction:ltr;vertical-align:bottom;text-align:left}.b-share-popup_down .b-share-popup__main,.b-share-popup_down .b-share-popup__extra{vertical-align:top}.b-share-popup__main{display:-moz-inline-stack;display:inline-block}.b-share-popup__extra{display:none;margin:0 -10px 0 0}.b-share-popup_full .b-share-popup__extra{display:-moz-inline-stack;display:inline-block}.b-share-popup_to-right .b-share-popup__extra{margin:0 0 0 -10px}.b-share-popup__tail{position:absolute;width:21px;height:10px;margin:0 0 0 -11px}.b-share-popup_down .b-share-popup__tail{top:-10px;background:url(//yandex.st/share/static/b-share-popup_down__tail.gif) 0 0 no-repeat}.b-share-popup_up .b-share-popup__tail{bottom:-10px;background:url(//yandex.st/share/static/b-share-popup_up__tail.gif) 0 0 no-repeat}.b-share-popup_down .b-share-popup__tail,x:nth-child(1){top:-9px;background-image:url(//yandex.st/share/static/b-share-popup_down__tail.png)}.b-share-popup_up .b-share-popup__tail,x:nth-child(1){bottom:-9px;background-image:url(//yandex.st/share/static/b-share-popup_up__tail.png)}@media all and (resolution = 0dpi){.b-share-popup_down .b-share-popup__tail,x:nth-child(1),x:-o-prefocus{top:-10px;background-image:url(//yandex.st/share/static/b-share-popup_down__tail.gif)}.b-share-popup_up .b-share-popup__tail,x:nth-child(1),x:-o-prefocus{bottom:-10px;background-image:url(//yandex.st/share/static/b-share-popup_up__tail.gif)}}.b-share-popup .b-share-popup_show_form_mail,.b-share-popup .b-share-popup_show_form_html{padding:0!important}.b-share-popup .b-share-popup_show_form_mail .b-share-popup__main,.b-share-popup .b-share-popup_show_form_html .b-share-popup__main,.b-share-popup .b-share-popup_show_form .b-share-popup__main,.b-share-popup .b-share-popup_show_form_mail .b-share-popup__extra,.b-share-popup .b-share-popup_show_form_html .b-share-popup__extra,.b-share-popup .b-share-popup_show_form .b-share-popup__extra{height:15px;padding:0!important;overflow:hidden;visibility:hidden}.b-share-popup_show_form_mail .b-share-popup__expander,.b-share-popup_show_form_html .b-share-popup__expander,.b-share-popup_show_form .b-share-popup__expander,.b-share-popup_show_form_mail .b-share-popup__input_link,.b-share-popup_show_form_html .b-share-popup__input_link,.b-share-popup_show_form .b-share-popup__input_link{display:none}.b-share-popup__form{position:relative;display:none;overflow:hidden;padding:5px 0 0!important;margin:0 0 -15px;white-space:normal}.b-share-popup_show_form_mail .b-share-popup__form_mail,.b-share-popup_show_form_html .b-share-popup__form_html,.b-share-popup_show_form .b-share-popup__form{display:block}.b-share-popup__form__link{font:86%/1.4545em Verdana,sans-serif;float:left;display:inline;padding:5px!important;margin:0 0 5px 10px;text-decoration:underline;cursor:pointer;color:#1a3dc1}.b-share-popup__form__button{font:86%/1.4545em Verdana,sans-serif;float:left;display:inline;margin:5px 0 0 15px}.b-share-popup__form__close{font:86%/1.4545em Verdana,sans-serif;float:right;display:inline;padding:5px!important;margin:0 10px 5px 0;cursor:pointer;color:#999}a.b-share-popup__form__link:hover,a.b-share-popup__form__close:hover{text-decoration:underline;color:#F00}.b-share-popup_font_fixed .b-share-popup__item{font-size:12.8px}.b-share-popup_font_fixed .b-share-popup__header,.b-share-popup_font_fixed .b-share-popup__input,.b-share-popup_font_fixed .b-share-popup__expander .b-share-popup__item,.b-share-popup_font_fixed .b-share-popup__form__link,.b-share-popup_font_fixed .b-share-popup__form__button,.b-share-popup_font_fixed .b-share-popup__form__close{font-size:11px}.b-share-popup_font_fixed .b-share-popup__yandex{font-size:10px}.b-share-form-button{font:86%/17px Verdana,Arial,sans-serif;display:-moz-inline-box;display:inline-block;position:relative;height:19px;margin:0 3px;padding:0 4px;cursor:default;white-space:nowrap;text-decoration:none!important;color:#000!important;border:none;outline:none;background:url(//yandex.st/share/static/b-share-form-button.png) 0 -20px repeat-x}.b-share-form-button:link:hover,.b-share-form-button:visited:hover{color:#000!important}.b-share-form-button__before,.b-share-form-button__after{position:absolute;width:3px;height:19px;background:url(//yandex.st/share/static/b-share-form-button.png)}.b-share-form-button__before{margin-left:-7px}.b-share-form-button__after{margin-left:4px;background-position:-3px 0}.b-share-form-button::-moz-focus-inner{border:none}button.b-share-form-button .b-share-form-button__before,button.b-share-form-button .b-share-form-button__after{margin-top:-1px}@-moz-document url-prefix(){button.b-share-form-button .b-share-form-button__after{margin-top:-2px;margin-left:6px}button.b-share-form-button .b-share-form-button__before{margin-top:-2px;margin-left:-9px}}SPAN.b-share-form-button:hover,.b-share-form-button_state_hover{background-position:0 -60px}SPAN.b-share-form-button:hover .b-share-form-button__before,.b-share-form-button_state_hover .b-share-form-button__before{background-position:0 -40px}SPAN.b-share-form-button:hover .b-share-form-button__after,.b-share-form-button_state_hover .b-share-form-button__after{background-position:-3px -40px}.b-share-form-button_state_pressed,.b-share-form-button_state_pressed .b-share-form-button_share{background-position:0 -100px!important}.b-share-form-button_state_pressed .b-share-form-button__before{background-position:0 -80px!important}.b-share-form-button_state_pressed .b-share-form-button__after{background-position:-3px -80px!important}button.b-share-form-button_state_pressed{overflow:visible}.b-share-form-button_icons{position:relative;padding:0;background-position:0 -20px!important}.b-share-form-button_icons .b-share-form-button__before{left:0;margin-left:-3px;background-position:0 0!important}.b-share-form-button_icons .b-share-form-button__after{z-index:-1;margin-left:0;background-position:-3px 0!important}.b-share-form-button_icons .b-share__handle{padding:2px!important}.b-share-form-button_icons .b-share__handle_more{position:relative;padding-right:6px!important;margin-right:-4px}.b-share-form-button_icons .b-share-icon{opacity:.5;background-image:url(//yandex.st/share/static/b-share-icon_size_14.png)}.b-share-form-button_icons A.b-share__handle:hover .b-share-icon{opacity:1}.b-share{font:86%/1.4545em Arial,sans-serif;display:-moz-inline-box;display:inline-block;padding:1px 3px 1px 4px!important;vertical-align:middle}.b-share .b-share-form-button{font-size:1em}.b-share__text .b-share-icon{margin:0 5px 0 0;border:none}.b-share__text{margin-right:5px}.b-share__handle{float:left;cursor:pointer;text-align:left;text-decoration:none!important;height:16px;padding:5px 3px 5px 2px!important;cursor:pointer;text-align:left;text-decoration:none!important}.b-share__handle_cursor_default{cursor:default}.b-share__handle .b-share-form-button{margin-top:-2px}.b-share__hr{display:none;float:left;width:1px;height:26px;margin:0 3px 0 2px}a.b-share__handle:hover .b-share__text{text-decoration:underline;color:#F00}.b-share_bordered{padding:0 2px 0 3px!important;border:1px solid #e4e4e4;-moz-border-radius:5px;-webkit-border-radius:5px;border-radius:5px}.b-share_bordered .b-share__hr{display:inline;background:#e4e4e4}.b-share_link{margin:-8px 0}a.b-share_link{margin:0}.b-share_link .b-share__text{text-decoration:underline;color:#1a3dc1}.b-share-form-button_share{padding-left:26px!important;vertical-align:top}.b-share-form-button_share .b-share-form-button__before{margin-left:-29px}.b-share-form-button_share .b-share-form-button__icon{position:absolute;width:20px;height:17px;margin:1px 0 0 -23px;background:url(//yandex.st/share/static/b-share-form-button_share__icon.png) 0 0 no-repeat}.b-share-pseudo-link{border-bottom:1px dotted;cursor:pointer;text-decoration:none!important}.b-share_font_fixed{font-size:11px}.b-share__handle_more{font-size:9px;margin-top:-1px;color:#7b7b7b}A.b-share__handle_more:hover{color:#000}.b-share__group{float:left}.b-share-icon{float:left;display:inline;overflow:hidden;width:16px;height:16px;padding:0!important;vertical-align:top;border:0;background:url(//yandex.st/share/static/b-share-icon.png) 0 99px no-repeat}.b-share-icon_vkontakte,.b-share-icon_custom{background-position:0 0}.b-share-icon_yaru,.b-share-icon_yaru_photo,.b-share-icon_yaru_wishlist{background-position:0 -17px}.b-share-icon_lj{background-position:0 -34px}.b-share-icon_twitter{background-position:0 -51px}.b-share-icon_facebook{background-position:0 -68px}.b-share-icon_moimir{background-position:0 -85px}.b-share-icon_friendfeed{background-position:0 -102px}.b-share-icon_mail{background-position:0 -119px}.b-share-icon_html{background-position:0 -136px}.b-share-icon_postcard{background-position:0 -153px}.b-share-icon_odnoklassniki{background-position:0 -170px}.b-share-icon_blogger{background-position:0 -187px}.b-share-icon_greader{background-position:0 -204px}.b-share-icon_delicious{background-position:0 -221px}.b-share-icon_gbuzz{background-position:0 -238px}.b-share-icon_linkedin{background-position:0 -255px}.b-share-icon_myspace{background-position:0 -272px}.b-share-icon_evernote{background-position:0 -289px}.b-share-icon_digg{background-position:0 -306px}.b-share-icon_juick{background-position:0 -324px}.b-share-icon_moikrug{background-position:0 -341px}.b-share-icon_yazakladki{background-position:0 -358px}.b-share-icon_liveinternet{background-position:0 -375px}.b-share-icon_tutby{background-position:0 -392px}.b-share-icon_diary{background-position:0 -409px}</style></head>
+
+<body>
+<div id="shadow_h">
+&nbsp;
+</div>
+<div id="shadow">
+<div id="header">
+	<div class="content">
+		<h1><a href="http://kaimi.ru/">Misc</a></h1>
+		<div class="description">Misc development</div>
+	</div>
+	<div id="headsearch">
+	<form method="get" id="searchform" action="http://kaimi.ru/">
+    <div>
+	<input type="text" name="s" id="s" onblur="this.value=(this.value==&#39;&#39;) ? &#39;Поиск&#39; : this.value;" onfocus="this.value=(this.value==&#39;Поиск&#39;) ? &#39;&#39; : this.value;" value="Поиск">
+	<input type="submit" id="searchsubmit" value="">
+    </div>
+    </form>
+	</div>
+</div>
+<div id="navigation">
+<li>	
+<ul>
+<li class="current_page_item"><a href="http://kaimi.ru/">Главная</a></li>
+<li class="page_item page-item-199"><a href="http://kaimi.ru/%d1%81%d1%82%d0%b0%d1%82%d1%8c%d0%b8/">Статьи</a></li>
+<li class="page_item page-item-2103"><a href="http://kaimi.ru/forum/">Форум</a></li>
+<li class="page_item page-item-2496"><a href="http://kaimi.ru/%d0%be-%d0%bd%d0%b0%d1%81-%d0%bf%d0%b8%d1%88%d1%83%d1%82/">О нас пишут</a></li>
+<li class="page_item page-item-16"><a href="http://kaimi.ru/%d0%be-%d0%b1%d0%bb%d0%be%d0%b3%d0%b5/">О блоге</a></li>
+</ul>
+</li>
+</div>
+
+<div id="container">
+<div id="content">
+<div style="padding-left:100px;padding-top:5px;">
+
+</div>
+
+
+
+<div class="post" id="post-2724">
+
+<h2><a href="http://kaimi.ru/2012/01/php-deobfuscate/?print=1" title="Print This Post" rel="nofollow"><img class="WP-PrintIcon" src="./Методика деобфускации PHP-скриптов для чайников. Полезные советы._files/print.gif" alt="Print This Post" title="Print This Post" style="border: 0px;" width="17" height="17"></a>
+Методика деобфускации PHP-скриптов для чайников. Полезные советы.</h2>
+<p class="time">
+Вторник, 24. Январь 2012<br>
+Раздел: <a href="http://kaimi.ru/category/php/" title="Просмотреть все записи в рубрике &laquo;PHP&raquo;" rel="category tag">PHP</a>, <a href="http://kaimi.ru/category/%d0%b4%d0%bb%d1%8f-%d0%bd%d0%be%d0%b2%d0%b8%d1%87%d0%ba%d0%be%d0%b2/" title="Просмотреть все записи в рубрике &laquo;Для новичков&raquo;" rel="category tag">Для новичков</a>, автор: <b><a href="http://kaimi.ru/author/dx/" title="Записи dx" rel="author">dx</a></b>
+</p>
+<div class="entry">
+<p>Очень часто непосвященные люди задают вопросы вроде "Как расшифровать обфусцированный PHP-скрипт?", "Хороша ли защита PHP-скрипта обфускатором?" и даже "Помогите деобфусцировать! Вам же не сложно?". Цель этой статьи - показать, что <a href="http://ru.wikipedia.org/wiki/%D0%9E%D0%B1%D1%84%D1%83%D1%81%D0%BA%D0%B0%D1%86%D0%B8%D1%8F" rel="nofollow" target="_blank">обфускаторы</a> дают в 90% случаев никакущую защиту (которая способна защитить только от людей, увидевших язык программирования первый раз в жизни). Снять ее можно обычно минут за 10-20, получив исходный PHP-скрипт в первозданном виде. Остальные 10% случаев - это немного усложненная защита, которая, впрочем, снимается теми же путями. Если вы желаете самостоятельно научиться снимать обфускацию со скриптов, то эта статья специально для вас!</p>
+<p>Как я уже говорил выше, задача деобфускации PHP-cкриптов очень актуальна. Достаточно взглянуть на один популярный хак-форум:<br>
+<br>
+<img src="./Методика деобфускации PHP-скриптов для чайников. Полезные советы._files/obf.png" alt="" title="obf" class="aligncenter size-full wp-image-2728"></p>
+<p><span id="more-2724"></span></p>
+<p>Что ж, давайте по шагам разберем, как в большинстве случаев деобфусцируются скрипты на PHP. Возьмем пример прямо из темы на вышеупомянутом форуме с просьбами людей, не желающих разобраться самостоятельно либо думающих, что это невероятно сложно.</p>
+<p>Для деобфускации нам потребуются руки, трезвая голова и <strong>Notepad++</strong> (можно и другой редактор, желательно умеющий подсвечивать одинаковые подстроки в документе - это ускорит снятие обфускатора).</p>
+<p>Для примера берем совершенно абстрактный, накрытый неизвестным мне, но в последнее время чрезвычайно популярным обфускатором, скрипт: <a href="http://kaimi.ru/wp-content/uploads/2012/01/original.zip">original.php</a>.<br>
+Сохраняем его в директорию нашего Web-сервера под именем <strong>original.php</strong>, а затем дублируем его же под другим именем, например, <strong>script.php</strong>. Позже я поясню, для чего это надо. Открываем скрипт и начинаем его изучение.</p>
+<p><img src="./Методика деобфускации PHP-скриптов для чайников. Полезные советы._files/obf2.png" alt="" title="obf2" width="566" height="457" class="aligncenter size-full wp-image-2733"></p>
+<p>Видим, что сам скрипт по размеру небольшой, зато в конце файла, уже после скрипта, находится некий зашифрованный кусок текста. Видим также вызов инструкции PHP <strong>eval()</strong>, которая исполняет переданный ей PHP-код. Первым делом меняем <strong>eval</strong> на <strong>print</strong>, чтобы просмотреть, что же она выполняет. Дабы убедится, что скрипт не натворит на нашем компьютере ничего плохого, просматриваем то, что идет выше - а это безобидный вызов <strong>urldecode()</strong>, несколько конкатенаций строк и присвоение значений паре переменных. Кроме того, перед вызовом <strong>eval()</strong> выполняется функция, имя которой хранится в переменной <strong>$OOO0000O0</strong>. Проверим, что эта функция не делает чего-либо зловредного, для начала просто выведя ее имя и временно закомментировав строку с <strong>eval</strong>:</p>
+<p><img src="./Методика деобфускации PHP-скриптов для чайников. Полезные советы._files/obf3.png" alt="" title="obf3" width="564" height="460" class="aligncenter size-full wp-image-2735"></p>
+<p>Обратите внимание, что редактирую я скрипт <strong>script.php</strong>, а оригинал <strong>original.php</strong> оставил без изменений. Обращаемся в браузере к скрипту <strong>script.php</strong> и видим вывод: <strong>base64_decode</strong>. Понятно, значит, перед вызовом <strong>eval()</strong> ничего плохого не происходит, и можно смело менять его на <strong>print()</strong>:</p>
+<p><img src="./Методика деобфускации PHP-скриптов для чайников. Полезные советы._files/obf4.png" alt="" title="obf4" width="565" height="470" class="aligncenter size-full wp-image-2736"></p>
+<p>Снова запускаем <strong>script.php</strong> через браузер и видим следующий вывод:</p>
+
+<div class="wp_syntax"><div class="code"><pre class="php" style="font-family:monospace;"><span style="color: #000088;">$O000O0O00</span><span style="color: #339933;">=</span><span style="color: #000088;">$OOO000O00</span><span style="color: #009900;">(</span><span style="color: #000088;">$OOO0O0O00</span><span style="color: #339933;">,</span><span style="color: #0000ff;">'rb'</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span><span style="color: #000088;">$O0O00OO00</span><span style="color: #009900;">(</span><span style="color: #000088;">$O000O0O00</span><span style="color: #339933;">,</span><span style="color: #208080;">0x49f</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span><span style="color: #000088;">$OO00O00O0</span><span style="color: #339933;">=</span><span style="color: #000088;">$OOO0000O0</span><span style="color: #009900;">(</span><span style="color: #000088;">$OOO00000O</span><span style="color: #009900;">(</span><span style="color: #000088;">$O0O00OO00</span><span style="color: #009900;">(</span><span style="color: #000088;">$O000O0O00</span><span style="color: #339933;">,</span><span style="color: #208080;">0x17c</span><span style="color: #009900;">)</span><span style="color: #339933;">,</span><span style="color: #0000ff;">'EnteryouwkhRHYKNWOUTAaBbCcDdFfGgIiJjLlMmPpQqSsVvXxZz0123456789+/='</span><span style="color: #339933;">,</span><span style="color: #0000ff;">'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'</span><span style="color: #009900;">)</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span>eval<span style="color: #009900;">(</span><span style="color: #000088;">$OO00O00O0</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span></pre></div></div>
+
+<p>Уже по этому неразборчивому коду можно догадаться, что он открывает какой-то файл на выполнение и что-то с ним делает (скорее всего, читает). Кроме того, тут появился очередной вызов <strong>eval()</strong>. Выведя значение переменной <strong>$OOO000O00</strong> видим, что это не что иное, как имя функции <strong>fopen()</strong>. Какой же файл открывает данный код? Воспользуемся подсветкой Notepad++:</p>
+<p><img src="./Методика деобфускации PHP-скриптов для чайников. Полезные советы._files/obf5.png" alt="" title="obf5" width="566" height="495" class="aligncenter size-full wp-image-2738"></p>
+<p>Видим, что это имя текущего файла, то есть <strong>script.php</strong>. Мы уже серьезно изменили этот скрипт, но можно же заставить код считывать оригинал, который мы заботливо припасли!</p>
+<p><img src="./Методика деобфускации PHP-скриптов для чайников. Полезные советы._files/obf6.png" alt="" title="obf6" width="569" height="469" class="aligncenter size-full wp-image-2739"></p>
+<p>Далее, выводя содержимое переменной <strong>$O0O00OO00</strong>, убеждаемся, что это имя функции <strong>fread</strong> и файл действительно читается. Сначала считывается <strong>0х49f</strong> байтов, которые никуда не сохраняются, а затем еще <strong>0х17c</strong>, и вот с ними скрипт уже что-то делает. Чтобы определить, что именно он с ними творит, выводим как обычно содержимое переменных <strong>$OOO0000O0</strong> (это <strong>base64_decode</strong>) и <strong>$OOO00000O</strong> (это <strong>strtr</strong>). Таким образом, считанное содержимое сначала прогоняется через <strong>strtr()</strong>, а затем через <strong>base64_decode()</strong>. Проще говоря, производится раскодирование. А раскодированное содержимое затем пропихивается в <strong>eval()</strong>. Теперь мы его снова можем безболезненно заменить на <strong>print()</strong>:</p>
+<p><img src="./Методика деобфускации PHP-скриптов для чайников. Полезные советы._files/obf7.png" alt="" title="obf7" width="566" height="478" class="aligncenter size-full wp-image-2740"></p>
+<p>Снова исполняем через браузер <strong>script.php</strong> и видим очередную порцию кода:</p>
+
+<div class="wp_syntax"><div class="code"><pre class="php" style="font-family:monospace;"><span style="color: #000088;">$OO00O00O0</span><span style="color: #339933;">=</span><span style="color: #990000;">str_replace</span><span style="color: #009900;">(</span><span style="color: #0000ff;">'__FILE__'</span><span style="color: #339933;">,</span><span style="color: #0000ff;">"'"</span><span style="color: #339933;">.</span><span style="color: #000088;">$OOO0O0O00</span><span style="color: #339933;">.</span><span style="color: #0000ff;">"'"</span><span style="color: #339933;">,</span><span style="color: #000088;">$OOO0000O0</span><span style="color: #009900;">(</span><span style="color: #000088;">$OOO00000O</span><span style="color: #009900;">(</span><span style="color: #000088;">$O0O00OO00</span><span style="color: #009900;">(</span><span style="color: #000088;">$O000O0O00</span><span style="color: #339933;">,</span><span style="color: #000088;">$OO00O0000</span><span style="color: #009900;">)</span><span style="color: #339933;">,</span><span style="color: #0000ff;">'EnteryouwkhRHYKNWOUTAaBbCcDdFfGgIiJjLlMmPpQqSsVvXxZz0123456789+/='</span><span style="color: #339933;">,</span><span style="color: #0000ff;">'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'</span><span style="color: #009900;">)</span><span style="color: #009900;">)</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span>fclose<span style="color: #009900;">(</span><span style="color: #000088;">$O000O0O00</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span>eval<span style="color: #009900;">(</span><span style="color: #000088;">$OO00O00O0</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span></pre></div></div>
+
+<p>Добавляем этот код в файл <strong>script.php</strong> и начинаем его разбирать:</p>
+<p><img src="./Методика деобфускации PHP-скриптов для чайников. Полезные советы._files/obf8.png" alt="" title="obf8" width="565" height="441" class="aligncenter size-full wp-image-2743"></p>
+<p>С помощью подсветки Notepad++ (выделяя по очереди переменные с исковерканными именами) узнаем уже знакомую конструкцию <strong>base64_decode(strtr(fread()))</strong>, только вот в <strong>fread</strong> теперь количество байтов для считывания указано неявно, но и это не проблема, ведь чуть выше оно пишется в переменную, которая и передается в <strong>fread</strong>:</p>
+
+<div class="wp_syntax"><div class="code"><pre class="php" style="font-family:monospace;"><span style="color: #000088;">$OO00O0000</span><span style="color: #339933;">=</span><span style="color: #208080;">0x2f24</span><span style="color: #339933;">;</span></pre></div></div>
+
+<p>Здесь же явно вызывается <strong>str_replace</strong>, меняющая в считанной и декодированной строке все вхождения подстроки <strong>"__FILE__"</strong> на имя нашего файла. Значит, меняем замену на <strong>"original.php"</strong>, как мы делали выше:</p>
+<p><img src="./Методика деобфускации PHP-скриптов для чайников. Полезные советы._files/obf9.png" alt="" title="obf9" width="502" height="126" class="aligncenter size-full wp-image-2745"></p>
+<p>После всего этого мы видим вызов <strong>fclose</strong> - значит, с файлом делаться больше ничего не будет. Остается последний вызов <strong>eval()</strong>, который мы в очередной раз меняем на <strong>print()</strong>:</p>
+<p><img src="./Методика деобфускации PHP-скриптов для чайников. Полезные советы._files/obf10.png" alt="" title="obf10" width="563" height="430" class="aligncenter size-full wp-image-2746"></p>
+<p>И снова запускаем скрипт из браузера... Ура! Наконец-то мы получили исходный код скрипта! В нем немного исковерканы некоторые имена переменных, но это уже не проблема, так как мы видим исходный код!</p>
+<p><img src="./Методика деобфускации PHP-скриптов для чайников. Полезные советы._files/obf11.png" alt="" title="obf11" width="515" height="219" class="aligncenter size-full wp-image-2747"></p>
+<p>Вот и все, скрипт расшифрован без проблем и сложностей! Таким методом, пошагово анализируя кусочки кода, которые нам встречаются, можно снять любую обфускацию, потратив на это не более получаса! Проведя такую работу несколько раз с разными типами обфускаторов и разными скриптами, вы научитесь распознавать их сразу по внешнему виду и расшифровывать буквально за 5 минут!</p>
+<p>Стоит заметить, что в накрытых рассмотренным обфускатором скриптах не стоит ничего менять (в том числе и комментарии), потому что скрипт считывает сам себя, а смещения, используемые при считывании, жестко забиты в файл. Таким образом, если поправить начальный комментарий, например, укоротив его всего на 1 символ, мы превращаем скрипт в неработоспособный текстовик.<br>
+Также отмечу, что при деобфускации данного скрипта я производил множество лишних действий (для того, чтобы как можно более подробно показать пошаговый процесс снятия обфускатора), но все это можно проделать гораздо быстрее и оптимальнее, если немного знать, как устроен тот или иной обфускатор.</p>
+<p>Для конкретных обфускаторов можно написать автоматический скрипт-деобфускатор, чтобы свести работу к минимуму.<br>
+В свое время я уже писал скрипт, позволяющий снимать конкретно такую обфускацию, и с радостью делюсь им с вами. Этот скрипт также умеет и снимать привязку (так как такой обфускатор, который я рассмотрел в статье, умеет делать привязку скрипта к конкретному домену). <a href="http://kaimi.ru/wp-content/uploads/2012/01/deobf.zip">Скачать деобфускатор!</a></p>
+<h4 class="related_post_title">Также рекомендую почитать</h4><ul class="related_post"><li><a href="http://kaimi.ru/2010/10/php-obfuscator-1-5/" title="PHP Obfuscator 1.5">PHP Obfuscator 1.5</a> (27)</li><li><a href="http://kaimi.ru/2009/10/php-obfuscator-1-4/" title="PHP Obfuscator 1.4">PHP Obfuscator 1.4</a> (19)</li><li><a href="http://kaimi.ru/2009/03/php-obfuscator-13-extended/" title="PHP obfuscator 1.3 extended">PHP obfuscator 1.3 extended</a> (2)</li><li><a href="http://kaimi.ru/2011/03/crypt-javascript-html-vbs/" title="Полиморфный криптор-обфускатор JavaScript/HTML/VBS">Полиморфный криптор-обфускатор JavaScript/HTML/VBS</a> (41)</li><li><a href="http://kaimi.ru/2010/12/%d1%8f%d0%b7%d1%8b%d0%ba%d0%b8-%d0%bf%d1%80%d0%be%d0%b3%d1%80%d0%b0%d0%bc%d0%bc%d0%b8%d1%80%d0%be%d0%b2%d0%b0%d0%bd%d0%b8%d1%8f-%d0%b4%d0%bb%d1%8f-%d0%b1%d1%8b%d1%81%d1%82%d1%80%d0%be%d0%b3%d0%be/" title="Языки программирования для быстрого заработка">Языки программирования для быстрого заработка</a> (61)</li></ul>
+<h4><a href="http://forum.kaimi.ru/index.php" target="_blank"><img src="./Методика деобфускации PHP-скриптов для чайников. Полезные советы._files/go.png" style="border-style:none; vertical-align:middle;"></a>&nbsp;<a href="http://forum.kaimi.ru/index.php" style="text-decoration:none; color:#7A7A7A; vertical-align:middle;" target="_blank">Обсудить на форуме</a></h4>
+<br>
+<div class="box">
+<form action="http://feedburner.google.com/fb/a/mailverify" method="post" target="popupwindow" onsubmit="window.open(&#39;http://feedburner.google.com/fb/a/mailverify?uri=kaimi/dev&#39;, &#39;popupwindow&#39;, &#39;scrollbars=yes,width=550,height=520&#39;);return true"><p>Получать обновления на почту: &nbsp;&nbsp;<input type="text" style="width:160px" name="email" value="Ваш e-mail">&nbsp;&nbsp;<input type="hidden" value="kaimi/dev" name="uri"><input type="hidden" name="loc" value="ru_RU"><input type="submit" value="Подписаться"></p></form>
+</div>
+<div id="tags">
+<span style="float: left">
+Метки: <a href="http://kaimi.ru/tag/deobfuscate/" rel="tag">deobfuscate</a>, <a href="http://kaimi.ru/tag/obfuscate/" rel="tag">obfuscate</a>, <a href="http://kaimi.ru/tag/php/" rel="tag">PHP</a>, <a href="http://kaimi.ru/tag/script/" rel="tag">script</a>, <a href="http://kaimi.ru/tag/%d0%b4%d0%b5%d0%be%d0%b1%d1%84%d1%83%d1%81%d0%ba%d0%b0%d1%86%d0%b8%d1%8f/" rel="tag">деобфускация</a>, <a href="http://kaimi.ru/tag/%d0%be%d0%b1%d1%84%d1%83%d1%81%d0%ba%d0%b0%d1%86%d0%b8%d1%8f/" rel="tag">обфускация</a>, <a href="http://kaimi.ru/tag/%d1%81%d0%ba%d1%80%d0%b8%d0%bf%d1%82/" rel="tag">скрипт</a>.</span>
+<script type="text/javascript" src="./Методика деобфускации PHP-скриптов для чайников. Полезные советы._files/share.js" charset="utf-8"></script>
+<script type="text/javascript">
+new Ya.share({
+	'element': 'ya_share1',
+	'elementStyle': {
+		'type': 'button',
+		'linkIcon': true,
+		'border': false,
+		'quickServices': ['yaru', 'vkontakte', 'facebook', 'twitter', 'lj']
+	},
+	'popupStyle': {
+		'copyPasteField': true
+	}
+ });
+</script>
+<span id="ya_share1" style="float: right"><span class="b-share"><a class="b-share__handle" id="ya-share-0.10446754307486117-1328214766673" data-hdirection="" data-vdirection=""><span class="b-share-form-button b-share-form-button_share"><i class="b-share-form-button__before"></i><i class="b-share-form-button__icon"></i>Поделиться…<i class="b-share-form-button__after"></i></span></a><a rel="nofollow" target="_blank" title="Я.ру" class="b-share__handle b-share__link" href="http://share.yandex.ru/go.xml?service=yaru&url=http%3A%2F%2Fkaimi.ru%2F2012%2F01%2Fphp-deobfuscate%2F&title=%D0%9C%D0%B5%D1%82%D0%BE%D0%B4%D0%B8%D0%BA%D0%B0%20%D0%B4%D0%B5%D0%BE%D0%B1%D1%84%D1%83%D1%81%D0%BA%D0%B0%D1%86%D0%B8%D0%B8%20PHP-%D1%81%D0%BA%D1%80%D0%B8%D0%BF%D1%82%D0%BE%D0%B2%20%D0%B4%D0%BB%D1%8F%20%D1%87%D0%B0%D0%B9%D0%BD%D0%B8%D0%BA%D0%BE%D0%B2.%20%D0%9F%D0%BE%D0%BB%D0%B5%D0%B7%D0%BD%D1%8B%D0%B5%20%D1%81%D0%BE%D0%B2%D0%B5%D1%82%D1%8B." data-service="yaru"><span class="b-share-icon b-share-icon_yaru"></span></a><a rel="nofollow" target="_blank" title="ВКонтакте" class="b-share__handle b-share__link" href="http://share.yandex.ru/go.xml?service=vkontakte&url=http%3A%2F%2Fkaimi.ru%2F2012%2F01%2Fphp-deobfuscate%2F&title=%D0%9C%D0%B5%D1%82%D0%BE%D0%B4%D0%B8%D0%BA%D0%B0%20%D0%B4%D0%B5%D0%BE%D0%B1%D1%84%D1%83%D1%81%D0%BA%D0%B0%D1%86%D0%B8%D0%B8%20PHP-%D1%81%D0%BA%D1%80%D0%B8%D0%BF%D1%82%D0%BE%D0%B2%20%D0%B4%D0%BB%D1%8F%20%D1%87%D0%B0%D0%B9%D0%BD%D0%B8%D0%BA%D0%BE%D0%B2.%20%D0%9F%D0%BE%D0%BB%D0%B5%D0%B7%D0%BD%D1%8B%D0%B5%20%D1%81%D0%BE%D0%B2%D0%B5%D1%82%D1%8B." data-service="vkontakte"><span class="b-share-icon b-share-icon_vkontakte"></span></a><a rel="nofollow" target="_blank" title="Facebook" class="b-share__handle b-share__link" href="http://share.yandex.ru/go.xml?service=facebook&url=http%3A%2F%2Fkaimi.ru%2F2012%2F01%2Fphp-deobfuscate%2F&title=%D0%9C%D0%B5%D1%82%D0%BE%D0%B4%D0%B8%D0%BA%D0%B0%20%D0%B4%D0%B5%D0%BE%D0%B1%D1%84%D1%83%D1%81%D0%BA%D0%B0%D1%86%D0%B8%D0%B8%20PHP-%D1%81%D0%BA%D1%80%D0%B8%D0%BF%D1%82%D0%BE%D0%B2%20%D0%B4%D0%BB%D1%8F%20%D1%87%D0%B0%D0%B9%D0%BD%D0%B8%D0%BA%D0%BE%D0%B2.%20%D0%9F%D0%BE%D0%BB%D0%B5%D0%B7%D0%BD%D1%8B%D0%B5%20%D1%81%D0%BE%D0%B2%D0%B5%D1%82%D1%8B." data-service="facebook"><span class="b-share-icon b-share-icon_facebook"></span></a><a rel="nofollow" target="_blank" title="Twitter" class="b-share__handle b-share__link" href="http://share.yandex.ru/go.xml?service=twitter&url=http%3A%2F%2Fkaimi.ru%2F2012%2F01%2Fphp-deobfuscate%2F&title=%D0%9C%D0%B5%D1%82%D0%BE%D0%B4%D0%B8%D0%BA%D0%B0%20%D0%B4%D0%B5%D0%BE%D0%B1%D1%84%D1%83%D1%81%D0%BA%D0%B0%D1%86%D0%B8%D0%B8%20PHP-%D1%81%D0%BA%D1%80%D0%B8%D0%BF%D1%82%D0%BE%D0%B2%20%D0%B4%D0%BB%D1%8F%20%D1%87%D0%B0%D0%B9%D0%BD%D0%B8%D0%BA%D0%BE%D0%B2.%20%D0%9F%D0%BE%D0%BB%D0%B5%D0%B7%D0%BD%D1%8B%D0%B5%20%D1%81%D0%BE%D0%B2%D0%B5%D1%82%D1%8B." data-service="twitter"><span class="b-share-icon b-share-icon_twitter"></span></a><a rel="nofollow" target="_blank" title="LiveJournal" class="b-share__handle b-share__link" href="http://share.yandex.ru/go.xml?service=lj&url=http%3A%2F%2Fkaimi.ru%2F2012%2F01%2Fphp-deobfuscate%2F&title=%D0%9C%D0%B5%D1%82%D0%BE%D0%B4%D0%B8%D0%BA%D0%B0%20%D0%B4%D0%B5%D0%BE%D0%B1%D1%84%D1%83%D1%81%D0%BA%D0%B0%D1%86%D0%B8%D0%B8%20PHP-%D1%81%D0%BA%D1%80%D0%B8%D0%BF%D1%82%D0%BE%D0%B2%20%D0%B4%D0%BB%D1%8F%20%D1%87%D0%B0%D0%B9%D0%BD%D0%B8%D0%BA%D0%BE%D0%B2.%20%D0%9F%D0%BE%D0%BB%D0%B5%D0%B7%D0%BD%D1%8B%D0%B5%20%D1%81%D0%BE%D0%B2%D0%B5%D1%82%D1%8B." data-service="lj"><span class="b-share-icon b-share-icon_lj"></span></a></span></span>
+</div>
+
+</div>
+
+<p class="postmetadata">
+Раздел: <a href="http://kaimi.ru/category/php/" title="Просмотреть все записи в рубрике &laquo;PHP&raquo;" rel="category tag">PHP</a>, <a href="http://kaimi.ru/category/%d0%b4%d0%bb%d1%8f-%d0%bd%d0%be%d0%b2%d0%b8%d1%87%d0%ba%d0%be%d0%b2/" title="Просмотреть все записи в рубрике &laquo;Для новичков&raquo;" rel="category tag">Для новичков</a>, автор: <b>dx</b>
+</p>
+
+</div>
+
+<!-- You can start editing here. -->
+
+	<h3 id="comments">Комментариев: 11 к “Методика деобфускации PHP-скриптов для чайников. Полезные советы.”</h3>
+
+	<div class="wp-pagenavi" align="center"><div class="previous_next"></div></div>
+
+	<ol class="commentlist">
+	<li class="comment even thread-even depth-1" id="li-comment-12245">
+<div id="comment-12245">
+<div class="comment-author vcard">
+<img alt="" src="./Методика деобфускации PHP-скриптов для чайников. Полезные советы._files/5586084ccc8bfcfd158cef4f1847aa7c" class="avatar avatar-48 photo" height="48" width="48"><br><cite class="fn">flisk</cite> <span class="says">:</span></div>
+<div class="comment-meta commentmetadata"><a href="http://kaimi.ru/2012/01/php-deobfuscate/comment-page-1/#comment-12245"><small>Январь 25, 2012 в 21:51</small></a></div>
+<p>Спасибо за полезную и интересную статью.</p>
+<p class="thdrpy">[<a href="javascript:void(0)" onclick="movecfm(event,12245,1,&#39;flisk&#39;);">Ответить</a>]</p><!--
+<div class="reply">
+<a class='comment-reply-link' href='/2012/01/php-deobfuscate/?replytocom=12245#respond' onclick='return addComment.moveForm("comment-12245", "12245", "respond", "2724")'>Ответить</a></div>
+-->
+
+</div>
+</li>
+<li class="comment odd alt thread-odd thread-alt depth-1" id="li-comment-12246">
+<div id="comment-12246">
+<div class="comment-author vcard">
+<img alt="" src="./Методика деобфускации PHP-скриптов для чайников. Полезные советы._files/b679f80b2ed7893dbf82871208119ab6" class="avatar avatar-48 photo" height="48" width="48"><br><cite class="fn">cb^3</cite> <span class="says">:</span></div>
+<div class="comment-meta commentmetadata"><a href="http://kaimi.ru/2012/01/php-deobfuscate/comment-page-1/#comment-12246"><small>Январь 26, 2012 в 01:38</small></a></div>
+<p>Действительно полезно!)</p>
+<p class="thdrpy">[<a href="javascript:void(0)" onclick="movecfm(event,12246,1,&#39;cb^3&#39;);">Ответить</a>]</p><!--
+<div class="reply">
+<a class='comment-reply-link' href='/2012/01/php-deobfuscate/?replytocom=12246#respond' onclick='return addComment.moveForm("comment-12246", "12246", "respond", "2724")'>Ответить</a></div>
+-->
+
+</div>
+</li>
+<li class="comment even thread-even depth-1" id="li-comment-12247">
+<div id="comment-12247">
+<div class="comment-author vcard">
+<img alt="" src="./Методика деобфускации PHP-скриптов для чайников. Полезные советы._files/1dd4f9f5feb900aa8344804a3064f5e6" class="avatar avatar-48 photo" height="48" width="48"><br><cite class="fn">3mph</cite> <span class="says">:</span></div>
+<div class="comment-meta commentmetadata"><a href="http://kaimi.ru/2012/01/php-deobfuscate/comment-page-1/#comment-12247"><small>Январь 26, 2012 в 03:03</small></a></div>
+<p>Пускай Каими расскажет, как он дотнет обфусцировал во втором квесте :)</p>
+<p class="thdrpy">[<a href="javascript:void(0)" onclick="movecfm(event,12247,1,&#39;3mph&#39;);">Ответить</a>]</p><!--
+<div class="reply">
+<a class='comment-reply-link' href='/2012/01/php-deobfuscate/?replytocom=12247#respond' onclick='return addComment.moveForm("comment-12247", "12247", "respond", "2724")'>Ответить</a></div>
+-->
+
+</div>
+</li>
+<li class="comment odd alt thread-odd thread-alt depth-1" id="li-comment-12263">
+<div id="comment-12263">
+<div class="comment-author vcard">
+<img alt="" src="./Методика деобфускации PHP-скриптов для чайников. Полезные советы._files/18f11a62e01fa63aae2169dd4bfd88f4" class="avatar avatar-48 photo" height="48" width="48"><br><cite class="fn">true</cite> <span class="says">:</span></div>
+<div class="comment-meta commentmetadata"><a href="http://kaimi.ru/2012/01/php-deobfuscate/comment-page-1/#comment-12263"><small>Январь 27, 2012 в 21:43</small></a></div>
+<p>DX, привет.<br>
+Можешь посоветовать наиболее мощный обфускатор кода, на твой взгляд.<br>
+Твой обфускатор снимается так же не сложно, как и описанный в статье.<br>
+Спасибо!</p>
+<p class="thdrpy">[<a href="javascript:void(0)" onclick="movecfm(event,12263,1,&#39;true&#39;);">Ответить</a>]</p><div class="comment-childs chalt" id="comment-12264"><img alt="" src="./Методика деобфускации PHP-скриптов для чайников. Полезные советы._files/68263912c39b44daeafc5bfa3ecc9426" class="avatar avatar-32 photo" height="32" width="32"><p><cite>dx</cite>:<br><small class="commentmetadata">Январь 27th, 2012 at 22:03</small></p><p>Привет, не могу, потому что все обфускаторы примитивны, да и нельзя сделать обфускатор для PHP настолько сложным, чтобы его нельзя было снять в течение пары часов. Можно, конечно, использовать Zend Optimizer или ioncube, но и для их снятия есть готовые пути.</p>
+<p class="thdrpy">[<a href="javascript:void(0)" onclick="movecfm(event,12264,2,&#39;dx&#39;);">Ответить</a>]</p><div class="comment-childs" id="comment-12282"><img alt="" src="./Методика деобфускации PHP-скриптов для чайников. Полезные советы._files/1a9eebe3f024823632ebfeb9ca9fff0a" class="avatar avatar-32 photo" height="32" width="32"><p><cite>komyak</cite>:<br><small class="commentmetadata">Январь 30th, 2012 at 23:15</small></p><p>По деобфускации ioncube не подскажешь? Не нашел решений.<br>
+После снятия куба функции остаются зашифрованными.</p>
+<p class="thdrpy">[<a href="javascript:void(0)" onclick="movecfm(event,12282,3,&#39;komyak&#39;);">Ответить</a>]</p><div class="comment-childs chalt" id="comment-12283"><img alt="" src="./Методика деобфускации PHP-скриптов для чайников. Полезные советы._files/68263912c39b44daeafc5bfa3ecc9426" class="avatar avatar-32 photo" height="32" width="32"><p><cite>dx</cite>:<br><small class="commentmetadata">Январь 31st, 2012 at 00:37</small></p><p>Это другой уровень, на уровне самого интерпретатора PHP и Zend, а не просто скрипт. Не в курсе, как такое снимают.</p>
+</div></div></div><!--
+<div class="reply">
+<a class='comment-reply-link' href='/2012/01/php-deobfuscate/?replytocom=12263#respond' onclick='return addComment.moveForm("comment-12263", "12263", "respond", "2724")'>Ответить</a></div>
+-->
+
+</div>
+</li>
+<li class="comment even thread-even depth-1" id="li-comment-12265">
+<div id="comment-12265">
+<div class="comment-author vcard">
+<img alt="" src="./Методика деобфускации PHP-скриптов для чайников. Полезные советы._files/9c88a1d525a1d9c89a439a9ce4980e8a" class="avatar avatar-48 photo" height="48" width="48"><br><cite class="fn">SHiNiGaMi</cite> <span class="says">:</span></div>
+<div class="comment-meta commentmetadata"><a href="http://kaimi.ru/2012/01/php-deobfuscate/comment-page-1/#comment-12265"><small>Январь 28, 2012 в 17:05</small></a></div>
+<p>Извиняюсь, конечно, но статья бесолезная. Смысл показывать и так очевидные действия?</p>
+<p class="thdrpy">[<a href="javascript:void(0)" onclick="movecfm(event,12265,1,&#39;SHiNiGaMi&#39;);">Ответить</a>]</p><div class="comment-childs chalt" id="comment-12266"><img alt="" src="./Методика деобфускации PHP-скриптов для чайников. Полезные советы._files/a28d9f429aaeba73463f012f04339819" class="avatar avatar-32 photo" height="32" width="32"><p><cite><a href="http://kaimi.ru/" rel="external nofollow" class="url">Kaimi</a></cite>:<br><small class="commentmetadata">Январь 28th, 2012 at 17:08</small></p><p>Зато есть куда посылать просителей отсюда <a href="https://forum.antichat.net/thread144505.html" rel="nofollow">https://forum.antichat.net/thread144505.html</a></p>
+<p class="thdrpy">[<a href="javascript:void(0)" onclick="movecfm(event,12266,2,&#39;Kaimi&#39;);">Ответить</a>]</p><div class="comment-childs" id="comment-12271"><img alt="" src="./Методика деобфускации PHP-скриптов для чайников. Полезные советы._files/5586084ccc8bfcfd158cef4f1847aa7c(1)" class="avatar avatar-32 photo" height="32" width="32"><p><cite>flisk</cite>:<br><small class="commentmetadata">Январь 29th, 2012 at 15:10</small></p><p>Кому-то бесполезная, а кому-то и очень полезная. Я, например, не знал всего этого (и в свое время не прошел квест от Kaimi дальше этапа с обфускацией пхп).</p>
+<p class="thdrpy">[<a href="javascript:void(0)" onclick="movecfm(event,12271,3,&#39;flisk&#39;);">Ответить</a>]</p></div></div><!--
+<div class="reply">
+<a class='comment-reply-link' href='/2012/01/php-deobfuscate/?replytocom=12265#respond' onclick='return addComment.moveForm("comment-12265", "12265", "respond", "2724")'>Ответить</a></div>
+-->
+
+</div>
+</li>
+<li class="comment odd alt thread-odd thread-alt depth-1" id="li-comment-12312">
+<div id="comment-12312">
+<div class="comment-author vcard">
+<img alt="" src="./Методика деобфускации PHP-скриптов для чайников. Полезные советы._files/8b5c250b68644cc84190588e291df0c8" class="avatar avatar-48 photo" height="48" width="48"><br><cite class="fn">Анон</cite> <span class="says">:</span></div>
+<div class="comment-meta commentmetadata"><a href="http://kaimi.ru/2012/01/php-deobfuscate/comment-page-1/#comment-12312"><small>Февраль 2, 2012 в 17:59</small></a></div>
+<p><a href="http://habrahabr.ru/blogs/php/137459/" class="jqcl" title="http://habrahabr.ru/blogs/php/137459/" rel="nofollow">http://habrahabr.ru/blogs/php/137459/</a></p>
+<p class="thdrpy">[<a href="javascript:void(0)" onclick="movecfm(event,12312,1,&#39;Анон&#39;);">Ответить</a>]</p><!--
+<div class="reply">
+<a class='comment-reply-link' href='/2012/01/php-deobfuscate/?replytocom=12312#respond' onclick='return addComment.moveForm("comment-12312", "12312", "respond", "2724")'>Ответить</a></div>
+-->
+
+</div>
+</li>
+	</ol>
+	<br>
+	<div class="wp-pagenavi" align="center"><div class="previous_next"></div></div>
+	
+ 
+
+
+<h3 id="respond">Оставьте ваш комментарий</h3>
+
+
+<form action="http://kaimi.ru/wp-comments-post.php" method="post" id="commentform">
+
+
+<p><input type="text" name="author" id="author" value="" size="22" tabindex="1">
+<label for="author"><small>Имя (required)</small></label></p>
+
+<p><input type="text" name="email" id="email" value="" size="22" tabindex="2">
+<label for="email"><small>E-mail (не будет опубликован) (required)</small></label></p>
+
+<p><input type="text" name="url" id="url" value="" size="22" tabindex="3">
+<label for="url"><small>Сайт</small></label></p>
+
+
+<!--<p><small><strong>XHTML:</strong> You can use these tags: &lt;a href=&quot;&quot; title=&quot;&quot;&gt; &lt;abbr title=&quot;&quot;&gt; &lt;acronym title=&quot;&quot;&gt; &lt;b&gt; &lt;blockquote cite=&quot;&quot;&gt; &lt;cite&gt; &lt;code&gt; &lt;del datetime=&quot;&quot;&gt; &lt;em&gt; &lt;i&gt; &lt;q cite=&quot;&quot;&gt; &lt;strike&gt; &lt;strong&gt; &lt;pre lang=&quot;&quot; line=&quot;&quot; escaped=&quot;&quot; highlight=&quot;&quot;&gt; </small></p>-->
+
+<p><textarea name="d5d6f-comment" id="comment" cols="100%" rows="10" tabindex="4"></textarea><textarea name="comment" style="display:none" rows="1" cols="1"></textarea></p>
+
+<p><input name="submit" type="submit" id="submit" tabindex="5" value="Сказать">
+<input type="hidden" name="comment_post_ID" value="2724">
+</p>
+
+
+<script type="text/javascript">/*<![CDATA[*/
+var $j = jQuery.noConflict();
+$j(document).ready(function() {
+	$j('a.jqcl').each(function() {
+		var link = $j(this).attr('title');
+		$j(this).attr('href', 'http://'+link).attr('title', 'http://'+link);
+	});
+})
+/*]]>*/</script>
+<p><input type="hidden" id="comment_reply_ID" name="comment_reply_ID" value="0"><input type="hidden" id="comment_reply_dp" name="comment_reply_dp" value="0"></p><div id="cancel_reply" style="display:none;"><a href="javascript:void(0)" onclick="movecfm(null,0,1,null);" style="color:red;">Отменить написание комментария</a></div><p><input type="checkbox" name="comment_mail_notify" id="comment_mail_notify" value="comment_mail_notify" style="width: auto;"><label for="comment_mail_notify" style="display: inline;">Notify me of follow-up comments via e-mail</label></p><script type="text/javascript">
+/* <![CDATA[ */
+var commentformid = "commentform";
+var USERINFO = false;
+var atreply = "none";
+/* ]]> */
+</script>
+<script type="text/javascript" src="./Методика деобфускации PHP-скриптов для чайников. Полезные советы._files/wp-thread-comment.js.php"></script>
+
+</form>
+
+
+
+<div class="previous_next">
+	</div>
+
+</div>
+<div id="sidebar">
+     <br>
+	 
+	<div align="center"><noindex><a href="http://feeds.feedburner.com/kaimi/dev" rel="nofollow"><img border="0" style="border-width:0px 0px 0px 0px;" src="./Методика деобфускации PHP-скриптов для чайников. Полезные советы._files/rss.gif" width="70" height="70"></a></noindex>
+	<p><noindex><a href="http://feeds.feedburner.com/kaimi/dev" rel="nofollow"><img src="./Методика деобфускации PHP-скриптов для чайников. Полезные советы._files/dev" height="26" width="88" style="border:0" alt=""></a></noindex></p>
+	</div>
+	<ul>
+    <li id="calendar-4" class="widget widget_calendar"><h2 class="widgettitle">Календарь</h2>
+<div id="calendar_wrap"><table id="wp-calendar">
+	<caption>Январь 2012</caption>
+	<thead>
+	<tr>
+		<th scope="col" title="Понедельник">Пн</th>
+		<th scope="col" title="Вторник">Вт</th>
+		<th scope="col" title="Среда">Ср</th>
+		<th scope="col" title="Четверг">Чт</th>
+		<th scope="col" title="Пятница">Пт</th>
+		<th scope="col" title="Суббота">Сб</th>
+		<th scope="col" title="Воскресенье">Вс</th>
+	</tr>
+	</thead>
+
+	<tfoot>
+	<tr>
+		<td colspan="3" id="prev"><a href="http://kaimi.ru/2011/12/" title="Посмотреть записи за Декабрь 2011">« Дек</a></td>
+		<td class="pad">&nbsp;</td>
+		<td colspan="3" id="next" class="pad">&nbsp;</td>
+	</tr>
+	</tfoot>
+
+	<tbody>
+	<tr>
+		<td colspan="6" class="pad">&nbsp;</td><td>1</td>
+	</tr>
+	<tr>
+		<td>2</td><td>3</td><td><a href="http://kaimi.ru/2012/01/04/" title="VkBot 1.9.4-B2 Pro отвязанный + исходники">4</a></td><td>5</td><td><a href="http://kaimi.ru/2012/01/06/" title="Классы для работы с HTTP(S) на C++">6</a></td><td>7</td><td>8</td>
+	</tr>
+	<tr>
+		<td>9</td><td>10</td><td>11</td><td>12</td><td>13</td><td>14</td><td>15</td>
+	</tr>
+	<tr>
+		<td>16</td><td><a href="http://kaimi.ru/2012/01/17/" title="Встраиваем Flash в свое приложение">17</a></td><td>18</td><td>19</td><td>20</td><td>21</td><td>22</td>
+	</tr>
+	<tr>
+		<td>23</td><td><a href="http://kaimi.ru/2012/01/24/" title="Методика деобфускации PHP-скриптов для чайников. Полезные советы.">24</a></td><td>25</td><td>26</td><td>27</td><td>28</td><td>29</td>
+	</tr>
+	<tr>
+		<td>30</td><td>31</td>
+		<td class="pad" colspan="5">&nbsp;</td>
+	</tr>
+	</tbody>
+	</table></div></li>
+<li id="text-3" class="widget widget_text"><h2 class="widgettitle">Предупреждение</h2>
+			<div class="textwidget"><p style="text-align:justify; font-family: &#39;Calibri&#39;, sans-serif;">Все материалы сайта предоставлены исключительно в ознакомительных и обучающих целях. Ответственность за использование их в корыстных целях полностью ложится на Ваши плечи.</p></div>
+		</li>
+<li id="categories-3" class="widget widget_categories"><h2 class="widgettitle">Категории</h2>
+		<ul>
+	<li class="cat-item cat-item-88"><a href="http://kaimi.ru/category/%d0%b4%d0%b5%d0%bd%d1%8c%d0%b3%d0%b8/" title="Просмотреть все записи в рубрике &laquo;$$$&raquo;">$$$</a>
+</li>
+	<li class="cat-item cat-item-48"><a href="http://kaimi.ru/category/assembler/" title="Assembler x86">Assembler</a>
+</li>
+	<li class="cat-item cat-item-108"><a href="http://kaimi.ru/category/c-sharp/" title="Просмотреть все записи в рубрике &laquo;C#&raquo;">C#</a>
+</li>
+	<li class="cat-item cat-item-173"><a href="http://kaimi.ru/category/cpp/" title="Просмотреть все записи в рубрике &laquo;C/C++&raquo;">C/C++</a>
+</li>
+	<li class="cat-item cat-item-274"><a href="http://kaimi.ru/category/html-js/" title="Просмотреть все записи в рубрике &laquo;HTML/JS&raquo;">HTML/JS</a>
+</li>
+	<li class="cat-item cat-item-152"><a href="http://kaimi.ru/category/lua/" title="Просмотреть все записи в рубрике &laquo;Lua&raquo;">Lua</a>
+</li>
+	<li class="cat-item cat-item-4"><a href="http://kaimi.ru/category/perl/" title="perl scripts">Perl</a>
+</li>
+	<li class="cat-item cat-item-24"><a href="http://kaimi.ru/category/php/" title="Просмотреть все записи в рубрике &laquo;PHP&raquo;">PHP</a>
+</li>
+	<li class="cat-item cat-item-142"><a href="http://kaimi.ru/category/windows/" title="Просмотреть все записи в рубрике &laquo;Windows&raquo;">Windows</a>
+</li>
+	<li class="cat-item cat-item-1"><a href="http://kaimi.ru/category/uncategorized/" title="Просмотреть все записи в рубрике &laquo;Без категории&raquo;">Без категории</a>
+</li>
+	<li class="cat-item cat-item-204"><a href="http://kaimi.ru/category/%d0%b4%d0%bb%d1%8f-%d0%bd%d0%be%d0%b2%d0%b8%d1%87%d0%ba%d0%be%d0%b2/" title="Просмотреть все записи в рубрике &laquo;Для новичков&raquo;">Для новичков</a>
+</li>
+	<li class="cat-item cat-item-100"><a href="http://kaimi.ru/category/life/" title="Просмотреть все записи в рубрике &laquo;Жизнь&raquo;">Жизнь</a>
+</li>
+	<li class="cat-item cat-item-261"><a href="http://kaimi.ru/category/snippets/" title="Просмотреть все записи в рубрике &laquo;Сниппеты&raquo;">Сниппеты</a>
+</li>
+	<li class="cat-item cat-item-269"><a href="http://kaimi.ru/category/soft/" title="Просмотреть все записи в рубрике &laquo;Софт&raquo;">Софт</a>
+</li>
+	<li class="cat-item cat-item-17"><a href="http://kaimi.ru/category/%d1%81%d0%be%d1%86%d0%b8%d0%b0%d0%bb%d1%8c%d0%bd%d1%8b%d0%b5-%d1%81%d0%b5%d1%82%d0%b8/" title="Просмотреть все записи в рубрике &laquo;Социальные сети&raquo;">Социальные сети</a>
+</li>
+	<li class="cat-item cat-item-166"><a href="http://kaimi.ru/category/%d1%8d%d1%82%d0%be-%d0%b8%d0%bd%d1%82%d0%b5%d1%80%d0%b5%d1%81%d0%bd%d0%be/" title="Просмотреть все записи в рубрике &laquo;Это интересно&raquo;">Это интересно</a>
+</li>
+	<li class="cat-item cat-item-242"><a href="http://kaimi.ru/category/%d1%8e%d0%bc%d0%be%d1%80/" title="Просмотреть все записи в рубрике &laquo;Юмор&raquo;">Юмор</a>
+</li>
+		</ul>
+</li>
+<li id="linkcat-96" class="widget widget_links"><h2 class="widgettitle">Ссылки</h2>
+
+	<ul class="xoxo blogroll">
+<li><a href="http://blog.alexv.biz/" target="_blank">AlexV Блог | Записи из Жизни</a></li>
+<li><a href="http://freedomscripts.org/forum/forumdisplay.php?f=15" target="_blank">Freedom Team — софт на заказ</a></li>
+<li><a href="http://forum.reverse4you.org/" target="_blank">r0 Crew</a></li>
+<li><a href="http://blog.rebz.net/" target="_blank">Rebz's blog</a></li>
+<li><a href="http://mrthe.name/" target="_blank">Блог mr.The</a></li>
+<li><a href="http://rushter.com/" target="_blank">Блог RushteR</a></li>
+<li><a href="http://hack-stars.ru/" target="_blank">Дедики | Icq | Vkontakte | RAT</a></li>
+<li><a href="http://vkspam.com/" target="_blank">Спам ВКонтакте</a></li>
+
+	</ul>
+</li>
+
+<li id="tag_cloud-3" class="widget widget_tag_cloud"><h2 class="widgettitle">Метки</h2>
+<div class="tagcloud"><a href="http://kaimi.ru/tag/assembler/" class="tag-link-48" title="13 записей" style="font-size: 16.651685393258pt;">Assembler</a>
+<a href="http://kaimi.ru/tag/bruteforce/" class="tag-link-22" title="3 записи" style="font-size: 8pt;">bruteforce</a>
+<a href="http://kaimi.ru/tag/c/" class="tag-link-61" title="12 записей" style="font-size: 16.022471910112pt;">c++</a>
+<a href="http://kaimi.ru/tag/checker/" class="tag-link-19" title="3 записи" style="font-size: 8pt;">checker</a>
+<a href="http://kaimi.ru/tag/cmd/" class="tag-link-139" title="3 записи" style="font-size: 8pt;">cmd</a>
+<a href="http://kaimi.ru/tag/crypto-api/" class="tag-link-69" title="4 записи" style="font-size: 9.5730337078652pt;">crypto api</a>
+<a href="http://kaimi.ru/tag/dll/" class="tag-link-77" title="11 записей" style="font-size: 15.550561797753pt;">dll</a>
+<a href="http://kaimi.ru/tag/dll-hijacking/" class="tag-link-217" title="3 записи" style="font-size: 8pt;">dll hijacking</a>
+<a href="http://kaimi.ru/tag/exe/" class="tag-link-180" title="3 записи" style="font-size: 8pt;">exe</a>
+<a href="http://kaimi.ru/tag/gui/" class="tag-link-54" title="3 записи" style="font-size: 8pt;">gui</a>
+<a href="http://kaimi.ru/tag/http/" class="tag-link-79" title="3 записи" style="font-size: 8pt;">http</a>
+<a href="http://kaimi.ru/tag/inject/" class="tag-link-194" title="5 записей" style="font-size: 10.831460674157pt;">inject</a>
+<a href="http://kaimi.ru/tag/javascript/" class="tag-link-105" title="5 записей" style="font-size: 10.831460674157pt;">JavaScript</a>
+<a href="http://kaimi.ru/tag/lastfm/" class="tag-link-53" title="6 записей" style="font-size: 11.932584269663pt;">last.fm</a>
+<a href="http://kaimi.ru/tag/masm32/" class="tag-link-50" title="12 записей" style="font-size: 16.022471910112pt;">masm32</a>
+<a href="http://kaimi.ru/tag/odnoklassniki/" class="tag-link-3" title="3 записи" style="font-size: 8pt;">odnoklassniki</a>
+<a href="http://kaimi.ru/tag/pe/" class="tag-link-215" title="6 записей" style="font-size: 11.932584269663pt;">pe</a>
+<a href="http://kaimi.ru/tag/perl/" class="tag-link-4" title="30 записей" style="font-size: 22pt;">Perl</a>
+<a href="http://kaimi.ru/tag/php/" class="tag-link-24" title="17 записей" style="font-size: 18.38202247191pt;">PHP</a>
+<a href="http://kaimi.ru/tag/plugin/" class="tag-link-75" title="3 записи" style="font-size: 8pt;">plugin</a>
+<a href="http://kaimi.ru/tag/portable-executable/" class="tag-link-220" title="4 записи" style="font-size: 9.5730337078652pt;">Portable Executable</a>
+<a href="http://kaimi.ru/tag/proxy/" class="tag-link-129" title="3 записи" style="font-size: 8pt;">proxy</a>
+<a href="http://kaimi.ru/tag/quest/" class="tag-link-248" title="5 записей" style="font-size: 10.831460674157pt;">quest</a>
+<a href="http://kaimi.ru/tag/splicing/" class="tag-link-202" title="5 записей" style="font-size: 10.831460674157pt;">splicing</a>
+<a href="http://kaimi.ru/tag/tk/" class="tag-link-52" title="4 записи" style="font-size: 9.5730337078652pt;">tk</a>
+<a href="http://kaimi.ru/tag/vkontakte/" class="tag-link-31" title="12 записей" style="font-size: 16.022471910112pt;">vkontakte</a>
+<a href="http://kaimi.ru/tag/webmoney/" class="tag-link-176" title="4 записи" style="font-size: 9.5730337078652pt;">webmoney</a>
+<a href="http://kaimi.ru/tag/win32/" class="tag-link-145" title="3 записи" style="font-size: 8pt;">win32</a>
+<a href="http://kaimi.ru/tag/win32-api/" class="tag-link-51" title="10 записей" style="font-size: 14.921348314607pt;">win32 api</a>
+<a href="http://kaimi.ru/tag/win32api/" class="tag-link-206" title="3 записи" style="font-size: 8pt;">win32api</a>
+<a href="http://kaimi.ru/tag/winapi/" class="tag-link-237" title="5 записей" style="font-size: 10.831460674157pt;">winapi</a>
+<a href="http://kaimi.ru/tag/windows-2/" class="tag-link-231" title="3 записи" style="font-size: 8pt;">windows</a>
+<a href="http://kaimi.ru/tag/%d1%81%d0%be%d1%86%d0%b8%d0%b0%d0%bb%d1%8c%d0%bd%d1%8b%d0%b5-%d1%81%d0%b5%d1%82%d0%b8/" class="tag-link-17" title="3 записи" style="font-size: 8pt;">Социальные сети</a>
+<a href="http://kaimi.ru/tag/%d0%b0%d0%bd%d1%82%d0%b8%d0%ba%d0%b0%d0%bf%d1%87%d0%b0/" class="tag-link-55" title="3 записи" style="font-size: 8pt;">антикапча</a>
+<a href="http://kaimi.ru/tag/%d0%b0%d1%81%d1%81%d0%b5%d0%bc%d0%b1%d0%bb%d0%b5%d1%80/" class="tag-link-49" title="7 записей" style="font-size: 12.719101123596pt;">ассемблер</a>
+<a href="http://kaimi.ru/tag/%d0%b1%d1%80%d1%83%d1%82%d1%84%d0%be%d1%80%d1%81/" class="tag-link-16" title="5 записей" style="font-size: 10.831460674157pt;">брутфорс</a>
+<a href="http://kaimi.ru/tag/%d0%b2%d0%ba%d0%be%d0%bd%d1%82%d0%b0%d0%ba%d1%82%d0%b5/" class="tag-link-30" title="17 записей" style="font-size: 18.38202247191pt;">вконтакте</a>
+<a href="http://kaimi.ru/tag/%d0%b7%d0%b0%d1%80%d0%b0%d0%b1%d0%be%d1%82%d0%be%d0%ba/" class="tag-link-271" title="3 записи" style="font-size: 8pt;">заработок</a>
+<a href="http://kaimi.ru/tag/%d0%ba%d0%b0%d0%bf%d1%87%d0%b0/" class="tag-link-114" title="3 записи" style="font-size: 8pt;">капча</a>
+<a href="http://kaimi.ru/tag/%d0%ba%d0%b2%d0%b5%d1%81%d1%82/" class="tag-link-247" title="6 записей" style="font-size: 11.932584269663pt;">квест</a>
+<a href="http://kaimi.ru/tag/%d0%be%d0%b1%d1%84%d1%83%d1%81%d0%ba%d0%b0%d1%86%d0%b8%d1%8f/" class="tag-link-38" title="5 записей" style="font-size: 10.831460674157pt;">обфускация</a>
+<a href="http://kaimi.ru/tag/%d0%bf%d0%bb%d0%b0%d0%b3%d0%b8%d0%bd/" class="tag-link-74" title="3 записи" style="font-size: 8pt;">плагин</a>
+<a href="http://kaimi.ru/tag/%d1%81%d0%ba%d1%80%d0%b8%d0%bf%d1%82-%d1%80%d0%b0%d1%81%d1%81%d1%8b%d0%bb%d0%ba%d0%b8/" class="tag-link-83" title="3 записи" style="font-size: 8pt;">скрипт рассылки</a>
+<a href="http://kaimi.ru/tag/%d1%81%d0%be%d0%ba%d0%b5%d1%82%d1%8b/" class="tag-link-37" title="3 записи" style="font-size: 8pt;">сокеты</a>
+<a href="http://kaimi.ru/tag/%d1%81%d0%bf%d0%bb%d0%b0%d0%b9%d1%81%d0%b8%d0%bd%d0%b3/" class="tag-link-203" title="4 записи" style="font-size: 9.5730337078652pt;">сплайсинг</a></div>
+</li>
+	</ul>
+	<br></div>
+<div class="endfloat">&nbsp;</div>
+</div>
+
+<div id="footer">
+	<script type="text/javascript">
+/* <![CDATA[ */
+var pollsL10n = {"ajax_url":"http:\/\/kaimi.ru\/wp-content\/plugins\/wp-polls\/wp-polls.php","text_wait":"Your last request is still being processed. Please wait a while ...","text_valid":"Please choose a valid poll answer.","text_multiple":"Maximum number of choices allowed: ","show_loading":"0","show_fading":"0"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./Методика деобфускации PHP-скриптов для чайников. Полезные советы._files/polls-js.js"></script>
+	<p>
+		</p><center>Использование материалов на других ресурсах разрешено только с указанием активной гиперссылки на kaimi.ru</center>
+<span id="7ecd33c2f49aaa63357450844bbc1fcb"></span>
+<!-- Yandex.Metrika -->
+<script src="./Методика деобфускации PHP-скриптов для чайников. Полезные советы._files/watch.js" type="text/javascript"></script>
+<div style="display:none;">
+<script type="text/javascript">
+try 
+{
+	var yaCounter1810114 = new Ya.Metrika(1810114);
+	yaCounter1810114.clickmap(true);
+	yaCounter1810114.trackLinks(true);
+} catch(e){}
+</script>
+</div>
+<noscript></noscript>
+<!-- /Yandex.Metrika -->
+<!--LiveInternet counter-->
+<script type="text/javascript"></script></div></div><div class="b-share-popup-wrap b-share-popup-wrap_state_hidden" id="ya-share-0.10446754307486117-1328214766673-popup"><div class="b-share-popup b-share-popup_down b-share-popup_to-right"><div class="b-share-popup__i b-share-popup_with-link"><div class="b-share-popup__main  b-share-popup_yandexed"><label class="b-share-popup__input b-share-popup__input_link">Ссылка<input class="b-share-popup__input__input" readonly="readonly" type="text" value="http://kaimi.ru/2012/01/php-deobfuscate/"></label><div class="b-share-popup__header b-share-popup__header_first">Поделитесь с друзьями</div><a rel="nofollow" target="_blank" href="http://share.yandex.ru/go.xml?service=yaru&url=http%3A%2F%2Fkaimi.ru%2F2012%2F01%2Fphp-deobfuscate%2F&title=%D0%9C%D0%B5%D1%82%D0%BE%D0%B4%D0%B8%D0%BA%D0%B0%20%D0%B4%D0%B5%D0%BE%D0%B1%D1%84%D1%83%D1%81%D0%BA%D0%B0%D1%86%D0%B8%D0%B8%20PHP-%D1%81%D0%BA%D1%80%D0%B8%D0%BF%D1%82%D0%BE%D0%B2%20%D0%B4%D0%BB%D1%8F%20%D1%87%D0%B0%D0%B9%D0%BD%D0%B8%D0%BA%D0%BE%D0%B2.%20%D0%9F%D0%BE%D0%BB%D0%B5%D0%B7%D0%BD%D1%8B%D0%B5%20%D1%81%D0%BE%D0%B2%D0%B5%D1%82%D1%8B." class="b-share-popup__item" data-service="yaru"><span class="b-share-popup__icon"><span class="b-share-icon b-share-icon_yaru"></span></span><span class="b-share-popup__item__text">Я.ру</span></a><a rel="nofollow" target="_blank" href="http://share.yandex.ru/go.xml?service=vkontakte&url=http%3A%2F%2Fkaimi.ru%2F2012%2F01%2Fphp-deobfuscate%2F&title=%D0%9C%D0%B5%D1%82%D0%BE%D0%B4%D0%B8%D0%BA%D0%B0%20%D0%B4%D0%B5%D0%BE%D0%B1%D1%84%D1%83%D1%81%D0%BA%D0%B0%D1%86%D0%B8%D0%B8%20PHP-%D1%81%D0%BA%D1%80%D0%B8%D0%BF%D1%82%D0%BE%D0%B2%20%D0%B4%D0%BB%D1%8F%20%D1%87%D0%B0%D0%B9%D0%BD%D0%B8%D0%BA%D0%BE%D0%B2.%20%D0%9F%D0%BE%D0%BB%D0%B5%D0%B7%D0%BD%D1%8B%D0%B5%20%D1%81%D0%BE%D0%B2%D0%B5%D1%82%D1%8B." class="b-share-popup__item" data-service="vkontakte"><span class="b-share-popup__icon"><span class="b-share-icon b-share-icon_vkontakte"></span></span><span class="b-share-popup__item__text">ВКонтакте</span></a><a rel="nofollow" target="_blank" href="http://share.yandex.ru/go.xml?service=odnoklassniki&url=http%3A%2F%2Fkaimi.ru%2F2012%2F01%2Fphp-deobfuscate%2F&title=%D0%9C%D0%B5%D1%82%D0%BE%D0%B4%D0%B8%D0%BA%D0%B0%20%D0%B4%D0%B5%D0%BE%D0%B1%D1%84%D1%83%D1%81%D0%BA%D0%B0%D1%86%D0%B8%D0%B8%20PHP-%D1%81%D0%BA%D1%80%D0%B8%D0%BF%D1%82%D0%BE%D0%B2%20%D0%B4%D0%BB%D1%8F%20%D1%87%D0%B0%D0%B9%D0%BD%D0%B8%D0%BA%D0%BE%D0%B2.%20%D0%9F%D0%BE%D0%BB%D0%B5%D0%B7%D0%BD%D1%8B%D0%B5%20%D1%81%D0%BE%D0%B2%D0%B5%D1%82%D1%8B." class="b-share-popup__item" data-service="odnoklassniki"><span class="b-share-popup__icon"><span class="b-share-icon b-share-icon_odnoklassniki"></span></span><span class="b-share-popup__item__text">Одноклассники</span></a><a rel="nofollow" target="_blank" href="http://share.yandex.ru/go.xml?service=twitter&url=http%3A%2F%2Fkaimi.ru%2F2012%2F01%2Fphp-deobfuscate%2F&title=%D0%9C%D0%B5%D1%82%D0%BE%D0%B4%D0%B8%D0%BA%D0%B0%20%D0%B4%D0%B5%D0%BE%D0%B1%D1%84%D1%83%D1%81%D0%BA%D0%B0%D1%86%D0%B8%D0%B8%20PHP-%D1%81%D0%BA%D1%80%D0%B8%D0%BF%D1%82%D0%BE%D0%B2%20%D0%B4%D0%BB%D1%8F%20%D1%87%D0%B0%D0%B9%D0%BD%D0%B8%D0%BA%D0%BE%D0%B2.%20%D0%9F%D0%BE%D0%BB%D0%B5%D0%B7%D0%BD%D1%8B%D0%B5%20%D1%81%D0%BE%D0%B2%D0%B5%D1%82%D1%8B." class="b-share-popup__item" data-service="twitter"><span class="b-share-popup__icon"><span class="b-share-icon b-share-icon_twitter"></span></span><span class="b-share-popup__item__text">Twitter</span></a><a rel="nofollow" target="_blank" href="http://share.yandex.ru/go.xml?service=facebook&url=http%3A%2F%2Fkaimi.ru%2F2012%2F01%2Fphp-deobfuscate%2F&title=%D0%9C%D0%B5%D1%82%D0%BE%D0%B4%D0%B8%D0%BA%D0%B0%20%D0%B4%D0%B5%D0%BE%D0%B1%D1%84%D1%83%D1%81%D0%BA%D0%B0%D1%86%D0%B8%D0%B8%20PHP-%D1%81%D0%BA%D1%80%D0%B8%D0%BF%D1%82%D0%BE%D0%B2%20%D0%B4%D0%BB%D1%8F%20%D1%87%D0%B0%D0%B9%D0%BD%D0%B8%D0%BA%D0%BE%D0%B2.%20%D0%9F%D0%BE%D0%BB%D0%B5%D0%B7%D0%BD%D1%8B%D0%B5%20%D1%81%D0%BE%D0%B2%D0%B5%D1%82%D1%8B." class="b-share-popup__item" data-service="facebook"><span class="b-share-popup__icon"><span class="b-share-icon b-share-icon_facebook"></span></span><span class="b-share-popup__item__text">Facebook</span></a><a rel="nofollow" target="_blank" href="http://share.yandex.ru/go.xml?service=moimir&url=http%3A%2F%2Fkaimi.ru%2F2012%2F01%2Fphp-deobfuscate%2F&title=%D0%9C%D0%B5%D1%82%D0%BE%D0%B4%D0%B8%D0%BA%D0%B0%20%D0%B4%D0%B5%D0%BE%D0%B1%D1%84%D1%83%D1%81%D0%BA%D0%B0%D1%86%D0%B8%D0%B8%20PHP-%D1%81%D0%BA%D1%80%D0%B8%D0%BF%D1%82%D0%BE%D0%B2%20%D0%B4%D0%BB%D1%8F%20%D1%87%D0%B0%D0%B9%D0%BD%D0%B8%D0%BA%D0%BE%D0%B2.%20%D0%9F%D0%BE%D0%BB%D0%B5%D0%B7%D0%BD%D1%8B%D0%B5%20%D1%81%D0%BE%D0%B2%D0%B5%D1%82%D1%8B." class="b-share-popup__item" data-service="moimir"><span class="b-share-popup__icon"><span class="b-share-icon b-share-icon_moimir"></span></span><span class="b-share-popup__item__text">Мой Мир</span></a><a rel="nofollow" target="_blank" href="http://share.yandex.ru/go.xml?service=lj&url=http%3A%2F%2Fkaimi.ru%2F2012%2F01%2Fphp-deobfuscate%2F&title=%D0%9C%D0%B5%D1%82%D0%BE%D0%B4%D0%B8%D0%BA%D0%B0%20%D0%B4%D0%B5%D0%BE%D0%B1%D1%84%D1%83%D1%81%D0%BA%D0%B0%D1%86%D0%B8%D0%B8%20PHP-%D1%81%D0%BA%D1%80%D0%B8%D0%BF%D1%82%D0%BE%D0%B2%20%D0%B4%D0%BB%D1%8F%20%D1%87%D0%B0%D0%B9%D0%BD%D0%B8%D0%BA%D0%BE%D0%B2.%20%D0%9F%D0%BE%D0%BB%D0%B5%D0%B7%D0%BD%D1%8B%D0%B5%20%D1%81%D0%BE%D0%B2%D0%B5%D1%82%D1%8B." class="b-share-popup__item" data-service="lj"><span class="b-share-popup__icon"><span class="b-share-icon b-share-icon_lj"></span></span><span class="b-share-popup__item__text">LiveJournal</span></a><a href="http://api.yandex.ru/share/" class="b-share-popup__yandex">Яндекс</a></div></div><div class="b-share-popup__tail"></div></div></div></body></html>

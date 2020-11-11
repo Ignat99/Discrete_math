@@ -1,0 +1,7 @@
+//:badassjs.com
+try{
+if(woopraTracker.version && woopraTracker.version==10){}else{
+setTimeout(function(){woopraTracker.ping();},12 * 1000);
+}
+}catch(e){}
+woopraTracker.createcookie('wooMeta','MjAwNzQ2JjEmMSYwJjEzMjgzODM4NjIyNjYmMTMyODM4Mzg2MjI2NiYmMTAwJiYyJiYmJg==',9000);
